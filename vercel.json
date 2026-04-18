@@ -1,0 +1,6 @@
+{
+  "buildCommand": "npm install -g pnpm && pnpm install && pnpm --filter @workspace/neet-pg-planner run build",
+  "outputDirectory": "artifacts/neet-pg-planner/dist/public",
+  "installCommand": "npm install -g pnpm && pnpm install",
+  "framework": null
+}
