@@ -2,5 +2,6 @@
   "installCommand": "cd deploy && npm install",
   "buildCommand": "cd deploy && npm run build",
   "outputDirectory": "deploy/dist",
-  "framework": null
+  "framework": null,
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
