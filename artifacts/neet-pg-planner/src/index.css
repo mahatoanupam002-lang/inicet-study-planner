@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=Merriweather:wght@300;400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
@@ -51,45 +51,45 @@
 }
 
 :root {
-  --background: 240 33% 5%; /* #080810 */
-  --foreground: 0 0% 98%;
-  --border: 240 20% 15%;
-  --input: 240 20% 15%;
+  --background: 240 33% 4%;
+  --foreground: 220 15% 95%;
+  --border: 240 20% 13%;
+  --input: 240 20% 13%;
   --ring: 240 30% 25%;
 
-  --card: 240 30% 8%;
-  --card-foreground: 0 0% 98%;
-  --card-border: 240 20% 15%;
+  --card: 240 28% 7%;
+  --card-foreground: 220 15% 95%;
+  --card-border: 240 20% 13%;
 
-  --popover: 240 30% 8%;
-  --popover-foreground: 0 0% 98%;
-  --popover-border: 240 20% 15%;
+  --popover: 240 28% 7%;
+  --popover-foreground: 220 15% 95%;
+  --popover-border: 240 20% 13%;
 
-  --primary: 0 0% 98%;
-  --primary-foreground: 240 33% 5%;
-  --primary-border: 0 0% 98%;
+  --primary: 0 0% 97%;
+  --primary-foreground: 240 33% 4%;
+  --primary-border: 0 0% 97%;
 
-  --secondary: 240 20% 15%;
-  --secondary-foreground: 0 0% 98%;
-  --secondary-border: 240 20% 25%;
+  --secondary: 240 20% 14%;
+  --secondary-foreground: 220 15% 95%;
+  --secondary-border: 240 20% 24%;
 
-  --muted: 240 20% 15%;
-  --muted-foreground: 240 10% 65%;
-  --muted-border: 240 20% 25%;
+  --muted: 240 20% 12%;
+  --muted-foreground: 240 12% 55%;
+  --muted-border: 240 20% 22%;
 
-  --accent: 240 30% 20%;
-  --accent-foreground: 0 0% 98%;
-  --accent-border: 240 30% 30%;
+  --accent: 240 28% 18%;
+  --accent-foreground: 220 15% 95%;
+  --accent-border: 240 28% 28%;
 
-  --destructive: 0 100% 65%;
+  --destructive: 0 90% 60%;
   --destructive-foreground: 0 0% 98%;
-  --destructive-border: 0 100% 75%;
+  --destructive-border: 0 90% 70%;
 
-  --app-font-sans: 'Space Mono', monospace;
-  --app-font-serif: 'Merriweather', serif;
-  --app-font-mono: 'Space Mono', monospace;
-  
-  --radius: 0.5rem;
+  --app-font-sans: 'Inter', system-ui, sans-serif;
+  --app-font-serif: 'Merriweather', Georgia, serif;
+  --app-font-mono: 'Space Mono', 'Courier New', monospace;
+
+  --radius: 0.625rem;
 }
 
 @layer base {
@@ -98,8 +98,188 @@
   }
   body {
     @apply font-sans antialiased bg-background text-foreground;
+    font-feature-settings: "cv11", "ss01";
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-mono;
+    @apply font-sans font-semibold;
+    letter-spacing: -0.01em;
   }
+}
+
+/* ============================================================ */
+/* SCROLLBAR                                                     */
+/* ============================================================ */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: hsl(240 20% 20%); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(240 20% 30%); }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ============================================================ */
+/* GLASSMORPHISM                                                 */
+/* ============================================================ */
+.glass {
+  background: rgba(13, 13, 26, 0.6);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.glass-hover:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ============================================================ */
+/* GRADIENTS & GLOW                                             */
+/* ============================================================ */
+.gradient-text {
+  background: linear-gradient(135deg, #ff4d4d 0%, #ff8c00 50%, #00e5cc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glow-red   { box-shadow: 0 0 24px rgba(255, 77,  77,  0.35); }
+.glow-amber { box-shadow: 0 0 24px rgba(255, 170,  0,  0.35); }
+.glow-teal  { box-shadow: 0 0 24px rgba(  0, 229, 204, 0.35); }
+.glow-white { box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); }
+
+/* ============================================================ */
+/* ANIMATED MESH BACKGROUND                                     */
+/* ============================================================ */
+.mesh-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.mesh-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.06;
+  animation: meshFloat 20s ease-in-out infinite;
+}
+.mesh-blob:nth-child(1) { width: 600px; height: 600px; background: #ff4d4d; top: -200px; left: -100px; animation-delay: 0s; }
+.mesh-blob:nth-child(2) { width: 500px; height: 500px; background: #00e5cc; bottom: -150px; right: -100px; animation-delay: -7s; }
+.mesh-blob:nth-child(3) { width: 400px; height: 400px; background: #8b5cf6; top: 50%; left: 40%; animation-delay: -14s; }
+
+@keyframes meshFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, -40px) scale(1.05); }
+  66%       { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+/* ============================================================ */
+/* COUNTDOWN FLIP                                               */
+/* ============================================================ */
+.flip-num {
+  display: inline-block;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.flip-num.flipping {
+  transform: scaleY(0);
+  opacity: 0;
+}
+
+/* ============================================================ */
+/* PHASE PILL                                                   */
+/* ============================================================ */
+.phase-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-family: var(--app-font-mono);
+}
+
+/* ============================================================ */
+/* XP PROGRESS BAR                                             */
+/* ============================================================ */
+.xp-bar {
+  height: 4px;
+  border-radius: 99px;
+  background: rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+.xp-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #ff4d4d, #ffaa00, #00e5cc);
+  transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================================ */
+/* ACHIEVEMENT BADGE                                           */
+/* ============================================================ */
+.badge-locked { filter: grayscale(1) opacity(0.35); }
+
+/* ============================================================ */
+/* DAY GRID CARD                                               */
+/* ============================================================ */
+.day-card {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  border: 1.5px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.day-card:hover { transform: scale(1.06); }
+.day-card.selected { transform: scale(1.08); }
+
+/* ============================================================ */
+/* POMODORO RING                                               */
+/* ============================================================ */
+.pomodoro-ring {
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+.pomodoro-ring circle {
+  transition: stroke-dashoffset 1s linear, stroke 0.5s ease;
+}
+
+/* ============================================================ */
+/* STREAK FLAME                                                */
+/* ============================================================ */
+@keyframes flicker {
+  0%, 100% { transform: scale(1) rotate(-2deg); }
+  50%       { transform: scale(1.1) rotate(2deg); }
+}
+.flame { animation: flicker 1.2s ease-in-out infinite; }
+
+/* ============================================================ */
+/* TOPIC CARD HOVER                                            */
+/* ============================================================ */
+.topic-card {
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+.topic-card:hover {
+  transform: translateX(4px);
+}
+
+/* ============================================================ */
+/* TAB INDICATOR                                               */
+/* ============================================================ */
+.nav-tab-active-bar {
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #ff4d4d, #00e5cc);
 }
