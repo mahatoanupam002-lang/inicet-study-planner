@@ -8,6 +8,7 @@ import { DayDetail, DetailTab } from "@/components/DayDetail";
 import { DailyScheduleView } from "@/components/DailyScheduleView";
 import { NotesView } from "@/components/NotesView";
 import { RevisionList, FlaggedTopic } from "@/components/RevisionList";
+import { MockScoreTracker } from "@/components/MockScoreTracker";
 
 type MainTab = 'planner' | 'schedule' | 'notes' | 'revision';
 
@@ -199,7 +200,12 @@ export default function App() {
           aria-label="Daily Schedule"
           hidden={activeTab !== 'schedule'}
         >
-          <DailyScheduleView />
+          <div className="flex flex-col gap-8 max-w-5xl mx-auto">
+            <DailyScheduleView />
+            <div className="bg-card border border-border rounded-xl p-6">
+              <MockScoreTracker />
+            </div>
+          </div>
         </div>
 
         <div
