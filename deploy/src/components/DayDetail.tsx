@@ -1,8 +1,11 @@
+import { useState, useEffect } from "react";
 import {
   CheckCircle, Circle, ChevronLeft, ChevronRight, BookOpen,
-  Flag, Target, Crosshair, AlertTriangle,
+  Flag, Target, Crosshair, AlertTriangle, Save,
 } from "lucide-react";
 import { PHASES, DayEntry } from "@/data/schedule";
+import { McqChart, McqScore } from "@/components/McqChart";
+import type { FlaggedTopic } from "@/components/RevisionList";
 
 export type DetailTab = 'TOPICS' | 'INDIA' | 'IMAGES' | 'MCQ' | 'NOTE';
 
@@ -14,6 +17,11 @@ interface Props {
   onToggleCompletion: (day: number) => void;
   notes: Record<number, string>;
   onUpdateNote: (day: number, text: string) => void;
+  mcqScores: Record<number, McqScore>;
+  onSaveMcqScore: (day: number, attempted: number, correct: number) => void;
+  onSelectDay: (day: number) => void;
+  flagged: FlaggedTopic[];
+  onToggleFlag: (dayId: number, topicIdx: number) => void;
   onPrevDay: () => void;
   onNextDay: () => void;
   canGoPrev: boolean;
@@ -30,11 +38,42 @@ export function DayDetail({
   onToggleCompletion,
   notes,
   onUpdateNote,
+  mcqScores,
+  onSaveMcqScore,
+  onSelectDay,
+  flagged,
+  onToggleFlag,
   onPrevDay,
   onNextDay,
   canGoPrev,
   canGoNext,
 }: Props) {
+  const existing = mcqScores[day.day];
+  const [attempted, setAttempted] = useState(existing?.attempted.toString() ?? '');
+  const [correct,   setCorrect]   = useState(existing?.correct.toString()   ?? '');
+
+  // sync inputs when day changes
+  useEffect(() => {
+    const s = mcqScores[day.day];
+    setAttempted(s?.attempted.toString() ?? '');
+    setCorrect(s?.correct.toString()   ?? '');
+  }, [day.day, mcqScores]);
+
+  const accuracy = (() => {
+    const a = parseInt(attempted), c = parseInt(correct);
+    if (!a || !c || a === 0) return null;
+    return Math.round((c / a) * 100);
+  })();
+
+  const accuracyColor =
+    accuracy === null ? 'text-muted-foreground' :
+    accuracy >= 80    ? 'text-emerald-400' :
+    accuracy >= 60    ? 'text-yellow-400'  : 'text-destructive';
+
+  const handleSave = () => {
+    const a = parseInt(attempted), c = parseInt(correct);
+    if (a > 0 && c >= 0 && c <= a) onSaveMcqScore(day.day, a, c);
+  };
   const isCompleted = completedDays.includes(day.day);
   const phase = PHASES.find(p => p.id === day.phase);
 
@@ -141,19 +180,30 @@ export function DayDetail({
             hidden={detailTab !== 'TOPICS'}
           >
             <div className="space-y-4">
-              {day.topics.map((topic, idx) => (
-                <div key={idx} className="flex gap-4 group">
-                  <div
-                    className="flex-shrink-0 w-8 h-8 rounded-full border border-border bg-background flex items-center justify-center font-mono text-sm font-bold mt-0.5"
-                    style={{ color: day.color }}
-                  >
-                    {idx + 1}
+              {day.topics.map((topic, idx) => {
+                const isFlagged = flagged.some(f => f.dayId === day.day && f.topicIdx === idx);
+                return (
+                  <div key={idx} className="flex gap-3 group">
+                    <div
+                      className="flex-shrink-0 w-8 h-8 rounded-full border border-border bg-background flex items-center justify-center font-mono text-sm font-bold mt-0.5"
+                      style={{ color: day.color }}
+                    >
+                      {idx + 1}
+                    </div>
+                    <div className={`flex-1 bg-background border rounded-lg p-4 transition-colors font-serif leading-relaxed text-foreground/90 ${isFlagged ? 'border-orange-500/50 bg-orange-500/5' : 'border-border group-hover:border-muted-foreground'}`}>
+                      {topic}
+                    </div>
+                    <button
+                      onClick={() => onToggleFlag(day.day, idx)}
+                      aria-label={isFlagged ? 'Remove flag' : 'Flag for revision'}
+                      aria-pressed={isFlagged}
+                      className={`flex-shrink-0 mt-1 p-1.5 rounded-md transition-colors ${isFlagged ? 'text-orange-400' : 'text-muted-foreground/30 hover:text-orange-400 opacity-0 group-hover:opacity-100'}`}
+                    >
+                      <Flag className="w-4 h-4" fill={isFlagged ? 'currentColor' : 'none'} />
+                    </button>
                   </div>
-                  <div className="flex-1 bg-background border border-border rounded-lg p-4 group-hover:border-muted-foreground transition-colors font-serif leading-relaxed text-foreground/90">
-                    {topic}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
@@ -211,33 +261,70 @@ export function DayDetail({
             aria-label="Daily MCQ mission"
             hidden={detailTab !== 'MCQ'}
           >
-            <div className="h-full flex flex-col">
-              <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-6 relative flex-1">
-                <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500" />
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="bg-emerald-500 p-2 rounded-lg">
-                    <Crosshair className="w-5 h-5 text-white" />
+            <div className="flex flex-col gap-4">
+              {/* Target */}
+              <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-5 relative">
+                <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500 rounded-l-xl" />
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="bg-emerald-500 p-1.5 rounded-md">
+                    <Crosshair className="w-4 h-4 text-white" />
                   </div>
-                  <h3 className="text-lg font-bold text-emerald-400 font-mono tracking-wide">DAILY MCQ MISSION</h3>
+                  <h3 className="text-sm font-bold text-emerald-400 font-mono tracking-wide">TODAY'S TARGET</h3>
                 </div>
-                <div className="font-serif text-xl font-bold mb-8 text-foreground p-6 bg-background/60 rounded-lg border border-emerald-500/30 text-center">
-                  {day.mcq}
-                </div>
-                <div className="grid grid-cols-3 gap-4 mt-auto">
-                  <div className="bg-background border border-border p-4 rounded-lg text-center">
-                    <span className="block text-2xl font-mono font-bold text-emerald-500">+1</span>
-                    <span className="text-xs text-muted-foreground uppercase font-mono">Correct</span>
-                  </div>
-                  <div className="bg-background border border-border p-4 rounded-lg text-center">
-                    <span className="block text-2xl font-mono font-bold text-destructive">-0.33</span>
-                    <span className="text-xs text-muted-foreground uppercase font-mono">Incorrect</span>
-                  </div>
-                  <div className="bg-background border border-border p-4 rounded-lg text-center">
-                    <span className="block text-2xl font-mono font-bold text-muted-foreground">0</span>
-                    <span className="text-xs text-muted-foreground uppercase font-mono">Unattempted</span>
-                  </div>
+                <p className="font-serif text-base text-foreground">{day.mcq}</p>
+                <div className="grid grid-cols-3 gap-2 mt-4">
+                  {[["#22c55e", "+1", "Correct"], ["#ef4444", "−0.33", "Wrong"], ["hsl(var(--muted-foreground))", "0", "Skip"]].map(([color, val, lbl]) => (
+                    <div key={lbl} className="bg-background border border-border p-3 rounded-lg text-center">
+                      <span className="block text-xl font-mono font-bold" style={{ color }}>{val}</span>
+                      <span className="text-[10px] text-muted-foreground uppercase font-mono">{lbl}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
+
+              {/* Score logger */}
+              <div className="bg-card border border-border rounded-xl p-5">
+                <h3 className="text-xs font-mono uppercase text-muted-foreground mb-3">Log today's score</h3>
+                <div className="flex items-end gap-3">
+                  <div className="flex-1">
+                    <label className="text-[10px] font-mono text-muted-foreground uppercase block mb-1">Attempted</label>
+                    <input
+                      type="number" min="0" max="300"
+                      value={attempted}
+                      onChange={e => setAttempted(e.target.value)}
+                      placeholder="e.g. 40"
+                      className="w-full bg-background border border-border rounded-md px-3 py-2 text-sm font-mono focus:outline-none focus:ring-1 focus:ring-primary"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="text-[10px] font-mono text-muted-foreground uppercase block mb-1">Correct</label>
+                    <input
+                      type="number" min="0" max="300"
+                      value={correct}
+                      onChange={e => setCorrect(e.target.value)}
+                      placeholder="e.g. 34"
+                      className="w-full bg-background border border-border rounded-md px-3 py-2 text-sm font-mono focus:outline-none focus:ring-1 focus:ring-primary"
+                    />
+                  </div>
+                  <div className="flex flex-col items-center gap-1 min-w-[64px]">
+                    <span className={`text-2xl font-mono font-bold ${accuracyColor}`}>
+                      {accuracy !== null ? `${accuracy}%` : '—'}
+                    </span>
+                    <span className="text-[10px] font-mono text-muted-foreground">accuracy</span>
+                  </div>
+                  <button
+                    onClick={handleSave}
+                    disabled={!attempted || !correct}
+                    aria-label="Save MCQ score"
+                    className="flex items-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs font-mono rounded-md transition-colors"
+                  >
+                    <Save className="w-3.5 h-3.5" /> Save
+                  </button>
+                </div>
+              </div>
+
+              {/* Accuracy chart */}
+              <McqChart scores={mcqScores} activeDayId={day.day} onSelectDay={onSelectDay} />
             </div>
           </div>
 
