@@ -66,7 +66,7 @@ export function DayGrid({
         </div>
 
         <div className="grid grid-cols-7 gap-2" role="grid" aria-label="28-day study plan">
-          {schedule.map((day) => {
+          {[...schedule].reverse().map((day) => {
             const isSelected  = day.day === selectedDayId;
             const isCompleted = completedDays.includes(day.day);
             const hasNotes    = !!notes[day.day]?.trim();
