@@ -66,7 +66,8 @@ export function DayGrid({
         </div>
 
         <div className="grid grid-cols-7 gap-2" role="grid" aria-label="28-day study plan">
-          {[...schedule].reverse().map((day) => {
+          {schedule.map((day) => {
+            const daysLeft = schedule.length + 1 - day.day;
             const isSelected  = day.day === selectedDayId;
             const isCompleted = completedDays.includes(day.day);
             const hasNotes    = !!notes[day.day]?.trim();
@@ -77,7 +78,7 @@ export function DayGrid({
                 key={day.day}
                 onClick={() => onSelectDay(day.day)}
                 role="gridcell"
-                aria-label={`Day ${day.day}: ${day.focus}${isCompleted ? ' (completed)' : ''}`}
+                aria-label={`${daysLeft} days to exam — ${day.focus}${isCompleted ? ' (completed)' : ''}`}
                 aria-selected={isSelected}
                 style={{
                   borderColor: isSelected ? day.color : isCompleted ? '#1f1f2e' : 'var(--border)',
@@ -90,7 +91,7 @@ export function DayGrid({
                 }`}
               >
                 <span className={`text-sm font-mono font-bold ${isSelected ? 'text-foreground' : 'text-muted-foreground'}`}>
-                  {day.day}
+                  {daysLeft}
                 </span>
 
                 {isCompleted && (
