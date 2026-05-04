@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { Target, Calendar, Clock, StickyNote, Flag, Bot, Flame, Download, Upload } from "lucide-react";
+import { StudyReminderBanner, StudyReminderBell } from "@/components/StudyReminder";
 import { EXAM_DATE, SCHEDULE } from "@/data/schedule";
 import { safeLoad, safeSave } from "@/lib/storage";
 import { SRCard } from "@/lib/sr";
@@ -135,7 +136,8 @@ export default function App() {
     return SCHEDULE.filter(s => s.subject === selectedSubject);
   }, [selectedSubject]);
 
-  const selectedDay = SCHEDULE.find(s => s.day === selectedDayId) ?? SCHEDULE[0];
+  const selectedDay   = SCHEDULE.find(s => s.day === selectedDayId) ?? SCHEDULE[0];
+  const studiedToday  = streak.lastDate === new Date().toISOString().slice(0, 10);
 
   const NAV_TABS: { id: MainTab; label: string; Icon: React.FC<{ className?: string }>; badge?: number }[] = [
     { id: 'planner',  label: 'Planner',  Icon: Calendar                               },
@@ -148,28 +150,31 @@ export default function App() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
       {/* Header */}
-      <header className="border-b border-border bg-card px-4 md:px-6 py-3 md:py-4 sticky top-0 z-10 flex justify-between items-center gap-4">
-        <div className="flex items-center gap-3">
-          <div className="bg-destructive p-2 rounded-md shrink-0">
-            <Target className="w-5 h-5 text-destructive-foreground" />
-          </div>
-          <div>
-            <h1 className="text-lg md:text-2xl font-bold uppercase tracking-wider text-primary leading-none">INI-CET War Plan</h1>
-            <p className="text-[10px] text-muted-foreground font-mono">MAY 16, 2026 // COMMAND CENTER</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-3">
-          {/* Streak badge */}
-          {streak.count > 0 && (
-            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full">
-              <Flame className="w-3.5 h-3.5 text-orange-400" />
-              <span className="text-xs font-mono text-orange-400 font-bold">{streak.count}</span>
-              {streak.longest > 1 && (
-                <span className="text-[10px] font-mono text-orange-400/60">/ {streak.longest} best</span>
-              )}
+      <header className="border-b border-border bg-card sticky top-0 z-10">
+        <StudyReminderBanner studiedToday={studiedToday} />
+        <div className="px-4 md:px-6 py-3 md:py-4 flex justify-between items-center gap-4">
+          <div className="flex items-center gap-3">
+            <div className="bg-destructive p-2 rounded-md shrink-0">
+              <Target className="w-5 h-5 text-destructive-foreground" />
             </div>
-          )}
-          <CountdownTimer timeLeft={timeLeft} />
+            <div>
+              <h1 className="text-lg md:text-2xl font-bold uppercase tracking-wider text-primary leading-none">INI-CET War Plan</h1>
+              <p className="text-[10px] text-muted-foreground font-mono">MAY 16, 2026 // COMMAND CENTER</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            {streak.count > 0 && (
+              <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full">
+                <Flame className="w-3.5 h-3.5 text-orange-400" />
+                <span className="text-xs font-mono text-orange-400 font-bold">{streak.count}</span>
+                {streak.longest > 1 && (
+                  <span className="text-[10px] font-mono text-orange-400/60">/ {streak.longest} best</span>
+                )}
+              </div>
+            )}
+            <CountdownTimer timeLeft={timeLeft} />
+            <StudyReminderBell studiedToday={studiedToday} />
+          </div>
         </div>
       </header>
 

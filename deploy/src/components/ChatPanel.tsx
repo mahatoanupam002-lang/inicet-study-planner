@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import Anthropic from "@anthropic-ai/sdk";
-import { Bot, Send, Trash2, Key, ChevronDown, ChevronUp, Loader2 } from "lucide-react";
+import { Bot, Send, Trash2, Key, ChevronDown, ChevronUp, Loader2, ExternalLink, ShieldCheck, Zap } from "lucide-react";
 import { safeLoad, safeSave } from "@/lib/storage";
 
 interface Message {
@@ -165,6 +165,7 @@ export function ChatPanel() {
           {apiKey && (
             <button
               onClick={() => setShowKeyForm(v => !v)}
+              title="Manage API key"
               className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-mono text-muted-foreground hover:text-foreground border border-border rounded-md transition-colors"
             >
               <Key className="w-3.5 h-3.5" />
@@ -174,51 +175,105 @@ export function ChatPanel() {
         </div>
       </div>
 
-      {/* API Key form */}
-      {showKeyForm && (
-        <div className="bg-card border border-border rounded-xl p-4 shrink-0">
-          <p className="text-xs font-mono text-muted-foreground mb-3">
-            Enter your <span className="text-violet-400">Anthropic API key</span> to enable AI answers.
-            Stored only in your browser's localStorage.
-          </p>
-          <div className="flex gap-2">
-            <input
-              type="password"
-              value={keyInput}
-              onChange={e => setKeyInput(e.target.value)}
-              onKeyDown={e => e.key === "Enter" && saveKey()}
-              placeholder="sk-ant-api03-..."
-              className="flex-1 bg-background border border-border rounded-md px-3 py-2 text-sm font-mono focus:outline-none focus:ring-1 focus:ring-violet-500"
-            />
-            <button
-              onClick={saveKey}
-              className="px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white text-xs font-mono rounded-md transition-colors"
-            >
-              Save
-            </button>
-            {apiKey && (
+      {/* Onboarding — no key yet */}
+      {!apiKey && (
+        <div className="flex-1 flex items-center justify-center py-8">
+          <div className="w-full max-w-md space-y-6">
+            {/* Hero */}
+            <div className="text-center space-y-2">
+              <div className="w-14 h-14 bg-violet-500/20 rounded-2xl flex items-center justify-center mx-auto">
+                <Bot className="w-7 h-7 text-violet-400" />
+              </div>
+              <h3 className="font-mono font-bold text-foreground uppercase tracking-wider">AI Doubt Solver</h3>
+              <p className="text-sm text-muted-foreground font-mono max-w-xs mx-auto">
+                Ask medical exam questions and get instant, exam-focused answers with mnemonics and MCQ tips.
+              </p>
+            </div>
+
+            {/* Feature pills */}
+            <div className="grid grid-cols-3 gap-3 text-center">
+              {[
+                { icon: Zap,         label: "Instant answers" },
+                { icon: ShieldCheck, label: "Key stays local" },
+                { icon: Bot,         label: "INI-CET tuned"   },
+              ].map(({ icon: Icon, label }) => (
+                <div key={label} className="bg-card border border-border rounded-xl p-3 space-y-1.5">
+                  <Icon className="w-4 h-4 text-violet-400 mx-auto" />
+                  <p className="text-[10px] font-mono text-muted-foreground">{label}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Steps */}
+            <div className="bg-card border border-border rounded-xl p-5 space-y-4">
+              <p className="text-xs font-mono uppercase text-muted-foreground">Setup — 2 steps</p>
+
+              <div className="flex gap-3">
+                <span className="w-5 h-5 rounded-full bg-violet-600 text-white text-[10px] font-mono flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+                <div>
+                  <p className="text-xs font-mono text-foreground mb-1">Get a free Anthropic API key</p>
+                  <p className="text-[11px] font-mono text-muted-foreground">
+                    Visit{" "}
+                    <span className="text-violet-400 select-all">console.anthropic.com</span>
+                    {" "}→ API Keys → Create Key.
+                    New accounts get free credits.
+                  </p>
+                  <a
+                    href="https://console.anthropic.com/settings/keys"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11px] font-mono text-violet-400 hover:text-violet-300 mt-1"
+                  >
+                    Open console <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <span className="w-5 h-5 rounded-full bg-violet-600 text-white text-[10px] font-mono flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+                <div className="flex-1">
+                  <p className="text-xs font-mono text-foreground mb-2">Paste it below</p>
+                  <input
+                    type="password"
+                    value={keyInput}
+                    onChange={e => setKeyInput(e.target.value)}
+                    onKeyDown={e => e.key === "Enter" && saveKey()}
+                    placeholder="sk-ant-api03-…"
+                    className="w-full bg-background border border-border rounded-md px-3 py-2 text-sm font-mono focus:outline-none focus:ring-1 focus:ring-violet-500 placeholder:text-muted-foreground/40"
+                  />
+                  {error && <p className="text-[11px] text-destructive font-mono mt-1.5">{error}</p>}
+                  <p className="text-[10px] text-muted-foreground font-mono mt-1.5">
+                    Stored only in this browser. Never sent anywhere except Anthropic.
+                  </p>
+                </div>
+              </div>
+
               <button
-                onClick={clearKey}
-                className="px-3 py-2 border border-destructive/50 text-destructive text-xs font-mono rounded-md hover:bg-destructive/10 transition-colors"
+                onClick={saveKey}
+                disabled={!keyInput.trim()}
+                className="w-full py-2.5 bg-violet-600 hover:bg-violet-500 disabled:opacity-30 text-white text-sm font-mono rounded-lg transition-colors"
               >
-                Remove
+                Connect AI Tutor
               </button>
-            )}
+            </div>
           </div>
-          {error && <p className="text-xs text-destructive font-mono mt-2">{error}</p>}
         </div>
       )}
 
-      {/* No key state */}
-      {!apiKey && !showKeyForm && (
-        <div className="flex-1 flex items-center justify-center">
-          <div className="text-center space-y-3">
-            <Bot className="w-12 h-12 text-muted-foreground/30 mx-auto" />
-            <p className="text-sm text-muted-foreground font-mono">No API key set.</p>
-            <button onClick={() => setShowKeyForm(true)} className="px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white text-xs font-mono rounded-md transition-colors">
-              Add API Key
-            </button>
-          </div>
+      {/* Key management (when already set) */}
+      {apiKey && showKeyForm && (
+        <div className="bg-card border border-border rounded-xl p-4 shrink-0 flex items-center gap-3">
+          <Key className="w-4 h-4 text-violet-400 flex-shrink-0" />
+          <p className="text-xs font-mono text-muted-foreground flex-1">API key active — ending in …{apiKey.slice(-6)}</p>
+          <button
+            onClick={clearKey}
+            className="px-3 py-1.5 border border-destructive/50 text-destructive text-xs font-mono rounded-md hover:bg-destructive/10 transition-colors flex-shrink-0"
+          >
+            Remove
+          </button>
+          <button onClick={() => setShowKeyForm(false)} className="text-muted-foreground hover:text-foreground">
+            <ChevronUp className="w-4 h-4" />
+          </button>
         </div>
       )}
 
