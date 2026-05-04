@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Clock, ShieldAlert, CheckSquare, Square } from "lucide-react";
 import { DAILY_BLOCKS } from "@/data/schedule";
 import { safeLoad, safeSave } from "@/lib/storage";
+import { PomodoroTimer } from "@/components/PomodoroTimer";
 
 function getTodayKey() {
   return new Date().toISOString().slice(0, 10); // YYYY-MM-DD
@@ -71,6 +72,7 @@ export function DailyScheduleView() {
       </div>
 
       <div className="w-full lg:w-80 flex flex-col gap-6">
+        <PomodoroTimer />
         <div className="bg-destructive/10 border border-destructive/20 rounded-xl p-6">
           <h3 className="font-mono text-destructive font-bold mb-4 flex items-center gap-2">
             <ShieldAlert className="w-5 h-5" /> NON-NEGOTIABLES
