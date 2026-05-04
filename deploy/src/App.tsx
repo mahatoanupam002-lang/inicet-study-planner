@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { Target, Calendar, Clock, StickyNote } from "lucide-react";
+import { Target, Calendar, Clock, StickyNote, Flag, Bot } from "lucide-react";
 import { EXAM_DATE, SCHEDULE } from "@/data/schedule";
 import { safeLoad, safeSave } from "@/lib/storage";
 import { CountdownTimer } from "@/components/CountdownTimer";
@@ -7,8 +7,11 @@ import { DayGrid } from "@/components/DayGrid";
 import { DayDetail, DetailTab } from "@/components/DayDetail";
 import { DailyScheduleView } from "@/components/DailyScheduleView";
 import { NotesView } from "@/components/NotesView";
+import { RevisionList, FlaggedTopic } from "@/components/RevisionList";
+import { MockScoreTracker } from "@/components/MockScoreTracker";
+import { ChatPanel } from "@/components/ChatPanel";
 
-type MainTab = 'planner' | 'schedule' | 'notes';
+type MainTab = 'planner' | 'schedule' | 'notes' | 'revision' | 'ai';
 
 interface TimeLeft { days: number; hours: number; minutes: number; seconds: number; }
 
@@ -30,6 +33,12 @@ export default function App() {
   const [notes, setNotes] = useState<Record<number, string>>(() =>
     safeLoad<Record<number, string>>('inicet_notes', {})
   );
+  const [mcqScores, setMcqScores] = useState<Record<number, { attempted: number; correct: number }>>(() =>
+    safeLoad('inicet_mcq_scores', {})
+  );
+  const [flagged, setFlagged] = useState<FlaggedTopic[]>(() =>
+    safeLoad('inicet_flagged', [])
+  );
   const [activeTab,      setActiveTab]      = useState<MainTab>('planner');
   const [selectedSubject, setSelectedSubject] = useState<string>('All');
   const [selectedDayId,  setSelectedDayId]  = useState<number>(1);
@@ -38,6 +47,8 @@ export default function App() {
 
   useEffect(() => { safeSave('inicet_completed_days', completedDays); }, [completedDays]);
   useEffect(() => { safeSave('inicet_notes', notes); }, [notes]);
+  useEffect(() => { safeSave('inicet_mcq_scores', mcqScores); }, [mcqScores]);
+  useEffect(() => { safeSave('inicet_flagged', flagged); }, [flagged]);
 
   useEffect(() => {
     const timer = setInterval(() => setTimeLeft(calcTimeLeft()), 1000);
@@ -52,6 +63,16 @@ export default function App() {
   const updateNote = (day: number, text: string) =>
     setNotes(prev => ({ ...prev, [day]: text }));
 
+  const saveMcqScore = (day: number, attempted: number, correct: number) =>
+    setMcqScores(prev => ({ ...prev, [day]: { attempted, correct } }));
+
+  const toggleFlag = (dayId: number, topicIdx: number) =>
+    setFlagged(prev =>
+      prev.some(f => f.dayId === dayId && f.topicIdx === topicIdx)
+        ? prev.filter(f => !(f.dayId === dayId && f.topicIdx === topicIdx))
+        : [...prev, { dayId, topicIdx }]
+    );
+
   const filteredSchedule = useMemo(() => {
     if (selectedSubject === 'All') return SCHEDULE;
     if (selectedSubject === 'Full Mock') return SCHEDULE.filter(s => s.phase === 'mock');
@@ -60,10 +81,12 @@ export default function App() {
 
   const selectedDay = SCHEDULE.find(s => s.day === selectedDayId) ?? SCHEDULE[0];
 
-  const NAV_TABS: { id: MainTab; label: string; Icon: React.FC<{ className?: string }> }[] = [
-    { id: 'planner',  label: 'Planner',        Icon: Calendar    },
-    { id: 'schedule', label: 'Daily Schedule',  Icon: Clock       },
-    { id: 'notes',    label: 'My Notes',        Icon: StickyNote  },
+  const NAV_TABS: { id: MainTab; label: string; Icon: React.FC<{ className?: string }>; badge?: number }[] = [
+    { id: 'planner',  label: 'Planner',       Icon: Calendar                              },
+    { id: 'schedule', label: 'Schedule',       Icon: Clock                                 },
+    { id: 'notes',    label: 'Notes',          Icon: StickyNote                            },
+    { id: 'revision', label: 'Revision',       Icon: Flag, badge: flagged.length || undefined },
+    { id: 'ai',       label: 'AI Tutor',       Icon: Bot                                   },
   ];
 
   return (
@@ -89,20 +112,25 @@ export default function App() {
           role="tablist"
           aria-label="Main sections"
         >
-          {NAV_TABS.map(({ id, label, Icon }) => (
+          {NAV_TABS.map(({ id, label, Icon, badge }) => (
             <button
               key={id}
               role="tab"
               aria-selected={activeTab === id}
               aria-controls={`main-panel-${id}`}
               onClick={() => setActiveTab(id)}
-              className={`flex-1 md:flex-none px-4 py-2 text-sm font-medium rounded-md transition-colors flex items-center justify-center gap-2 ${
+              className={`flex-1 md:flex-none px-4 py-2 text-sm font-medium rounded-md transition-colors flex items-center justify-center gap-2 relative ${
                 activeTab === id
                   ? 'bg-secondary text-secondary-foreground'
                   : 'text-muted-foreground hover:text-primary hover:bg-muted'
               }`}
             >
               <Icon className="w-4 h-4" /> {label}
+              {badge ? (
+                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-orange-500 text-white text-[9px] font-mono flex items-center justify-center">
+                  {badge > 99 ? '99' : badge}
+                </span>
+              ) : null}
             </button>
           ))}
         </nav>
@@ -155,6 +183,11 @@ export default function App() {
               onToggleCompletion={toggleDayCompletion}
               notes={notes}
               onUpdateNote={updateNote}
+              mcqScores={mcqScores}
+              onSaveMcqScore={saveMcqScore}
+              onSelectDay={setSelectedDayId}
+              flagged={flagged}
+              onToggleFlag={toggleFlag}
               onPrevDay={() => setSelectedDayId(prev => prev - 1)}
               onNextDay={() => setSelectedDayId(prev => prev + 1)}
               canGoPrev={selectedDayId > 1}
@@ -169,7 +202,12 @@ export default function App() {
           aria-label="Daily Schedule"
           hidden={activeTab !== 'schedule'}
         >
-          <DailyScheduleView />
+          <div className="flex flex-col gap-8 max-w-5xl mx-auto">
+            <DailyScheduleView />
+            <div className="bg-card border border-border rounded-xl p-6">
+              <MockScoreTracker />
+            </div>
+          </div>
         </div>
 
         <div
@@ -185,6 +223,28 @@ export default function App() {
             notes={notes}
             onUpdateNote={updateNote}
           />
+        </div>
+
+        <div
+          id="main-panel-revision"
+          role="tabpanel"
+          aria-label="Revision List"
+          hidden={activeTab !== 'revision'}
+        >
+          <RevisionList
+            flagged={flagged}
+            onUnflag={toggleFlag}
+            onGoToDay={(day) => { setSelectedDayId(day); setActiveTab('planner'); }}
+          />
+        </div>
+
+        <div
+          id="main-panel-ai"
+          role="tabpanel"
+          aria-label="AI Tutor"
+          hidden={activeTab !== 'ai'}
+        >
+          <ChatPanel />
         </div>
 
       </main>

@@ -1,5 +1,6 @@
-import { Calendar, ListChecks, CheckCircle } from "lucide-react";
-import { PHASES, SUBJECTS, DayEntry } from "@/data/schedule";
+import { useMemo } from "react";
+import { Calendar, ListChecks, CheckCircle, Activity } from "lucide-react";
+import { PHASES, SUBJECTS, SCHEDULE, DayEntry } from "@/data/schedule";
 
 interface Props {
   schedule: DayEntry[];
@@ -23,6 +24,17 @@ export function DayGrid({
   onSelectSubject,
 }: Props) {
   const visibleDayIds = new Set(filteredSchedule.map(s => s.day));
+
+  // subject-wise progress (exclude "All" entry)
+  const subjectProgress = useMemo(() => {
+    return SUBJECTS.filter(s => s !== 'All').map(subj => {
+      const days = subj === 'Full Mock'
+        ? SCHEDULE.filter(d => d.phase === 'mock')
+        : SCHEDULE.filter(d => d.subject === subj);
+      const done = days.filter(d => completedDays.includes(d.day)).length;
+      return { subj, total: days.length, done, color: days[0]?.color ?? '#aaa' };
+    }).filter(s => s.total > 0);
+  }, [completedDays]);
 
   return (
     <div className="w-full lg:w-1/3 flex flex-col gap-6">
@@ -108,6 +120,29 @@ export function DayGrid({
               </button>
             );
           })}
+        </div>
+      </div>
+
+      {/* Subject progress breakdown */}
+      <div className="bg-card border border-border rounded-xl p-4">
+        <h3 className="text-xs font-mono uppercase text-muted-foreground mb-3 flex items-center gap-2">
+          <Activity className="w-3.5 h-3.5" /> Subject Progress
+        </h3>
+        <div className="space-y-2">
+          {subjectProgress.map(({ subj, total, done, color }) => (
+            <div key={subj} className="flex items-center gap-2">
+              <span className="text-[11px] font-mono text-muted-foreground w-28 truncate flex-shrink-0">{subj}</span>
+              <div className="flex-1 h-1.5 bg-background rounded-full overflow-hidden border border-border">
+                <div
+                  className="h-full rounded-full transition-all duration-300"
+                  style={{ width: `${(done / total) * 100}%`, backgroundColor: color }}
+                />
+              </div>
+              <span className="text-[11px] font-mono text-muted-foreground w-8 text-right flex-shrink-0">
+                {done}/{total}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
