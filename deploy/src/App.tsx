@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { Target, Calendar, Clock, StickyNote, Flag } from "lucide-react";
+import { Target, Calendar, Clock, StickyNote, Flag, Bot } from "lucide-react";
 import { EXAM_DATE, SCHEDULE } from "@/data/schedule";
 import { safeLoad, safeSave } from "@/lib/storage";
 import { CountdownTimer } from "@/components/CountdownTimer";
@@ -9,8 +9,9 @@ import { DailyScheduleView } from "@/components/DailyScheduleView";
 import { NotesView } from "@/components/NotesView";
 import { RevisionList, FlaggedTopic } from "@/components/RevisionList";
 import { MockScoreTracker } from "@/components/MockScoreTracker";
+import { ChatPanel } from "@/components/ChatPanel";
 
-type MainTab = 'planner' | 'schedule' | 'notes' | 'revision';
+type MainTab = 'planner' | 'schedule' | 'notes' | 'revision' | 'ai';
 
 interface TimeLeft { days: number; hours: number; minutes: number; seconds: number; }
 
@@ -85,6 +86,7 @@ export default function App() {
     { id: 'schedule', label: 'Schedule',       Icon: Clock                                 },
     { id: 'notes',    label: 'Notes',          Icon: StickyNote                            },
     { id: 'revision', label: 'Revision',       Icon: Flag, badge: flagged.length || undefined },
+    { id: 'ai',       label: 'AI Tutor',       Icon: Bot                                   },
   ];
 
   return (
@@ -234,6 +236,15 @@ export default function App() {
             onUnflag={toggleFlag}
             onGoToDay={(day) => { setSelectedDayId(day); setActiveTab('planner'); }}
           />
+        </div>
+
+        <div
+          id="main-panel-ai"
+          role="tabpanel"
+          aria-label="AI Tutor"
+          hidden={activeTab !== 'ai'}
+        >
+          <ChatPanel />
         </div>
 
       </main>
