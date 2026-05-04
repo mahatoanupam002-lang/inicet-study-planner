@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from "react";
-import { Target, Calendar, Clock, StickyNote, Flag, Bot, Flame, Download, Upload } from "lucide-react";
+import { Target, Calendar, Clock, StickyNote, Flag, Bot, Flame, Download, Upload, BookOpen } from "lucide-react";
 import { StudyReminderBanner, StudyReminderBell } from "@/components/StudyReminder";
 import { EXAM_DATE, SCHEDULE } from "@/data/schedule";
 import { safeLoad, safeSave } from "@/lib/storage";
@@ -12,8 +12,9 @@ import { NotesView } from "@/components/NotesView";
 import { RevisionList, FlaggedTopic } from "@/components/RevisionList";
 import { MockScoreTracker } from "@/components/MockScoreTracker";
 import { ChatPanel } from "@/components/ChatPanel";
+import { PYQBank } from "@/components/PYQBank";
 
-type MainTab = 'planner' | 'schedule' | 'notes' | 'revision' | 'ai';
+type MainTab = 'planner' | 'schedule' | 'notes' | 'revision' | 'ai' | 'pyq';
 
 interface TimeLeft   { days: number; hours: number; minutes: number; seconds: number; }
 interface StreakData  { count: number; longest: number; lastDate: string; }
@@ -145,6 +146,7 @@ export default function App() {
     { id: 'notes',    label: 'Notes',    Icon: StickyNote                             },
     { id: 'revision', label: 'Revision', Icon: Flag, badge: flagged.length || undefined },
     { id: 'ai',       label: 'AI Tutor', Icon: Bot                                    },
+    { id: 'pyq',      label: 'PYQ',      Icon: BookOpen                               },
   ];
 
   return (
@@ -312,6 +314,10 @@ export default function App() {
 
         <div id="main-panel-ai" role="tabpanel" aria-label="AI Tutor" hidden={activeTab !== 'ai'}>
           <ChatPanel />
+        </div>
+
+        <div id="main-panel-pyq" role="tabpanel" aria-label="PYQ Practice" hidden={activeTab !== 'pyq'}>
+          <PYQBank />
         </div>
 
       </main>
