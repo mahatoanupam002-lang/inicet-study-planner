@@ -2,52 +2,38 @@
   "systemSetup": [
     {
       "name": "Install pnpm",
-      "command": "npm install -g pnpm@10.26.1"
+      "command": "npm i -g pnpm"
     }
   ],
   "templateName": "custom",
   "projectDependencies": [
     {
-      "name": "Install workspace dependencies",
+      "name": "Install Dependencies",
       "command": "pnpm install"
     }
   ],
   "codeChecks": [
     {
-      "name": "Type check",
+      "name": "Typecheck",
       "command": "pnpm run typecheck"
     }
   ],
   "buildSteps": [
     {
-      "name": "Build project",
+      "name": "Build Project",
       "command": "pnpm run build"
     }
   ],
   "runStep": [
     {
-      "name": "Dev server (artifacts/neet-pg-planner)",
-      "command": "pnpm --filter @workspace/neet-pg-planner run dev --port 3000",
+      "name": "Run Dev Server",
+      "command": "pnpm -C deploy run dev --port 3000",
       "port": "3000"
-    },
-    {
-      "name": "Dev server (deploy)",
-      "command": "pnpm --filter inicet-study-planner run dev --port 3001",
-      "port": "3001"
     }
   ],
-  "deploySteps": [
-    {
-      "name": "Build and deploy",
-      "command": "pnpm run build"
-    }
-  ],
+  "deploySteps": [],
   "cleanupFiles": [
-    "node_modules",
-    "dist",
-    "artifacts/neet-pg-planner/dist",
-    "deploy/dist",
-    ".pnpm-store"
+    "deploy/dist"
   ],
   "packageManager": "pnpm",
   "envPaths": [

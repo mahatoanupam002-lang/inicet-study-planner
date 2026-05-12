@@ -18,7 +18,7 @@ export default defineConfig({
         theme_color: "#080810",
         background_color: "#080810",
         display: "standalone",
-        orientation: "portrait-primary",
+        orientation: "portrait",
         start_url: "/",
         scope: "/",
         icons: [
@@ -43,6 +43,9 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    host: true,
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
