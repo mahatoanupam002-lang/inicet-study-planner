@@ -239,7 +239,7 @@ export default function App() {
       {/* Nav + Progress */}
       <div className="px-4 md:px-6 py-3 border-b border-border/50 bg-background flex flex-col md:flex-row justify-between items-center gap-3">
         <nav
-          className="flex bg-card p-1 rounded-lg border border-border w-full md:w-auto overflow-x-auto no-scrollbar"
+          className="flex bg-card p-1 rounded-lg border border-border w-full md:w-auto overflow-x-auto"
           role="tablist"
           aria-label="Main sections"
         >
@@ -247,17 +247,18 @@ export default function App() {
             <button
               key={id}
               role="tab"
+              title={label}
               aria-selected={activeTab === id}
               aria-controls={`main-panel-${id}`}
               onClick={() => setActiveTab(id)}
-              className={`flex-shrink-0 md:flex-none px-3 md:px-4 py-2 text-sm font-medium rounded-md transition-colors flex items-center justify-center gap-1.5 relative ${
+              className={`flex-shrink-0 px-3 py-2 text-sm font-medium rounded-md transition-colors flex items-center justify-center gap-1.5 relative ${
                 activeTab === id
                   ? 'bg-secondary text-secondary-foreground'
                   : 'text-muted-foreground hover:text-primary hover:bg-muted'
               }`}
             >
               <Icon className="w-4 h-4" />
-              <span className="hidden sm:inline">{label}</span>
+              <span className="hidden xl:inline">{label}</span>
               {badge ? (
                 <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-orange-500 text-white text-[9px] font-mono flex items-center justify-center">
                   {badge > 99 ? '99' : badge}
