@@ -8,7 +8,17 @@ interface Message {
   content: string;
 }
 
-const SYSTEM_PROMPT = `You are an expert INI-CET / USMLE-style medical exam tutor helping an Indian postgraduate medical aspirant preparing for INI-CET (All India Institute of Medical Sciences PG entrance exam, May 2026).
+interface McqScore { attempted: number; correct: number; }
+
+interface StudyContext {
+  completedDays: number[];
+  mcqScores: Record<number, McqScore>;
+  flaggedCount: number;
+  currentDayFocus: string;
+  examDate: Date;
+}
+
+const BASE_SYSTEM_PROMPT = `You are an expert INI-CET / USMLE-style medical exam tutor helping an Indian postgraduate medical aspirant preparing for INI-CET (All India Institute of Medical Sciences PG entrance exam).
 
 Your role:
 - Give concise, high-yield exam-focused answers
@@ -19,10 +29,49 @@ Your role:
 - Keep answers ≤300 words unless the topic genuinely demands more
 - Use bullet points and bold for scannable reading
 - Always mention the most likely exam angle at the end (e.g., "Most likely asked as: identify the drug from its mechanism")
+- When the student asks "what should I study" or "what's my weak area", use the student profile below to give a specific, personalised answer
 
 Subjects covered: Anatomy, Physiology, Biochemistry, Pharmacology, Pathology, Microbiology, FMT/Forensics, PSM/Community Medicine, Medicine, Surgery, OBG, Paediatrics, Orthopaedics, Ophthalmology, ENT, Psychiatry, Radiology, Skin.`;
 
-const QUICK_PROMPTS = [
+const SUBJECT_DAYS: Record<string, number[]> = {
+  Medicine: [1,2,3,4], Surgery: [5,6], Pathology: [7,8],
+  Pharmacology: [9,10], OBG: [11,12], Paediatrics: [13],
+  PSM: [14,15], Microbiology: [16,17], Forensic: [18],
+};
+
+function buildSystemPrompt(ctx: StudyContext | undefined): string {
+  if (!ctx) return BASE_SYSTEM_PROMPT;
+
+  const daysToExam = Math.max(0, Math.ceil(
+    (ctx.examDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)
+  ));
+
+  const subjectLines = Object.entries(SUBJECT_DAYS).map(([subj, days]) => {
+    let attempted = 0, correct = 0;
+    days.filter(d => ctx.completedDays.includes(d)).forEach(d => {
+      const s = ctx.mcqScores[d];
+      if (s?.attempted) { attempted += s.attempted; correct += s.correct; }
+    });
+    if (!attempted) return null;
+    const acc = Math.round((correct / attempted) * 100);
+    const tag = acc < 60 ? "⚠ WEAK" : acc < 75 ? "~ borderline" : "✓ strong";
+    return `  ${subj}: ${acc}% accuracy (${attempted} Qs) ${tag}`;
+  }).filter(Boolean);
+
+  const contextBlock = `
+
+=== STUDENT PROFILE (use this to personalise answers) ===
+Plan progress: ${ctx.completedDays.length}/28 days completed
+Currently studying: ${ctx.currentDayFocus}
+Days until exam: ${daysToExam}
+Flagged topics for review: ${ctx.flaggedCount}
+${subjectLines.length ? `Subject MCQ performance:\n${subjectLines.join("\n")}` : "MCQ scores: not yet logged"}
+=== END PROFILE ===`;
+
+  return BASE_SYSTEM_PROMPT + contextBlock;
+}
+
+const DEFAULT_QUICK_PROMPTS = [
   "What is the DOC for absence seizures?",
   "Vaughan Williams classification of antiarrhythmics",
   "Classic triad of Cushing's syndrome vs Cushing's disease",
@@ -35,7 +84,11 @@ function loadKey(): string {
   return safeLoad<string>("inicet_ai_key", "");
 }
 
-export function ChatPanel() {
+interface Props {
+  studyContext?: StudyContext;
+}
+
+export function ChatPanel({ studyContext }: Props) {
   const [apiKey, setApiKey]     = useState<string>(loadKey);
   const [keyInput, setKeyInput] = useState<string>("");
   const [showKeyForm, setShowKeyForm] = useState<boolean>(!loadKey());
@@ -46,6 +99,15 @@ export function ChatPanel() {
   const bottomRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const abortRef = useRef<AbortController | null>(null);
+
+  const quickPrompts = studyContext
+    ? [
+        "Based on my weak subjects, what should I focus on today?",
+        "Give me the top 5 high-yield mnemonics for my weakest subject",
+        "What are the most common MCQ traps for my current topic?",
+        ...DEFAULT_QUICK_PROMPTS.slice(0, 3),
+      ]
+    : DEFAULT_QUICK_PROMPTS;
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -95,7 +157,7 @@ export function ChatPanel() {
       const stream = client.messages.stream({
         model: "claude-haiku-4-5",
         max_tokens: 1024,
-        system: SYSTEM_PROMPT,
+        system: buildSystemPrompt(studyContext),
         messages: nextMessages.map(m => ({ role: m.role, content: m.content })),
       });
 
@@ -288,7 +350,7 @@ export function ChatPanel() {
                   Ask anything about your INI-CET syllabus. Quick-start:
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-xl">
-                  {QUICK_PROMPTS.map((p, i) => (
+                  {quickPrompts.map((p, i) => (
                     <button
                       key={i}
                       onClick={() => send(p)}

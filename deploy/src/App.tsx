@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import type { User } from "@supabase/supabase-js";
-import { Target, Calendar, Clock, StickyNote, Flag, Bot, Flame, Download, Upload, BookOpen, Award, MessageSquare, ExternalLink, Sun, Moon, LogOut, LogIn } from "lucide-react";
+import { Target, Calendar, Clock, StickyNote, Flag, Bot, Flame, Download, Upload, BookOpen, Award, MessageSquare, ExternalLink, Sun, Moon, LogOut, LogIn, BarChart2, FlaskConical } from "lucide-react";
 import { StudyReminderBanner, StudyReminderBell } from "@/components/StudyReminder";
 import { EXAM_DATE, SCHEDULE } from "@/data/schedule";
 import { safeLoad, safeSave } from "@/lib/storage";
@@ -21,17 +21,20 @@ import { ResourceHub } from "@/components/ResourceHub";
 import { CommunityQA } from "@/components/CommunityQA";
 import { AdaptiveSuggestions } from "@/components/AdaptiveSuggestions";
 import { AdaptivePlanPanel } from "@/components/AdaptivePlanPanel";
+import { AnalyticsPanel } from "@/components/AnalyticsPanel";
+import { ExamSimulation } from "@/components/ExamSimulation";
+import { ExamDateConfig } from "@/components/ExamDateConfig";
 import { computeAdaptivePlan } from "@/lib/adaptive";
 import { LoginScreen } from "@/components/LoginScreen";
 import { useAuth } from "@/lib/auth";
 
-type MainTab = 'planner' | 'schedule' | 'notes' | 'revision' | 'ai' | 'pyq' | 'toppers' | 'resources' | 'community';
+type MainTab = 'planner' | 'schedule' | 'notes' | 'revision' | 'ai' | 'pyq' | 'toppers' | 'resources' | 'community' | 'analytics' | 'simulation';
 
 interface TimeLeft   { days: number; hours: number; minutes: number; seconds: number; }
 interface StreakData  { count: number; longest: number; lastDate: string; }
 
-function calcTimeLeft(): TimeLeft {
-  const distance = EXAM_DATE.getTime() - Date.now();
+function calcTimeLeft(examDate: Date): TimeLeft {
+  const distance = examDate.getTime() - Date.now();
   if (distance <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
   return {
     days:    Math.floor(distance / (1000 * 60 * 60 * 24)),
@@ -88,11 +91,16 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
     safeLoad('inicet_pyq_attempts', {})
   );
 
+  const [examDate, setExamDate] = useState<Date>(() => {
+    const saved = safeLoad<string>(`${prefix}exam_date`, '');
+    return saved ? new Date(saved) : EXAM_DATE;
+  });
+
   const [activeTab,       setActiveTab]       = useState<MainTab>('planner');
   const [selectedSubject, setSelectedSubject] = useState<string>('All');
   const [selectedDayId,   setSelectedDayId]   = useState<number>(1);
   const [detailTab,       setDetailTab]       = useState<DetailTab>('TOPICS');
-  const [timeLeft,        setTimeLeft]        = useState<TimeLeft>(calcTimeLeft);
+  const [timeLeft,        setTimeLeft]        = useState<TimeLeft>(() => calcTimeLeft(examDate));
   const [showOnboarding,  setShowOnboarding]  = useState<boolean>(() =>
     !localStorage.getItem(`${prefix}onboarded`)
   );
@@ -122,11 +130,12 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
   useEffect(() => { safeSave(`${prefix}flagged`, flagged); },             [flagged, prefix]);
   useEffect(() => { safeSave(`${prefix}sr_cards`, srCards); },            [srCards, prefix]);
   useEffect(() => { safeSave(`${prefix}streak`, streak); },               [streak, prefix]);
+  useEffect(() => { safeSave(`${prefix}exam_date`, examDate.toISOString()); }, [examDate, prefix]);
 
   useEffect(() => {
-    const timer = setInterval(() => setTimeLeft(calcTimeLeft()), 1000);
+    const timer = setInterval(() => setTimeLeft(calcTimeLeft(examDate)), 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [examDate]);
 
   useEffect(() => {
     const handler = () => {
@@ -197,19 +206,31 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
   const selectedDay  = SCHEDULE.find(s => s.day === selectedDayId) ?? SCHEDULE[0];
   const studiedToday = streak.lastDate === new Date().toISOString().slice(0, 10);
 
+  const studyContext = useMemo(() => ({
+    completedDays,
+    mcqScores,
+    flaggedCount: flagged.length,
+    currentDayFocus: selectedDay ? `Day ${selectedDay.day} — ${selectedDay.subject}: ${selectedDay.focus}` : '',
+    examDate,
+  }), [completedDays, mcqScores, flagged.length, selectedDay, examDate]);
+
+  const isPostExam = examDate.getTime() <= Date.now();
+
   const userInitial = user?.email?.[0]?.toUpperCase() ?? 'G';
   const userLabel   = user?.email ?? 'Guest';
 
   const NAV_TABS: { id: MainTab; label: string; Icon: React.FC<{ className?: string }>; badge?: number }[] = [
-    { id: 'planner',   label: 'Planner',   Icon: Calendar                                },
-    { id: 'schedule',  label: 'Schedule',  Icon: Clock                                   },
-    { id: 'notes',     label: 'Notes',     Icon: StickyNote                              },
-    { id: 'revision',  label: 'Revision',  Icon: Flag, badge: flagged.length || undefined },
-    { id: 'ai',        label: 'AI Tutor',  Icon: Bot                                     },
-    { id: 'pyq',       label: 'PYQ',       Icon: BookOpen                                },
-    { id: 'toppers',   label: 'Toppers',   Icon: Award                                   },
-    { id: 'resources', label: 'Resources', Icon: ExternalLink                            },
-    { id: 'community', label: 'Community', Icon: MessageSquare                           },
+    { id: 'planner',    label: 'Planner',    Icon: Calendar                                 },
+    { id: 'schedule',   label: 'Schedule',   Icon: Clock                                    },
+    { id: 'notes',      label: 'Notes',      Icon: StickyNote                               },
+    { id: 'revision',   label: 'Revision',   Icon: Flag, badge: flagged.length || undefined },
+    { id: 'analytics',  label: 'Analytics',  Icon: BarChart2                                },
+    { id: 'simulation', label: 'Simulate',   Icon: FlaskConical                             },
+    { id: 'ai',         label: 'AI Tutor',   Icon: Bot                                      },
+    { id: 'pyq',        label: 'PYQ',        Icon: BookOpen                                 },
+    { id: 'toppers',    label: 'Toppers',    Icon: Award                                    },
+    { id: 'resources',  label: 'Resources',  Icon: ExternalLink                             },
+    { id: 'community',  label: 'Community',  Icon: MessageSquare                            },
   ];
 
   return (
@@ -395,6 +416,11 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
               completedDays={completedDays}
               onGoToTab={(tab) => setActiveTab(tab as MainTab)}
             />
+            <ExamDateConfig
+              currentExamDate={examDate}
+              onSave={setExamDate}
+              isPostExam={isPostExam}
+            />
           </div>
         </div>
 
@@ -418,8 +444,21 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
           />
         </div>
 
+        <div id="main-panel-analytics" role="tabpanel" aria-label="Analytics" hidden={activeTab !== 'analytics'}>
+          <AnalyticsPanel
+            mcqScores={mcqScores}
+            completedDays={completedDays}
+            streak={streak}
+            examDate={examDate}
+          />
+        </div>
+
+        <div id="main-panel-simulation" role="tabpanel" aria-label="Exam Simulation" hidden={activeTab !== 'simulation'}>
+          <ExamSimulation />
+        </div>
+
         <div id="main-panel-ai" role="tabpanel" aria-label="AI Tutor" hidden={activeTab !== 'ai'}>
-          <ChatPanel />
+          <ChatPanel studyContext={studyContext} />
         </div>
 
         <div id="main-panel-pyq" role="tabpanel" aria-label="PYQ Practice" hidden={activeTab !== 'pyq'}>
@@ -436,6 +475,17 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
 
         <div id="main-panel-community" role="tabpanel" aria-label="Community Q&A" hidden={activeTab !== 'community'}>
           <CommunityQA />
+        </div>
+
+        {/* Settings panel — exam date config */}
+        <div id="main-panel-settings" role="tabpanel" aria-label="Settings" hidden={activeTab !== ('settings' as MainTab)}>
+          <div className="max-w-md">
+            <ExamDateConfig
+              currentExamDate={examDate}
+              onSave={setExamDate}
+              isPostExam={isPostExam}
+            />
+          </div>
         </div>
 
       </main>
