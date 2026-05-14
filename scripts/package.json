@@ -2,12 +2,10 @@
   "name": "inicet-question-generator",
   "version": "1.0.0",
   "type": "module",
-  "description": "Daily AI question generator for INI-CET War Plan",
   "scripts": {
     "generate": "node generate-questions.mjs"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.32.0",
-    "@supabase/supabase-js": "^2.39.0"
+    "@anthropic-ai/sdk": "^0.32.0"
   }
 }

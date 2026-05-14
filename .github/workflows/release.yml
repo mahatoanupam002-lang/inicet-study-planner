@@ -9,6 +9,8 @@ permissions:
 
 jobs:
   release:
+    # Skip automated bot commits (e.g. daily question batches)
+    if: "!contains(github.event.head_commit.author.name, 'github-actions[bot]')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

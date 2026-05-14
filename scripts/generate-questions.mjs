@@ -1,292 +1,208 @@
 /**
  * Daily INI-CET / NEET PG question generator.
- * Generates ~500 high-yield questions via Claude and upserts them into
- * the Supabase `pyq_questions` table.
  *
- * Env vars required:
+ * Generates ~500 high-yield questions via Claude Haiku and writes them to
+ * deploy/public/daily-questions.json — Vercel serves this as a static asset.
+ *
+ * Required env var:
  *   ANTHROPIC_API_KEY
- *   SUPABASE_URL
- *   SUPABASE_SERVICE_KEY  (service role, needed for inserts)
+ *
+ * That's it — no database, no extra secrets.
  */
 
 import Anthropic from "@anthropic-ai/sdk";
-import { createClient } from "@supabase/supabase-js";
+import { randomUUID } from "crypto";
+import { readFileSync, writeFileSync, existsSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __dir  = dirname(fileURLToPath(import.meta.url));
+const OUTPUT = join(__dir, "..", "deploy", "public", "daily-questions.json");
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 
-const BATCH_SIZE = 40; // questions per subject call
+const BATCH_SIZE = 40; // per subject call (~520 total across 13 subjects)
+const KEEP_DAYS  = 3;  // rolling window kept in the JSON file
 
 const SUBJECTS = [
   {
     name: "Medicine",
-    topics: [
-      "Cardiology (MI, HF, arrhythmias, valvular disease)",
-      "Nephrology (AKI, CKD, glomerulonephritis, electrolytes)",
-      "Neurology (stroke, epilepsy, dementia, movement disorders)",
-      "Endocrinology (diabetes, thyroid, adrenal, pituitary)",
-      "Gastroenterology (IBD, liver disease, GI bleeding, pancreatitis)",
-      "Pulmonology (COPD, asthma, TB, ILD, PE)",
-      "Rheumatology (SLE, RA, vasculitis, crystal arthropathies)",
-    ],
+    topics: "Cardiology, Nephrology, Neurology, Endocrinology, Gastroenterology, Pulmonology, Rheumatology",
   },
   {
     name: "Surgery",
-    topics: [
-      "General Surgery (hernias, appendicitis, bowel obstruction)",
-      "Hepatobiliary (gallstones, cholecystitis, jaundice, liver tumors)",
-      "Breast & Thyroid Surgery",
-      "Orthopedics (fractures, dislocations, bone tumors, joint replacements)",
-      "Urology (renal stones, BPH, carcinoma, urinary tract)",
-      "Trauma & Emergency Surgery",
-      "Vascular Surgery (aneurysm, peripheral vascular disease, DVT)",
-    ],
+    topics: "Hernias, Appendicitis, Bowel obstruction, Hepatobiliary, Breast & Thyroid, Orthopedics, Urology, Vascular",
   },
   {
     name: "Pathology",
-    topics: [
-      "General Pathology (inflammation, healing, cell injury, necrosis)",
-      "Neoplasia (tumor markers, oncogenes, carcinogenesis)",
-      "Hematology (anemias, leukemias, lymphomas, coagulation)",
-      "Systemic Pathology — Cardiovascular & Respiratory",
-      "Systemic Pathology — Renal, GI & Hepatic",
-      "Immunopathology (hypersensitivity, autoimmune diseases)",
-    ],
+    topics: "Cell injury, Inflammation, Healing, Neoplasia, Hematology, Systemic pathology, Immunopathology",
   },
   {
     name: "Pharmacology",
-    topics: [
-      "ANS pharmacology (adrenergics, cholinergics, blockers)",
-      "CNS drugs (antiepileptics, antipsychotics, antidepressants, analgesics)",
-      "Cardiovascular pharmacology (antihypertensives, antiarrhythmics, anticoagulants)",
-      "Antibiotics & antimicrobials (mechanisms, resistance, spectrum)",
-      "Endocrine pharmacology (antidiabetics, corticosteroids, thyroid drugs)",
-      "Chemotherapy (cancer drugs, mechanisms, adverse effects)",
-      "Pharmacokinetics & pharmacodynamics",
-    ],
+    topics: "ANS, CNS drugs, Cardiovascular drugs, Antibiotics, Endocrine pharmacology, Chemotherapy, Pharmacokinetics",
   },
   {
     name: "OBG",
-    topics: [
-      "Obstetrics (normal labor, complications, antepartum hemorrhage, preeclampsia)",
-      "High-risk pregnancy (diabetes, hypertension, cardiac disease in pregnancy)",
-      "Gynecology (PCOS, endometriosis, fibroids, ovarian tumors)",
-      "Reproductive endocrinology & infertility",
-      "Family planning & contraception",
-      "Cervical & uterine carcinoma",
-    ],
+    topics: "Normal labor, Antepartum hemorrhage, Preeclampsia, High-risk pregnancy, PCOS, Fibroids, Ovarian tumors, Contraception",
   },
   {
     name: "Paediatrics",
-    topics: [
-      "Neonatology (birth asphyxia, jaundice, respiratory distress, NEC)",
-      "Growth & development milestones",
-      "Nutrition & nutritional deficiencies in children",
-      "Pediatric infectious diseases (viral exanthems, meningitis, dengue)",
-      "National immunization schedule & vaccines",
-      "Congenital heart diseases",
-    ],
+    topics: "Neonatology, Growth & development milestones, Nutrition, Pediatric infections, Vaccines, Congenital heart diseases",
   },
   {
     name: "PSM/Community Medicine",
-    topics: [
-      "Epidemiology (study designs, bias, measures of disease frequency)",
-      "Biostatistics (sensitivity, specificity, NNT, p-value, confidence intervals)",
-      "National health programs (TB, leprosy, malaria, RNTCP, NVBDCP)",
-      "Nutrition & food safety",
-      "Environmental health & occupational diseases",
-      "Screening tests & preventive medicine",
-    ],
+    topics: "Epidemiology, Biostatistics, National health programs, Nutrition, Environmental health, Screening tests",
   },
   {
     name: "Microbiology",
-    topics: [
-      "Bacteriology (gram-positive, gram-negative, mycobacteria, spirochetes)",
-      "Virology (HIV, hepatitis viruses, herpesviruses, respiratory viruses)",
-      "Mycology (Candida, Aspergillus, Cryptococcus, dermatophytes)",
-      "Parasitology (Plasmodium, Leishmania, helminthiasis, protozoa)",
-      "Immunology (complement, immunoglobulins, cell-mediated immunity)",
-      "Clinical microbiology & diagnostic methods",
-    ],
+    topics: "Bacteriology, Virology, Mycology, Parasitology, Immunology, Clinical diagnostic methods",
   },
   {
     name: "Forensic Medicine",
-    topics: [
-      "Thanatology (signs of death, postmortem changes, time since death)",
-      "Medico-legal aspects (consent, POCSO, MLC writing, dying declaration)",
-      "Wounds (contusions, lacerations, incised, firearm wounds)",
-      "Toxicology (common poisons: organophosphate, CO, opioids, arsenic)",
-      "Sexual offences & examination",
-      "Age estimation & identification",
-    ],
+    topics: "Thanatology, Medico-legal aspects, Wounds, Toxicology, Sexual offences, Age estimation",
   },
   {
     name: "Anatomy",
-    topics: [
-      "Gross Anatomy — Upper & Lower Limb (nerves, vessels, muscles)",
-      "Gross Anatomy — Thorax, Abdomen & Pelvis",
-      "Head & Neck Anatomy (cranial nerves, sinuses, triangles)",
-      "Neuroanatomy (tracts, nuclei, cerebellum, basal ganglia)",
-      "Embryology (developmental anomalies, pharyngeal arches)",
-      "Histology (epithelium, connective tissue, organs)",
-    ],
+    topics: "Upper & lower limb, Thorax & abdomen, Head & neck, Neuroanatomy, Embryology, Histology",
   },
   {
     name: "Physiology",
-    topics: [
-      "Cardiovascular physiology (cardiac cycle, ECG, pressure-volume loops)",
-      "Renal physiology (GFR, tubular transport, concentration mechanism)",
-      "Respiratory physiology (volumes, lung mechanics, gas exchange, control)",
-      "Neurophysiology (action potential, synaptic transmission, reflexes)",
-      "Endocrine physiology (feedback mechanisms, hormonal regulation)",
-      "GIT physiology (secretions, motility, absorption)",
-    ],
+    topics: "Cardiovascular, Renal, Respiratory, Neurophysiology, Endocrine, GIT physiology",
   },
   {
     name: "Biochemistry",
-    topics: [
-      "Carbohydrate metabolism (glycolysis, TCA, gluconeogenesis, glycogen)",
-      "Lipid metabolism (fatty acid synthesis, beta-oxidation, cholesterol)",
-      "Protein & amino acid metabolism (urea cycle, enzyme disorders)",
-      "Vitamins & minerals (deficiency diseases, toxicity, mechanisms)",
-      "Molecular biology (DNA replication, transcription, translation, PCR)",
-      "Enzymes & metabolic regulation",
-    ],
+    topics: "Carbohydrate metabolism, Lipid metabolism, Protein & amino acids, Vitamins & minerals, Molecular biology, Enzymes",
   },
   {
     name: "ENT/Ophthalmology",
-    topics: [
-      "Ear (otitis media, CSOM, cholesteatoma, otosclerosis, sensorineural HL)",
-      "Nose & sinuses (rhinitis, sinusitis, epistaxis, nasal polyps, deviated septum)",
-      "Throat & larynx (tonsillitis, laryngitis, vocal cord pathology, laryngeal Ca)",
-      "Cornea & anterior segment (keratitis, glaucoma, cataract)",
-      "Retina & posterior segment (CRVO, CRAO, diabetic retinopathy, RD)",
-      "Squint, refractive errors & neuro-ophthalmology",
-    ],
+    topics: "Ear diseases, Nose & sinuses, Throat & larynx, Cornea & glaucoma, Retina, Neuro-ophthalmology",
   },
 ];
 
-// ─── Anthropic & Supabase clients ────────────────────────────────────────────
+// ─── Anthropic client ─────────────────────────────────────────────────────────
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY
-);
-
-// ─── Generation ──────────────────────────────────────────────────────────────
-
 function buildPrompt(subject) {
-  const topicList = subject.topics.map((t, i) => `  ${i + 1}. ${t}`).join("\n");
-  return `You are a senior medical educator preparing a rank-1 NEET PG / INI-CET question bank. Generate exactly ${BATCH_SIZE} high-quality MCQs for: **${subject.name}**
+  return `You are a senior medical educator creating a rank-1 INI-CET / NEET PG question bank.
 
-Cover these topics proportionally:
-${topicList}
+Generate exactly ${BATCH_SIZE} MCQs for: **${subject.name}**
+Cover these topics proportionally: ${subject.topics}
 
-Rules for every question:
-• Strictly follows NEET PG / INI-CET / AIIMS PG exam pattern (2019-2024)
-• One clear correct answer; three plausible distractors
-• Explanation: 3-5 sentences — state the correct answer rationale AND why each distractor is wrong
-• Mnemonic: include a concise, memorable mnemonic where one exists (null if none)
-• Key concept: one sentence capturing the testable core principle
-• Difficulty: "easy" = pure recall, "medium" = application, "hard" = complex multi-step reasoning
-• exam_hint: approximate source like "INI-CET Nov 2023" or "AIIMS May 2022" (make plausible, not fabricated)
+Each question must:
+• Mirror the exact NEET PG / INI-CET / AIIMS PG pattern (2019–2024 papers)
+• Have ONE correct answer and THREE plausible distractors
+• Include a thorough explanation (mention WHY correct, and WHY each wrong option fails)
+• Include a concise mnemonic where one exists (null otherwise)
+• State the key testable concept in one sentence
+• Label difficulty: easy=pure recall, medium=application, hard=multi-step reasoning
+• Provide an approximate exam source like "INI-CET Nov 2023" or "AIIMS May 2022"
 
-Return ONLY a valid JSON array. No markdown fences, no extra commentary:
-[
-  {
-    "topic": "string",
-    "question": "string",
-    "options": ["string","string","string","string"],
-    "correct_answer": 0,
-    "explanation": "string",
-    "mnemonic": "string or null",
-    "key_concept": "string",
-    "difficulty": "easy|medium|hard",
-    "exam_hint": "string"
-  }
-]`;
+Return ONLY a valid JSON array — no markdown, no commentary:
+[{
+  "topic": "string",
+  "question": "string",
+  "options": ["string","string","string","string"],
+  "correct_answer": 0,
+  "explanation": "string",
+  "mnemonic": "string or null",
+  "key_concept": "string",
+  "difficulty": "easy|medium|hard",
+  "exam_hint": "string"
+}]`;
 }
 
 async function generateForSubject(subject) {
   const msg = await anthropic.messages.create({
-    model: "claude-haiku-4-5-20251001",
+    model:      "claude-haiku-4-5-20251001",
     max_tokens: 8192,
-    messages: [{ role: "user", content: buildPrompt(subject) }],
+    messages:   [{ role: "user", content: buildPrompt(subject) }],
   });
 
-  const raw = msg.content[0]?.type === "text" ? msg.content[0].text : "";
-
-  // Extract first JSON array from response (handles any stray preamble)
+  const raw   = msg.content[0]?.type === "text" ? msg.content[0].text : "";
   const match = raw.match(/\[[\s\S]*\]/);
   if (!match) throw new Error("No JSON array in response");
 
-  const rows = JSON.parse(match[0]);
-  const today = new Date().toISOString().slice(0, 10);
+  const today  = new Date().toISOString().slice(0, 10);
+  const parsed = JSON.parse(match[0]);
 
-  return rows
-    .filter(
-      (q) =>
-        typeof q.question === "string" &&
-        Array.isArray(q.options) &&
-        q.options.length === 4 &&
-        typeof q.correct_answer === "number"
+  return parsed
+    .filter(q =>
+      typeof q.question === "string" &&
+      Array.isArray(q.options) && q.options.length === 4 &&
+      typeof q.correct_answer === "number"
     )
-    .map((q) => ({
-      subject: subject.name,
-      topic: q.topic || subject.name,
-      question: q.question,
-      options: q.options,
+    .map(q => ({
+      id:             randomUUID(),
+      subject:        subject.name,
+      topic:          q.topic         ?? subject.name,
+      question:       q.question,
+      options:        q.options,
       correct_answer: Math.min(3, Math.max(0, Math.round(q.correct_answer))),
-      explanation: q.explanation || "",
-      mnemonic: q.mnemonic || null,
-      key_concept: q.key_concept || null,
-      difficulty: ["easy", "medium", "hard"].includes(q.difficulty)
-        ? q.difficulty
-        : "medium",
-      exam_hint: q.exam_hint || null,
-      batch_date: today,
+      explanation:    q.explanation   ?? "",
+      mnemonic:       q.mnemonic      ?? null,
+      key_concept:    q.key_concept   ?? null,
+      difficulty:     ["easy","medium","hard"].includes(q.difficulty) ? q.difficulty : "medium",
+      exam_hint:      q.exam_hint     ?? null,
+      batch_date:     today,
     }));
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
-  const batchDate = new Date().toISOString().slice(0, 10);
-  console.log(`\n🚀 INI-CET Daily Question Generator — batch ${batchDate}\n`);
+  const today = new Date().toISOString().slice(0, 10);
+  console.log(`\n🚀 INI-CET Daily Question Generator — batch ${today}\n`);
 
-  let totalInserted = 0;
-  let totalFailed = 0;
-
+  // ── Generate fresh questions ──────────────────────────────────────────────
+  let newQuestions = [];
   for (const subject of SUBJECTS) {
-    process.stdout.write(`  Generating ${BATCH_SIZE} Qs for ${subject.name} ... `);
+    process.stdout.write(`  ${subject.name.padEnd(30)} … `);
     try {
-      const rows = await generateForSubject(subject);
-      const { error } = await supabase.from("pyq_questions").insert(rows);
-      if (error) {
-        console.log(`❌ DB error: ${error.message}`);
-        totalFailed += BATCH_SIZE;
-      } else {
-        console.log(`✅ ${rows.length} inserted`);
-        totalInserted += rows.length;
-      }
+      const qs = await generateForSubject(subject);
+      newQuestions.push(...qs);
+      console.log(`✅ ${qs.length}`);
     } catch (err) {
       console.log(`❌ ${err.message}`);
-      totalFailed += BATCH_SIZE;
     }
-    // Respect rate limits
-    await new Promise((r) => setTimeout(r, 1500));
+    await new Promise(r => setTimeout(r, 1200));
+  }
+  console.log(`\n  Generated: ${newQuestions.length} questions`);
+
+  // ── Load existing file, drop expired batches ──────────────────────────────
+  let existing = [];
+  if (existsSync(OUTPUT)) {
+    try {
+      const file = JSON.parse(readFileSync(OUTPUT, "utf8"));
+      existing   = file.questions ?? [];
+    } catch { /* ignore corrupt file */ }
   }
 
-  console.log(`\n📊 Done — inserted: ${totalInserted}  failed: ${totalFailed}\n`);
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - KEEP_DAYS);
+  const cutoffStr = cutoff.toISOString().slice(0, 10);
 
-  if (totalInserted < 100) {
-    console.error("Less than 100 questions inserted — treating as failure.");
+  const retained = existing.filter(q => (q.batch_date ?? "") > cutoffStr);
+  const merged   = [...newQuestions, ...retained];
+
+  // ── Write output ──────────────────────────────────────────────────────────
+  const output = {
+    lastUpdated:  today,
+    totalCount:   merged.length,
+    todayCount:   newQuestions.length,
+    questions:    merged,
+  };
+
+  writeFileSync(OUTPUT, JSON.stringify(output, null, 2));
+  console.log(`\n✅ Wrote ${merged.length} questions to deploy/public/daily-questions.json\n`);
+
+  if (newQuestions.length < 100) {
+    console.error("Fewer than 100 questions generated — treating as failure.");
     process.exit(1);
   }
 }
 
-main().catch((err) => {
+main().catch(err => {
   console.error("Fatal:", err);
   process.exit(1);
 });

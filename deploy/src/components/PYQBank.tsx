@@ -5,16 +5,15 @@ import {
 } from "lucide-react";
 import { QUESTIONS, QUESTION_SUBJECTS, Question } from "@/data/questions";
 import { safeLoad, safeSave } from "@/lib/storage";
-import { supabase } from "@/lib/supabase";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface AttemptRecord { selected: number; correct: boolean; }
-type FilterMode = "all" | "unattempted" | "wrong";
+type FilterMode      = "all" | "unattempted" | "wrong";
 type DifficultyFilter = "all" | "easy" | "medium" | "hard";
-type SourceFilter = "all" | "today" | "classic";
+type SourceFilter    = "all" | "today" | "classic";
 
-interface RemoteQuestion {
+interface AIQuestion {
   id: string;
   subject: string;
   topic: string;
@@ -41,7 +40,7 @@ interface UnifiedQuestion {
   key_concept?: string | null;
   difficulty: "easy" | "medium" | "hard";
   exam_hint?: string | null;
-  isRemote: boolean;
+  isAI: boolean;
   batch_date?: string;
 }
 
@@ -56,11 +55,11 @@ function localToUnified(q: Question): UnifiedQuestion {
     answer: q.answer,
     explanation: q.explanation,
     difficulty: "medium",
-    isRemote: false,
+    isAI: false,
   };
 }
 
-function remoteToUnified(q: RemoteQuestion): UnifiedQuestion {
+function aiToUnified(q: AIQuestion): UnifiedQuestion {
   return {
     uid: q.id,
     subject: q.subject,
@@ -73,7 +72,7 @@ function remoteToUnified(q: RemoteQuestion): UnifiedQuestion {
     key_concept: q.key_concept,
     difficulty: q.difficulty ?? "medium",
     exam_hint: q.exam_hint,
-    isRemote: true,
+    isAI: true,
     batch_date: q.batch_date,
   };
 }
@@ -130,12 +129,13 @@ function KeyConceptBox({ text }: { text: string }) {
 // ─── Stats View ───────────────────────────────────────────────────────────────
 
 function StatsView({
-  attempts, allQuestions, onBack, onReset,
+  attempts, allQuestions, onBack, onReset, todayCount,
 }: {
   attempts: Record<string, AttemptRecord>;
   allQuestions: UnifiedQuestion[];
   onBack: () => void;
   onReset: () => void;
+  todayCount: number;
 }) {
   const totalAttempted = Object.keys(attempts).length;
   const totalCorrect   = Object.values(attempts).filter(a => a.correct).length;
@@ -150,26 +150,21 @@ function StatsView({
     });
   }, [attempts, allQuestions]);
 
-  const todayCount = allQuestions.filter(q => q.isRemote && q.batch_date === TODAY).length;
-
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="font-mono font-bold uppercase text-sm text-foreground">Performance Stats</h2>
-        <button
-          onClick={onBack}
-          className="text-xs font-mono text-muted-foreground hover:text-foreground border border-border px-3 py-1.5 rounded-md"
-        >
+        <button onClick={onBack} className="text-xs font-mono text-muted-foreground hover:text-foreground border border-border px-3 py-1.5 rounded-md">
           Back to Practice
         </button>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
-          { label: "Overall Accuracy", value: overallPct !== null ? `${overallPct}%` : "—", color: "text-primary" },
-          { label: "Attempted",        value: totalAttempted,                                  color: "text-foreground" },
-          { label: "Correct",          value: totalCorrect,                                    color: "text-emerald-400" },
-          { label: "Today's AI Qs",    value: todayCount,                                      color: "text-yellow-400" },
+          { label: "Overall Accuracy", value: overallPct !== null ? `${overallPct}%` : "—", color: "text-primary"     },
+          { label: "Attempted",        value: totalAttempted,                                color: "text-foreground"  },
+          { label: "Correct",          value: totalCorrect,                                  color: "text-emerald-400" },
+          { label: "Today's AI Qs",    value: todayCount,                                    color: "text-yellow-400"  },
         ].map(({ label, value, color }) => (
           <div key={label} className="bg-card border border-border rounded-xl p-4 text-center">
             <p className={`text-2xl font-mono font-bold ${color}`}>{value}</p>
@@ -187,10 +182,7 @@ function StatsView({
             <div key={subj} className="flex items-center gap-3">
               <span className="text-[11px] font-mono text-muted-foreground w-40 truncate shrink-0">{subj}</span>
               <div className="flex-1 h-1.5 bg-background rounded-full overflow-hidden border border-border">
-                <div
-                  className="h-full rounded-full transition-all"
-                  style={{ width: `${total > 0 ? (done / total) * 100 : 0}%`, backgroundColor: color }}
-                />
+                <div className="h-full rounded-full transition-all" style={{ width: `${total > 0 ? (done/total)*100 : 0}%`, backgroundColor: color }} />
               </div>
               <span className="text-[11px] font-mono text-muted-foreground w-20 text-right shrink-0">
                 {done}/{total}{pct !== null ? ` (${pct}%)` : ""}
@@ -200,10 +192,7 @@ function StatsView({
         })}
       </div>
 
-      <button
-        onClick={onReset}
-        className="flex items-center gap-2 text-xs font-mono text-destructive border border-destructive/30 px-4 py-2 rounded-md hover:bg-destructive/10 transition-colors"
-      >
+      <button onClick={onReset} className="flex items-center gap-2 text-xs font-mono text-destructive border border-destructive/30 px-4 py-2 rounded-md hover:bg-destructive/10 transition-colors">
         <RotateCcw className="w-3.5 h-3.5" /> Reset all attempts
       </button>
     </div>
@@ -223,54 +212,44 @@ export function PYQBank() {
   const [showStats,   setShowStats]   = useState<boolean>(false);
   const [search,      setSearch]      = useState<string>("");
 
-  // Remote questions from Supabase
-  const [remoteQs,   setRemoteQs]   = useState<UnifiedQuestion[]>([]);
-  const [loadingR,   setLoadingR]   = useState<boolean>(true);
-  const [remoteErr,  setRemoteErr]  = useState<string | null>(null);
-  const [remotePage, setRemotePage] = useState<number>(0);
-  const [hasMore,    setHasMore]    = useState<boolean>(true);
-  const PAGE_SIZE = 200;
+  // AI questions loaded from static JSON file (auto-published by GitHub Actions)
+  const [aiQuestions, setAiQuestions] = useState<UnifiedQuestion[]>([]);
+  const [aiMeta,      setAiMeta]      = useState<{ lastUpdated: string; todayCount: number } | null>(null);
+  const [loadingAI,   setLoadingAI]   = useState<boolean>(true);
 
-  const fetchRemote = useCallback(async (page: number) => {
-    setLoadingR(true);
-    setRemoteErr(null);
+  const fetchAI = useCallback(async () => {
+    setLoadingAI(true);
     try {
-      const { data, error } = await supabase
-        .from("pyq_questions")
-        .select("*")
-        .order("batch_date", { ascending: false })
-        .range(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE - 1);
-
-      if (error) throw new Error(error.message);
-      const unified = (data ?? []).map(remoteToUnified);
-      setRemoteQs(prev => page === 0 ? unified : [...prev, ...unified]);
-      setHasMore((data?.length ?? 0) === PAGE_SIZE);
-    } catch (err: unknown) {
-      setRemoteErr(err instanceof Error ? err.message : "Failed to load questions");
+      const res  = await fetch(`/daily-questions.json?v=${Date.now()}`);
+      if (!res.ok) throw new Error("Not found");
+      const data = await res.json();
+      const qs   = (data.questions ?? []) as AIQuestion[];
+      setAiQuestions(qs.map(aiToUnified));
+      setAiMeta({ lastUpdated: data.lastUpdated ?? "", todayCount: data.todayCount ?? 0 });
+    } catch {
+      // File doesn't exist yet — first workflow run pending; silent fallback
     } finally {
-      setLoadingR(false);
+      setLoadingAI(false);
     }
   }, []);
 
-  useEffect(() => { fetchRemote(0); }, [fetchRemote]);
+  useEffect(() => { fetchAI(); }, [fetchAI]);
 
-  // Merge local + remote
   const allQuestions = useMemo<UnifiedQuestion[]>(() => [
-    ...remoteQs,
+    ...aiQuestions,
     ...QUESTIONS.map(localToUnified),
-  ], [remoteQs]);
+  ], [aiQuestions]);
 
   const todayCount = useMemo(
-    () => remoteQs.filter(q => q.batch_date === TODAY).length,
-    [remoteQs]
+    () => aiQuestions.filter(q => q.batch_date === TODAY).length,
+    [aiQuestions]
   );
 
-  // Filtered pool
   const pool = useMemo<UnifiedQuestion[]>(() => {
     let qs = allQuestions;
 
-    if (source === "today")   qs = qs.filter(q => q.isRemote && q.batch_date === TODAY);
-    if (source === "classic") qs = qs.filter(q => !q.isRemote);
+    if (source === "today")   qs = qs.filter(q => q.isAI && q.batch_date === TODAY);
+    if (source === "classic") qs = qs.filter(q => !q.isAI);
 
     if (subject !== "All")    qs = qs.filter(q => q.subject === subject);
     if (difficulty !== "all") qs = qs.filter(q => q.difficulty === difficulty);
@@ -286,7 +265,6 @@ export function PYQBank() {
         q.topic?.toLowerCase().includes(s)
       );
     }
-
     return qs;
   }, [allQuestions, source, subject, difficulty, mode, search, attempts]);
 
@@ -299,13 +277,11 @@ export function PYQBank() {
     setSelectedOpt(null);
   };
 
-  const random = () => goTo(Math.floor(Math.random() * pool.length));
-
   const select = (opt: number) => {
     if (revealed || !current) return;
     setSelectedOpt(opt);
     const correct = opt === current.answer;
-    const next = { ...attempts, [current.uid]: { selected: opt, correct } };
+    const next    = { ...attempts, [current.uid]: { selected: opt, correct } };
     setAttempts(next);
     saveAttempts(next);
   };
@@ -331,12 +307,6 @@ export function PYQBank() {
     return "border-border/40 text-foreground/30";
   };
 
-  const loadMore = () => {
-    const next = remotePage + 1;
-    setRemotePage(next);
-    fetchRemote(next);
-  };
-
   if (showStats) {
     return (
       <StatsView
@@ -344,6 +314,7 @@ export function PYQBank() {
         allQuestions={allQuestions}
         onBack={() => setShowStats(false)}
         onReset={() => { resetAll(); setShowStats(false); }}
+        todayCount={todayCount}
       />
     );
   }
@@ -366,30 +337,28 @@ export function PYQBank() {
                   <Zap className="w-3 h-3 inline mr-0.5" />{todayCount} new today
                 </span>
               )}
-              {loadingR && <span className="ml-2 animate-pulse">· loading AI questions…</span>}
+              {loadingAI && <span className="ml-2 animate-pulse">· loading AI questions…</span>}
+              {aiMeta?.lastUpdated && (
+                <span className="ml-2 text-muted-foreground/60">· updated {aiMeta.lastUpdated}</span>
+              )}
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-2">
           {overallPct !== null && (
             <div className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full">
               <TrendingUp className="w-3 h-3 text-emerald-400" />
               <span className="text-xs font-mono text-emerald-400">{overallPct}% accuracy</span>
             </div>
           )}
-          {remoteErr && (
-            <button
-              onClick={() => fetchRemote(0)}
-              title="Retry loading cloud questions"
-              className="flex items-center gap-1 text-[10px] font-mono text-destructive border border-destructive/30 px-2 py-1 rounded"
-            >
-              <RefreshCw className="w-3 h-3" /> Retry
-            </button>
-          )}
           <button
-            onClick={() => setShowStats(true)}
-            className="px-3 py-1.5 text-xs font-mono text-muted-foreground hover:text-foreground border border-border rounded-md transition-colors"
+            onClick={fetchAI}
+            title="Refresh AI questions"
+            className="p-1.5 text-muted-foreground hover:text-foreground border border-border rounded transition-colors"
           >
+            <RefreshCw className="w-3.5 h-3.5" />
+          </button>
+          <button onClick={() => setShowStats(true)} className="px-3 py-1.5 text-xs font-mono text-muted-foreground hover:text-foreground border border-border rounded-md transition-colors">
             Stats
           </button>
         </div>
@@ -409,7 +378,7 @@ export function PYQBank() {
       {/* Filters */}
       <div className="flex flex-col gap-2 shrink-0">
         {/* Source */}
-        <div className="flex gap-1.5">
+        <div className="flex gap-1.5 flex-wrap">
           {(["all", "today", "classic"] as SourceFilter[]).map(s => (
             <button
               key={s}
@@ -458,10 +427,10 @@ export function PYQBank() {
               onClick={() => { setDifficulty(d); setQIndex(0); setSelectedOpt(null); }}
               className={`px-2.5 py-1 text-[11px] font-mono rounded-full border transition-colors capitalize ${
                 difficulty === d
-                  ? d === "all" ? "bg-secondary text-secondary-foreground border-secondary"
-                    : d === "easy" ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/40"
-                    : d === "medium" ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/40"
-                    : "bg-destructive/20 text-destructive border-destructive/40"
+                  ? d === "all"    ? "bg-secondary text-secondary-foreground border-secondary"
+                  : d === "easy"   ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/40"
+                  : d === "medium" ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/40"
+                  :                  "bg-destructive/20 text-destructive border-destructive/40"
                   : "text-muted-foreground border-border/50 hover:border-muted-foreground"
               }`}
             >
@@ -471,7 +440,7 @@ export function PYQBank() {
         </div>
       </div>
 
-      {/* No results */}
+      {/* Empty state */}
       {pool.length === 0 ? (
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center space-y-3">
@@ -498,20 +467,17 @@ export function PYQBank() {
                   {current.subject}
                 </span>
                 {current.topic && (
-                  <span className="text-[10px] font-mono text-muted-foreground/70">
-                    {current.topic}
-                  </span>
+                  <span className="text-[10px] font-mono text-muted-foreground/70">{current.topic}</span>
                 )}
                 <DiffBadge level={current.difficulty} />
-                {current.isRemote && current.exam_hint && (
+                {current.isAI && current.exam_hint && (
                   <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border border-primary/30 text-primary/70 bg-primary/5">
                     {current.exam_hint}
                   </span>
                 )}
-                {attempt && (
-                  attempt.correct
-                    ? <CheckCircle className="w-4 h-4 text-emerald-400" />
-                    : <XCircle    className="w-4 h-4 text-destructive" />
+                {attempt && (attempt.correct
+                  ? <CheckCircle className="w-4 h-4 text-emerald-400" />
+                  : <XCircle    className="w-4 h-4 text-destructive" />
                 )}
               </div>
               <span className="text-[11px] font-mono text-muted-foreground shrink-0">
@@ -539,7 +505,7 @@ export function PYQBank() {
               ))}
             </div>
 
-            {/* Post-reveal content */}
+            {/* Rank-1 reveal: key concept → mnemonic → full explanation */}
             {revealed && (
               <>
                 {current.key_concept && <KeyConceptBox text={current.key_concept} />}
@@ -561,22 +527,12 @@ export function PYQBank() {
             >
               <ChevronLeft className="w-4 h-4" /> Prev
             </button>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={random}
-                className="flex items-center gap-1.5 px-4 py-2 border border-border text-xs font-mono text-muted-foreground hover:text-foreground rounded-lg transition-colors"
-              >
-                <Shuffle className="w-4 h-4" /> Random
-              </button>
-              {hasMore && !loadingR && (
-                <button
-                  onClick={loadMore}
-                  className="flex items-center gap-1.5 px-3 py-2 border border-border text-xs font-mono text-muted-foreground hover:text-foreground rounded-lg transition-colors"
-                >
-                  <RefreshCw className="w-3.5 h-3.5" /> Load more
-                </button>
-              )}
-            </div>
+            <button
+              onClick={() => goTo(Math.floor(Math.random() * pool.length))}
+              className="flex items-center gap-1.5 px-4 py-2 border border-border text-xs font-mono text-muted-foreground hover:text-foreground rounded-lg transition-colors"
+            >
+              <Shuffle className="w-4 h-4" /> Random
+            </button>
             <button
               onClick={() => goTo(qIndex + 1)}
               disabled={qIndex >= pool.length - 1}
