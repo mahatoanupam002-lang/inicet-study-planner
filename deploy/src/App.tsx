@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import type { User } from "@supabase/supabase-js";
-import { Target, Calendar, Clock, StickyNote, Flag, Bot, Flame, Download, Upload, BookOpen, Award, MessageSquare, ExternalLink, Sun, Moon, LogOut, LogIn, BarChart2, FlaskConical } from "lucide-react";
+import { Target, Calendar, Clock, StickyNote, Flag, Bot, Flame, Download, Upload, BookOpen, Award, MessageSquare, ExternalLink, Sun, Moon, LogOut, LogIn, BarChart2, FlaskConical, FileText } from "lucide-react";
 import { StudyReminderBanner, StudyReminderBell } from "@/components/StudyReminder";
 import { EXAM_DATE, SCHEDULE } from "@/data/schedule";
 import { safeLoad, safeSave } from "@/lib/storage";
@@ -24,11 +24,12 @@ import { AdaptivePlanPanel } from "@/components/AdaptivePlanPanel";
 import { AnalyticsPanel } from "@/components/AnalyticsPanel";
 import { ExamSimulation } from "@/components/ExamSimulation";
 import { ExamDateConfig } from "@/components/ExamDateConfig";
+import { PDFLearningExtractor } from "@/components/PDFLearningExtractor";
 import { computeAdaptivePlan } from "@/lib/adaptive";
 import { LoginScreen } from "@/components/LoginScreen";
 import { useAuth } from "@/lib/auth";
 
-type MainTab = 'planner' | 'schedule' | 'notes' | 'revision' | 'ai' | 'pyq' | 'toppers' | 'resources' | 'community' | 'analytics' | 'simulation';
+type MainTab = 'planner' | 'schedule' | 'notes' | 'revision' | 'ai' | 'pyq' | 'toppers' | 'resources' | 'community' | 'analytics' | 'simulation' | 'pdf';
 
 interface TimeLeft   { days: number; hours: number; minutes: number; seconds: number; }
 interface StreakData  { count: number; longest: number; lastDate: string; }
@@ -226,6 +227,7 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
     { id: 'revision',   label: 'Revision',   Icon: Flag, badge: flagged.length || undefined },
     { id: 'analytics',  label: 'Analytics',  Icon: BarChart2                                },
     { id: 'simulation', label: 'Simulate',   Icon: FlaskConical                             },
+    { id: 'pdf',        label: 'PDF',        Icon: FileText                                 },
     { id: 'ai',         label: 'AI Tutor',   Icon: Bot                                      },
     { id: 'pyq',        label: 'PYQ',        Icon: BookOpen                                 },
     { id: 'toppers',    label: 'Toppers',    Icon: Award                                    },
@@ -455,6 +457,10 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
 
         <div id="main-panel-simulation" role="tabpanel" aria-label="Exam Simulation" hidden={activeTab !== 'simulation'}>
           <ExamSimulation />
+        </div>
+
+        <div id="main-panel-pdf" role="tabpanel" aria-label="PDF Learning Extractor" hidden={activeTab !== 'pdf'}>
+          <PDFLearningExtractor />
         </div>
 
         <div id="main-panel-ai" role="tabpanel" aria-label="AI Tutor" hidden={activeTab !== 'ai'}>
