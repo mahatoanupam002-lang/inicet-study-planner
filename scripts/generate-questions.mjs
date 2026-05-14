@@ -150,8 +150,13 @@ async function generateForSubject(subject) {
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
-  const today = new Date().toISOString().slice(0, 10);
-  console.log(`\n🚀 INI-CET Daily Question Generator — batch ${today}\n`);
+  // BATCH_DATE_OFFSET lets the bulk-seed workflow simulate historical batches
+  // e.g. offset=3 means "generate as if this were 3 days ago"
+  const offsetDays = parseInt(process.env.BATCH_DATE_OFFSET ?? "0");
+  const d = new Date();
+  d.setDate(d.getDate() - offsetDays);
+  const today = d.toISOString().slice(0, 10);
+  console.log(`\n🚀 INI-CET Daily Question Generator — batch ${today}${offsetDays > 0 ? ` (offset -${offsetDays}d)` : ""}\n`);
 
   // ── Generate fresh questions ──────────────────────────────────────────────
   let newQuestions = [];

@@ -1,0 +1,60 @@
+name: Bulk Question Seed
+
+# Run this ONCE to pre-populate historical question batches.
+# Each "batch" simulates one past day (~500 questions with that day's date).
+# After this runs, the daily workflow keeps adding 1,500/day automatically.
+
+on:
+  workflow_dispatch:
+    inputs:
+      batches:
+        description: 'Number of historical days to generate (each ~500 questions)'
+        default: '20'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: scripts
+        run: npm install
+
+      - name: Ensure public directory exists
+        run: mkdir -p deploy/public
+
+      - name: Generate historical batches (oldest → newest)
+        working-directory: scripts
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          BATCHES=${{ github.event.inputs.batches }}
+          echo "Generating $BATCHES historical batches..."
+          # Run oldest first so today's batch ends up on top in the JSON
+          for i in $(seq $((BATCHES - 1)) -1 0); do
+            echo ""
+            echo "━━━ Batch offset -${i}d ($(( BATCHES - i )) / $BATCHES ) ━━━"
+            BATCH_DATE_OFFSET=$i node generate-questions.mjs
+            sleep 3
+          done
+
+      - name: Commit full question bank
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add deploy/public/daily-questions.json
+          git diff --cached --quiet || git commit -m "chore(questions): bulk seed $(date -u '+%Y-%m-%d') — ${{ github.event.inputs.batches }} batches"
+          git push
