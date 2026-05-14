@@ -1,0 +1,78 @@
+name: Auto Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compute next version
+        id: version
+        run: |
+          git fetch --tags
+          LATEST=$(git tag -l 'v*.*.*' --sort=-v:refname | head -1)
+          [ -z "$LATEST" ] && LATEST="v0.0.0"
+
+          MAJOR=$(echo ${LATEST#v} | cut -d. -f1)
+          MINOR=$(echo ${LATEST#v} | cut -d. -f2)
+          PATCH=$(echo ${LATEST#v} | cut -d. -f3)
+
+          MSG=$(git log -1 --pretty=%B)
+
+          if echo "$MSG" | grep -qE '^feat'; then
+            MINOR=$((MINOR + 1)); PATCH=0
+          elif echo "$MSG" | grep -qE '^fix|^perf|^refactor'; then
+            PATCH=$((PATCH + 1))
+          else
+            PATCH=$((PATCH + 1))
+          fi
+
+          echo "tag=v${MAJOR}.${MINOR}.${PATCH}" >> $GITHUB_OUTPUT
+          echo "prev=${LATEST}" >> $GITHUB_OUTPUT
+          echo "msg<<EOF" >> $GITHUB_OUTPUT
+          echo "$MSG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Tag the release
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag ${{ steps.version.outputs.tag }}
+          git push origin ${{ steps.version.outputs.tag }}
+
+      - name: Build changelog
+        id: changelog
+        run: |
+          PREV="${{ steps.version.outputs.prev }}"
+          if [ "$PREV" = "v0.0.0" ]; then
+            RANGE="HEAD"
+          else
+            RANGE="${PREV}..HEAD"
+          fi
+          NOTES=$(git log $RANGE --pretty="- %s" --no-merges | head -30)
+          echo "notes<<EOF" >> $GITHUB_OUTPUT
+          echo "$NOTES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ steps.version.outputs.tag }}" \
+            --title "INI-CET War Plan ${{ steps.version.outputs.tag }}" \
+            --notes "## What's new in ${{ steps.version.outputs.tag }}
+
+          ${{ steps.changelog.outputs.notes }}
+
+          ---
+          **Live:** https://inicet-study-planner.vercel.app" \
+            --latest
