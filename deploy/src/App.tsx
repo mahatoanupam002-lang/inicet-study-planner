@@ -20,6 +20,8 @@ import { OnboardingModal } from "@/components/OnboardingModal";
 import { ResourceHub } from "@/components/ResourceHub";
 import { CommunityQA } from "@/components/CommunityQA";
 import { AdaptiveSuggestions } from "@/components/AdaptiveSuggestions";
+import { AdaptivePlanPanel } from "@/components/AdaptivePlanPanel";
+import { computeAdaptivePlan } from "@/lib/adaptive";
 import { LoginScreen } from "@/components/LoginScreen";
 import { useAuth } from "@/lib/auth";
 
@@ -181,6 +183,11 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
     e.target.value = '';
   };
 
+  const adaptivePlan = useMemo(
+    () => computeAdaptivePlan(mcqScores, completedDays),
+    [mcqScores, completedDays]
+  );
+
   const filteredSchedule = useMemo(() => {
     if (selectedSubject === 'All') return SCHEDULE;
     if (selectedSubject === 'Full Mock') return SCHEDULE.filter(s => s.phase === 'mock');
@@ -332,6 +339,7 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
       <main className="flex-1 p-4 md:p-6 overflow-y-auto max-w-7xl mx-auto w-full">
 
         <div id="main-panel-planner" role="tabpanel" aria-label="Planner" hidden={activeTab !== 'planner'}>
+          <div className="flex flex-col gap-6">
           <div className="flex flex-col lg:flex-row gap-6">
             <DayGrid
               schedule={SCHEDULE}
@@ -342,6 +350,8 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
               onSelectDay={setSelectedDayId}
               selectedSubject={selectedSubject}
               onSelectSubject={setSelectedSubject}
+              urgentDays={adaptivePlan.urgentRemainingDays}
+              missedDays={adaptivePlan.missedBlitzDays}
             />
             <DayDetail
               day={selectedDay}
@@ -361,6 +371,12 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
               canGoPrev={selectedDayId > 1}
               canGoNext={selectedDayId < 28}
             />
+          </div>
+          <AdaptivePlanPanel
+            mcqScores={mcqScores}
+            completedDays={completedDays}
+            onSelectDay={(day) => { setSelectedDayId(day); }}
+          />
           </div>
         </div>
 

@@ -11,6 +11,8 @@ interface Props {
   onSelectDay: (day: number) => void;
   selectedSubject: string;
   onSelectSubject: (subject: string) => void;
+  urgentDays?: number[];
+  missedDays?: number[];
 }
 
 export function DayGrid({
@@ -22,8 +24,12 @@ export function DayGrid({
   onSelectDay,
   selectedSubject,
   onSelectSubject,
+  urgentDays = [],
+  missedDays = [],
 }: Props) {
   const visibleDayIds = new Set(filteredSchedule.map(s => s.day));
+  const urgentSet     = new Set(urgentDays);
+  const missedSet     = new Set(missedDays);
 
   // subject-wise progress (exclude "All" entry)
   const subjectProgress = useMemo(() => {
@@ -84,6 +90,8 @@ export function DayGrid({
             const isCompleted = completedDays.includes(day.day);
             const hasNotes    = !!notes[day.day]?.trim();
             const isVisible   = visibleDayIds.has(day.day);
+            const isUrgent    = urgentSet.has(day.day);
+            const isMissed    = missedSet.has(day.day);
 
             return (
               <button
@@ -116,6 +124,16 @@ export function DayGrid({
                   <div className="absolute bottom-1 left-1/2 -translate-x-1/2">
                     <div className="w-1.5 h-1.5 rounded-full bg-accent-foreground" />
                   </div>
+                )}
+
+                {/* Urgent: small red pip top-left */}
+                {isUrgent && !isCompleted && (
+                  <div className="absolute top-1 left-1 w-2 h-2 rounded-full bg-red-500 animate-pulse" title="Urgent — weak subject" />
+                )}
+
+                {/* Missed: small yellow triangle indicator bottom-right */}
+                {isMissed && !isCompleted && (
+                  <div className="absolute bottom-1 right-1 w-2 h-2 rounded-full bg-yellow-500" title="Skipped day" />
                 )}
               </button>
             );
