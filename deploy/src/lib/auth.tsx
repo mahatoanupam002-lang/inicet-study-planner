@@ -12,9 +12,14 @@ interface AuthContextValue {
   session: Session | null;
   user: User | null;
   loading: boolean;
+  isGuest: boolean;
+  storagePrefix: string;
+  signInWithEmail: (email: string, password: string) => Promise<string | null>;
+  signUpWithEmail: (email: string, password: string) => Promise<string | null>;
   signInWithGoogle: () => Promise<void>;
   signInWithGitHub: () => Promise<void>;
   signOut: () => Promise<void>;
+  continueAsGuest: () => void;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -22,23 +27,40 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isGuest, setIsGuest] = useState(() =>
+    localStorage.getItem("inicet_guest_mode") === "1"
+  );
 
   useEffect(() => {
-    // Get initial session
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
       setLoading(false);
     });
 
-    // Listen to auth state changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, newSession) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession);
+      if (newSession) {
+        setIsGuest(false);
+        localStorage.removeItem("inicet_guest_mode");
+      }
     });
 
     return () => subscription.unsubscribe();
   }, []);
+
+  const storagePrefix = session?.user
+    ? `inicet_u_${session.user.id}_`
+    : "inicet_";
+
+  const signInWithEmail = async (email: string, password: string): Promise<string | null> => {
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    return error?.message ?? null;
+  };
+
+  const signUpWithEmail = async (email: string, password: string): Promise<string | null> => {
+    const { error } = await supabase.auth.signUp({ email, password });
+    return error?.message ?? null;
+  };
 
   const signInWithGoogle = async () => {
     await supabase.auth.signInWithOAuth({
@@ -56,6 +78,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signOut = async () => {
     await supabase.auth.signOut();
+    setIsGuest(false);
+    localStorage.removeItem("inicet_guest_mode");
+  };
+
+  const continueAsGuest = () => {
+    localStorage.setItem("inicet_guest_mode", "1");
+    setIsGuest(true);
   };
 
   return (
@@ -64,9 +93,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         session,
         user: session?.user ?? null,
         loading,
+        isGuest,
+        storagePrefix,
+        signInWithEmail,
+        signUpWithEmail,
         signInWithGoogle,
         signInWithGitHub,
         signOut,
+        continueAsGuest,
       }}
     >
       {children}
