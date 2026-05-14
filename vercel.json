@@ -2,13 +2,5 @@
   "installCommand": "cd deploy && npm install",
   "buildCommand": "cd deploy && npm run build",
   "outputDirectory": "deploy/dist",
-  "framework": null,
-  "functions": {
-    "deploy/api/*.ts": {
-      "runtime": "@vercel/node@5.7.17"
-    }
-  },
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/deploy/api/$1" }
-  ]
+  "framework": null
 }
