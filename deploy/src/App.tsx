@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from "react";
-import { Target, Calendar, Clock, StickyNote, Flag, Bot, Flame, Download, Upload, BookOpen, Award, MessageSquare, ExternalLink, Sun, Moon } from "lucide-react";
+import type { User } from "@supabase/supabase-js";
+import { Target, Calendar, Clock, StickyNote, Flag, Bot, Flame, Download, Upload, BookOpen, Award, MessageSquare, ExternalLink, Sun, Moon, LogOut, LogIn } from "lucide-react";
 import { StudyReminderBanner, StudyReminderBell } from "@/components/StudyReminder";
 import { EXAM_DATE, SCHEDULE } from "@/data/schedule";
 import { safeLoad, safeSave } from "@/lib/storage";
@@ -19,6 +20,8 @@ import { OnboardingModal } from "@/components/OnboardingModal";
 import { ResourceHub } from "@/components/ResourceHub";
 import { CommunityQA } from "@/components/CommunityQA";
 import { AdaptiveSuggestions } from "@/components/AdaptiveSuggestions";
+import { LoginScreen } from "@/components/LoginScreen";
+import { useAuth } from "@/lib/auth";
 
 type MainTab = 'planner' | 'schedule' | 'notes' | 'revision' | 'ai' | 'pyq' | 'toppers' | 'resources' | 'community';
 
@@ -36,8 +39,8 @@ function calcTimeLeft(): TimeLeft {
   };
 }
 
-function exportAllData() {
-  const keys = Object.keys(localStorage).filter(k => k.startsWith('inicet_'));
+function exportAllData(prefix: string) {
+  const keys = Object.keys(localStorage).filter(k => k.startsWith(prefix));
   const data: Record<string, unknown> = {};
   keys.forEach(k => {
     try { data[k] = JSON.parse(localStorage.getItem(k)!); }
@@ -52,24 +55,32 @@ function exportAllData() {
   URL.revokeObjectURL(url);
 }
 
-export default function App() {
+// ─── StudyApp ─────────────────────────────────────────────────────────────────
+
+interface StudyAppProps {
+  prefix: string;
+  user: User | null;
+  onSignOut: () => Promise<void>;
+}
+
+function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
   const [completedDays, setCompletedDays] = useState<number[]>(() =>
-    safeLoad<number[]>('inicet_completed_days', [])
+    safeLoad<number[]>(`${prefix}completed_days`, [])
   );
   const [notes, setNotes] = useState<Record<number, string>>(() =>
-    safeLoad<Record<number, string>>('inicet_notes', {})
+    safeLoad<Record<number, string>>(`${prefix}notes`, {})
   );
   const [mcqScores, setMcqScores] = useState<Record<number, { attempted: number; correct: number }>>(() =>
-    safeLoad('inicet_mcq_scores', {})
+    safeLoad(`${prefix}mcq_scores`, {})
   );
   const [flagged, setFlagged] = useState<FlaggedTopic[]>(() =>
-    safeLoad('inicet_flagged', [])
+    safeLoad(`${prefix}flagged`, [])
   );
   const [srCards, setSrCards] = useState<Record<number, SRCard>>(() =>
-    safeLoad('inicet_sr_cards', {})
+    safeLoad(`${prefix}sr_cards`, {})
   );
   const [streak, setStreak] = useState<StreakData>(() =>
-    safeLoad('inicet_streak', { count: 0, longest: 0, lastDate: '' })
+    safeLoad(`${prefix}streak`, { count: 0, longest: 0, lastDate: '' })
   );
   const [pyqAttempts, setPyqAttempts] = useState<Record<number, { selected: number; correct: boolean }>>(() =>
     safeLoad('inicet_pyq_attempts', {})
@@ -81,7 +92,7 @@ export default function App() {
   const [detailTab,       setDetailTab]       = useState<DetailTab>('TOPICS');
   const [timeLeft,        setTimeLeft]        = useState<TimeLeft>(calcTimeLeft);
   const [showOnboarding,  setShowOnboarding]  = useState<boolean>(() =>
-    !localStorage.getItem('inicet_onboarded')
+    !localStorage.getItem(`${prefix}onboarded`)
   );
   const [isLightMode, setIsLightMode] = useState<boolean>(() =>
     safeLoad('inicet_light_mode', false)
@@ -89,7 +100,6 @@ export default function App() {
 
   const importRef = useRef<HTMLInputElement>(null);
 
-  // Apply light/dark class to document root
   useEffect(() => {
     if (isLightMode) {
       document.documentElement.classList.add('light');
@@ -100,23 +110,22 @@ export default function App() {
   }, [isLightMode]);
 
   const handleOnboardingDone = () => {
-    localStorage.setItem('inicet_onboarded', '1');
+    localStorage.setItem(`${prefix}onboarded`, '1');
     setShowOnboarding(false);
   };
 
-  useEffect(() => { safeSave('inicet_completed_days', completedDays); }, [completedDays]);
-  useEffect(() => { safeSave('inicet_notes', notes); },                 [notes]);
-  useEffect(() => { safeSave('inicet_mcq_scores', mcqScores); },       [mcqScores]);
-  useEffect(() => { safeSave('inicet_flagged', flagged); },             [flagged]);
-  useEffect(() => { safeSave('inicet_sr_cards', srCards); },            [srCards]);
-  useEffect(() => { safeSave('inicet_streak', streak); },               [streak]);
+  useEffect(() => { safeSave(`${prefix}completed_days`, completedDays); }, [completedDays, prefix]);
+  useEffect(() => { safeSave(`${prefix}notes`, notes); },                 [notes, prefix]);
+  useEffect(() => { safeSave(`${prefix}mcq_scores`, mcqScores); },       [mcqScores, prefix]);
+  useEffect(() => { safeSave(`${prefix}flagged`, flagged); },             [flagged, prefix]);
+  useEffect(() => { safeSave(`${prefix}sr_cards`, srCards); },            [srCards, prefix]);
+  useEffect(() => { safeSave(`${prefix}streak`, streak); },               [streak, prefix]);
 
   useEffect(() => {
     const timer = setInterval(() => setTimeLeft(calcTimeLeft()), 1000);
     return () => clearInterval(timer);
   }, []);
 
-  // Sync pyqAttempts from localStorage when PYQBank updates it directly
   useEffect(() => {
     const handler = () => {
       setPyqAttempts(safeLoad('inicet_pyq_attempts', {}));
@@ -178,8 +187,11 @@ export default function App() {
     return SCHEDULE.filter(s => s.subject === selectedSubject);
   }, [selectedSubject]);
 
-  const selectedDay   = SCHEDULE.find(s => s.day === selectedDayId) ?? SCHEDULE[0];
-  const studiedToday  = streak.lastDate === new Date().toISOString().slice(0, 10);
+  const selectedDay  = SCHEDULE.find(s => s.day === selectedDayId) ?? SCHEDULE[0];
+  const studiedToday = streak.lastDate === new Date().toISOString().slice(0, 10);
+
+  const userInitial = user?.email?.[0]?.toUpperCase() ?? 'G';
+  const userLabel   = user?.email ?? 'Guest';
 
   const NAV_TABS: { id: MainTab; label: string; Icon: React.FC<{ className?: string }>; badge?: number }[] = [
     { id: 'planner',   label: 'Planner',   Icon: Calendar                                },
@@ -195,7 +207,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
-      {/* Onboarding modal */}
       {showOnboarding && <OnboardingModal onDone={handleOnboardingDone} />}
 
       {/* Header */}
@@ -211,7 +222,7 @@ export default function App() {
               <p className="text-[10px] text-muted-foreground font-mono">MAY 16, 2026 // COMMAND CENTER</p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 md:gap-3">
             {streak.count > 0 && (
               <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full">
                 <Flame className="w-3.5 h-3.5 text-orange-400" />
@@ -222,7 +233,6 @@ export default function App() {
               </div>
             )}
             <CountdownTimer timeLeft={timeLeft} />
-            {/* Theme toggle */}
             <button
               onClick={() => setIsLightMode(m => !m)}
               title={isLightMode ? "Switch to dark mode" : "Switch to light mode"}
@@ -232,6 +242,21 @@ export default function App() {
               {isLightMode ? <Moon className="w-3.5 h-3.5" /> : <Sun className="w-3.5 h-3.5" />}
             </button>
             <StudyReminderBell studiedToday={studiedToday} />
+            {/* User / sign-out */}
+            <div className="flex items-center gap-1.5 border-l border-border pl-2 md:pl-3">
+              <div className="w-6 h-6 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center shrink-0">
+                <span className="text-[10px] font-mono font-bold text-primary">{userInitial}</span>
+              </div>
+              <span className="hidden lg:block text-[11px] font-mono text-muted-foreground max-w-[130px] truncate">{userLabel}</span>
+              <button
+                onClick={onSignOut}
+                title={user ? "Sign out" : "Sign in with a different account"}
+                className="p-1.5 text-muted-foreground hover:text-foreground transition-colors rounded border border-transparent hover:border-border"
+                aria-label={user ? "Sign out" : "Switch account"}
+              >
+                {user ? <LogOut className="w-3.5 h-3.5" /> : <LogIn className="w-3.5 h-3.5" />}
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -285,10 +310,9 @@ export default function App() {
               style={{ width: `${(completedDays.length / 28) * 100}%` }}
             />
           </div>
-          {/* Backup/restore */}
           <input ref={importRef} type="file" accept=".json" className="hidden" onChange={handleImport} />
           <button
-            onClick={exportAllData}
+            onClick={() => exportAllData(prefix)}
             title="Export backup"
             className="p-1.5 text-muted-foreground hover:text-foreground transition-colors rounded border border-transparent hover:border-border"
           >
@@ -400,5 +424,37 @@ export default function App() {
 
       </main>
     </div>
+  );
+}
+
+// ─── App (Auth Gate) ──────────────────────────────────────────────────────────
+
+export default function App() {
+  const { user, loading, isGuest, storagePrefix, signOut } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <div className="bg-destructive p-3 rounded-xl animate-pulse">
+            <Target className="w-8 h-8 text-destructive-foreground" />
+          </div>
+          <p className="text-sm font-mono text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user && !isGuest) {
+    return <LoginScreen />;
+  }
+
+  return (
+    <StudyApp
+      key={storagePrefix}
+      prefix={storagePrefix}
+      user={user}
+      onSignOut={signOut}
+    />
   );
 }
