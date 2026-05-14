@@ -20,7 +20,7 @@ jobs:
         run: |
           git fetch --tags
           LATEST=$(git tag -l 'v*.*.*' --sort=-v:refname | head -1)
-          [ -z "$LATEST" ] && LATEST="v0.0.0"
+          [ -z "$LATEST" ] && LATEST="v1.1.0"
 
           MAJOR=$(echo ${LATEST#v} | cut -d. -f1)
           MINOR=$(echo ${LATEST#v} | cut -d. -f2)
