@@ -47,7 +47,7 @@ export function McqChart({ scores, activeDayId, onSelectDay }: Props) {
     <div className="mt-6">
       <p className="text-xs font-mono text-muted-foreground uppercase mb-2">Accuracy trend (all logged days)</p>
       <ResponsiveContainer width="100%" height={140}>
-        <BarChart data={data} onClick={(e) => e?.activePayload?.[0] && onSelectDay(e.activePayload[0].payload.day)}>
+        <BarChart data={data} onClick={(e: any) => e?.activePayload?.[0] && onSelectDay(e.activePayload[0].payload.day)}>
           <XAxis dataKey="day" tick={{ fontSize: 10, fontFamily: "monospace", fill: "hsl(var(--muted-foreground))" }} />
           <YAxis domain={[0, 100]} hide />
           <Tooltip content={<CustomTooltip />} cursor={{ fill: "hsl(var(--muted))" }} />

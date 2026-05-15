@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, type ComponentType } from "react";
 import { Target, Calendar, Bot, BookOpen, Award, TrendingUp, ChevronRight, X, type LucideProps } from "lucide-react";
 
 interface Step {
-  icon: (props: LucideProps) => JSX.Element;
+  icon: ComponentType<LucideProps>;
   color: string;
   bg: string;
   title: string;
