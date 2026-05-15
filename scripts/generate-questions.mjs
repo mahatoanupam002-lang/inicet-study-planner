@@ -1,24 +1,38 @@
 /**
  * Daily INI-CET / NEET PG question generator.
  *
- * Generates ~520 high-yield questions via Google Gemini (free tier) and writes
- * them to deploy/public/daily-questions.json — Vercel serves this as a static asset.
+ * Generates ~520 high-yield questions via Groq (free tier, Llama 3.3 70B) and
+ * writes them to deploy/public/daily-questions.json — Vercel serves this as a
+ * static asset.
  *
  * Required env var:
- *   GEMINI_API_KEY
+ *   GROQ_API_KEY   (free at console.groq.com — no billing required)
  *
  * Optional env var:
  *   BATCH_DATE_OFFSET   number of days to subtract from today (for bulk-seed)
  */
 
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import Groq from "groq-sdk";
 import { randomUUID } from "crypto";
-import { readFileSync, writeFileSync, existsSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dir  = dirname(fileURLToPath(import.meta.url));
 const OUTPUT = join(__dir, "..", "deploy", "public", "daily-questions.json");
+const NOTES_DIR = join(__dir, "..", "notes");
+
+// ─── Load student notes as source material ────────────────────────────────────
+
+function loadNotes() {
+  if (!existsSync(NOTES_DIR)) return "";
+  const files = readdirSync(NOTES_DIR).filter(f => f.endsWith(".md")).sort();
+  return files.map(f => readFileSync(join(NOTES_DIR, f), "utf8")).join("\n\n---\n\n");
+}
+
+const STUDENT_NOTES = loadNotes();
+const HAS_NOTES = STUDENT_NOTES.trim().length > 0;
+if (HAS_NOTES) console.log(`  Loaded ${STUDENT_NOTES.length} chars of student notes as source material\n`);
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 
@@ -79,23 +93,31 @@ const SUBJECTS = [
   },
 ];
 
-// ─── Gemini client ────────────────────────────────────────────────────────────
+// ─── Groq client ─────────────────────────────────────────────────────────────
 
-const genai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genai.getGenerativeModel({ model: "gemini-1.5-flash" });
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 // ─── Prompt builder ───────────────────────────────────────────────────────────
 
-function buildPrompt(subject, batchDate) {
+function buildPrompt(subject) {
   const textCount  = BATCH_SIZE - 5;
   const imageCount = 5;
+
+  const notesBlock = HAS_NOTES ? `
+## STUDENT'S NOTES (Primary Source — prioritise testing these exact facts)
+${STUDENT_NOTES}
+
+---
+Use the student's notes above as your PRIMARY source. At least 60% of questions must directly test facts, tables, mnemonics, or concepts from these notes. The remaining questions can cover other high-yield topics for the subject.
+` : "";
+
   return `You are a senior medical educator creating a rank-1 INI-CET / NEET PG question bank.
 
 Generate exactly ${BATCH_SIZE} MCQs for: **${subject.name}**
 Cover these topics proportionally: ${subject.topics}
-
+${notesBlock}
 ${textCount} of the questions should be standard text-based MCQs.
-${imageCount} of the questions should be IMAGE-BASED clinical scenario questions where a student would be shown an ECG, X-ray, histology slide, ophthalmoscopy image, or clinical photograph. For these, describe the key finding in the question stem (e.g. "A patient presents with an ECG showing wide-complex tachycardia with a right bundle branch block pattern..."). Mark these with "is_image_based": true and set "image_type" to one of: "ECG", "X-ray", "CT", "MRI", "histology", "fundoscopy", "clinical_photo", "ultrasound".
+${imageCount} of the questions should be IMAGE-BASED clinical scenario questions where a student would be shown an ECG, X-ray, histology slide, ophthalmoscopy image, or clinical photograph. For these, describe the key finding in the question stem. Mark these with "is_image_based": true and set "image_type" to one of: "ECG", "X-ray", "CT", "MRI", "histology", "fundoscopy", "clinical_photo", "ultrasound".
 
 Each question must:
 • Mirror the exact NEET PG / INI-CET / AIIMS PG pattern (2019–2024 papers)
@@ -125,9 +147,14 @@ Return ONLY a valid JSON array — no markdown, no code fences, no commentary:
 // ─── Per-subject generation ───────────────────────────────────────────────────
 
 async function generateForSubject(subject, batchDate) {
-  const prompt = buildPrompt(subject, batchDate);
-  const result = await model.generateContent(prompt);
-  const raw    = result.response.text();
+  const completion = await groq.chat.completions.create({
+    model: "llama-3.3-70b-versatile",
+    messages: [{ role: "user", content: buildPrompt(subject) }],
+    temperature: 0.7,
+    max_tokens: 8192,
+  });
+
+  const raw = completion.choices[0]?.message?.content ?? "";
 
   // Strip markdown code fences if model wraps with them
   const stripped = raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```\s*$/, "");
@@ -163,13 +190,11 @@ async function generateForSubject(subject, batchDate) {
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
-  // BATCH_DATE_OFFSET lets the bulk-seed workflow simulate historical batches
-  // e.g. offset=3 means "generate as if this were 3 days ago"
   const offsetDays = parseInt(process.env.BATCH_DATE_OFFSET ?? "0");
   const d = new Date();
   d.setDate(d.getDate() - offsetDays);
   const today = d.toISOString().slice(0, 10);
-  console.log(`\nINI-CET Daily Question Generator (Gemini) — batch ${today}${offsetDays > 0 ? ` (offset -${offsetDays}d)` : ""}\n`);
+  console.log(`\nINI-CET Daily Question Generator (Groq/Llama) — batch ${today}${offsetDays > 0 ? ` (offset -${offsetDays}d)` : ""}\n`);
 
   // ── Generate fresh questions ──────────────────────────────────────────────
   let newQuestions = [];
@@ -183,12 +208,12 @@ async function main() {
     } catch (err) {
       console.log(`FAIL ${err.message}`);
     }
-    // Respect Gemini free-tier rate limits (15 req/min)
-    await new Promise(r => setTimeout(r, 4500));
+    // Groq free tier: 30 RPM — 2s gap is enough
+    await new Promise(r => setTimeout(r, 2000));
   }
   console.log(`\n  Generated: ${newQuestions.length} questions`);
 
-  // ── Load existing questions and append (questions stack up over time) ────────
+  // ── Load existing questions and accumulate ────────────────────────────────
   let existing = [];
   if (existsSync(OUTPUT)) {
     try {
@@ -197,10 +222,7 @@ async function main() {
     } catch { /* ignore corrupt file */ }
   }
 
-  // Keep all previous questions — new ones prepended so today's batch shows first
-  const merged = [...newQuestions, ...existing];
-
-  // Count unique batches so we can show "Day N" in the UI
+  const merged  = [...newQuestions, ...existing];
   const batches = [...new Set(merged.map(q => q.batch_date))].sort();
 
   // ── Write output ──────────────────────────────────────────────────────────
