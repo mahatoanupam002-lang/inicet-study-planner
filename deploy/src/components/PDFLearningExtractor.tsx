@@ -34,11 +34,11 @@ interface Flashcard { q: string; a: string; }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const STORAGE_KEY_HISTORY = "inicet_pdf_history";
-const STORAGE_KEY_PDF_CARDS = "inicet_pdf_sr_cards";
+const STORAGE_KEY_HISTORY = "neetpg_pdf_history";
+const STORAGE_KEY_PDF_CARDS = "neetpg_pdf_sr_cards";
 const MAX_TEXT_CHARS = 80_000;
 
-const SYSTEM_PROMPT = `You are an expert INI-CET / NEET PG exam tutor analyzing uploaded study material for an Indian medical PG aspirant. Extract ONLY what matters for MCQ-based entrance exams.
+const SYSTEM_PROMPT = `You are an expert NEET PG exam tutor analyzing uploaded study material for an Indian medical PG aspirant. Extract ONLY what matters for MCQ-based entrance exams.
 
 Respond in exactly this format — use these exact section headers:
 

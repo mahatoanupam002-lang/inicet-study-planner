@@ -142,7 +142,7 @@ function exportAllData(prefix: string) {
   const url  = URL.createObjectURL(blob);
   const a    = document.createElement('a');
   a.href     = url;
-  a.download = `inicet-backup-${new Date().toISOString().slice(0, 10)}.json`;
+  a.download = `neetpg-backup-${new Date().toISOString().slice(0, 10)}.json`;
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -177,7 +177,7 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
     safeLoad(`${prefix}streak`, { count: 0, longest: 0, lastDate: '' })
   );
   const [pyqAttempts, setPyqAttempts] = useState<Record<number, { selected: number; correct: boolean }>>(() =>
-    safeLoad('inicet_pyq_attempts', {})
+    safeLoad('neetpg_pyq_attempts', {})
   );
   const [examDate, setExamDate] = useState<Date>(() => {
     const saved = safeLoad<string>(`${prefix}exam_date`, '');
@@ -185,10 +185,10 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
   });
 
   // ── Gamification state ─────────────────────────────────────────
-  const [bonusXP,        setBonusXP]        = useState<number>(() => safeLoad('inicet_bonus_xp', 0));
-  const [unlockedIds,    setUnlockedIds]    = useState<string[]>(() => safeLoad('inicet_achievements', []));
-  const [drillsCompleted, setDrillsCompleted] = useState<number>(() => safeLoad('inicet_drills_count', 0));
-  const [simCompleted,   setSimCompleted]   = useState<boolean>(() => safeLoad('inicet_sim_done', false));
+  const [bonusXP,        setBonusXP]        = useState<number>(() => safeLoad('neetpg_bonus_xp', 0));
+  const [unlockedIds,    setUnlockedIds]    = useState<string[]>(() => safeLoad('neetpg_achievements', []));
+  const [drillsCompleted, setDrillsCompleted] = useState<number>(() => safeLoad('neetpg_drills_count', 0));
+  const [simCompleted,   setSimCompleted]   = useState<boolean>(() => safeLoad('neetpg_sim_done', false));
   const [xpToasts,       setXpToasts]       = useState<XPToastItem[]>([]);
 
   // ── Nav state ──────────────────────────────────────────────────
@@ -199,7 +199,7 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
   const [detailTab,        setDetailTab]        = useState<DetailTab>('TOPICS');
   const [timeLeft,         setTimeLeft]         = useState<TimeLeft>(() => calcTimeLeft(examDate));
   const [showOnboarding,   setShowOnboarding]   = useState<boolean>(() => !localStorage.getItem(`${prefix}onboarded`));
-  const [isLightMode,      setIsLightMode]      = useState<boolean>(() => safeLoad('inicet_light_mode', false));
+  const [isLightMode,      setIsLightMode]      = useState<boolean>(() => safeLoad('neetpg_light_mode', false));
 
   const importRef = useRef<HTMLInputElement>(null);
 
@@ -263,7 +263,7 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
   // ── Theme ─────────────────────────────────────────────────────
   useEffect(() => {
     document.documentElement.classList.toggle('light', isLightMode);
-    safeSave('inicet_light_mode', isLightMode);
+    safeSave('neetpg_light_mode', isLightMode);
   }, [isLightMode]);
 
   // ── localStorage persistence ──────────────────────────────────
@@ -274,10 +274,10 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
   useEffect(() => { safeSave(`${prefix}sr_cards`,       srCards);         }, [srCards, prefix]);
   useEffect(() => { safeSave(`${prefix}streak`,         streak);          }, [streak, prefix]);
   useEffect(() => { safeSave(`${prefix}exam_date`,      examDate.toISOString()); }, [examDate, prefix]);
-  useEffect(() => { safeSave('inicet_bonus_xp',         bonusXP);         }, [bonusXP]);
-  useEffect(() => { safeSave('inicet_achievements',     unlockedIds);     }, [unlockedIds]);
-  useEffect(() => { safeSave('inicet_drills_count',     drillsCompleted); }, [drillsCompleted]);
-  useEffect(() => { safeSave('inicet_sim_done',         simCompleted);    }, [simCompleted]);
+  useEffect(() => { safeSave('neetpg_bonus_xp',         bonusXP);         }, [bonusXP]);
+  useEffect(() => { safeSave('neetpg_achievements',     unlockedIds);     }, [unlockedIds]);
+  useEffect(() => { safeSave('neetpg_drills_count',     drillsCompleted); }, [drillsCompleted]);
+  useEffect(() => { safeSave('neetpg_sim_done',         simCompleted);    }, [simCompleted]);
 
   // ── Timer ─────────────────────────────────────────────────────
   useEffect(() => {
@@ -286,7 +286,7 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
   }, [examDate]);
 
   useEffect(() => {
-    const handler = () => setPyqAttempts(safeLoad('inicet_pyq_attempts', {}));
+    const handler = () => setPyqAttempts(safeLoad('neetpg_pyq_attempts', {}));
     window.addEventListener('storage', handler);
     return () => window.removeEventListener('storage', handler);
   }, []);
@@ -431,7 +431,7 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
               <Target className="w-5 h-5 text-destructive-foreground" />
             </div>
             <div>
-              <h1 className="text-lg md:text-2xl font-bold uppercase tracking-wider text-primary leading-none">INI-CET War Plan</h1>
+              <h1 className="text-lg md:text-2xl font-bold uppercase tracking-wider text-primary leading-none">NEET PG War Plan</h1>
               <p className="text-[10px] text-muted-foreground font-mono">MAY 16, 2026 // COMMAND CENTER</p>
             </div>
           </div>

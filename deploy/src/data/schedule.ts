@@ -11,7 +11,7 @@ export interface DayEntry {
   images: string;
 }
 
-export const EXAM_DATE = new Date("2026-05-16T09:00:00");
+export const EXAM_DATE = new Date("2026-11-16T09:00:00");
 
 export const PHASES = [
   { id: "blitz",    label: "Blitz Pass",         days: [1, 18],  color: "#ff4d4d" },
@@ -21,7 +21,7 @@ export const PHASES = [
 
 export const SUBJECTS = [
   "All","Medicine","Surgery","Pathology","Pharmacology","OBG","Paediatrics",
-  "PSM","Microbiology","Biochemistry","Forensic","Anatomy/Physio","Revision","Full Mock",
+  "PSM","Microbiology","Biochemistry","Forensic","Anatomy","Physiology","ENT/Ophth/Derm","Revision","Full Mock",
 ];
 
 export const DAILY_BLOCKS = [
