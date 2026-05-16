@@ -4,7 +4,7 @@ import {
   Target, Calendar, Clock, StickyNote, Flag, Bot, Flame, Download, Upload,
   BookOpen, Award, MessageSquare, ExternalLink, Sun, Moon, LogOut, LogIn,
   BarChart2, FlaskConical, FileText, Crosshair, Zap, Layers, Home, Trophy,
-  Users, GraduationCap,
+  Users, GraduationCap, Brain,
 } from "lucide-react";
 import { StudyReminderBanner, StudyReminderBell } from "@/components/StudyReminder";
 import { EXAM_DATE, SCHEDULE } from "@/data/schedule";
@@ -36,6 +36,8 @@ import { OneLinerBank } from "@/components/OneLinerBank";
 import { DailyBriefing } from "@/components/DailyBriefing";
 import { ErrorAnalysis } from "@/components/ErrorAnalysis";
 import { GamificationPanel } from "@/components/GamificationPanel";
+import { MnemonicsBank } from "@/components/MnemonicsBank";
+import { NEETPGPaperAnalysis } from "@/components/NEETPGPaperAnalysis";
 import { XPToastLayer, makeToastItem, type XPToastItem } from "@/components/XPToast";
 import { computeAdaptivePlan } from "@/lib/adaptive";
 import { LoginScreen } from "@/components/LoginScreen";
@@ -50,7 +52,8 @@ import { supabase } from "@/lib/supabase";
 type MainTab =
   | 'planner' | 'schedule' | 'notes' | 'revision' | 'ai' | 'pyq'
   | 'toppers' | 'resources' | 'community' | 'analytics' | 'simulation'
-  | 'pdf' | 'drills' | 'rapid' | 'oneliners' | 'rewards';
+  | 'pdf' | 'drills' | 'rapid' | 'oneliners' | 'rewards'
+  | 'mnemonics' | 'analysis';
 
 type NavGroup = 'home' | 'practice' | 'learn' | 'insights' | 'rewards';
 
@@ -92,9 +95,11 @@ const NAV_GROUPS: {
     label: 'Learn',
     Icon: GraduationCap,
     tabs: [
-      { id: 'notes', label: 'Notes',    Icon: StickyNote },
-      { id: 'pdf',   label: 'PDF',      Icon: FileText   },
-      { id: 'ai',    label: 'AI Tutor', Icon: Bot        },
+      { id: 'notes',      label: 'Notes',      Icon: StickyNote },
+      { id: 'pdf',        label: 'PDF',        Icon: FileText   },
+      { id: 'ai',         label: 'AI Tutor',   Icon: Bot        },
+      { id: 'mnemonics',  label: 'Mnemonics',  Icon: Brain      },
+      { id: 'analysis',   label: 'Analysis',   Icon: BarChart2  },
     ],
   },
   {
@@ -693,6 +698,12 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
         </div>
         <div hidden={activeGroup !== 'learn' || activeTab !== 'ai'}>
           <ChatPanel studyContext={studyContext} onFirstMessage={handleAIChat} />
+        </div>
+        <div hidden={activeGroup !== 'learn' || activeTab !== 'mnemonics'}>
+          <MnemonicsBank />
+        </div>
+        <div hidden={activeGroup !== 'learn' || activeTab !== 'analysis'}>
+          <NEETPGPaperAnalysis />
         </div>
 
         {/* INSIGHTS group */}
