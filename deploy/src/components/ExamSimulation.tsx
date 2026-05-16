@@ -34,7 +34,7 @@ function estimateRank(pct: number): {
 
 // ─── Negative marking ─────────────────────────────────────────────────────────
 function negativeMarkingScore(correct: number, wrong: number): number {
-  return correct - wrong * 0.33;
+  return correct - wrong * 0.25;
 }
 
 // ─── Fisher-Yates shuffle ─────────────────────────────────────────────────────
@@ -323,7 +323,7 @@ export function ExamSimulation({ onComplete }: { onComplete?: () => void } = {})
             <div className="flex gap-2 items-start">
               <AlertTriangle className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
               <p className="text-[11px] font-mono text-foreground/70 leading-relaxed">
-                Negative marking: <span className="text-amber-400 font-bold">–0.33</span> per wrong answer.
+                Negative marking: <span className="text-amber-400 font-bold">–0.25</span> per wrong answer.
                 Timer: <span className="text-amber-400 font-bold">54 seconds</span> per question.
               </p>
             </div>
