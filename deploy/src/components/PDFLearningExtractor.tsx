@@ -169,7 +169,7 @@ export function PDFLearningExtractor() {
   const [phase, setPhase] = useState<"idle" | "loading" | "ready" | "analyzing" | "done">("idle");
   const [result, setResult] = useState("");
   const [error, setError] = useState("");
-  const [apiKey] = useState(() => safeLoad<string>("inicet_ai_key", ""));
+  const [apiKey] = useState(() => safeLoad<string>("neetpg_ai_key", ""));
   const [history, setHistory] = useState<Extraction[]>(() => safeLoad(STORAGE_KEY_HISTORY, []));
   const [savedCount, setSavedCount] = useState(0);
   const [showHistory, setShowHistory] = useState(false);
@@ -238,7 +238,7 @@ export function PDFLearningExtractor() {
         system: SYSTEM_PROMPT,
         messages: [{
           role: "user",
-          content: `Here is the study material extracted from "${file?.name}":\n\n${truncateText(rawText)}\n\nExtract everything important for INI-CET / NEET PG exam preparation.`,
+          content: `Here is the study material extracted from "${file?.name}":\n\n${truncateText(rawText)}\n\nExtract everything important for NEET PG exam preparation.`,
         }],
       });
 

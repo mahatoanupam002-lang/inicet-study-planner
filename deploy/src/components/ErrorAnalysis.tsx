@@ -21,9 +21,9 @@ interface CachedAnalysis { date: string; text: string; }
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const CACHE_KEY    = "inicet_error_analysis_cache";
-const ATTEMPTS_KEY = "inicet_pyq_attempts";
-const AI_KEY_KEY   = "inicet_ai_key";
+const CACHE_KEY    = "neetpg_error_analysis_cache";
+const ATTEMPTS_KEY = "neetpg_pyq_attempts";
+const AI_KEY_KEY   = "neetpg_ai_key";
 
 const TODAY_ISO = new Date().toISOString().slice(0, 10);
 
@@ -47,7 +47,7 @@ const SUBJECT_DAYS: Record<string, number[]> = {
   "ENT/Ophthalmology": [22],
 };
 
-const SYSTEM_PROMPT = `You are an INI-CET expert. Analyze the student's MCQ performance data and identify: 1) Top 3 subject weaknesses with specific % 2) Common error patterns (e.g. always misses mechanism questions) 3) Personalized 3-point action plan for next 7 days. Be specific and actionable.`;
+const SYSTEM_PROMPT = `You are a NEET PG expert. Analyze the student's MCQ performance data and identify: 1) Top 3 subject weaknesses with specific % 2) Common error patterns (e.g. always misses mechanism questions) 3) Personalized 3-point action plan for next 7 days. Be specific and actionable.`;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 

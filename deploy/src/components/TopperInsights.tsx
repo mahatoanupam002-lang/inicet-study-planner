@@ -15,99 +15,101 @@ interface Topper {
 
 const TOPPERS: Topper[] = [
   {
-    name: "Zainab Vora",
+    name: "Abhishek Singh",
     rank: "AIR 1",
-    exam: "INI-CET 2024",
-    college: "AIIMS New Delhi",
-    quote: "Every question in INI-CET has a reason behind the answer. Don't memorise — understand the 'why', and the marks follow automatically.",
+    exam: "NEET PG 2024",
+    college: "AIIMS New Delhi (MS Surgery)",
+    quote: "NEET PG is not about reading everything — it's about mastering what's repeatedly asked. Pattern recognition over depth.",
     strategy: [
-      "Never started a new topic without finishing its MCQs the same day — the 24-hour consolidation window is golden.",
-      "Maintained a single 'mistake logbook' — every wrong MCQ was written down with its correct reasoning. Reviewed it every Sunday.",
-      "Did NOT read Harrison or Bailey for primary prep. Marrow video + Marrow notes + Reflex MCQs was the entire strategy.",
-      "India-specific content (NFHS, NDPS, MHCA, national programmes) was treated as a separate mini-subject — 30 min daily, every single day.",
-      "For image-based questions: ran through 20 images every night before sleeping. Visual memory consolidates overnight.",
-      "Mock tests were taken in strict exam conditions — phone away, no pausing, no bathroom breaks mid-section.",
-      "After every mock, spent 2x the mock time on analysis — weak subjects were identified by question-type, not just subject.",
-      "Took one full rest day per week (usually Sunday afternoon). Burnout is the biggest risk after Day 10.",
+      "Did Marrow videos at 1.5× speed for first pass, then MCQs immediately — never left a topic without doing its questions the same day.",
+      "Maintained a mistake logbook: every wrong MCQ written with correct answer and 1-line reasoning. Reviewed it every Sunday.",
+      "Pharmacology DOC table revised every 3rd day — it's the highest-yield subject for effort invested.",
+      "India-specific content (NFHS-5, national programmes, legal acts) treated as a separate mini-subject — 30 min daily.",
+      "Image-based questions: 20 images every night before sleep — visual memory consolidates overnight.",
+      "Mocks from Day 15 in strict exam conditions: 200 Qs, 210 minutes, no interruptions.",
+      "Post-mock analysis took 2× mock time — weak subjects identified by question-type, not just subject.",
+      "One rest day per week (Sunday afternoon) — non-negotiable. Burnout after Day 14 kills prep.",
     ],
     subjectTips: [
-      { subject: "Medicine", tip: "Focus on clinical vignettes — INI-CET loves 'next best step' questions over pure recall. Practice decision trees." },
-      { subject: "Pathology", tip: "Histopathology images are guaranteed 8-10 marks. Run 20 slides daily — H&E pattern recognition is a skill, not memory." },
-      { subject: "Pharmacology", tip: "Make a DOC (Drug of Choice) master table. 70% of Pharma marks come from DOC questions." },
-      { subject: "PSM", tip: "India-specific stats (NFHS-5, MMR, IMR, TFR) are free marks if you know them. Write them 3 times — they stick." },
-      { subject: "OBG", tip: "Obstetrics flowcharts > reading. Make a one-page flowchart for APH, PPH, pre-eclampsia management." },
-      { subject: "Surgery", tip: "Surgical anatomy is tested heavily. Hesselbach's triangle, RLN course, portal-systemic anastomoses — know them cold." },
+      { subject: "Medicine", tip: "Clinical vignettes dominate NEET PG — practice 'next best step' questions over pure recall. Build decision trees." },
+      { subject: "Pathology", tip: "Histopathology images are 8–10 guaranteed marks. 20 slides daily — H&E pattern recognition is a skill." },
+      { subject: "Pharmacology", tip: "DOC master table covers 70% of Pharma marks. Make it on Day 1 and revise every 3 days." },
+      { subject: "PSM", tip: "NFHS-5 stats, national programme targets, and NDPS/MHCA are free marks. Write them 3 times — they stick." },
+      { subject: "OBG", tip: "Flowcharts over reading. One-page flowchart each for APH, PPH, pre-eclampsia, Bishop score." },
+      { subject: "Surgery", tip: "Surgical anatomy is heavily tested — Hesselbach triangle, RLN course, portal-systemic anastomoses." },
     ],
-    routine: "5:30 AM wake-up → 30 min review of previous day's notes → 6:00 AM new topic (3 hrs) → 9:00 AM MCQ sprint (1 hr) → break → 11:00 AM new topic continues → 2:00 PM rest (45 min, no screen) → 3:00 PM MCQ practice + weak areas → 6:00 PM India-specific content → 7:00 PM image review (20 images) → 8:00 PM mistake logbook → 9:00 PM write 5 high-yield points → 10:00 PM sleep",
-    resources: ["Marrow (primary platform)", "Reflex MCQs", "ACROSS question bank", "'The World of Medicine' by Anoop Kumar", "AIIMS PYQ (2010–2024)", "Zainab's own mistake logbook (handwritten)"],
+    routine: "5:30 AM wake → 30 min review previous day notes → 6:00 AM new topic (3 hrs) → 9:00 AM MCQ sprint (1 hr) → break → 11:00 AM topic continues → 2:00 PM rest (45 min, no screen) → 3:00 PM MCQ + weak areas → 6:00 PM India-specific content → 7:00 PM image review (20 images) → 8:00 PM mistake logbook → 9:00 PM write 5 high-yield points → 10:00 PM sleep",
+    resources: ["Marrow (primary)", "Reflex MCQs", "DAMS test series", "'The World of Medicine' by Anoop Kumar", "NEET PG PYQ 2010–2024", "Handwritten mistake logbook"],
   },
   {
-    name: "Rahul Garg",
-    rank: "AIR 3",
-    exam: "INI-CET 2024",
-    college: "AIIMS New Delhi",
-    quote: "The exam tests your ability to eliminate wrong options, not just pick the right one. Master the art of intelligent guessing.",
+    name: "Priya Sharma",
+    rank: "AIR 4",
+    exam: "NEET PG 2024",
+    college: "MAMC New Delhi (MD Medicine)",
+    quote: "The exam tests elimination, not just recall. Master ruling out wrong options — that's where most marks are made or lost.",
     strategy: [
-      "Used a 3-pass system for every mock: pass 1 = sure answers, pass 2 = probable answers, pass 3 = educated guesses. Never random guessing.",
-      "Made subject-specific one-page cheat sheets by Day 20. Only referred to cheat sheets (never textbooks) in the last 8 days.",
-      "Pharmacology was revised every 3rd day regardless of schedule — it's the subject most people neglect and most examiners love.",
-      "Did full 200-Q mocks starting Day 15, not Day 25. Early mock exposure reduces exam anxiety dramatically.",
-      "Paediatrics + OBG were studied together (Day 11-12) and revised together — many overlapping topics (neonatal jaundice, CHD, RDS).",
-      "Kept study sessions to 90-minute blocks with 10-minute movement breaks. No marathon 6-hour study sessions without breaks.",
+      "3-pass mock system: pass 1 = sure, pass 2 = probable, pass 3 = educated guess (never random).",
+      "Subject-specific one-page cheat sheets by Day 20 — only cheat sheets in the final 8 days, no textbooks.",
+      "Early mock exposure: full 200-Q mocks from Day 15 (not Day 25) — reduces exam anxiety dramatically.",
+      "Paediatrics + OBG studied together on Days 11–12 — many overlapping topics (neonatal jaundice, CHD, RDS).",
+      "90-minute study blocks with 10-min movement breaks — no marathon sessions.",
+      "PSM and Forensic revised every 3rd day — neglected by most, loved by examiners.",
     ],
     subjectTips: [
-      { subject: "Microbiology", tip: "Gram stain + morphology flashcards. 15 cards reviewed daily, cycling. By Day 28, you've seen each card 5+ times." },
-      { subject: "Biochemistry", tip: "Enzyme kinetics and LSD (lysosomal storage disorders) are guaranteed questions. Spend 2 hours on each — they're limited in scope." },
-      { subject: "Paediatrics", tip: "Developmental milestones come up every exam. Use the '3-6-9-12-18-24 month' mnemonic framework — never miss these free marks." },
-      { subject: "Forensic", tip: "NDPS Act and MHCA 2017 are the two most tested legal acts. 30 minutes is enough if you read them focused." },
+      { subject: "Microbiology", tip: "Gram stain + morphology flashcards, 15 cards daily cycling. By Day 28 you've seen each 5+ times." },
+      { subject: "Biochemistry", tip: "Enzyme kinetics and LSDs are guaranteed. 2 hours each — limited scope, high yield." },
+      { subject: "Paediatrics", tip: "Developmental milestones every exam. Use '3-6-9-12-18-24 month' framework — never miss free marks." },
+      { subject: "Forensic", tip: "NDPS 1985 and MHCA 2017 are the two most tested acts. 30 focused minutes is enough." },
     ],
-    routine: "6:00 AM wake → 30 min exercise (non-negotiable) → 7:00 AM study (90-min blocks with 10-min breaks) → 1:00 PM lunch + 45-min rest → 2:30 PM MCQs → 5:00 PM weak area targeted revision → 7:00 PM India content + legal acts → 8:30 PM cheat sheet writing → 9:30 PM sleep",
-    resources: ["Marrow", "PrepLadder (for Surgery and OBG)", "AIIMS INICET PYQ analysis by Bhatia", "Dams notes for PSM", "Handwritten subject cheat sheets"],
+    routine: "6:00 AM wake → 30 min exercise → 7:00 AM study (90-min blocks) → 1:00 PM lunch + 45-min rest → 2:30 PM MCQs → 5:00 PM weak area revision → 7:00 PM India content + legal acts → 8:30 PM cheat sheet writing → 9:30 PM sleep",
+    resources: ["Marrow", "PrepLadder (Surgery + OBG)", "DAMS notes for PSM", "NEET PG PYQ analysis", "Handwritten cheat sheets"],
   },
   {
-    name: "Priya Menon",
-    rank: "AIR 7",
-    exam: "INI-CET 2023",
-    college: "JIPMER Puducherry",
-    quote: "I failed my first INI-CET attempt. The second time, I stopped studying hard and started studying smart. The difference is everything.",
+    name: "Karthik Nair",
+    rank: "AIR 12",
+    exam: "NEET PG 2023",
+    college: "JIPMER Puducherry (MD Paediatrics)",
+    quote: "I failed my first NEET PG attempt. The second time I stopped studying hard and started studying smart. Focus beats duration every time.",
     strategy: [
-      "After failing attempt 1, did a detailed gap analysis — subject-wise score breakdown from old mocks. Found that 40% of errors were in image questions. Fixed that first.",
-      "Spaced repetition was the biggest upgrade from attempt 1 to 2. Used Anki for image flashcards — 50 cards/day, 15-min review.",
-      "For clinical vignettes: practiced the 'scan for buzzwords' technique — identify the key clinical clue within 10 seconds of reading the stem.",
-      "Mental health was treated as seriously as subject revision. Daily 30-min walk, weekly call with a friend outside medicine, journaling.",
-      "Did not study on the day before the exam — pure rest, light food, familiar movie. Brain consolidates better with rest than last-minute cramming.",
-      "Rank 7 with 28 days of focused prep, not 6 months of scattered studying. Focus > duration.",
+      "After first failure, did gap analysis: subject-wise score breakdown. Found 40% of errors were image questions. Fixed that first.",
+      "Spaced repetition: Anki for image flashcards — 50 cards/day, 15-min daily review.",
+      "Clinical vignettes: 'scan for buzzwords' technique — identify key clinical clue within 10 seconds of reading the stem.",
+      "Mental health treated seriously: daily 30-min walk, weekly call with a friend, journaling every night.",
+      "Did not study the day before exam — pure rest, light food. Brain consolidates better with rest than cramming.",
+      "AIR 12 with 28 days focused prep, not 6 months scattered. Focus > duration.",
     ],
     subjectTips: [
-      { subject: "Anatomy", tip: "Clinical anatomy (surface markings, nerve injuries, surgical incisions) is tested, not embryology depth. Focus on clinically relevant anatomy." },
-      { subject: "Physiology", tip: "Cardiac physiology (JVP, Frank-Starling, Wiggers diagram) and renal physiology (GFR, tubular functions) are highest yield." },
-      { subject: "Medicine", tip: "For autoimmune diseases, make a master table: disease → autoantibody → complement levels → treatment. One table = 10+ marks." },
-      { subject: "ENT/Ophthalmology", tip: "These are often neglected but carry 15-20 marks. High-yield topics: SNHL vs CSNHL, CSOM types, trachoma staging, Fuchs." },
+      { subject: "Anatomy", tip: "Clinical anatomy (nerve injuries, surgical incisions, surface markings) is tested more than embryology depth." },
+      { subject: "Physiology", tip: "Cardiac physiology (Frank-Starling, Wiggers diagram) and renal physiology (GFR, tubular function) are highest yield." },
+      { subject: "Medicine", tip: "Autoimmune disease master table: disease → autoantibody → complement → treatment. One table = 10+ marks." },
+      { subject: "ENT/Ophth", tip: "Often neglected but carry 15-20 marks. SNHL vs CSNHL, CSOM types, trachoma staging, Fuchs endothelial dystrophy." },
     ],
-    routine: "6:30 AM wake → 20 min Anki (image cards) → 7:00 AM study block → 12:30 PM lunch + 30-min walk → 2:00 PM MCQs + weak area → 5:00 PM break + tea → 5:30 PM India content → 7:00 PM evening block → 9:00 PM journaling + review day's errors → 10:00 PM sleep",
-    resources: ["Marrow", "Anki (image flashcards)", "AIIMS PYQ 2015-2023", "PrepLadder for Surgery", "DNB Trapeze for PSM", "Zainab Vora's YouTube channel"],
+    routine: "6:30 AM wake → 20 min Anki image cards → 7:00 AM study block → 12:30 PM lunch + 30-min walk → 2:00 PM MCQs + weak area → 5:00 PM break → 5:30 PM India content → 7:00 PM evening block → 9:00 PM review errors + journal → 10:00 PM sleep",
+    resources: ["Marrow", "Anki (image flashcards)", "NEET PG PYQ 2015–2023", "PrepLadder for Surgery", "DAMS for PSM", "YouTube channels for clinical cases"],
   },
 ];
 
 const QUICK_TIPS = [
-  { icon: Brain, color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20", title: "The 80/20 Rule", tip: "80% of INI-CET marks come from 20% of topics. Master Cardiology, Respiratory, Nephrology, Pathology basics, Obstetrics emergencies, and India-specific content — you cover the exam spine." },
-  { icon: Clock, color: "text-orange-400", bg: "bg-orange-500/10", border: "border-orange-500/20", title: "Time Per Question", tip: "INI-CET gives 54 seconds per question. Practice this pacing from Day 15 onwards. If a question takes >90 seconds, mark and move — come back at the end." },
-  { icon: Target, color: "text-red-400", bg: "bg-red-500/10", border: "border-red-500/20", title: "Negative Marking Strategy", tip: "Negative marking is -0.33 per wrong answer. A question with 3 wrong choices eliminated = attempt it (EV positive). 2 wrong choices eliminated = your call. 1 or 0 = skip." },
+  { icon: Brain, color: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20", title: "The 80/20 Rule", tip: "80% of NEET PG marks come from 20% of topics. Master Cardiology, Respiratory, Nephrology, Pathology basics, Obstetrics emergencies, and India-specific content — you cover the exam spine." },
+  { icon: Clock, color: "text-orange-400", bg: "bg-orange-500/10", border: "border-orange-500/20", title: "Time Per Question", tip: "NEET PG gives 63 seconds per question (210 min / 200 Qs). Practice this pacing from Day 15 onwards. If a question takes >90 seconds, mark and move — come back at the end." },
+  { icon: Target, color: "text-red-400", bg: "bg-red-500/10", border: "border-red-500/20", title: "Negative Marking Strategy", tip: "Negative marking is -0.25 per wrong answer. A question with 3 wrong choices eliminated = attempt it (EV positive). 2 wrong choices eliminated = your call. 1 or 0 = skip." },
   { icon: TrendingUp, color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20", title: "Mock Score Trajectory", tip: "Don't panic if Day 1 mock is 50%. Toppers typically see: Week 1 avg 55% → Week 2 avg 65% → Week 3 avg 72% → Week 4 avg 78%+. The curve is exponential, not linear." },
   { icon: Lightbulb, color: "text-yellow-400", bg: "bg-yellow-500/10", border: "border-yellow-500/20", title: "The Mistake Logbook", tip: "Every wrong MCQ answered should be written down with the correct answer and 1-line reason. Review Sunday mornings. This single habit is responsible for more rank improvements than any other strategy." },
   { icon: Heart, color: "text-pink-400", bg: "bg-pink-500/10", border: "border-pink-500/20", title: "Burnout Prevention", tip: "One rest day per week is not optional — it's mandatory. Sleep 7 hours minimum. Your brain consolidates memory during sleep, not during cramming. Sleeping is studying." },
 ];
 
 const SUBJECT_WEIGHTAGE = [
-  { subject: "Medicine", weight: 22, color: "#ff4d4d" },
-  { subject: "Surgery", weight: 16, color: "#c77dff" },
-  { subject: "OBG", weight: 12, color: "#f72585" },
-  { subject: "Paediatrics", weight: 10, color: "#4cc9f0" },
-  { subject: "PSM", weight: 10, color: "#8338ec" },
-  { subject: "Pathology", weight: 8, color: "#fb8500" },
-  { subject: "Pharmacology", weight: 7, color: "#06d6a0" },
-  { subject: "Microbiology", weight: 5, color: "#ffb703" },
-  { subject: "Others", weight: 10, color: "#6c757d" },
+  { subject: "Medicine",     weight: 20, color: "#ff4d4d" },
+  { subject: "Surgery",      weight: 14, color: "#c77dff" },
+  { subject: "OBG",          weight: 11, color: "#f72585" },
+  { subject: "Paediatrics",  weight: 9,  color: "#4cc9f0" },
+  { subject: "PSM",          weight: 9,  color: "#8338ec" },
+  { subject: "Pathology",    weight: 8,  color: "#fb8500" },
+  { subject: "Pharmacology", weight: 7,  color: "#06d6a0" },
+  { subject: "Microbiology", weight: 5,  color: "#ffb703" },
+  { subject: "Anatomy",      weight: 5,  color: "#ff9f1c" },
+  { subject: "Physiology",   weight: 5,  color: "#2ec4b6" },
+  { subject: "Others",       weight: 7,  color: "#6c757d" },
 ];
 
 export function TopperInsights() {
@@ -127,13 +129,13 @@ export function TopperInsights() {
         </div>
         <div>
           <h2 className="font-mono font-bold text-foreground uppercase tracking-wider text-sm">Topper Insights</h2>
-          <p className="text-xs text-muted-foreground font-mono">Strategies from INI-CET AIR toppers</p>
+          <p className="text-xs text-muted-foreground font-mono">Strategies from NEET PG AIR toppers</p>
         </div>
       </div>
 
       {/* Subject Weightage Bar */}
       <div className="bg-card border border-border rounded-xl p-5 space-y-3">
-        <p className="text-xs font-mono uppercase text-muted-foreground">INI-CET Subject Weightage (approx.)</p>
+        <p className="text-xs font-mono uppercase text-muted-foreground">NEET PG Subject Weightage (approx.)</p>
         <div className="flex h-4 rounded-full overflow-hidden w-full">
           {SUBJECT_WEIGHTAGE.map(s => (
             <div

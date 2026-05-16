@@ -23,7 +23,7 @@ function exportNotes(notes: Record<number, string>) {
   const url  = URL.createObjectURL(blob);
   const a    = document.createElement('a');
   a.href     = url;
-  a.download = 'inicet-notes.txt';
+  a.download = 'neetpg-notes.txt';
   a.click();
   URL.revokeObjectURL(url);
 }

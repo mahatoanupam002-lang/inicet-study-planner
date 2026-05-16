@@ -20,7 +20,7 @@ interface OneLiner {
 type CategoryFilter = "all" | "DOC" | "mechanism" | "side-effect" | "value" | "classification";
 type KnownFilter = "all" | "unknown" | "known";
 
-const KNOWN_KEY = "inicet_known_oneliners";
+const KNOWN_KEY = "neetpg_known_oneliners";
 
 function loadKnown(): Set<string> {
   const arr = safeLoad<string[]>(KNOWN_KEY, []);

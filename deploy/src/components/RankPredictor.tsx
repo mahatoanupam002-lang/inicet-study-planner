@@ -6,31 +6,30 @@ interface MockEntry {
   total: number;
 }
 
-// INI-CET rank estimation based on historical data patterns.
-// Roughly: score% → estimated AIR (from cutoff analysis 2020-2024).
-// These brackets are derived from publicly available INI-CET result trends.
+// NEET PG rank estimation based on historical data patterns.
+// Roughly: score% → estimated AIR (from cutoff analysis 2020-2025).
+// These brackets are derived from publicly available NEET PG result trends.
 function estimateRank(pct: number): { airMin: number; airMax: number; category: string; color: string; advice: string } {
-  if (pct >= 90)  return { airMin: 1,    airMax: 50,   category: "Top 50 — AIIMS Delhi / PGIMER likely", color: "#22c55e", advice: "Outstanding. Maintain this with daily practice. Don't change anything now." };
-  if (pct >= 85)  return { airMin: 50,   airMax: 200,  category: "Top 200 — Premier institutes", color: "#4ade80", advice: "Excellent. Tighten weak subjects to push into top 50. Focus on image questions." };
-  if (pct >= 80)  return { airMin: 200,  airMax: 500,  category: "Top 500 — AIIMS/JIPMER states", color: "#86efac", advice: "Very good. One more strong revision week can push you into top 200." };
-  if (pct >= 75)  return { airMin: 500,  airMax: 1000, category: "Top 1000 — Good central institutes", color: "#a3e635", advice: "Solid foundation. Prioritise India-specific content and image MCQs — these separate ranks at this level." };
-  if (pct >= 70)  return { airMin: 1000, airMax: 1800, category: "Top 2000 — AIIMS branches / DNB seats", color: "#facc15", advice: "Good start. Identify your bottom 2 subjects and do emergency targeted revision on those." };
-  if (pct >= 65)  return { airMin: 1800, airMax: 3000, category: "DNB / State PG range", color: "#fb923c", advice: "Needs improvement. Pharmacology DOC table and PSM one-liners can add 8-10 marks quickly." };
-  if (pct >= 55)  return { airMin: 3000, airMax: 5000, category: "Borderline — intensive revision needed", color: "#f87171", advice: "Focused sprint on high-yield topics. Don't attempt low-yield topics — concentrate firepower." };
-  return           { airMin: 5000, airMax: 10000, category: "Below competitive range — restructure prep", color: "#ef4444", advice: "Drop depth, go broad. Cover all subjects at basic level before any revision. Use Zainab's strategy from scratch." };
+  if (pct >= 90)  return { airMin: 1,     airMax: 500,   category: "Top 500 — Government MDH/MS/MD seats", color: "#22c55e", advice: "Outstanding. Secure top government specialty. Maintain with mock analysis." };
+  if (pct >= 85)  return { airMin: 500,   airMax: 2000,  category: "Top 2000 — Good government PG seats", color: "#4ade80", advice: "Excellent. Focus on weakest 2 subjects to push into top 500." };
+  if (pct >= 80)  return { airMin: 2000,  airMax: 5000,  category: "Top 5000 — Decent government PG seats", color: "#86efac", advice: "Very good. Targeted revision on India-specific content and image MCQs." };
+  if (pct >= 75)  return { airMin: 5000,  airMax: 10000, category: "Top 10,000 — Government DNB / private seats", color: "#a3e635", advice: "Solid. India-specific programmes and PSM stats are rank differentiators at this level." };
+  if (pct >= 70)  return { airMin: 10000, airMax: 20000, category: "Private PG / DNB range", color: "#facc15", advice: "Improve weakest 2 subjects. Pharmacology DOC table and PSM one-liners add marks fast." };
+  if (pct >= 60)  return { airMin: 20000, airMax: 40000, category: "Borderline — intensive revision needed", color: "#fb923c", advice: "Focus sprint on high-yield topics. Cover basics of all subjects before deep dives." };
+  return           { airMin: 40000, airMax: 100000, category: "Below competitive range — restructure prep", color: "#ef4444", advice: "Drop depth, go broad. Cover all subjects at basic level first. Use adaptive plan." };
 }
 
 function negativeMarkingScore(raw: number, wrong: number): number {
-  return raw - wrong * 0.33;
+  return raw - wrong * 0.25;
 }
 
 const PERCENTILE_BENCHMARKS = [
-  { pct: "90%+", air: "~AIR 1–50",     label: "AIIMS Delhi zone" },
-  { pct: "85%",  air: "~AIR 50–200",   label: "Top premier" },
-  { pct: "80%",  air: "~AIR 200–500",  label: "AIIMS/JIPMER" },
-  { pct: "75%",  air: "~AIR 500–1000", label: "Central institutes" },
-  { pct: "70%",  air: "~AIR 1000–2000",label: "Good institutes" },
-  { pct: "65%",  air: "~AIR 2000–3000",label: "DNB/State PG" },
+  { pct: "90%+", air: "~AIR 1–500",     label: "Govt top specialty" },
+  { pct: "85%",  air: "~AIR 500–2000",  label: "Govt PG seats" },
+  { pct: "80%",  air: "~AIR 2000–5000", label: "Decent govt PG" },
+  { pct: "75%",  air: "~AIR 5000–10K",  label: "DNB / private" },
+  { pct: "70%",  air: "~AIR 10K–20K",   label: "Private PG" },
+  { pct: "60%",  air: "~AIR 20K–40K",   label: "Borderline" },
 ];
 
 export function RankPredictor() {
@@ -92,7 +91,7 @@ export function RankPredictor() {
           <div className="flex gap-2">
             <AlertCircle className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
             <p className="text-[11px] font-mono text-foreground/70 leading-relaxed">
-              Estimates are based on historical INI-CET cutoff trends (2020–2024). Actual rank depends on exam difficulty, number of candidates, and paper pattern. Use this as a directional guide, not a guarantee. Negative marking: -0.33 per wrong answer.
+              Estimates are based on historical NEET PG cutoff trends (2020–2025). Actual rank depends on exam difficulty, number of candidates, and paper pattern. Use this as a directional guide, not a guarantee. Negative marking: -0.25 per wrong answer.
             </p>
           </div>
         </div>

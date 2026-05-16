@@ -9,7 +9,7 @@ function getTodayKey() {
 }
 
 function loadChecked(): Set<number> {
-  const data = safeLoad<{ date: string; checked: number[] }>('inicet_daily_checklist', { date: '', checked: [] });
+  const data = safeLoad<{ date: string; checked: number[] }>('neetpg_daily_checklist', { date: '', checked: [] });
   if (data.date === getTodayKey()) return new Set(data.checked);
   return new Set(); // new day → fresh checklist
 }
@@ -21,7 +21,7 @@ export function DailyScheduleView() {
     setChecked(prev => {
       const next = new Set(prev);
       next.has(i) ? next.delete(i) : next.add(i);
-      safeSave('inicet_daily_checklist', { date: getTodayKey(), checked: [...next] });
+      safeSave('neetpg_daily_checklist', { date: getTodayKey(), checked: [...next] });
       return next;
     });
   };

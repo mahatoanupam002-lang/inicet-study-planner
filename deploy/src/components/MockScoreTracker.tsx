@@ -28,10 +28,10 @@ function CustomTooltip({ active, payload }: { active?: boolean; payload?: Toolti
 }
 
 export function MockScoreTracker() {
-  const [scores, setScores] = useState<MockScores>(() => safeLoad('inicet_mock_scores', {}));
+  const [scores, setScores] = useState<MockScores>(() => safeLoad('neetpg_mock_scores', {}));
   const [inputs, setInputs] = useState<Record<number, { raw: string; total: string }>>({});
 
-  useEffect(() => { safeSave('inicet_mock_scores', scores); }, [scores]);
+  useEffect(() => { safeSave('neetpg_mock_scores', scores); }, [scores]);
 
   // init inputs from saved scores
   useEffect(() => {

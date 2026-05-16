@@ -80,7 +80,7 @@ function ShareCard({ xp, rank, streak, completed, displayName }: {
     // Title
     ctx.fillStyle = "rgba(255,255,255,0.5)";
     ctx.font = "bold 11px 'Courier New', monospace";
-    ctx.fillText("INI-CET WAR PLAN // PROGRESS REPORT", 24, 32);
+    ctx.fillText("NEET PG WAR PLAN // PROGRESS REPORT", 24, 32);
 
     // Rank emoji + title
     ctx.font = "bold 40px serif";
@@ -120,7 +120,7 @@ function ShareCard({ xp, rank, streak, completed, displayName }: {
     // Bottom tag
     ctx.fillStyle = "rgba(255,255,255,0.25)";
     ctx.font = "10px 'Courier New', monospace";
-    ctx.fillText("May 16, 2026 • INI-CET", W - 180, H - 16);
+    ctx.fillText("Nov 16, 2026 • NEET PG", W - 180, H - 16);
   }, [xp, rank, streak, completed, displayName]);
 
   const handleShare = async () => {
@@ -131,14 +131,14 @@ function ShareCard({ xp, rank, streak, completed, displayName }: {
       try {
         if (navigator.share && navigator.canShare({ files: [new File([blob], "progress.png", { type: "image/png" })] })) {
           await navigator.share({
-            title: "My INI-CET Progress",
+            title: "My NEET PG Progress",
             files: [new File([blob], "progress.png", { type: "image/png" })],
           });
         } else {
           const url = URL.createObjectURL(blob);
           const a = document.createElement("a");
           a.href = url;
-          a.download = `inicet-progress-${new Date().toISOString().slice(0, 10)}.png`;
+          a.download = `neetpg-progress-${new Date().toISOString().slice(0, 10)}.png`;
           a.click();
           URL.revokeObjectURL(url);
         }

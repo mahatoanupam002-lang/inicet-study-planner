@@ -73,7 +73,7 @@ const SEEDED_QA: QAPost[] = [
   },
   {
     id: 3, isSeeded: true,
-    question: "INI-CET vs NEET PG — which is harder and how different is the preparation?",
+    question: "NEET PG 2026 — key changes from previous years and what to expect?",
     subject: "General",
     author: "FirstAttemptDoc",
     createdAt: "5 days ago",
@@ -81,7 +81,7 @@ const SEEDED_QA: QAPost[] = [
     answers: [
       {
         id: 5, isExpert: true,
-        text: "INI-CET is generally considered harder than NEET PG for 3 reasons: (1) More clinical vignette-style questions requiring reasoning, not recall; (2) Image-based questions are a higher proportion; (3) Pattern is less predictable — examiners from AIIMS/JIPMER set it. However, the syllabus is identical. The preparation approach differs: for NEET PG you can get away with more rote learning; for INI-CET you must understand WHY the answer is what it is. Priority: master clinical reasoning first, then polish with MCQ practice.",
+        text: "NEET PG 2026 key things to know: (1) Conducted by NBEMS, 200 MCQs in 210 minutes, -0.25 negative marking; (2) Clinical vignette-style questions are increasing — expect more 'next best step' than pure recall; (3) Syllabus mirrors MCI/NMC graduate curriculum — all 19 subjects; (4) ~2 lakh candidates compete for ~45,000 PG seats; (5) Cutoff for government MD seats typically around AIR <5000 (75%+ score). Preparation approach: Marrow + DAMS test series + PYQ analysis + strong India-specific content.",
         author: "PriyaMenon_AIR7",
         createdAt: "5 days ago",
         upvotes: 72,
@@ -90,7 +90,7 @@ const SEEDED_QA: QAPost[] = [
   },
   {
     id: 4, isSeeded: true,
-    question: "Is Marrow alone sufficient for INI-CET preparation? Do I need additional resources?",
+    question: "Is Marrow alone sufficient for NEET PG preparation? Do I need additional resources?",
     subject: "Strategy",
     author: "BudgetPrepper",
     createdAt: "4 days ago",
@@ -98,7 +98,7 @@ const SEEDED_QA: QAPost[] = [
     answers: [
       {
         id: 6, isExpert: true,
-        text: "Yes, Marrow alone is sufficient for INI-CET — Zainab Vora (AIR 1 2024) and most top rankers used Marrow as their primary (and often only) platform. What matters more than the platform is: (1) completing it fully, (2) doing all Reflex MCQs on the same day, (3) revising topics 3 times minimum. The one addition most toppers make is Park's for PSM (Park's textbook, not just Marrow videos for PSM — the level of detail matters).",
+        text: "Yes, Marrow alone is sufficient for NEET PG — most top rankers used it as their primary platform. What matters more than the platform is: (1) completing it fully, (2) doing all Reflex MCQs on the same day, (3) revising topics 3 times minimum. Additions most toppers make: Park's for PSM (textbook depth matters for PSM), DAMS grand test series for mock practice, and PYQ analysis books for pattern recognition.",
         author: "RahulAIR3",
         createdAt: "4 days ago",
         upvotes: 43,
@@ -114,7 +114,7 @@ const SEEDED_QA: QAPost[] = [
   },
   {
     id: 5, isSeeded: true,
-    question: "How to handle the India-specific questions in INI-CET? I always lose marks there.",
+    question: "How to handle the India-specific questions in NEET PG? I always lose marks there.",
     subject: "PSM",
     author: "IndiaSpecificGap",
     createdAt: "6 days ago",
@@ -148,7 +148,7 @@ const SEEDED_QA: QAPost[] = [
   },
   {
     id: 7, isSeeded: true,
-    question: "Which AIIMS has the highest cutoff for INI-CET and what are the seat counts?",
+    question: "Which government colleges have the highest cutoff in NEET PG and what are the seat counts?",
     subject: "General",
     author: "SeatHunter",
     createdAt: "7 days ago",
@@ -156,7 +156,7 @@ const SEEDED_QA: QAPost[] = [
     answers: [
       {
         id: 10, isExpert: true,
-        text: "AIIMS New Delhi has the highest cutoff (typically AIR 1-150 for MD seats). Total seats across all 19 AIIMS + JIPMER (2) + NIMHANS + PGIMER: approximately 1,200 seats. AIIMS Delhi has ~175 PG seats (MD/MS). To be safe for AIIMS Delhi: target AIR < 200 consistently in mocks (score ~85%+). For AIIMS branches: AIR < 500 (80%+). For PGIMER: similar to AIIMS branches but separate exam.",
+        text: "Top government PG seats are fiercely competitive. Rough cutoffs: MAMC/Maulana Azad Delhi: AIR <500; Government Medical College state seats: AIR <5000-10000 (state-dependent). Total NEET PG seats ~45,000+, of which ~22,000 are government. Key insight: for desirable government MD in Medicine/Surgery/OBG: target AIR <3000 (score ~80%+). For any government PG seat: AIR <15000 (score ~70%+). State quota vs all-India quota (50/50 split) affects your effective rank.",
         author: "RankAnalyst",
         createdAt: "7 days ago",
         upvotes: 31,
@@ -171,16 +171,16 @@ const SUBJECTS_FOR_QA = [
 ];
 
 function loadUserQA(): QAPost[] {
-  return safeLoad<QAPost[]>("inicet_community_qa", []);
+  return safeLoad<QAPost[]>("neetpg_community_qa", []);
 }
 function saveUserQA(posts: QAPost[]) {
-  safeSave("inicet_community_qa", posts);
+  safeSave("neetpg_community_qa", posts);
 }
 function loadVotes(): Record<string, boolean> {
-  return safeLoad<Record<string, boolean>>("inicet_qa_votes", {});
+  return safeLoad<Record<string, boolean>>("neetpg_qa_votes", {});
 }
 function saveVotes(v: Record<string, boolean>) {
-  safeSave("inicet_qa_votes", v);
+  safeSave("neetpg_qa_votes", v);
 }
 
 export function CommunityQA() {

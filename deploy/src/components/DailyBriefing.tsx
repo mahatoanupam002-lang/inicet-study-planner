@@ -228,7 +228,7 @@ export function DailyBriefing({
             <Calendar className={`w-5 h-5 shrink-0 ${urgencyColor}`} />
             <div>
               <p className={`text-xs font-mono font-bold ${urgencyColor}`}>
-                {daysLeft === 0 ? "Exam day!" : `${daysLeft} days until INI-CET`}
+                {daysLeft === 0 ? "Exam day!" : `${daysLeft} days until NEET PG`}
               </p>
               <p className="text-[10px] font-mono text-muted-foreground mt-0.5">
                 {daysLeft > 14

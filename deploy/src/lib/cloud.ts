@@ -67,17 +67,17 @@ export async function upsertCloudData(userId: string, patch: Partial<UserData>):
  * Cloud wins for everything except streaks where we take the larger value.
  */
 export function mergeCloudIntoLocal(cloud: UserData): void {
-  if (cloud.completed_days)  safeSave("inicet_completed_days", cloud.completed_days);
-  if (cloud.notes)           safeSave("inicet_notes", cloud.notes);
-  if (cloud.mcq_scores)      safeSave("inicet_mcq_scores", cloud.mcq_scores);
-  if (cloud.flagged)         safeSave("inicet_flagged", cloud.flagged);
-  if (cloud.sr_cards)        safeSave("inicet_sr_cards", cloud.sr_cards);
-  if (cloud.exam_date)       safeSave("inicet_exam_date", cloud.exam_date);
+  if (cloud.completed_days)  safeSave("neetpg_completed_days", cloud.completed_days);
+  if (cloud.notes)           safeSave("neetpg_notes", cloud.notes);
+  if (cloud.mcq_scores)      safeSave("neetpg_mcq_scores", cloud.mcq_scores);
+  if (cloud.flagged)         safeSave("neetpg_flagged", cloud.flagged);
+  if (cloud.sr_cards)        safeSave("neetpg_sr_cards", cloud.sr_cards);
+  if (cloud.exam_date)       safeSave("neetpg_exam_date", cloud.exam_date);
 
   // Streak: take the longer streak to avoid punishing users who switch devices
   if (cloud.streak) {
     const local = safeLoad<{ count: number; longest: number; lastDate: string }>(
-      "inicet_streak",
+      "neetpg_streak",
       { count: 0, longest: 0, lastDate: "" }
     );
     const merged = {
@@ -85,7 +85,7 @@ export function mergeCloudIntoLocal(cloud: UserData): void {
       longest:  Math.max(local.longest, cloud.streak.longest),
       lastDate: local.lastDate > cloud.streak.lastDate ? local.lastDate : cloud.streak.lastDate,
     };
-    safeSave("inicet_streak", merged);
+    safeSave("neetpg_streak", merged);
   }
 }
 

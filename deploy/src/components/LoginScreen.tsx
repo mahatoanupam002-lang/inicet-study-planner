@@ -79,7 +79,7 @@ export function LoginScreen() {
             <Target className="w-8 h-8 text-destructive-foreground" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold uppercase tracking-wider text-primary font-mono">INI-CET War Plan</h1>
+            <h1 className="text-2xl font-bold uppercase tracking-wider text-primary font-mono">NEET PG War Plan</h1>
             <p className="text-sm text-muted-foreground font-mono mt-1">Sign in to save your progress across devices</p>
           </div>
         </div>

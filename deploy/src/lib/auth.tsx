@@ -28,7 +28,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [isGuest, setIsGuest] = useState(() =>
-    localStorage.getItem("inicet_guest_mode") === "1"
+    localStorage.getItem("neetpg_guest_mode") === "1"
   );
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setSession(newSession);
       if (newSession) {
         setIsGuest(false);
-        localStorage.removeItem("inicet_guest_mode");
+        localStorage.removeItem("neetpg_guest_mode");
       }
     });
 
@@ -49,8 +49,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const storagePrefix = session?.user
-    ? `inicet_u_${session.user.id}_`
-    : "inicet_";
+    ? `neetpg_u_${session.user.id}_`
+    : "neetpg_";
 
   const signInWithEmail = async (email: string, password: string): Promise<string | null> => {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -79,11 +79,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = async () => {
     await supabase.auth.signOut();
     setIsGuest(false);
-    localStorage.removeItem("inicet_guest_mode");
+    localStorage.removeItem("neetpg_guest_mode");
   };
 
   const continueAsGuest = () => {
-    localStorage.setItem("inicet_guest_mode", "1");
+    localStorage.setItem("neetpg_guest_mode", "1");
     setIsGuest(true);
   };
 

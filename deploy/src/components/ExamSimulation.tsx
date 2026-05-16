@@ -217,7 +217,7 @@ export function ExamSimulation({ onComplete }: { onComplete?: () => void } = {})
   const exportResults = () => {
     if (!results) return;
     const lines: string[] = [];
-    lines.push("INI-CET Exam Simulation Results");
+    lines.push("NEET PG Exam Simulation Results");
     lines.push("================================");
     lines.push(`Date: ${new Date().toLocaleDateString()}`);
     lines.push(`Questions: ${results.total}`);
@@ -255,7 +255,7 @@ export function ExamSimulation({ onComplete }: { onComplete?: () => void } = {})
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `inicet-simulation-${Date.now()}.txt`;
+    a.download = `neetpg-simulation-${Date.now()}.txt`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -273,7 +273,7 @@ export function ExamSimulation({ onComplete }: { onComplete?: () => void } = {})
           </div>
           <div>
             <p className="text-sm font-mono font-bold text-foreground">Exam Simulation</p>
-            <p className="text-[10px] font-mono text-muted-foreground">Full INI-CET mock with negative marking</p>
+            <p className="text-[10px] font-mono text-muted-foreground">Full NEET PG mock with negative marking</p>
           </div>
         </div>
 

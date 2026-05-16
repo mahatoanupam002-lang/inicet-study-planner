@@ -3,16 +3,16 @@
  * All localStorage and Supabase column names derive from this enum.
  */
 export const enum StorageKey {
-  CompletedDays = "inicet_completed_days",
-  Notes         = "inicet_notes",
-  McqScores     = "inicet_mcq_scores",
-  Flagged       = "inicet_flagged",
-  SrCards       = "inicet_sr_cards",
-  Streak        = "inicet_streak",
-  ExamDate      = "inicet_exam_date",
-  PomodoroSessions = "inicet_pomodoro_sessions",
-  ChatHistory   = "inicet_chat_history",
-  AiKey         = "inicet_ai_key",
+  CompletedDays = "neetpg_completed_days",
+  Notes         = "neetpg_notes",
+  McqScores     = "neetpg_mcq_scores",
+  Flagged       = "neetpg_flagged",
+  SrCards       = "neetpg_sr_cards",
+  Streak        = "neetpg_streak",
+  ExamDate      = "neetpg_exam_date",
+  PomodoroSessions = "neetpg_pomodoro_sessions",
+  ChatHistory   = "neetpg_chat_history",
+  AiKey         = "neetpg_ai_key",
 }
 
 // ─── LocalStorage helpers ────────────────────────────────────────────────────

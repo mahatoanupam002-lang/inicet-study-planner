@@ -54,7 +54,7 @@ type CountOption = 25 | 50 | 100;
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const DRILL_SCORES_KEY = "inicet_drill_scores";
+const DRILL_SCORES_KEY = "neetpg_drill_scores";
 const OPTION_LABELS = ["A", "B", "C", "D"] as const;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -301,7 +301,7 @@ export function SubjectDrill({ onComplete }: { onComplete?: () => void } = {}) {
   const exportResults = () => {
     if (!results) return;
     const lines: string[] = [];
-    lines.push("INI-CET Subject Drill Results");
+    lines.push("NEET PG Subject Drill Results");
     lines.push("==============================");
     lines.push(`Date: ${new Date().toLocaleDateString()}`);
     lines.push(`Subject: ${subject}`);
@@ -330,7 +330,7 @@ export function SubjectDrill({ onComplete }: { onComplete?: () => void } = {}) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `inicet-drill-${subject.replace(/\s+/g, "-").toLowerCase()}-${Date.now()}.txt`;
+    a.download = `neetpg-drill-${subject.replace(/\s+/g, "-").toLowerCase()}-${Date.now()}.txt`;
     a.click();
     URL.revokeObjectURL(url);
   };

@@ -78,10 +78,10 @@ function aiToUnified(q: AIQuestion): UnifiedQuestion {
 }
 
 function loadAttempts(): Record<string, AttemptRecord> {
-  return safeLoad("inicet_pyq_attempts", {});
+  return safeLoad("neetpg_pyq_attempts", {});
 }
 function saveAttempts(a: Record<string, AttemptRecord>) {
-  safeSave("inicet_pyq_attempts", a);
+  safeSave("neetpg_pyq_attempts", a);
 }
 
 const TODAY = new Date().toISOString().slice(0, 10);

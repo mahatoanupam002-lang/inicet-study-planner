@@ -220,7 +220,7 @@ export function RapidRevision({ onComplete }: { onComplete?: () => void } = {}) 
   // Start session
   const startSession = useCallback(() => {
     const attempts = safeLoad<Record<string, AttemptRecord>>(
-      "inicet_pyq_attempts",
+      "neetpg_pyq_attempts",
       {}
     );
     const pool = buildPool(allLocal, aiQuestions, attempts);
@@ -332,7 +332,7 @@ export function RapidRevision({ onComplete }: { onComplete?: () => void } = {}) 
   // ─────────────────────────────────────────────────────────────────────────
   if (phase === "idle") {
     const attempts = safeLoad<Record<string, AttemptRecord>>(
-      "inicet_pyq_attempts",
+      "neetpg_pyq_attempts",
       {}
     );
     const wrongCount = Object.values(attempts).filter((a) => !a.correct).length;

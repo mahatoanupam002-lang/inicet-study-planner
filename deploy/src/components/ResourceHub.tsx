@@ -21,7 +21,7 @@ const RESOURCES: Record<Category, Resource[]> = {
       tag: "Medicine",
       tagColor: "#ff4d4d",
       rating: 5,
-      note: "Reference only — do NOT read cover to cover for INI-CET. Use for clinical vignette understanding after Marrow.",
+      note: "Reference only — do NOT read cover to cover for NEET PG. Use for clinical vignette understanding after Marrow.",
       priority: "recommended",
     },
     {
@@ -57,7 +57,7 @@ const RESOURCES: Record<Category, Resource[]> = {
       tag: "Surgery",
       tagColor: "#c77dff",
       rating: 4,
-      note: "Use for major surgical topics (hernia, thyroid, GI surgery). Marrow is sufficient for most INI-CET surgery questions.",
+      note: "Use for major surgical topics (hernia, thyroid, GI surgery). Marrow is sufficient for most NEET PG surgery questions.",
       priority: "recommended",
     },
     {
@@ -113,7 +113,7 @@ const RESOURCES: Record<Category, Resource[]> = {
       tag: "All Subjects",
       tagColor: "#4361ee",
       rating: 5,
-      note: "The #1 video platform for INI-CET. Used by Zainab Vora (AIR 1) and most top rankers. High-yield, exam-focused, Indian context.",
+      note: "The #1 video platform for NEET PG. Used by Zainab Vora (AIR 1) and most top rankers. High-yield, exam-focused, Indian context.",
       priority: "must",
     },
     {
@@ -187,7 +187,7 @@ const RESOURCES: Record<Category, Resource[]> = {
       tag: "All-in-One",
       tagColor: "#4361ee",
       rating: 5,
-      note: "Most recommended platform by INI-CET toppers. Includes video lectures, Reflex MCQs, flashcards, and grand tests. Paid but worth it.",
+      note: "Most recommended platform by NEET PG toppers. Includes video lectures, Reflex MCQs, flashcards, and grand tests. Paid but worth it.",
       priority: "must",
     },
     {
@@ -214,12 +214,12 @@ const RESOURCES: Record<Category, Resource[]> = {
       tag: "MCQ Practice",
       tagColor: "#06d6a0",
       rating: 4,
-      note: "Large question bank aligned with INI-CET pattern. Good for daily MCQ practice after completing topics.",
+      note: "Large question bank aligned with NEET PG pattern. Good for daily MCQ practice after completing topics.",
       priority: "recommended",
     },
     {
-      title: "INI-CET Official Website",
-      subtitle: "aiimsexams.ac.in",
+      title: "NEET PG Official Website",
+      subtitle: "natboard.edu.in",
       tag: "Official",
       tagColor: "#ff4d4d",
       rating: 5,
@@ -256,7 +256,7 @@ const RESOURCES: Record<Category, Resource[]> = {
       priority: "must",
     },
     {
-      title: "INICET India One-pager",
+      title: "NEET PG India One-pager",
       subtitle: "All India-specific stats on 2 pages",
       tag: "PSM / India",
       tagColor: "#8338ec",
@@ -351,7 +351,7 @@ export function ResourceHub() {
             <span className={`text-[10px] font-mono font-bold ${val.text}`}>{val.label}</span>
           </div>
         ))}
-        <span className="text-[10px] font-mono text-muted-foreground self-center ml-1">— priority level for INI-CET</span>
+        <span className="text-[10px] font-mono text-muted-foreground self-center ml-1">— priority level for NEET PG</span>
       </div>
 
       {/* Category tabs */}

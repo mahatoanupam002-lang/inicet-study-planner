@@ -2610,7 +2610,7 @@ export const QUESTIONS: Question[] = [
     options: ["27 per 1000 live births", "35 per 1000 live births", "42 per 1000 live births", "50 per 1000 live births"],
     answer: 1,
     explanation:
-      "IMR India (SRS 2020-21): 35 per 1000 live births. Best state: Kerala (6/1000). Worst: MP (41/1000). U5MR (NFHS-5): 41.9. NMR: 28.2. MMR (SRS 2018-20): 97 per 100,000 live births. These figures are heavily tested in INI-CET.",
+      "IMR India (SRS 2020-21): 35 per 1000 live births. Best state: Kerala (6/1000). Worst: MP (41/1000). U5MR (NFHS-5): 41.9. NMR: 28.2. MMR (SRS 2018-20): 97 per 100,000 live births. These figures are heavily tested in NEET PG.",
   },
   {
     id: 225,

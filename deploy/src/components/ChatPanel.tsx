@@ -172,7 +172,7 @@ export function ChatPanel({ studyContext, onFirstMessage }: Props) {
           </div>
           <div>
             <h2 className="font-mono font-bold text-foreground uppercase tracking-wider text-sm">AI Doubt Solver</h2>
-            <p className="text-xs text-muted-foreground font-mono">Powered by Claude · INI-CET focused</p>
+            <p className="text-xs text-muted-foreground font-mono">Powered by Claude · NEET PG focused</p>
           </div>
         </div>
         {messages.length > 0 && (
@@ -191,7 +191,7 @@ export function ChatPanel({ studyContext, onFirstMessage }: Props) {
           <div className="flex-1 flex flex-col items-center justify-center p-6 gap-6">
             <Bot className="w-10 h-10 text-violet-400/50" />
             <p className="text-sm text-muted-foreground font-mono text-center max-w-sm">
-              Ask anything about your INI-CET syllabus. Quick-start:
+              Ask anything about your NEET PG syllabus. Quick-start:
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-xl">
               {quickPrompts.map((p, i) => (

@@ -5,8 +5,8 @@ import { safeLoad, safeSave } from "@/lib/storage";
 export interface ReminderConfig { enabled: boolean; time: string; }
 
 const DEFAULT: ReminderConfig = { enabled: false, time: "07:00" };
-const CONFIG_KEY  = "inicet_reminder";
-const FIRED_KEY   = () => `inicet_reminder_fired_${new Date().toISOString().slice(0, 10)}`;
+const CONFIG_KEY  = "neetpg_reminder";
+const FIRED_KEY   = () => `neetpg_reminder_fired_${new Date().toISOString().slice(0, 10)}`;
 
 function msUntil(hhmm: string): number {
   const [h, m] = hhmm.split(":").map(Number);
@@ -61,7 +61,7 @@ export function StudyReminderBell({ studiedToday }: { studiedToday: boolean }) {
       timerRef.current = setTimeout(() => {
         safeSave(FIRED_KEY(), true);
         if (!studiedToday && Notification.permission === "granted") {
-          new Notification("INI-CET Study Reminder", {
+          new Notification("NEET PG Study Reminder", {
             body: "Time to study! Keep your streak alive.",
             icon: "/icon-192.png",
           });

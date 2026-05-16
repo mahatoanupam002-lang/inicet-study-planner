@@ -15,8 +15,8 @@ const STEPS: Step[] = [
     icon: Target,
     color: "text-red-400",
     bg: "bg-red-500/20",
-    title: "Welcome to INI-CET War Plan",
-    body: "This is your complete 28-day command centre to crack INI-CET. Everything you need — plan, practice, track, and learn — is in one place.",
+    title: "Welcome to NEET PG War Plan",
+    body: "This is your complete 28-day command centre to crack NEET PG. Everything you need — plan, practice, track, and learn — is in one place.",
     tip: "Built by toppers, for toppers. Start with Day 1 and follow the plan exactly.",
   },
   {
@@ -32,7 +32,7 @@ const STEPS: Step[] = [
     color: "text-emerald-400",
     bg: "bg-emerald-500/20",
     title: "Practice with PYQ Bank",
-    body: "The PYQ tab has 250+ INI-CET style questions across all subjects. Practice by subject, filter wrong-only answers, and track your accuracy. Aim for >75% before exam day.",
+    body: "The PYQ tab has 250+ NEET PG style questions across all subjects. Practice by subject, filter wrong-only answers, and track your accuracy. Aim for >75% before exam day.",
     tip: "Use the 'Wrong' filter daily — it's your most efficient practice mode after the first pass.",
   },
   {
@@ -40,7 +40,7 @@ const STEPS: Step[] = [
     color: "text-purple-400",
     bg: "bg-purple-500/20",
     title: "AI Tutor — Ask Anything",
-    body: "Stuck on a concept? The AI Tutor tab is powered by Claude and trained to explain INICET-level topics with mnemonics, clinical reasoning, and MCQ traps. Add your API key once and it works offline.",
+    body: "Stuck on a concept? The AI Tutor tab is powered by Claude and trained to explain NEET PG topics with mnemonics, clinical reasoning, and MCQ traps. Add your API key once and it works offline.",
     tip: "Try asking: 'Explain the difference between nephrotic and nephritic syndrome with mnemonics'",
   },
   {
@@ -48,15 +48,15 @@ const STEPS: Step[] = [
     color: "text-yellow-400",
     bg: "bg-yellow-500/20",
     title: "Learn From Toppers",
-    body: "The Toppers tab has detailed strategies from INI-CET AIR 1 Zainab Vora and other top rankers — their daily routines, subject-wise tips, resources used, and mental health advice.",
-    tip: "Zainab's mistake logbook strategy alone can improve your score by 8–12 marks.",
+    body: "The Toppers tab has detailed strategies from NEET PG AIR 1 toppers and other high rankers — their daily routines, subject-wise tips, resources used, and mental health advice.",
+    tip: "The mistake logbook strategy alone can improve your score by 8–12 marks.",
   },
   {
     icon: TrendingUp,
     color: "text-cyan-400",
     bg: "bg-cyan-500/20",
     title: "Track Your Rank",
-    body: "After every mock, enter your score in the Schedule tab's Rank Predictor. You'll see your estimated AIR range based on historical INI-CET cutoff trends — and personalised advice on what to fix.",
+    body: "After every mock, enter your score in the Schedule tab's Rank Predictor. You'll see your estimated AIR range based on historical NEET PG cutoff trends — and personalised advice on what to fix.",
     tip: "Aim for 75%+ by Day 20. That puts you in the top 1000 territory going into mocks.",
   },
 ];
