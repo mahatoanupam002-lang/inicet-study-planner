@@ -4,7 +4,8 @@ import {
   Target, Calendar, Clock, StickyNote, Flag, Bot, Flame, Download, Upload,
   BookOpen, Award, MessageSquare, ExternalLink, Sun, Moon, LogOut, LogIn,
   BarChart2, FlaskConical, FileText, Crosshair, Zap, Layers, Home, Trophy,
-  Users, GraduationCap, Brain,
+  Users, GraduationCap, Brain, TrendingUp,
+  Pill, Calculator, BookMarked, XCircle, LayoutGrid, ScrollText, Stethoscope, Sliders, Eye, CalendarCheck,
 } from "lucide-react";
 import { StudyReminderBanner, StudyReminderBell } from "@/components/StudyReminder";
 import { EXAM_DATE, SCHEDULE } from "@/data/schedule";
@@ -41,6 +42,18 @@ import { NEETPGPaperAnalysis } from "@/components/NEETPGPaperAnalysis";
 import { XPToastLayer, makeToastItem, type XPToastItem } from "@/components/XPToast";
 import { computeAdaptivePlan } from "@/lib/adaptive";
 import { LoginScreen } from "@/components/LoginScreen";
+import { DOCTable } from "@/components/DOCTable";
+import { PSMCalculator } from "@/components/PSMCalculator";
+import { MistakeLogbook } from "@/components/MistakeLogbook";
+import { FlashcardDeck } from "@/components/FlashcardDeck";
+import { ImageBank } from "@/components/ImageBank";
+import { DailyQuiz } from "@/components/DailyQuiz";
+import { WeakTopicHeatmap } from "@/components/WeakTopicHeatmap";
+import { SpecialtySeatTracker } from "@/components/SpecialtySeatTracker";
+import { CutoffHistory } from "@/components/CutoffHistory";
+import { GuidelinesFeed } from "@/components/GuidelinesFeed";
+import { CustomMockGenerator } from "@/components/CustomMockGenerator";
+import { RevisionScheduler } from "@/components/RevisionScheduler";
 import { useAuth } from "@/lib/auth";
 import { useCloudSync } from "@/lib/cloud";
 import { computeBaseXP, XP_VALUES, getRank } from "@/lib/xp";
@@ -53,7 +66,10 @@ type MainTab =
   | 'planner' | 'schedule' | 'notes' | 'revision' | 'ai' | 'pyq'
   | 'toppers' | 'resources' | 'community' | 'analytics' | 'simulation'
   | 'pdf' | 'drills' | 'rapid' | 'oneliners' | 'rewards'
-  | 'mnemonics' | 'analysis';
+  | 'mnemonics' | 'analysis'
+  | 'dailyquiz' | 'custommock' | 'imagequiz' | 'psmcalc'
+  | 'flashcards' | 'doctable' | 'revschedule' | 'mistakelogbook'
+  | 'weakheatmap' | 'cutoffhistory' | 'specialtyseats' | 'guidelines';
 
 type NavGroup = 'home' | 'practice' | 'learn' | 'insights' | 'rewards';
 
@@ -88,6 +104,10 @@ const NAV_GROUPS: {
       { id: 'oneliners',  label: 'One-liners', Icon: Layers      },
       { id: 'simulation', label: 'Simulate',   Icon: FlaskConical},
       { id: 'revision',   label: 'Revision',   Icon: Flag        },
+      { id: 'dailyquiz',  label: 'Daily Quiz', Icon: CalendarCheck},
+      { id: 'custommock', label: 'Custom Mock',Icon: Sliders     },
+      { id: 'psmcalc',    label: 'PSM Calc',   Icon: Calculator  },
+      { id: 'imagequiz',  label: 'Image Bank', Icon: Eye         },
     ],
   },
   {
@@ -95,11 +115,15 @@ const NAV_GROUPS: {
     label: 'Learn',
     Icon: GraduationCap,
     tabs: [
-      { id: 'notes',      label: 'Notes',      Icon: StickyNote },
-      { id: 'pdf',        label: 'PDF',        Icon: FileText   },
-      { id: 'ai',         label: 'AI Tutor',   Icon: Bot        },
-      { id: 'mnemonics',  label: 'Mnemonics',  Icon: Brain      },
-      { id: 'analysis',   label: 'Analysis',   Icon: BarChart2  },
+      { id: 'notes',        label: 'Notes',      Icon: StickyNote  },
+      { id: 'pdf',          label: 'PDF',        Icon: FileText    },
+      { id: 'ai',           label: 'AI Tutor',   Icon: Bot         },
+      { id: 'mnemonics',    label: 'Mnemonics',  Icon: Brain       },
+      { id: 'analysis',     label: 'Analysis',   Icon: BarChart2   },
+      { id: 'flashcards',   label: 'Flashcards', Icon: BookMarked  },
+      { id: 'doctable',     label: 'DOC Table',  Icon: Pill        },
+      { id: 'revschedule',  label: 'Rev Sched',  Icon: CalendarCheck},
+      { id: 'mistakelogbook', label: 'Logbook',  Icon: XCircle     },
     ],
   },
   {
@@ -107,10 +131,14 @@ const NAV_GROUPS: {
     label: 'Insights',
     Icon: BarChart2,
     tabs: [
-      { id: 'analytics',  label: 'Analytics',  Icon: BarChart2    },
-      { id: 'toppers',    label: 'Toppers',    Icon: Award        },
-      { id: 'resources',  label: 'Resources',  Icon: ExternalLink },
-      { id: 'community',  label: 'Community',  Icon: MessageSquare},
+      { id: 'analytics',      label: 'Analytics',  Icon: BarChart2    },
+      { id: 'toppers',        label: 'Toppers',    Icon: Award        },
+      { id: 'resources',      label: 'Resources',  Icon: ExternalLink },
+      { id: 'community',      label: 'Community',  Icon: MessageSquare},
+      { id: 'weakheatmap',    label: 'Weak Areas', Icon: LayoutGrid   },
+      { id: 'cutoffhistory',  label: 'Cutoffs',    Icon: TrendingUp   },
+      { id: 'specialtyseats', label: 'Specialties',Icon: Stethoscope  },
+      { id: 'guidelines',     label: 'Guidelines', Icon: ScrollText   },
     ],
   },
   {
@@ -680,6 +708,18 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
             onGoToDay={(day) => { setSelectedDayId(day); setActiveGroup('home'); setActiveTab('planner'); }}
           />
         </div>
+        <div hidden={activeGroup !== 'practice' || activeTab !== 'dailyquiz'}>
+          <DailyQuiz />
+        </div>
+        <div hidden={activeGroup !== 'practice' || activeTab !== 'custommock'}>
+          <CustomMockGenerator />
+        </div>
+        <div hidden={activeGroup !== 'practice' || activeTab !== 'psmcalc'}>
+          <PSMCalculator />
+        </div>
+        <div hidden={activeGroup !== 'practice' || activeTab !== 'imagequiz'}>
+          <ImageBank />
+        </div>
 
         {/* LEARN group */}
         <div hidden={activeGroup !== 'learn' || activeTab !== 'notes'}>
@@ -705,6 +745,18 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
         <div hidden={activeGroup !== 'learn' || activeTab !== 'analysis'}>
           <NEETPGPaperAnalysis />
         </div>
+        <div hidden={activeGroup !== 'learn' || activeTab !== 'flashcards'}>
+          <FlashcardDeck />
+        </div>
+        <div hidden={activeGroup !== 'learn' || activeTab !== 'doctable'}>
+          <DOCTable />
+        </div>
+        <div hidden={activeGroup !== 'learn' || activeTab !== 'revschedule'}>
+          <RevisionScheduler />
+        </div>
+        <div hidden={activeGroup !== 'learn' || activeTab !== 'mistakelogbook'}>
+          <MistakeLogbook />
+        </div>
 
         {/* INSIGHTS group */}
         <div hidden={activeGroup !== 'insights' || activeTab !== 'analytics'}>
@@ -721,6 +773,18 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
         </div>
         <div hidden={activeGroup !== 'insights' || activeTab !== 'community'}>
           <CommunityQA />
+        </div>
+        <div hidden={activeGroup !== 'insights' || activeTab !== 'weakheatmap'}>
+          <WeakTopicHeatmap onGoToSubject={(subject) => { setActiveGroup('practice'); setActiveTab('pyq'); }} />
+        </div>
+        <div hidden={activeGroup !== 'insights' || activeTab !== 'cutoffhistory'}>
+          <CutoffHistory />
+        </div>
+        <div hidden={activeGroup !== 'insights' || activeTab !== 'specialtyseats'}>
+          <SpecialtySeatTracker />
+        </div>
+        <div hidden={activeGroup !== 'insights' || activeTab !== 'guidelines'}>
+          <GuidelinesFeed />
         </div>
 
         {/* REWARDS group */}
