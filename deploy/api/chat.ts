@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import Anthropic from "@anthropic-ai/sdk";
 
-const SYSTEM_PROMPT = `You are an expert INI-CET / USMLE-style medical exam tutor helping an Indian postgraduate medical aspirant preparing for INI-CET (All India Institute of Medical Sciences PG entrance exam, May 2026).
+const SYSTEM_PROMPT = `You are an expert NEET PG medical exam tutor helping an Indian postgraduate medical aspirant preparing for NEET PG (National Board of Examinations, Nov 2026).
 
 Your role:
 - Give concise, high-yield exam-focused answers

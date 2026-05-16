@@ -12,9 +12,9 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["favicon.svg", "icon-192.png", "icon-512.png"],
       manifest: {
-        name: "INI-CET War Plan",
-        short_name: "INI-CET",
-        description: "28-Day INI-CET / NEET PG Study Planner",
+        name: "NEET PG War Plan",
+        short_name: "NEET PG",
+        description: "28-Day NEET PG Study Planner",
         theme_color: "#080810",
         background_color: "#080810",
         display: "standalone",
