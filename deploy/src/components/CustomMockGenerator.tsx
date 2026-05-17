@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { safeLoad, safeSave } from "@/lib/storage";
-import { QUESTIONS_BY_SUBJECT, QUESTION_SUBJECTS } from "@/data/questions";
+import { QUESTIONS, QUESTIONS_BY_SUBJECT, QUESTION_SUBJECTS } from "@/data/questions";
 import { Sliders, Clock, Flag, CheckCircle, XCircle, Download, RotateCcw } from "lucide-react";
 
 interface MockResult {
