@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import type { User } from "@supabase/supabase-js";
 import {
-  Target, Calendar, Clock, StickyNote, Flag, Bot, Flame, Download, Upload,
+  Target, Calendar, Clock, StickyNote, Flag, Flame, Download, Upload,
   BookOpen, Award, MessageSquare, ExternalLink, Sun, Moon, LogOut, LogIn,
   BarChart2, FlaskConical, FileText, Crosshair, Zap, Layers, Home, Trophy,
   Users, GraduationCap, Brain, TrendingUp,
@@ -18,7 +18,6 @@ import { DailyScheduleView } from "@/components/DailyScheduleView";
 import { NotesView } from "@/components/NotesView";
 import { RevisionList, FlaggedTopic } from "@/components/RevisionList";
 import { MockScoreTracker } from "@/components/MockScoreTracker";
-import { ChatPanel } from "@/components/ChatPanel";
 import { PYQBank } from "@/components/PYQBank";
 import { TopperInsights } from "@/components/TopperInsights";
 import { RankPredictor } from "@/components/RankPredictor";
@@ -47,7 +46,8 @@ import { PSMCalculator } from "@/components/PSMCalculator";
 import { MistakeLogbook } from "@/components/MistakeLogbook";
 import { FlashcardDeck } from "@/components/FlashcardDeck";
 import { ImageBank } from "@/components/ImageBank";
-import { AIPredictedQuiz } from "@/components/AIPredictedQuiz";
+import { DailyQuiz } from "@/components/DailyQuiz";
+import { HighYieldReference } from "@/components/HighYieldReference";
 import { WeakTopicHeatmap } from "@/components/WeakTopicHeatmap";
 import { SpecialtySeatTracker } from "@/components/SpecialtySeatTracker";
 import { CutoffHistory } from "@/components/CutoffHistory";
@@ -117,7 +117,7 @@ const NAV_GROUPS: {
     tabs: [
       { id: 'notes',        label: 'Notes',      Icon: StickyNote  },
       { id: 'pdf',          label: 'PDF',        Icon: FileText    },
-      { id: 'ai',           label: 'AI Tutor',   Icon: Bot         },
+      { id: 'ai',           label: 'HY Ref',     Icon: BookOpen    },
       { id: 'mnemonics',    label: 'Mnemonics',  Icon: Brain       },
       { id: 'analysis',     label: 'Analysis',   Icon: BarChart2   },
       { id: 'flashcards',   label: 'Flashcards', Icon: BookMarked  },
@@ -709,7 +709,7 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
           />
         </div>
         <div hidden={activeGroup !== 'practice' || activeTab !== 'dailyquiz'}>
-          <AIPredictedQuiz />
+          <DailyQuiz />
         </div>
         <div hidden={activeGroup !== 'practice' || activeTab !== 'custommock'}>
           <CustomMockGenerator />
@@ -737,7 +737,7 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
           <PDFLearningExtractor />
         </div>
         <div hidden={activeGroup !== 'learn' || activeTab !== 'ai'}>
-          <ChatPanel studyContext={studyContext} onFirstMessage={handleAIChat} />
+          <HighYieldReference />
         </div>
         <div hidden={activeGroup !== 'learn' || activeTab !== 'mnemonics'}>
           <MnemonicsBank />
