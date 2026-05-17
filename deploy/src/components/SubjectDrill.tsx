@@ -11,7 +11,7 @@ import {
   BookOpen,
   Zap,
 } from "lucide-react";
-import { QUESTIONS, QUESTION_SUBJECTS, Question } from "@/data/questions";
+import { QUESTIONS_BY_SUBJECT, QUESTION_SUBJECTS, Question } from "@/data/questions";
 import { safeLoad, safeSave } from "@/lib/storage";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -190,9 +190,7 @@ export function SubjectDrill({ onComplete }: { onComplete?: () => void } = {}) {
 
   // Combined pool for subject
   const subjectPool = useMemo<UnifiedQuestion[]>(() => {
-    const local = QUESTIONS.filter((q) => q.subject === subject).map(
-      localToUnified
-    );
+    const local = (QUESTIONS_BY_SUBJECT.get(subject) ?? []).map(localToUnified);
     const ai = aiQuestions.filter((q) => q.subject === subject);
     return [...local, ...ai];
   }, [subject, aiQuestions]);

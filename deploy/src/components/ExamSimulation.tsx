@@ -13,7 +13,7 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
-import { QUESTIONS, QUESTION_SUBJECTS, Question } from "@/data/questions";
+import { QUESTIONS, QUESTIONS_BY_SUBJECT, QUESTION_SUBJECTS, Question } from "@/data/questions";
 
 // ─── Rank estimation (same brackets as RankPredictor) ────────────────────────
 function estimateRank(pct: number): {
@@ -118,7 +118,7 @@ export function ExamSimulation({ onComplete }: { onComplete?: () => void } = {})
     const pool =
       subjectFilter === "All subjects"
         ? QUESTIONS
-        : QUESTIONS.filter(q => q.subject === subjectFilter);
+        : (QUESTIONS_BY_SUBJECT.get(subjectFilter) ?? []);
     const selected = shuffle(pool).slice(0, numQuestions);
     const total = selected.length;
     setExamQuestions(selected);

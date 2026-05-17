@@ -5657,3 +5657,11 @@ export const QUESTIONS: Question[] = [
   },
 ];
 
+// Pre-built subject index for O(1) lookups — use this instead of QUESTIONS.filter()
+export const QUESTIONS_BY_SUBJECT: ReadonlyMap<string, Question[]> = new Map(
+  QUESTION_SUBJECTS.map(subj => [
+    subj,
+    QUESTIONS.filter(q => q.subject === subj),
+  ])
+);
+

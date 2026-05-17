@@ -8,7 +8,7 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
-import { QUESTIONS, QUESTION_SUBJECTS, Question } from "@/data/questions";
+import { QUESTIONS_BY_SUBJECT, QUESTION_SUBJECTS, Question } from "@/data/questions";
 import { safeLoad } from "@/lib/storage";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -99,10 +99,10 @@ function getWeakSubjects(
     subjStats[subj] = { correct: 0, total: 0 };
   }
 
-  // Map local question UIDs to subjects
+  // Map local question UIDs to subjects using the pre-built index
   const localSubjMap: Record<string, string> = {};
-  for (const q of QUESTIONS) {
-    localSubjMap[`local-${q.id}`] = q.subject;
+  for (const [subj, qs] of QUESTIONS_BY_SUBJECT) {
+    for (const q of qs) localSubjMap[`local-${q.id}`] = subj;
   }
 
   for (const [uid, record] of Object.entries(attempts)) {
@@ -209,7 +209,10 @@ export function RapidRevision({ onComplete }: { onComplete?: () => void } = {}) 
       });
   }, []);
 
-  const allLocal = useMemo(() => QUESTIONS.map(localToUnified), []);
+  const allLocal = useMemo(
+    () => Array.from(QUESTIONS_BY_SUBJECT.values()).flat().map(localToUnified),
+    []
+  );
 
   // Timer ref pattern to avoid stale closures
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
