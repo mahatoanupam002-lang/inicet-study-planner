@@ -47,7 +47,7 @@ import { PSMCalculator } from "@/components/PSMCalculator";
 import { MistakeLogbook } from "@/components/MistakeLogbook";
 import { FlashcardDeck } from "@/components/FlashcardDeck";
 import { ImageBank } from "@/components/ImageBank";
-import { DailyQuiz } from "@/components/DailyQuiz";
+import { AIPredictedQuiz } from "@/components/AIPredictedQuiz";
 import { WeakTopicHeatmap } from "@/components/WeakTopicHeatmap";
 import { SpecialtySeatTracker } from "@/components/SpecialtySeatTracker";
 import { CutoffHistory } from "@/components/CutoffHistory";
@@ -709,7 +709,7 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
           />
         </div>
         <div hidden={activeGroup !== 'practice' || activeTab !== 'dailyquiz'}>
-          <DailyQuiz />
+          <AIPredictedQuiz />
         </div>
         <div hidden={activeGroup !== 'practice' || activeTab !== 'custommock'}>
           <CustomMockGenerator />
