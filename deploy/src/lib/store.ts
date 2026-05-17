@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { safeLoad } from "@/lib/storage";
+import { EXAM_DATE } from "@/data/schedule";
 import type { SRCard } from "@/lib/sr";
 import type { FlaggedTopic } from "@/components/RevisionList";
 
@@ -58,7 +59,7 @@ function buildStore(prefix: string) {
         flagged:         safeLoad<FlaggedTopic[]>(`${prefix}flagged`, []),
         srCards:         safeLoad<Record<number, SRCard>>(`${prefix}sr_cards`, {}),
         streak:          safeLoad<StreakData>(`${prefix}streak`, { count: 0, longest: 0, lastDate: "" }),
-        examDateIso:     safeLoad<string>(`${prefix}exam_date`, "2026-05-16T00:00:00.000Z"),
+        examDateIso:     safeLoad<string>(`${prefix}exam_date`, EXAM_DATE.toISOString()),
 
         setCompletedDays: (days) => set({ completedDays: days }),
 
