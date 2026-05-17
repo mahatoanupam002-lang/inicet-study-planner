@@ -4305,5 +4305,1355 @@ export const QUESTIONS: Question[] = [
     explanation:
       "Guthrie test (bacterial inhibition assay using Bacillus subtilis) was the original neonatal screening test for PKU on dried blood spot. Now replaced by tandem mass spectrometry (MS/MS) for newborn screening. Ferric chloride test on urine turns green in PKU.",
   },
+  {
+    id: 403,
+    subject: "Medicine",
+    stem: "A 45-year-old male presents with haemoptysis, haematuria, and rapidly progressive glomerulonephritis. Chest X-ray shows bilateral pulmonary infiltrates. Anti-GBM antibody is positive. What is the diagnosis?",
+    options: ["Wegener's granulomatosis", "Goodpasture syndrome", "SLE nephritis", "Microscopic polyangiitis"],
+    answer: 1,
+    explanation:
+      "Goodpasture syndrome = anti-GBM (anti-glomerular basement membrane) antibodies → pulmonary haemorrhage + rapidly progressive GN (linear IgG deposits on immunofluorescence). Treatment: plasmapheresis + cyclophosphamide + steroids. c-ANCA = Wegener's; p-ANCA = microscopic polyangiitis.",
+  },
+  {
+    id: 404,
+    subject: "Medicine",
+    stem: "The most common cause of community-acquired pneumonia (CAP) in adults requiring hospitalisation is:",
+    options: ["Klebsiella pneumoniae", "Mycoplasma pneumoniae", "Streptococcus pneumoniae", "Legionella pneumophila"],
+    answer: 2,
+    explanation:
+      "Streptococcus pneumoniae is the most common cause of CAP in all age groups and severity categories. Presents with lobar consolidation, rusty sputum, pleuritic chest pain. Klebsiella causes CAP in alcoholics (upper lobe, currant jelly sputum). Mycoplasma = atypical pneumonia (younger, walking pneumonia).",
+  },
+  {
+    id: 405,
+    subject: "Medicine",
+    stem: "Which ECG finding is characteristic of hyperkalaemia?",
+    options: ["Prolonged QT interval", "ST depression with U waves", "Peaked (tall, tented) T waves", "Delta waves"],
+    answer: 2,
+    explanation:
+      "Hyperkalaemia ECG progression: peaked T waves → widened QRS → loss of P wave → sine wave pattern → VF. Hypokalaemia: ST depression + prominent U waves + prolonged QU. Delta waves = Wolff-Parkinson-White (WPW) syndrome. Prolonged QT = hypocalcaemia/drugs.",
+  },
+  {
+    id: 406,
+    subject: "Medicine",
+    stem: "A patient with diabetes presents with BP 155/90 mmHg and proteinuria. The drug of choice to prevent nephropathy progression is:",
+    options: ["Amlodipine", "Metoprolol", "ACE inhibitor (e.g., ramipril)", "Thiazide diuretic"],
+    answer: 2,
+    explanation:
+      "ACE inhibitors (or ARBs) are first-line for diabetic nephropathy — they reduce intraglomerular pressure by dilating the efferent arteriole, independently of their antihypertensive effect. They slow progression of proteinuria and CKD in both type 1 and type 2 diabetes. Avoid combining ACE inhibitor + ARB (dual blockade harmful).",
+  },
+  {
+    id: 407,
+    subject: "Medicine",
+    stem: "The classic triad of Wernicke's encephalopathy is:",
+    options: ["Confusion + ataxia + ophthalmoplegia", "Tremor + rigidity + bradykinesia", "Headache + vomiting + papilloedema", "Fever + neck stiffness + photophobia"],
+    answer: 0,
+    explanation:
+      "Wernicke's encephalopathy (thiamine/B1 deficiency) = confusion + ataxia + ophthalmoplegia (nystagmus, lateral rectus palsy). Seen in alcoholics, hyperemesis gravidarum. Treat immediately with IV thiamine (before glucose). Korsakoff psychosis = anterograde amnesia + confabulation (irreversible if untreated).",
+  },
+  {
+    id: 408,
+    subject: "Medicine",
+    stem: "In a patient with suspected pulmonary embolism, the single most useful initial investigation is:",
+    options: ["D-dimer", "CT pulmonary angiography (CTPA)", "V/Q scan", "Echocardiography"],
+    answer: 1,
+    explanation:
+      "CTPA is the investigation of choice for suspected PE — it directly visualises thrombus in pulmonary arteries and is widely available. D-dimer is useful only to rule OUT PE (when pre-test probability is low). V/Q scan is used when contrast is contraindicated. Echo shows right heart strain but is not diagnostic.",
+  },
+  {
+    id: 409,
+    subject: "Medicine",
+    stem: "Which finding best distinguishes rheumatoid arthritis from osteoarthritis on hand examination?",
+    options: ["Heberden's nodes at DIP joints", "Bouchard's nodes at PIP joints", "Swan-neck and boutonniere deformities", "Squaring of the first CMC joint"],
+    answer: 2,
+    explanation:
+      "Swan-neck (PIP hyperextension + DIP flexion) and boutonniere (PIP flexion + DIP hyperextension) deformities are characteristic of rheumatoid arthritis. Heberden's nodes (DIP) = OA. Bouchard's nodes (PIP) can occur in OA. Squaring of first CMC = OA of thumb base.",
+  },
+  {
+    id: 410,
+    subject: "Medicine",
+    stem: "A 30-year-old female presents with episodes of palpitations, sweating, headache, and hypertension. 24-hour urine shows elevated catecholamines and metanephrines. Diagnosis:",
+    options: ["Primary hyperaldosteronism", "Phaeochromocytoma", "Carcinoid syndrome", "Hyperthyroidism"],
+    answer: 1,
+    explanation:
+      "Phaeochromocytoma = catecholamine-secreting tumour (90% adrenal medulla, 10% extra-adrenal paraganglioma). Classic triad: paroxysmal hypertension + headache + sweating. Screen with 24-hr urine metanephrines/catecholamines or plasma metanephrines. Locate with MIBG scan or MRI. Rule of 10s: 10% bilateral, 10% malignant, 10% extra-adrenal.",
+  },
+  {
+    id: 411,
+    subject: "Medicine",
+    stem: "What is the most common cause of secondary hypertension in young females?",
+    options: ["Renal artery stenosis (fibromuscular dysplasia)", "Primary hyperaldosteronism", "Phaeochromocytoma", "Coarctation of aorta"],
+    answer: 0,
+    explanation:
+      "Fibromuscular dysplasia causing renal artery stenosis is the most common cause of secondary hypertension in young women. It causes renovascular hypertension via renin-angiotensin activation. Diagnosed by CT/MR angiography. Treated with percutaneous renal angioplasty. Atherosclerotic renal artery stenosis is more common in older males.",
+  },
+  {
+    id: 412,
+    subject: "Medicine",
+    stem: "In systemic lupus erythematosus (SLE), the most specific antibody is:",
+    options: ["ANA (antinuclear antibody)", "Anti-dsDNA", "Anti-Ro (SSA)", "Anti-Smith (anti-Sm)"],
+    answer: 3,
+    explanation:
+      "Anti-Smith (anti-Sm) is the most specific antibody for SLE (~99% specific), but less sensitive (~25-30%). Anti-dsDNA is also specific (95%) and correlates with disease activity and nephritis. ANA is most sensitive (~98%) but least specific. Anti-Ro is associated with neonatal lupus and Sjogren's.",
+  },
+  {
+    id: 413,
+    subject: "Medicine",
+    stem: "A patient with chronic liver disease develops confusion, asterixis, and elevated ammonia. The single most important acute treatment is:",
+    options: ["IV glucose", "Lactulose", "Rifaximin", "Neomycin enema"],
+    answer: 1,
+    explanation:
+      "Lactulose is the first-line treatment for hepatic encephalopathy. It acidifies the colon (trapping ammonia as NH4+), promotes stool evacuation, and reduces ammonia production. Titrate dose to 2-3 soft stools/day. Rifaximin is used as adjunct or for prevention of recurrence. Avoid protein restriction (now outdated advice).",
+  },
+  {
+    id: 414,
+    subject: "Surgery",
+    stem: "The most common site for a peptic ulcer that causes haemorrhage is:",
+    options: ["Lesser curve of stomach", "Greater curve of stomach", "Posterior wall of duodenal cap", "Pyloric antrum"],
+    answer: 2,
+    explanation:
+      "Posterior duodenal ulcers erode the gastroduodenal artery (GDA), causing massive haemorrhage. Anterior duodenal ulcers are more likely to perforate. The GDA runs posterior to the first part of the duodenum. In haemorrhage, endoscopic haemostasis is first-line; surgery if fails.",
+  },
+  {
+    id: 415,
+    subject: "Surgery",
+    stem: "Which type of inguinal hernia passes through Hasselbach's triangle and is considered a direct hernia?",
+    options: ["Passes through deep inguinal ring medial to inferior epigastric vessels", "Passes through deep inguinal ring lateral to inferior epigastric vessels", "Passes directly through Hasselbach's triangle medial to inferior epigastric vessels", "Passes through femoral canal"],
+    answer: 2,
+    explanation:
+      "Direct inguinal hernia = protrudes through Hesselbach's triangle (bounded by: inferior epigastric vessels laterally, inguinal ligament inferiorly, rectus sheath medially). Does NOT pass through deep ring. Indirect hernia passes through deep inguinal ring lateral to inferior epigastric vessels. Direct hernias are more common in older men.",
+  },
+  {
+    id: 416,
+    subject: "Surgery",
+    stem: "The investigation of choice for acute appendicitis when diagnosis is uncertain is:",
+    options: ["Plain abdominal X-ray", "Barium enema", "CT scan of abdomen/pelvis", "MRI abdomen"],
+    answer: 2,
+    explanation:
+      "CT abdomen/pelvis with contrast is the investigation of choice for suspected acute appendicitis when diagnosis is clinically uncertain (sensitivity ~94%, specificity ~95%). Ultrasound is preferred in children and pregnant women (no radiation). The Alvarado score helps risk-stratify patients clinically.",
+  },
+  {
+    id: 417,
+    subject: "Surgery",
+    stem: "Charcot's triad of ascending cholangitis consists of:",
+    options: ["Jaundice + fever + right upper quadrant pain", "Fever + rigors + confusion", "Jaundice + abdominal pain + pale stools", "RUQ pain + Murphy's sign + fever"],
+    answer: 0,
+    explanation:
+      "Charcot's triad = fever + jaundice + RUQ pain (ascending cholangitis). Reynolds' pentad = Charcot's triad + hypotension + mental confusion (severe septic cholangitis). Treatment: IV antibiotics + urgent ERCP for biliary decompression. Most common cause = choledocholithiasis.",
+  },
+  {
+    id: 418,
+    subject: "Surgery",
+    stem: "The most common congenital anomaly of the biliary system is:",
+    options: ["Caroli disease", "Choledochal cyst", "Biliary atresia", "Alagille syndrome"],
+    answer: 1,
+    explanation:
+      "Choledochal cyst is the most common congenital biliary anomaly. Todani classification: Type I (most common) = fusiform dilatation of CBD. Classic triad: jaundice + pain + abdominal mass. Risk of cholangiocarcinoma if untreated. Treatment: surgical excision + Roux-en-Y hepaticojejunostomy.",
+  },
+  {
+    id: 419,
+    subject: "Pharmacology",
+    stem: "The mechanism of action of metformin is:",
+    options: ["Stimulates insulin secretion from beta cells", "Activates AMPK → inhibits hepatic gluconeogenesis", "Inhibits alpha-glucosidase in gut", "Increases insulin sensitivity via PPAR-gamma"],
+    answer: 1,
+    explanation:
+      "Metformin activates AMP-activated protein kinase (AMPK) → primarily inhibits hepatic gluconeogenesis. Also improves peripheral insulin sensitivity. Does NOT cause hypoglycaemia or weight gain. Contraindicated in eGFR <30 mL/min (lactic acidosis risk). Drug of first choice in T2DM, especially in obese patients.",
+  },
+  {
+    id: 420,
+    subject: "Pharmacology",
+    stem: "Which drug is the antidote for paracetamol (acetaminophen) poisoning?",
+    options: ["Flumazenil", "Naloxone", "N-acetylcysteine (NAC)", "Pralidoxime"],
+    answer: 2,
+    explanation:
+      "N-acetylcysteine (NAC) is the antidote for paracetamol toxicity. It replenishes glutathione stores, detoxifying NAPQI (toxic metabolite from CYP2E1). Most effective within 8-10 hours of ingestion. Rumack-Matthew nomogram guides treatment. Flumazenil = benzodiazepine antidote; naloxone = opioid antidote; pralidoxime = organophosphate antidote.",
+  },
+  {
+    id: 421,
+    subject: "Pharmacology",
+    stem: "The drug of choice for status epilepticus (first-line acute treatment) is:",
+    options: ["Phenytoin IV", "Diazepam IV (or lorazepam)", "Phenobarbitone IV", "Sodium valproate IV"],
+    answer: 1,
+    explanation:
+      "IV lorazepam (or IV diazepam if lorazepam unavailable) is first-line for status epilepticus. Benzodiazepines enhance GABA-A receptor activity. If seizures persist after 2 doses, second-line = IV phenytoin/fosphenytoin or IV valproate. Refractory status epilepticus → general anaesthesia (propofol/thiopentone).",
+  },
+  {
+    id: 422,
+    subject: "Pharmacology",
+    stem: "Which antiepileptic drug is the drug of choice for absence seizures?",
+    options: ["Carbamazepine", "Phenytoin", "Ethosuximide", "Lamotrigine"],
+    answer: 2,
+    explanation:
+      "Ethosuximide is DOC for absence (petit mal) seizures in children without generalised tonic-clonic seizures. It blocks T-type calcium channels in thalamic neurons. Sodium valproate is DOC when absence occurs with GTCS. Carbamazepine can worsen absence seizures.",
+  },
+  {
+    id: 423,
+    subject: "Pharmacology",
+    stem: "A patient on warfarin develops a supratherapeutic INR of 8.5 with active major bleeding. What is the immediate management?",
+    options: ["Withhold warfarin + vitamin K oral", "IV vitamin K + fresh frozen plasma (FFP) or 4-factor PCC", "Withhold warfarin + observe", "IV protamine sulphate"],
+    answer: 1,
+    explanation:
+      "Major bleeding with supratherapeutic INR: IV vitamin K (5-10 mg) + 4-factor PCC (prothrombin complex concentrate) for immediate reversal. FFP if PCC unavailable. PCC works faster than FFP. Protamine sulphate reverses heparin (not warfarin). For minor bleeding/no bleeding: withhold warfarin ± oral vitamin K.",
+  },
+  {
+    id: 424,
+    subject: "Pharmacology",
+    stem: "Which class of antibiotics inhibits bacterial cell wall synthesis by binding to PBPs (penicillin-binding proteins)?",
+    options: ["Aminoglycosides", "Fluoroquinolones", "Beta-lactams (penicillins, cephalosporins)", "Macrolides"],
+    answer: 2,
+    explanation:
+      "Beta-lactam antibiotics (penicillins, cephalosporins, carbapenems, monobactams) inhibit bacterial cell wall synthesis by binding to penicillin-binding proteins (PBPs = transpeptidases), blocking cross-linking of peptidoglycan. Aminoglycosides inhibit 30S ribosome. Fluoroquinolones inhibit DNA gyrase/topoisomerase IV. Macrolides inhibit 50S ribosome.",
+  },
+  {
+    id: 425,
+    subject: "Pharmacology",
+    stem: "The drug of choice for Helicobacter pylori eradication in peptic ulcer disease (standard triple therapy) is:",
+    options: ["Amoxicillin + metronidazole + ranitidine", "PPI + amoxicillin + clarithromycin", "PPI + tetracycline + bismuth", "PPI + metronidazole alone"],
+    answer: 1,
+    explanation:
+      "Standard triple therapy for H. pylori eradication: PPI + amoxicillin + clarithromycin for 14 days. Eradication confirmed by urea breath test (4 weeks after completing antibiotics). Bismuth quadruple therapy used in clarithromycin resistance areas. Test and treat strategy for peptic ulcer disease.",
+  },
+  {
+    id: 426,
+    subject: "Pharmacology",
+    stem: "Heparin-induced thrombocytopaenia (HIT) type II is treated with:",
+    options: ["Increase heparin dose", "Switch to low molecular weight heparin (LMWH)", "Stop heparin + use argatroban or fondaparinux", "Platelet transfusion"],
+    answer: 2,
+    explanation:
+      "HIT type II: immune-mediated (IgG antibodies against PF4-heparin complex) → paradoxical thrombosis + thrombocytopaenia. Management: STOP all heparin immediately (including LMWH) + start non-heparin anticoagulant (argatroban or bivalirudin — direct thrombin inhibitors; or fondaparinux). Platelet transfusion contraindicated (worsens thrombosis).",
+  },
+  {
+    id: 427,
+    subject: "Pathology",
+    stem: "The hallmark microscopic finding in Hodgkin's lymphoma is:",
+    options: ["Starry sky pattern", "Reed-Sternberg cells", "Dutcher bodies", "Pautrier microabscesses"],
+    answer: 1,
+    explanation:
+      "Reed-Sternberg cells (large binucleated cells with prominent 'owl-eye' nucleoli) are the hallmark of Hodgkin's lymphoma. Background inflammatory cells (lymphocytes, eosinophils, plasma cells). Starry sky = Burkitt's lymphoma. Dutcher bodies = intranuclear Ig inclusions in lymphoplasmacytic lymphoma. Pautrier microabscesses = mycosis fungoides (cutaneous T-cell lymphoma).",
+  },
+  {
+    id: 428,
+    subject: "Pathology",
+    stem: "Which oncogene is most commonly amplified in breast cancer?",
+    options: ["BCR-ABL", "HER2/neu (ERBB2)", "RAS", "MYC"],
+    answer: 1,
+    explanation:
+      "HER2/neu (ERBB2) is amplified in ~20-25% of breast cancers and confers poor prognosis. Testing by IHC (3+) confirmed by FISH. Targeted therapy: trastuzumab (Herceptin) + pertuzumab. BCR-ABL = CML (t[9;22]). RAS mutations common in colorectal/pancreatic cancer. MYC amplification in Burkitt's lymphoma.",
+  },
+  {
+    id: 429,
+    subject: "Pathology",
+    stem: "Virchow's triad for thrombus formation includes all EXCEPT:",
+    options: ["Endothelial injury", "Stasis of blood flow", "Hypercoagulability", "Increased fibrinolysis"],
+    answer: 3,
+    explanation:
+      "Virchow's triad: (1) Endothelial injury, (2) Abnormal blood flow (stasis or turbulence), (3) Hypercoagulability. Increased fibrinolysis opposes thrombosis — it is not part of the triad. Thrombosis risk factors map to these three components (e.g., immobility → stasis; smoking → endothelial damage; Factor V Leiden → hypercoagulability).",
+  },
+  {
+    id: 430,
+    subject: "Pathology",
+    stem: "Which type of necrosis is characterised by ghost cell outlines with preservation of tissue architecture, seen in myocardial infarction?",
+    options: ["Liquefactive necrosis", "Coagulative necrosis", "Caseous necrosis", "Fat necrosis"],
+    answer: 1,
+    explanation:
+      "Coagulative necrosis: preserved cell outlines/tissue architecture (ghost cells), protein denaturation maintains structure. Seen in: myocardial infarction, renal infarction (except brain). Liquefactive necrosis = brain infarcts, abscess (enzymatic digestion). Caseous necrosis = TB (cheese-like, structureless). Fat necrosis = pancreatitis (saponification).",
+  },
+  {
+    id: 431,
+    subject: "Pathology",
+    stem: "The p53 tumour suppressor gene mutation is most commonly associated with which syndrome?",
+    options: ["BRCA1 mutation syndrome", "Li-Fraumeni syndrome", "FAP (familial adenomatous polyposis)", "MEN type 1"],
+    answer: 1,
+    explanation:
+      "Li-Fraumeni syndrome = germline TP53 mutation → multiple malignancies at young age: sarcomas, breast cancer, brain tumours, leukaemia, adrenocortical carcinoma. TP53 is the most commonly mutated gene in human cancers overall ('guardian of the genome'). Loss allows DNA-damaged cells to bypass apoptosis and proliferate.",
+  },
+  {
+    id: 432,
+    subject: "OBG",
+    stem: "A 28-year-old primigravida at 36 weeks presents with BP 160/105, headache, and 3+ proteinuria. She has a seizure. Diagnosis and immediate management:",
+    options: ["Gestational hypertension — IV labetalol", "Eclampsia — IV magnesium sulphate + antihypertensives", "Severe pre-eclampsia — oral nifedipine only", "HELLP syndrome — platelet transfusion"],
+    answer: 1,
+    explanation:
+      "Eclampsia = seizure in setting of pre-eclampsia. Management: (1) IV magnesium sulphate (loading dose 4g over 20 min, maintenance 1g/hr) — prevents further seizures; (2) Antihypertensives (IV labetalol or hydralazine) if BP ≥160/110; (3) Definitive treatment = delivery. MgSO4 mechanism: NMDA receptor antagonism, vasodilation.",
+  },
+  {
+    id: 433,
+    subject: "OBG",
+    stem: "The most common cause of postpartum haemorrhage (PPH) is:",
+    options: ["Retained placenta", "Uterine atony", "Genital tract lacerations", "Coagulopathy"],
+    answer: 1,
+    explanation:
+      "Uterine atony (failure of uterus to contract) accounts for ~80% of PPH cases (4 Ts: Tone, Trauma, Tissue, Thrombin). Management: uterine massage + oxytocin IV + ergometrine + carboprost. PPH = blood loss >500 mL after vaginal delivery or >1000 mL after caesarean. Early recognition and the HAEMOSTASIS protocol guide management.",
+  },
+  {
+    id: 434,
+    subject: "OBG",
+    stem: "A 32-week pregnant woman presents with painless, bright red vaginal bleeding. The fetus is well. What is the most likely diagnosis?",
+    options: ["Placental abruption", "Placenta praevia", "Vasa praevia", "Show (bloody mucus plug)"],
+    answer: 1,
+    explanation:
+      "Placenta praevia: painless, bright red, recurrent antepartum haemorrhage. Placental abruption: painful, dark blood, tender uterus, maternal shock. Vasa praevia: haemorrhage when membranes rupture (fetal blood). Confirm placenta praevia with transabdominal/transvaginal ultrasound. DO NOT perform digital vaginal examination.",
+  },
+  {
+    id: 435,
+    subject: "OBG",
+    stem: "The drug of choice for medical management of ectopic pregnancy (unruptured, haemodynamically stable) is:",
+    options: ["Mifepristone", "Methotrexate", "Misoprostol", "Danazol"],
+    answer: 1,
+    explanation:
+      "Methotrexate (MTX) IM is the drug of choice for medical management of unruptured ectopic pregnancy (criteria: haemodynamically stable, no fetal cardiac activity, serum hCG <5000 IU/L, mass <3.5 cm). It inhibits dihydrofolate reductase → prevents trophoblast cell division. Monitor hCG until negative.",
+  },
+  {
+    id: 436,
+    subject: "OBG",
+    stem: "Which investigation is the gold standard for diagnosing polycystic ovary syndrome (PCOS)?",
+    options: ["Serum LH:FSH ratio >2:1", "Ultrasound showing ≥12 follicles per ovary or ovarian volume >10 mL", "Elevated serum testosterone", "Elevated serum AMH"],
+    answer: 1,
+    explanation:
+      "Rotterdam criteria (2003) for PCOS diagnosis (2 of 3): (1) oligo/anovulation, (2) clinical/biochemical hyperandrogenism, (3) polycystic ovaries on ultrasound (≥12 follicles 2-9mm per ovary OR volume >10 mL). LH:FSH ratio is classic but not diagnostic criteria. AMH is elevated but not a diagnostic criterion.",
+  },
+  {
+    id: 437,
+    subject: "Paediatrics",
+    stem: "A 3-year-old presents with sudden onset stridor, drooling, and tripod position (leaning forward). Which organism is most likely responsible?",
+    options: ["Parainfluenza virus type 1", "Haemophilus influenzae type b", "Respiratory syncytial virus", "Staphylococcus aureus"],
+    answer: 1,
+    explanation:
+      "Epiglottitis (now rare due to Hib vaccine) = H. influenzae type b → sudden high fever, stridor, drooling, dysphagia, tripod position. DO NOT examine throat (may precipitate complete obstruction). Secure airway in controlled setting (theatre). Thumb sign on lateral neck X-ray. Croup (parainfluenza): barking cough, steeple sign on X-ray.",
+  },
+  {
+    id: 438,
+    subject: "Paediatrics",
+    stem: "The most common cause of nephrotic syndrome in children aged 2-8 years is:",
+    options: ["Focal segmental glomerulosclerosis (FSGS)", "Membranous nephropathy", "Minimal change disease (MCD)", "IgA nephropathy"],
+    answer: 2,
+    explanation:
+      "Minimal change disease (MCD) = most common cause of nephrotic syndrome in children (80-90% of cases aged 2-8). Electron microscopy: foot process effacement (no deposits by LM or IF). Responds to prednisolone in >90% (steroid-sensitive). Also called lipoid nephrosis. FSGS is most common in adults/adolescents with steroid-resistant NS.",
+  },
+  {
+    id: 439,
+    subject: "Paediatrics",
+    stem: "Which vaccine is given at birth in India's National Immunisation Schedule?",
+    options: ["BCG + OPV0 + Hepatitis B", "BCG + DPT + OPV", "OPV + MMR + Hepatitis B", "BCG + IPV + Hepatitis B"],
+    answer: 0,
+    explanation:
+      "At birth (India NIS): BCG (intradermal, right deltoid) + OPV-0 (oral) + Hepatitis B (birth dose, IM). BCG protects against miliary TB and TB meningitis. Hepatitis B birth dose within 24 hours prevents perinatal transmission. DPT starts at 6 weeks. IPV replaces OPV from 14 weeks in some states.",
+  },
+  {
+    id: 440,
+    subject: "Paediatrics",
+    stem: "The normal birth weight of a full-term Indian newborn and the cut-off for low birth weight (LBW) is:",
+    options: ["3500 g; LBW <2500 g", "3200 g; LBW <2000 g", "2900 g; LBW <2500 g", "3000 g; LBW <1500 g"],
+    answer: 2,
+    explanation:
+      "Average birth weight of a full-term Indian newborn = ~2.9 kg (2900 g). WHO definition of LBW = birth weight <2500 g. VLBW = <1500 g; ELBW = <1000 g. LBW is a major cause of neonatal mortality in India. Causes: prematurity, IUGR, or both. India has high LBW rates (~28%).",
+  },
+  {
+    id: 441,
+    subject: "PSM",
+    stem: "The reproductive number (R0) of measles is approximately:",
+    options: ["1-2", "2-5", "12-18", "6-8"],
+    answer: 2,
+    explanation:
+      "Measles has an R0 of 12-18 (among the highest of any infectious disease), meaning one case infects 12-18 susceptibles in a fully susceptible population. This requires herd immunity threshold of ~94% to prevent outbreaks. Compare: COVID-19 original strain R0 ~2-3; influenza ~1.5; smallpox ~5-7.",
+  },
+  {
+    id: 442,
+    subject: "PSM",
+    stem: "The most sensitive indicator of recent safe water supply improvement in a community is:",
+    options: ["Infant mortality rate", "Under-5 mortality rate", "Diarrhoeal disease incidence", "Maternal mortality ratio"],
+    answer: 2,
+    explanation:
+      "Diarrhoeal disease incidence is the most sensitive and immediate indicator of water supply and sanitation improvements. Infant mortality rate (IMR) is the best overall indicator of community health/socioeconomic development. MMR reflects maternal health care. U5MR reflects child health broadly.",
+  },
+  {
+    id: 443,
+    subject: "PSM",
+    stem: "In a clinical trial, the process of allocating participants such that neither the participant nor investigator knows group assignment is called:",
+    options: ["Randomisation", "Blinding", "Double-blinding", "Stratification"],
+    answer: 2,
+    explanation:
+      "Double-blinding: neither participant NOR investigator knows treatment allocation — minimises both performance bias and detection/assessment bias. Single-blind: only participant blinded. Open-label: no blinding. Randomisation prevents selection bias. Triple-blind: blinded data analyst too.",
+  },
+  {
+    id: 444,
+    subject: "PSM",
+    stem: "Positive predictive value (PPV) of a test is MOST affected by:",
+    options: ["Sensitivity of the test", "Specificity of the test", "Prevalence of the disease in the population", "Sample size"],
+    answer: 2,
+    explanation:
+      "PPV = TP/(TP+FP). PPV is most influenced by disease prevalence: when prevalence is low, even a highly specific test yields many false positives (low PPV). High prevalence → high PPV. This is why screening tests should be applied to high-prevalence populations. NPV is similarly affected by prevalence (inversely).",
+  },
+  {
+    id: 445,
+    subject: "Microbiology",
+    stem: "The organism causing gas gangrene (clostridial myonecrosis) produces which major toxin?",
+    options: ["Tetanospasmin", "Alpha toxin (lecithinase/phospholipase C)", "Botulinum toxin", "Exfoliative toxin"],
+    answer: 1,
+    explanation:
+      "Clostridium perfringens (type A) causes gas gangrene. Alpha toxin = lecithinase/phospholipase C — destroys cell membranes, causes haemolysis and tissue necrosis. Tetanospasmin = C. tetani (blocks GABA/glycine release → spastic paralysis). Botulinum toxin = C. botulinum (blocks ACh release → flaccid paralysis). Exfoliative toxin = S. aureus (scalded skin syndrome).",
+  },
+  {
+    id: 446,
+    subject: "Microbiology",
+    stem: "The Weil-Felix test uses Proteus antigens to diagnose which group of infections?",
+    options: ["Brucellosis", "Leptospirosis", "Rickettsial infections", "Typhoid fever"],
+    answer: 2,
+    explanation:
+      "Weil-Felix test: agglutination of Proteus vulgaris (OX-2, OX-19, OX-K strains) due to cross-reacting antigens with Rickettsia species. OX-19 + OX-2 positive = epidemic typhus (R. prowazekii), scrub typhus (OX-K). Replaced by more specific IFA. Widal test = typhoid (Salmonella typhi O and H antigens).",
+  },
+  {
+    id: 447,
+    subject: "Microbiology",
+    stem: "Which medium is used for culture of Mycobacterium tuberculosis?",
+    options: ["Thayer-Martin medium", "Lowenstein-Jensen (LJ) medium", "MacConkey agar", "Tellurite agar"],
+    answer: 1,
+    explanation:
+      "Lowenstein-Jensen (LJ) medium (egg-based, contains malachite green to inhibit contaminants) is the classical medium for M. tuberculosis culture. Growth takes 6-8 weeks. MGIT (Mycobacteria Growth Indicator Tube) is faster (1-2 weeks). Thayer-Martin = N. gonorrhoeae. MacConkey = Gram-negative lactose fermenters. Tellurite agar = C. diphtheriae.",
+  },
+  {
+    id: 448,
+    subject: "Forensic Medicine",
+    stem: "The classic triad of non-accidental injury (shaken baby syndrome) is:",
+    options: ["Subdural haematoma + retinal haemorrhage + absence of external injury", "Epidural haematoma + skull fracture + bruising", "Subdural haematoma + skull fracture + periorbital bruising", "Subarachnoid haemorrhage + retinal haemorrhage + fractures"],
+    answer: 0,
+    explanation:
+      "Shaken baby syndrome (abusive head trauma) classic triad: subdural haematoma + retinal haemorrhages + absence of external injuries (no visible bruising, which is why it may be missed). Caused by violent shaking with acceleration-deceleration forces. Seen in infants <2 years. Now called abusive head trauma (AHT).",
+  },
+  {
+    id: 449,
+    subject: "Forensic Medicine",
+    stem: "Rigor mortis begins within how many hours after death and is complete by:",
+    options: ["1-2 hours; complete in 4-6 hours", "2-6 hours; complete in 12 hours", "30 min; complete in 2 hours", "8-12 hours; complete in 24 hours"],
+    answer: 1,
+    explanation:
+      "Rigor mortis: starts 2-6 hours after death (face/jaw first), complete by ~12 hours, persists for 24-48 hours, then passes off (secondary relaxation). Caused by ATP depletion → actin-myosin cross-bridge cannot release. Depends on temperature (faster in heat, slower in cold) and muscular activity before death.",
+  },
+  {
+    id: 450,
+    subject: "Anatomy",
+    stem: "The nerve injured in fracture of the surgical neck of humerus is:",
+    options: ["Radial nerve", "Axillary nerve", "Musculocutaneous nerve", "Median nerve"],
+    answer: 1,
+    explanation:
+      "Axillary nerve (C5, C6) winds around surgical neck of humerus and supplies deltoid (abduction 15-90°) and teres minor. Injury → loss of shoulder abduction + loss of sensation over 'regimental badge' area (lateral arm). Radial nerve is injured in fracture of midshaft of humerus (in radial groove).",
+  },
+  {
+    id: 451,
+    subject: "Anatomy",
+    stem: "The rotator cuff of the shoulder is formed by all of the following EXCEPT:",
+    options: ["Supraspinatus", "Infraspinatus", "Teres major", "Subscapularis"],
+    answer: 2,
+    explanation:
+      "Rotator cuff = SITS muscles: Supraspinatus (abduction 0-15°), Infraspinatus (lateral rotation), Teres minor (lateral rotation), Subscapularis (medial rotation). Teres MAJOR is NOT part of the rotator cuff — it attaches to the medial lip of the bicipital groove and is supplied by lower subscapular nerve. Most common rotator cuff tear = supraspinatus.",
+  },
+  {
+    id: 452,
+    subject: "Physiology",
+    stem: "The Frank-Starling law of the heart states that:",
+    options: ["Heart rate increases with increased venous return", "Stroke volume increases with increased end-diastolic volume (preload)", "Contractility decreases with increased afterload", "Cardiac output is independent of preload"],
+    answer: 1,
+    explanation:
+      "Frank-Starling law: increased preload (EDV/venous return) → increased sarcomere stretch → more optimal actin-myosin overlap → increased stroke volume (up to a point). This allows the heart to pump out whatever blood it receives. Failure of this mechanism = heart failure (flat Starling curve). Afterload = resistance the heart pumps against (arterial pressure).",
+  },
+  {
+    id: 453,
+    subject: "Medicine",
+    stem: "A 60-year-old male smoker presents with weight loss, haemoptysis, and hypercalcaemia. Chest X-ray shows a hilar mass. The most likely lung cancer subtype is:",
+    options: ["Small cell lung cancer", "Adenocarcinoma", "Squamous cell carcinoma", "Large cell carcinoma"],
+    answer: 2,
+    explanation:
+      "Squamous cell carcinoma (SCC) of lung: central/hilar location, associated with smoking, produces PTHrP → hypercalcaemia. Cavitates commonly. Small cell: very central, ACTH (Cushing's), ADH (SIADH), Lambert-Eaton syndrome. Adenocarcinoma: peripheral, most common overall, EGFR mutations, associated with non-smokers. Pancoast tumour = SCC/adenocarcinoma at apex → Horner's syndrome.",
+  },
+  {
+    id: 454,
+    subject: "Medicine",
+    stem: "The investigation of choice for diagnosis of aortic dissection is:",
+    options: ["Chest X-ray (widened mediastinum)", "ECG", "CT angiography of aorta", "Transthoracic echocardiogram"],
+    answer: 2,
+    explanation:
+      "CT angiography (CTA) of the aorta is the investigation of choice for aortic dissection — high sensitivity/specificity, widely available, rapid. Shows intimal flap and true/false lumen. Widened mediastinum on CXR is a clue but not diagnostic. TOE is highly sensitive but invasive. Stanford Type A (ascending) = surgical emergency; Type B (descending) = medical management.",
+  },
+  {
+    id: 455,
+    subject: "Medicine",
+    stem: "In chronic obstructive pulmonary disease (COPD), the single most important intervention to slow disease progression is:",
+    options: ["Long-acting bronchodilators (LABA)", "Inhaled corticosteroids", "Smoking cessation", "Pulmonary rehabilitation"],
+    answer: 2,
+    explanation:
+      "Smoking cessation is the only intervention proven to slow the decline in FEV1 and reduce COPD progression. It reduces the annual rate of FEV1 decline from ~60 mL/yr in continuing smokers to ~30 mL/yr (similar to non-smokers). Long-term oxygen therapy (LTOT) improves survival in severe hypoxaemia (PaO2 <55 mmHg or <60 mmHg with cor pulmonale).",
+  },
+  {
+    id: 456,
+    subject: "Medicine",
+    stem: "The triad of hereditary haemochromatosis includes:",
+    options: ["Anaemia + splenomegaly + jaundice", "Cirrhosis + diabetes mellitus + skin bronzing ('bronze diabetes')", "Hepatitis + arthropathy + cardiomyopathy", "Ascites + encephalopathy + varices"],
+    answer: 1,
+    explanation:
+      "Hereditary haemochromatosis (HFE gene mutation, C282Y): iron overload causing cirrhosis + diabetes (iron deposits in pancreas) + skin bronzing = 'bronze diabetes'. Also: cardiomyopathy, hypogonadism, arthropathy (2nd-3rd MCP joints). Serum ferritin and transferrin saturation (>45%) are screening tests. Treatment: regular venesection.",
+  },
+  {
+    id: 457,
+    subject: "Medicine",
+    stem: "The most common neurological complication of diabetes mellitus is:",
+    options: ["Mononeuropathy multiplex", "Symmetric distal sensorimotor polyneuropathy", "Autonomic neuropathy", "Cranial nerve palsy"],
+    answer: 1,
+    explanation:
+      "Symmetric distal sensorimotor polyneuropathy is the most common diabetic neuropathy, presenting with 'glove and stocking' loss of sensation (pain/temperature first, then vibration/proprioception), burning, paraesthesias. Risk of Charcot's arthropathy, neuropathic ulcers. Treatment: tight glycaemic control; symptomatic: pregabalin, amitriptyline, duloxetine.",
+  },
+  {
+    id: 458,
+    subject: "Surgery",
+    stem: "The most sensitive test for acute pancreatitis is:",
+    options: ["Serum amylase", "Serum lipase", "Urinary amylase", "C-reactive protein (CRP)"],
+    answer: 1,
+    explanation:
+      "Serum lipase is more sensitive AND specific than serum amylase for acute pancreatitis. Lipase remains elevated longer (7-10 days vs 3-5 days for amylase). Amylase can be elevated in other conditions (salivary gland disease, bowel obstruction). CRP >150 mg/L at 48 hours indicates severe pancreatitis. CT (Balthazar score) assesses severity.",
+  },
+  {
+    id: 459,
+    subject: "Surgery",
+    stem: "The most common type of thyroid cancer (best prognosis, spreads via lymphatics) is:",
+    options: ["Follicular carcinoma", "Medullary carcinoma", "Papillary carcinoma", "Anaplastic carcinoma"],
+    answer: 2,
+    explanation:
+      "Papillary carcinoma = most common thyroid cancer (80%). Spreads via lymphatics (lymph node metastasis). Excellent prognosis (10-year survival >90%). Histology: Orphan Annie eye nuclei, psammoma bodies, nuclear grooves. Associated with RET/PTC rearrangements and BRAF mutation. Follicular = haematogenous spread (lung/bone). Medullary = calcitonin, MEN 2A/2B. Anaplastic = worst prognosis.",
+  },
+  {
+    id: 460,
+    subject: "Surgery",
+    stem: "Burns involving >15% BSA in adults require IV fluid resuscitation. The Parkland formula uses:",
+    options: ["Normal saline: 4 mL × kg × %BSA burnt", "Hartmann's/Ringer's lactate: 4 mL × kg × %BSA burnt", "Colloid: 2 mL × kg × %BSA burnt", "5% dextrose: 3 mL × kg × %BSA burnt"],
+    answer: 1,
+    explanation:
+      "Parkland formula: 4 mL × weight (kg) × %BSA burned of Ringer's lactate/Hartmann's in first 24 hours. Give half in first 8 hours (from time of burn, not admission), remainder over next 16 hours. 'Rule of Nines' for BSA estimation. Colloid not given in first 24 hours. Target urine output 0.5-1 mL/kg/hr.",
+  },
+  {
+    id: 461,
+    subject: "Pharmacology",
+    stem: "The drug of choice for treatment of Plasmodium vivax malaria in India is:",
+    options: ["Artesunate + amodiaquine", "Chloroquine + primaquine", "Quinine + doxycycline", "Mefloquine"],
+    answer: 1,
+    explanation:
+      "P. vivax: chloroquine (blood schizonticide, 3 days) + primaquine (radical cure, destroys liver hypnozoites, 14 days). Check G6PD status before primaquine (causes haemolysis in G6PD deficiency). P. falciparum: ACT (artemisinin combination therapy). P. vivax chloroquine resistance emerging in some regions → switch to ACT.",
+  },
+  {
+    id: 462,
+    subject: "Pharmacology",
+    stem: "Which immunosuppressant inhibits calcineurin, thereby blocking IL-2 production and T-cell activation?",
+    options: ["Azathioprine", "Mycophenolate mofetil", "Ciclosporin (cyclosporine)", "Sirolimus (rapamycin)"],
+    answer: 2,
+    explanation:
+      "Cyclosporine and tacrolimus inhibit calcineurin → prevent dephosphorylation of NFAT → block IL-2 gene transcription → impair T-cell activation. Used in transplant immunosuppression, autoimmune disease. Nephrotoxicity is the major side effect (cyclosporine also causes hirsutism, gingival hyperplasia; tacrolimus → tremor, alopecia). Sirolimus inhibits mTOR.",
+  },
+  {
+    id: 463,
+    subject: "Pharmacology",
+    stem: "The antidote for organophosphate poisoning is:",
+    options: ["N-acetylcysteine", "Atropine + pralidoxime (2-PAM)", "Naloxone", "Flumazenil"],
+    answer: 1,
+    explanation:
+      "Organophosphate poisoning (excess ACh due to AChE inhibition): SLUDGE (salivation, lacrimation, urination, defaecation, GI symptoms, emesis) + miosis + bronchospasm + bradycardia. Treatment: Atropine (blocks muscarinic effects — large doses needed) + Pralidoxime (regenerates AChE if given early, before 'ageing'). Diazepam for seizures.",
+  },
+  {
+    id: 464,
+    subject: "Pharmacology",
+    stem: "Which drug is the treatment of choice for cryptococcal meningitis in HIV patients?",
+    options: ["Fluconazole alone", "Amphotericin B + flucytosine (induction), then fluconazole (consolidation/maintenance)", "Itraconazole", "Voriconazole"],
+    answer: 1,
+    explanation:
+      "Cryptococcal meningitis in HIV (CD4 <100): Induction (2 weeks): IV amphotericin B + flucytosine → Consolidation (8 weeks): fluconazole 400 mg/day → Maintenance: fluconazole 200 mg/day (until immune reconstitution). Therapeutic lumbar punctures to manage raised ICP. Fluconazole alone is inferior to combination for induction.",
+  },
+  {
+    id: 465,
+    subject: "Pathology",
+    stem: "The Philadelphia chromosome [t(9;22)] is the characteristic translocation in:",
+    options: ["Acute lymphoblastic leukaemia (ALL)", "Chronic myeloid leukaemia (CML)", "Burkitt's lymphoma", "Follicular lymphoma"],
+    answer: 1,
+    explanation:
+      "CML: t(9;22) → BCR-ABL fusion gene → constitutively active tyrosine kinase → uncontrolled proliferation. Target of imatinib (Gleevec). Ph chromosome also found in 20-30% adult ALL (poor prognosis). Burkitt's: t(8;14) (MYC-IgH). Follicular lymphoma: t(14;18) (BCL-2 overexpression). CML: massive splenomegaly, basophilia, left shift.",
+  },
+  {
+    id: 466,
+    subject: "Pathology",
+    stem: "Amyloid in Alzheimer's disease is composed of:",
+    options: ["AA amyloid (serum amyloid A)", "AL amyloid (immunoglobulin light chains)", "Aβ amyloid (amyloid beta-peptide)", "ATTR (transthyretin amyloid)"],
+    answer: 2,
+    explanation:
+      "Alzheimer's disease: Aβ (amyloid beta) peptide derived from amyloid precursor protein (APP) cleavage by β- and γ-secretases → neuritic (senile) plaques + neurofibrillary tangles (hyperphosphorylated tau). AL = myeloma/primary amyloidosis. AA = reactive/secondary amyloidosis (TB, RA, etc). ATTR = familial or senile cardiac amyloidosis.",
+  },
+  {
+    id: 467,
+    subject: "Pathology",
+    stem: "The most common primary bone tumour in patients >40 years is:",
+    options: ["Osteosarcoma", "Ewing's sarcoma", "Metastatic carcinoma", "Multiple myeloma"],
+    answer: 3,
+    explanation:
+      "Multiple myeloma is the most common primary malignant bone tumour in adults >40 years. Presents with lytic bone lesions (punched-out, no sclerotic rim), hypercalcaemia, anaemia, renal failure, infections. Serum protein electrophoresis shows M-band. Bence Jones proteins in urine. Metastatic carcinoma is the most common malignant bone tumour overall (breast, prostate, lung, kidney, thyroid).",
+  },
+  {
+    id: 468,
+    subject: "OBG",
+    stem: "The most common site of endometriosis is:",
+    options: ["Rectovaginal septum", "Ovary", "Fallopian tube", "Bladder"],
+    answer: 1,
+    explanation:
+      "Ovary is the most common site of endometriosis (forms endometrioma/'chocolate cyst' — dark brown fluid). Classic triad: dysmenorrhoea + dyspareunia + infertility. Diagnosis: laparoscopy (gold standard). Medical treatment: combined OCP, GnRH agonists, danazol, progestogens. Surgical: conservative (excision/ablation) or radical (hysterectomy + BSO).",
+  },
+  {
+    id: 469,
+    subject: "OBG",
+    stem: "In obstetrics, the Bishop score is used to assess:",
+    options: ["Fetal well-being in post-term pregnancy", "Cervical favourability for induction of labour", "Risk of pre-eclampsia", "Estimated fetal weight"],
+    answer: 1,
+    explanation:
+      "Bishop score assesses cervical favourability for induction of labour. Parameters (scored 0-3 each): dilation + effacement + station + consistency + position of cervix. Total score ≤5 = unfavourable cervix (ripening needed with prostaglandins/balloon catheter). Score ≥8 = favourable, induction likely to succeed. Used to guide IOL decision.",
+  },
+  {
+    id: 470,
+    subject: "OBG",
+    stem: "The drug of choice for gestational diabetes mellitus (GDM) that fails dietary management during pregnancy is:",
+    options: ["Metformin", "Glibenclamide", "Insulin", "Acarbose"],
+    answer: 2,
+    explanation:
+      "Insulin is the drug of choice for GDM not controlled by diet. It does not cross the placenta in significant amounts. Metformin is increasingly used (crosses placenta — long-term fetal safety data still accumulating) but insulin remains gold standard per most guidelines. Strict glycaemic targets: fasting <95, 1-hr postprandial <140, 2-hr <120 mg/dL.",
+  },
+  {
+    id: 471,
+    subject: "Paediatrics",
+    stem: "Intussusception in children classically presents with:",
+    options: ["Painless rectal bleeding", "Colicky abdominal pain + vomiting + 'red currant jelly' stools + sausage-shaped mass", "Projectile vomiting immediately after feeding", "Abdominal distension + absent bowel sounds"],
+    answer: 1,
+    explanation:
+      "Intussusception: telescoping of bowel (usually ileocaecal) causing obstruction + mucosal ischaemia. Classic: colicky pain + 'red currant jelly' stools (blood + mucus) + vomiting + palpable sausage-shaped RUQ mass. Peak age 3 months-3 years. Ultrasound: 'target sign'. Treatment: pneumatic reduction (air enema); surgery if failed or perforation.",
+  },
+  {
+    id: 472,
+    subject: "Paediatrics",
+    stem: "The most common cause of acute meningitis in neonates (0-3 months) is:",
+    options: ["Neisseria meningitidis", "Streptococcus pneumoniae", "Group B Streptococcus (GBS) and E. coli", "Listeria monocytogenes"],
+    answer: 2,
+    explanation:
+      "Neonatal meningitis: Group B Streptococcus (S. agalactiae) + E. coli (K1) + Listeria = the three major organisms. GBS = most common overall in neonates. In older infants/children: S. pneumoniae, N. meningitidis. In adolescents/young adults: N. meningitidis. Empirical treatment for neonates: ampicillin + gentamicin (or cefotaxime).",
+  },
+  {
+    id: 473,
+    subject: "PSM",
+    stem: "The sample size of a study increases when:",
+    options: ["Desired precision decreases (wider CI accepted)", "Effect size increases", "Significance level (α) increases", "Power (1-β) increases"],
+    answer: 3,
+    explanation:
+      "Sample size increases with: greater power (1-β ↑), smaller significance level (α ↓, more stringent), smaller effect size (harder to detect), greater variability in outcome. Higher power requires more subjects to detect the same effect. Common conventions: α = 0.05, power = 80% (β = 0.20). Effect size and variance are outcome characteristics.",
+  },
+  {
+    id: 474,
+    subject: "PSM",
+    stem: "The maternal mortality ratio (MMR) is defined as:",
+    options: ["Maternal deaths per 1000 live births", "Maternal deaths per 100,000 live births", "Maternal deaths per 1000 women of reproductive age", "Maternal deaths per 100,000 total population"],
+    answer: 1,
+    explanation:
+      "MMR = (Maternal deaths / Live births) × 100,000. A maternal death = death of woman during pregnancy or within 42 days of termination (from causes related to or aggravated by pregnancy, not accidental). India MMR ~97/100,000 live births (SRS 2018-20). SDG target: MMR <70/100,000 live births by 2030.",
+  },
+  {
+    id: 475,
+    subject: "Microbiology",
+    stem: "Which bacteria produces a toxin that inhibits protein synthesis by ADP-ribosylation of EF-2 (elongation factor 2)?",
+    options: ["Clostridium perfringens", "Staphylococcus aureus", "Corynebacterium diphtheriae", "Bordetella pertussis"],
+    answer: 2,
+    explanation:
+      "Diphtheria toxin (Corynebacterium diphtheriae) = AB toxin: B subunit binds to cell surface, A subunit ADP-ribosylates EF-2 (EF-Tu equivalent) → inhibits protein synthesis → cell death. Pseudomonas aeruginosa exotoxin A has the same mechanism. Pertussis toxin: ADP-ribosylates Gi protein. Cholera toxin: ADP-ribosylates Gs protein (activates adenylyl cyclase).",
+  },
+  {
+    id: 476,
+    subject: "Forensic Medicine",
+    stem: "The most reliable indicator of age in a living person for medicolegal purposes is:",
+    options: ["Height and weight", "Dental examination", "Skeletal X-ray (bone age/ossification centres)", "Secondary sexual characteristics"],
+    answer: 2,
+    explanation:
+      "Skeletal radiography (bone age) is the most reliable method for age estimation — epiphyseal fusion and ossification centre appearance/fusion have predictable timelines. For adults: clavicle medial end fuses last (22-25 years) — key for determining >18 years of age in medicolegal cases. Dental age also useful. Combination approach gives best accuracy.",
+  },
+  {
+    id: 477,
+    subject: "Anatomy",
+    stem: "Which nerve is at risk during McBurney's incision (gridiron incision) for appendicectomy?",
+    options: ["Femoral nerve", "Ilioinguinal nerve", "Iliohypogastric nerve", "Lateral cutaneous nerve of thigh"],
+    answer: 2,
+    explanation:
+      "Iliohypogastric nerve (L1) runs between internal oblique and transversus abdominis, crossing the iliac crest — it can be damaged during McBurney's (gridiron) incision for appendicectomy. Damage causes loss of sensation over hypogastrium and weakness of lower abdominal wall. Ilioinguinal nerve can also be at risk during lower abdominal incisions.",
+  },
+  {
+    id: 478,
+    subject: "Anatomy",
+    stem: "The portal triad (portal tract) in the liver contains:",
+    options: ["Central vein + hepatic artery + bile ductule", "Portal vein branch + hepatic artery branch + bile ductule", "Portal vein + central vein + lymphatic", "Sinusoid + Kupffer cells + hepatocytes"],
+    answer: 1,
+    explanation:
+      "Portal triad = branch of portal vein + branch of hepatic artery + bile ductule (+ lymphatics). Located at the corners of hepatic lobules. Blood flows from portal tracts → sinusoids → central vein → hepatic veins → IVC. Bile flows in opposite direction: hepatocytes → bile canaliculi → bile ductules → portal tract.",
+  },
+  {
+    id: 479,
+    subject: "Physiology",
+    stem: "The bicarbonate buffer system maintains blood pH. The Henderson-Hasselbalch equation for blood is: pH = 6.1 + log([HCO3⁻]/[0.03 × PaCO2]). Normal pH is maintained when the ratio of [HCO3⁻] to dissolved CO2 is approximately:",
+    options: ["10:1", "15:1", "20:1", "25:1"],
+    answer: 2,
+    explanation:
+      "Normal blood: HCO3⁻ = 24 mEq/L, PaCO2 = 40 mmHg. Dissolved CO2 = 0.03 × 40 = 1.2 mEq/L. Ratio = 24/1.2 = 20:1. pH = 6.1 + log(20) = 6.1 + 1.3 = 7.4. Kidneys regulate HCO3⁻ (metabolic); lungs regulate PaCO2 (respiratory). Any process changing the 20:1 ratio shifts pH.",
+  },
+  {
+    id: 480,
+    subject: "Physiology",
+    stem: "The diving reflex (triggered by cold water on the face) causes:",
+    options: ["Tachycardia + vasodilation", "Bradycardia + peripheral vasoconstriction + blood redistribution to vital organs", "Tachycardia + vasoconstriction", "Apnoea + vasodilation"],
+    answer: 1,
+    explanation:
+      "Diving reflex: cold water on face (especially around nose/forehead) → trigeminal nerve → bradycardia (vagal) + peripheral vasoconstriction + redistribution of blood to heart and brain. Allows mammals to survive prolonged underwater submersion. Stronger in trained athletes. Clinical use: terminating SVT (cold water facial immersion).",
+  },
+  {
+    id: 481,
+    subject: "Medicine",
+    stem: "In iron deficiency anaemia, the sequence of laboratory changes from earliest to latest is:",
+    options: ["Low serum ferritin → low serum iron → high TIBC → microcytic anaemia", "Microcytic anaemia → low serum iron → low ferritin → high TIBC", "High TIBC → microcytic anaemia → low serum iron → low ferritin", "Low serum iron → low ferritin → high TIBC → microcytic anaemia"],
+    answer: 0,
+    explanation:
+      "Sequence of iron deficiency: (1) Iron stores depleted → low serum ferritin (earliest marker); (2) Transport iron decreases → low serum iron, high TIBC (transferrin rises as iron stores fall); (3) Haemoglobin synthesis impaired → microcytic hypochromic anaemia (latest). Serum ferritin is the single best test for iron stores.",
+  },
+  {
+    id: 482,
+    subject: "Medicine",
+    stem: "The most common organism causing infective endocarditis on native valves in the community is:",
+    options: ["Streptococcus viridans (alpha-haemolytic)", "Staphylococcus aureus", "Enterococcus faecalis", "HACEK organisms"],
+    answer: 0,
+    explanation:
+      "Streptococcus viridans is the most common cause of native valve endocarditis in the community (subacute, after dental procedures). S. aureus is most common in IV drug users and prosthetic valve endocarditis (acute, rapid destruction). HACEK organisms are fastidious Gram-negatives. Enterococcus often from GU tract. Modified Duke criteria for diagnosis.",
+  },
+  {
+    id: 483,
+    subject: "Medicine",
+    stem: "Conn's syndrome (primary hyperaldosteronism) presents with which triad?",
+    options: ["Hypertension + hypokalaemia + metabolic alkalosis", "Hypertension + hyperkalaemia + metabolic acidosis", "Hypotension + hypokalaemia + metabolic acidosis", "Hypertension + hyponatraemia + metabolic alkalosis"],
+    answer: 0,
+    explanation:
+      "Conn's syndrome = autonomous aldosterone secretion (usually adrenal adenoma). Aldosterone → renal Na retention (hypertension) + K excretion (hypokalaemia) + H+ excretion (metabolic alkalosis). Screen with aldosterone/renin ratio (elevated). Confirm with CT adrenal + adrenal vein sampling. Treatment: adrenalectomy (adenoma) or spironolactone (bilateral hyperplasia).",
+  },
+  {
+    id: 484,
+    subject: "Medicine",
+    stem: "The classic presentation of myasthenia gravis (MG) is:",
+    options: ["Proximal muscle weakness that worsens with rest", "Fatigable weakness that worsens with activity + ptosis + diplopia", "Ascending paralysis with absent reflexes", "Fasciculations + wasting + UMN signs"],
+    answer: 1,
+    explanation:
+      "Myasthenia gravis = anti-AChR antibodies (85%) or anti-MuSK antibodies → impaired NMJ transmission. Classic: fatigable weakness (worsens with repetitive use, improves with rest) + ptosis + diplopia (usually presenting features). Diagnosis: anti-AChR antibody + repetitive nerve stimulation (decremental response) + edrophonium/ice pack test. Treatment: pyridostigmine, thymectomy, immunosuppression.",
+  },
+  {
+    id: 485,
+    subject: "Surgery",
+    stem: "What is the most common cause of small bowel obstruction in adults in developed countries?",
+    options: ["Hernia", "Adhesions (post-surgical)", "Neoplasm", "Crohn's disease"],
+    answer: 1,
+    explanation:
+      "Adhesions from previous abdominal surgery = most common cause of small bowel obstruction (SBO) in adults in developed countries (~75%). In developing countries/children: hernia is more common. Features: colicky pain + vomiting + abdominal distension + constipation. Management: NGT decompression ± surgery. CT confirms diagnosis and detects closed loop obstruction.",
+  },
+  {
+    id: 486,
+    subject: "Surgery",
+    stem: "The most common complication of thyroidectomy is:",
+    options: ["Hypothyroidism", "Recurrent laryngeal nerve palsy", "Hypocalcaemia (hypoparathyroidism)", "Haemorrhage"],
+    answer: 2,
+    explanation:
+      "Hypocalcaemia (due to inadvertent parathyroid removal or devascularisation) is the most common complication of total thyroidectomy. Presents with perioral tingling, Chvostek's sign, Trousseau's sign, tetany. Transient hypocalcaemia common; permanent in ~1-2%. Recurrent laryngeal nerve (RLN) palsy causes hoarseness — occurs in ~1-3%. Check vocal cords before/after thyroidectomy.",
+  },
+  {
+    id: 487,
+    subject: "Pharmacology",
+    stem: "The mechanism of action of statins is:",
+    options: ["Inhibit cholesterol absorption in small intestine", "Activate lipoprotein lipase", "Inhibit HMG-CoA reductase (rate-limiting step of cholesterol synthesis)", "Bind bile acids to reduce reabsorption"],
+    answer: 2,
+    explanation:
+      "Statins inhibit HMG-CoA reductase → reduce hepatic cholesterol synthesis → upregulate LDL receptors → increase LDL clearance from plasma. Primarily lower LDL-C (20-55%). Also modest TG reduction, HDL increase. Side effects: myopathy/rhabdomyolysis (check CK), hepatotoxicity (rare), new-onset diabetes. Ezetimibe inhibits cholesterol absorption (NPC1L1). Bile acid sequestrants bind bile acids.",
+  },
+  {
+    id: 488,
+    subject: "Pharmacology",
+    stem: "Which drug is the DOC for prevention of mother-to-child transmission (PMTCT) of HIV?",
+    options: ["Zidovudine (AZT) alone", "Combination ART (cART) from 14 weeks", "Nevirapine single dose at delivery only", "Lopinavir/ritonavir"],
+    answer: 1,
+    explanation:
+      "Current WHO recommendation: all HIV-positive pregnant women should receive combination ART (Option B+) — regardless of CD4 count, continued lifelong. Preferred regimen: tenofovir + lamivudine + efavirenz. Neonates receive zidovudine or nevirapine prophylaxis for 6 weeks. Goal: reduce vertical transmission rate from ~25-40% to <1-2%.",
+  },
+  {
+    id: 489,
+    subject: "Pathology",
+    stem: "The tumour marker most useful for monitoring testicular germ cell tumours (non-seminomatous) is:",
+    options: ["PSA (prostate-specific antigen)", "AFP (alpha-fetoprotein) + beta-hCG", "CEA (carcinoembryonic antigen)", "CA-125"],
+    answer: 1,
+    explanation:
+      "Non-seminomatous GCTs (NSGCT): AFP + β-hCG are the key markers — AFP elevated in yolk sac tumours and embryonal carcinoma; β-hCG elevated in choriocarcinoma. Seminomas: β-hCG only (never AFP; AFP rise = non-seminomatous component). Markers used for staging, response to treatment, and surveillance. PSA = prostate cancer; CEA = colorectal/gastric; CA-125 = ovarian.",
+  },
+  {
+    id: 490,
+    subject: "OBG",
+    stem: "The most common cause of secondary amenorrhoea (excluding pregnancy) is:",
+    options: ["Premature ovarian failure", "Hypothyroidism", "Prolactinoma", "PCOS (polycystic ovary syndrome)"],
+    answer: 3,
+    explanation:
+      "PCOS is the most common cause of secondary amenorrhoea/oligomenorrhoea in reproductive-age women, accounting for ~70-80% of anovulatory infertility. Prolactinoma is the most common pituitary cause (galactorrhoea + amenorrhoea = Chiari-Frommel if postpartum). After exclusion of pregnancy, the workup includes prolactin, TSH, FSH/LH, androgens, ultrasound.",
+  },
+  {
+    id: 491,
+    subject: "OBG",
+    stem: "In shoulder dystocia during labour, the first manoeuvre to perform is:",
+    options: ["Fundal pressure", "McRoberts manoeuvre + suprapubic pressure", "Zavanelli manoeuvre", "Emergency caesarean section"],
+    answer: 1,
+    explanation:
+      "Shoulder dystocia management (HELPERR mnemonic): (H) Call for Help, (E) Evaluate for Episiotomy, (L) Legs — McRoberts manoeuvre (thigh hyperflexion onto abdomen) + suprapubic pressure FIRST. McRoberts + suprapubic pressure resolves ~90% of cases. Never apply fundal pressure (worsens impaction). Zavanelli = last resort (cephalic replacement → caesarean).",
+  },
+  {
+    id: 492,
+    subject: "Paediatrics",
+    stem: "The most common presenting feature of Wilms' tumour (nephroblastoma) in children is:",
+    options: ["Haematuria", "Hypertension", "Painless abdominal mass", "Weight loss"],
+    answer: 2,
+    explanation:
+      "Wilms' tumour: most common malignant renal tumour in children (peak 3-4 years). Most common presentation = painless abdominal mass discovered by parent/doctor. Other features: haematuria (25%), hypertension, fever. Do NOT palpate excessively (risk of capsule rupture). Ultrasound/CT abdomen. Treatment: nephrectomy + adjuvant chemotherapy (vincristine + actinomycin D ± doxorubicin). 90% cure rate.",
+  },
+  {
+    id: 493,
+    subject: "PSM",
+    stem: "National Health Mission (NHM) in India was launched in which year and covers which population groups?",
+    options: ["2005; rural population only (NRHM)", "2013; rural and urban populations (NRHM + NUHM)", "2000; tribal populations only", "2010; BPL families only"],
+    answer: 1,
+    explanation:
+      "NHM launched in 2013, subsuming NRHM (2005) and adding NUHM (National Urban Health Mission). Covers rural, tribal, and urban underserved populations. Key components: ASHA programme, Janani Suraksha Yojana (JSY), free drugs/diagnostics, health and wellness centres. ASHA = Accredited Social Health Activist (10th standard, community-selected female health worker).",
+  },
+  {
+    id: 494,
+    subject: "Microbiology",
+    stem: "The causative organism of plague and the vector responsible for its transmission to humans is:",
+    options: ["Yersinia pestis; Anopheles mosquito", "Yersinia pestis; rat flea (Xenopsylla cheopis)", "Francisella tularensis; tick", "Rickettsia prowazekii; body louse"],
+    answer: 1,
+    explanation:
+      "Plague = Yersinia pestis, transmitted by rat flea (Xenopsylla cheopis — blocked flea regurgitates blood into bite wound). Forms: bubonic (inguinal bubo), septicaemic, pneumonic. Bubonic plague: 'herald' bubo. Pneumonic plague: person-to-person transmission. Diagnosis: Gram stain ('safety pin' bipolar staining), culture, PCR. Treatment: streptomycin or gentamicin.",
+  },
+  {
+    id: 495,
+    subject: "Anatomy",
+    stem: "The femoral triangle boundaries are:",
+    options: ["Inguinal ligament + adductor longus + sartorius", "Inguinal ligament + adductor magnus + iliopsoas", "Poupart's ligament + gracilis + rectus femoris", "Inguinal ligament + pectineus + semitendinosus"],
+    answer: 0,
+    explanation:
+      "Femoral triangle: Superior = inguinal ligament; Medial = adductor longus; Lateral = sartorius. Floor = iliopsoas (lateral) + pectineus (medial). Contents (lateral to medial): Femoral Nerve, Artery, Vein (NAVY: Nerve Artery Vein) + deep inguinal lymph nodes + femoral canal. Femoral hernia enters femoral canal (medial to femoral vein).",
+  },
+  {
+    id: 496,
+    subject: "Physiology",
+    stem: "The oxygen-haemoglobin dissociation curve shifts to the RIGHT (reduced O2 affinity) with:",
+    options: ["Decreased temperature", "Decreased 2,3-DPG", "Increased PaCO2 (Bohr effect)", "Increased pH (alkalosis)", ],
+    answer: 2,
+    explanation:
+      "Right shift of O2-Hb curve (reduced affinity, easier O2 unloading to tissues): increased PaCO2 (Bohr effect), increased H+ (decreased pH), increased temperature, increased 2,3-DPG, increased CO. Left shift (increased affinity, harder O2 release): decreased temp, decreased CO2, alkalosis, fetal Hb (HbF), carboxyhaemoglobin, methaemoglobin. Mnemonic: CADET face right (CO2, Acid, 2,3-DPG, Exercise, Temperature).",
+  },
+  {
+    id: 497,
+    subject: "Medicine",
+    stem: "A 50-year-old presents with fatigue, weight gain, constipation, dry skin, and bradycardia. TSH is 45 mIU/L; free T4 is low. Management:",
+    options: ["Levothyroxine (T4) replacement", "Liothyronine (T3) replacement", "Radioiodine therapy", "Anti-thyroid drugs (carbimazole)"],
+    answer: 0,
+    explanation:
+      "Primary hypothyroidism: high TSH + low free T4. Treatment: levothyroxine (synthetic T4) — T3 is produced by peripheral deiodination. Start low dose (25-50 mcg/day) in elderly/cardiac patients, titrate. Monitor TSH 6-8 weeks after dose change. Target TSH = 0.5-2.5 mIU/L. Myxoedema coma (severe): IV T4 + T3 + hydrocortisone + supportive.",
+  },
+  {
+    id: 498,
+    subject: "Medicine",
+    stem: "The most common cause of haemoptysis worldwide is:",
+    options: ["Lung cancer", "Tuberculosis", "Pulmonary embolism", "Bronchiectasis"],
+    answer: 1,
+    explanation:
+      "Tuberculosis is the most common cause of haemoptysis worldwide (and in India). Mechanisms: Rasmussen's aneurysm (erosion of pulmonary artery in cavity), bronchiectasis, Aspergilloma (fungus ball in old TB cavity — risk of massive haemoptysis). In developed countries: bronchiectasis, lung cancer, and bronchitis are more common causes.",
+  },
+  {
+    id: 499,
+    subject: "Medicine",
+    stem: "A patient with end-stage renal disease has Hb 8 g/dL. The most likely cause of anaemia is:",
+    options: ["Iron deficiency", "Vitamin B12 deficiency", "Reduced erythropoietin production", "Haemolysis"],
+    answer: 2,
+    explanation:
+      "Anaemia of CKD: primarily due to reduced erythropoietin (EPO) production by peritubular cells. Also: reduced RBC survival, iron deficiency (dialysis blood loss), uraemic inhibition of erythropoiesis. Treatment: erythropoiesis-stimulating agents (darbepoetin, EPO) + IV iron. Target Hb 10-12 g/dL (not normalise — increases thrombotic risk).",
+  },
+  {
+    id: 500,
+    subject: "Surgery",
+    stem: "The most common type of renal stone in India and worldwide is:",
+    options: ["Uric acid stones", "Struvite (magnesium ammonium phosphate) stones", "Calcium oxalate stones", "Cystine stones"],
+    answer: 2,
+    explanation:
+      "Calcium oxalate stones are the most common renal stones (80-85% of all renal calculi). Seen in hypercalciuria, hyperoxaluria, hypocitraturia. Radiopaque on plain X-ray. Risk factors: dehydration, high-oxalate diet (spinach, nuts), Crohn's disease. Uric acid stones: radiolucent, gout. Struvite: infection stones (Proteus — urease producer), staghorn calculus.",
+  },
+  {
+    id: 501,
+    subject: "ENT",
+    stem: "The most common site for epistaxis (nosebleed) is:",
+    options: ["Posterior nasal cavity (sphenopalatine artery)", "Little's area (Kiesselbach's plexus) on nasal septum", "Inferior turbinate", "Roof of nasal cavity"],
+    answer: 1,
+    explanation:
+      "Little's area (Kiesselbach's plexus) on the anteroinferior nasal septum is the most common site of epistaxis (90%). It is an anastomosis of 4 arteries: anterior ethmoidal, sphenopalatine, greater palatine, and superior labial. Anterior epistaxis: direct pressure/silver nitrate cautery. Posterior epistaxis (sphenopalatine area): packing or embolisation.",
+  },
+  {
+    id: 502,
+    subject: "ENT",
+    stem: "A child presents with recurrent otitis media with effusion ('glue ear'). The most appropriate management after 3 months of watchful waiting is:",
+    options: ["Oral antibiotics", "Adenoidectomy + grommet insertion (ventilation tubes)", "Myringotomy alone", "High-dose IV steroids"],
+    answer: 1,
+    explanation:
+      "Otitis media with effusion (OME/'glue ear'): fluid in middle ear without signs of acute infection. Management: watchful waiting 3 months → if persists (especially with bilateral hearing loss >25 dB): grommet insertion (ventilation tubes) ± adenoidectomy. Hearing aids are an alternative. Antibiotics and antihistamines not routinely recommended.",
+  },
+  {
+    id: 503,
+    subject: "Ophthalmology",
+    stem: "A patient presents with painful red eye, photophobia, and a dendritic ulcer on fluorescein staining. Diagnosis and treatment:",
+    options: ["Bacterial keratitis — topical fluoroquinolones", "Herpetic keratitis (HSV) — topical acyclovir", "Acanthamoeba keratitis — topical chlorhexidine", "Fungal keratitis — topical natamycin"],
+    answer: 1,
+    explanation:
+      "Dendritic (branching) corneal ulcer with terminal bulbs on fluorescein staining is pathognomonic of HSV keratitis. Treatment: topical acyclovir 3% eye ointment 5×/day for 10 days. DO NOT give topical corticosteroids (worsen viral keratitis). Acanthamoeba: contact lens users, ring infiltrate, very painful. Bacterial: hypopyon. Fungal: feathery infiltrate, post-corneal trauma.",
+  },
+  {
+    id: 504,
+    subject: "Ophthalmology",
+    stem: "The optic disc appearance in papilloedema (increased intracranial pressure) is:",
+    options: ["Pale optic disc with cupping", "Swollen disc + blurred margins + absent venous pulsations", "Cherry red spot at macula", "Disc with increased cup:disc ratio"],
+    answer: 1,
+    explanation:
+      "Papilloedema: bilateral optic disc swelling due to raised ICP. Features: disc swelling, blurred margins, absent venous pulsations, peripapillary haemorrhages. Visual acuity initially preserved. Enlarged blind spot on perimetry. Differentiate from papillitis (painful, unilateral, early VA loss) and pseudopapilloedema (drusen). Investigate with CT/MRI brain urgently.",
+  },
+  {
+    id: 505,
+    subject: "Psychiatry",
+    stem: "The drug of first choice for bipolar disorder maintenance and acute mania is:",
+    options: ["Haloperidol", "Lithium carbonate", "Diazepam", "Fluoxetine"],
+    answer: 1,
+    explanation:
+      "Lithium is the gold standard mood stabiliser for bipolar disorder (prophylaxis + acute mania). Narrow therapeutic index (0.6-1.0 mEq/L maintenance; 0.8-1.2 for acute mania). Monitor: renal function (nephrogenic DI), thyroid function (hypothyroidism), ECG. Toxicity: coarse tremor, vomiting, diarrhoea, ataxia, seizures. Avoid NSAIDs/thiazides (increase lithium levels).",
+  },
+  {
+    id: 506,
+    subject: "Psychiatry",
+    stem: "A patient experiences a fixed false belief that his neighbours are spying on him, which is not amenable to reason. This is called:",
+    options: ["Illusion", "Hallucination", "Delusion", "Obsession"],
+    answer: 2,
+    explanation:
+      "Delusion = fixed false belief, firmly held despite evidence to the contrary, inconsistent with cultural background. Persecutory delusions (paranoid) are the most common type in schizophrenia. Hallucination = perception without stimulus (e.g., hearing voices). Illusion = misinterpretation of a real stimulus. Obsession = intrusive, recurrent, ego-dystonic thought (patient recognises it as their own but can't control it).",
+  },
+  {
+    id: 507,
+    subject: "Psychiatry",
+    stem: "The first-line treatment for obsessive-compulsive disorder (OCD) is:",
+    options: ["Benzodiazepines", "SSRI (e.g., fluvoxamine) + cognitive behavioural therapy with ERP", "Lithium", "Haloperidol"],
+    answer: 1,
+    explanation:
+      "OCD: First-line = SSRIs (fluvoxamine, fluoxetine, sertraline, paroxetine) + Cognitive Behavioural Therapy with Exposure and Response Prevention (ERP). Higher doses needed than for depression. 10-12 weeks trial before assessing response. Clomipramine (TCA) is also effective. Refractory: augment with antipsychotics. Benzodiazepines do not treat core OCD symptoms.",
+  },
+  {
+    id: 508,
+    subject: "Orthopaedics",
+    stem: "Colles' fracture is a fracture of:",
+    options: ["Distal radius with dorsal angulation/displacement", "Distal radius with volar (palmar) angulation", "Scaphoid bone", "Distal ulna"],
+    answer: 0,
+    explanation:
+      "Colles' fracture: distal radius fracture within 2.5 cm of wrist joint, with dorsal angulation (dinner fork deformity), dorsal displacement, radial shortening, and supination. Mechanism: FOOSH (fall on outstretched hand) in elderly women (osteoporosis). Smith's fracture (reverse Colles'): volar angulation. Garden spade deformity. Scaphoid fracture: anatomical snuffbox tenderness.",
+  },
+  {
+    id: 509,
+    subject: "Orthopaedics",
+    stem: "The most common complication of hip replacement surgery (total hip arthroplasty) requiring prophylaxis is:",
+    options: ["Infection", "Dislocation", "Deep vein thrombosis (DVT)/pulmonary embolism", "Periprosthetic fracture"],
+    answer: 2,
+    explanation:
+      "DVT/PE is the most common serious complication after hip/knee replacement. All patients require VTE prophylaxis: mechanical (compression stockings, pneumatic compression) + pharmacological (LMWH or rivaroxaban for 28-35 days post-hip replacement, 10-14 days post-knee). Dislocation most common in posterior approach; infection is least common but most devastating.",
+  },
+  {
+    id: 510,
+    subject: "Orthopaedics",
+    stem: "A child aged 5 years presents with a painless limp and limited internal rotation of the hip. X-ray shows flattening and fragmentation of the femoral head. Diagnosis:",
+    options: ["Developmental dysplasia of the hip (DDH)", "Septic arthritis", "Perthes' disease (Legg-Calvé-Perthes)", "Slipped capital femoral epiphysis (SCFE)"],
+    answer: 2,
+    explanation:
+      "Perthes' disease = avascular necrosis of the femoral head epiphysis in children (peak 4-8 years, M:F = 4:1). Painless limp, limited abduction/internal rotation. X-ray: femoral head flattening, fragmentation, 'crescent sign'. MRI is most sensitive early. Treatment: activity restriction, bracing, or surgery depending on age and severity. SCFE occurs in obese adolescents (posterior slip).",
+  },
+  {
+    id: 511,
+    subject: "Radiology",
+    stem: "The investigation of choice for diagnosing acute subarachnoid haemorrhage (SAH) within 6 hours of onset is:",
+    options: ["MRI brain", "CT brain without contrast", "Lumbar puncture", "Cerebral angiography"],
+    answer: 1,
+    explanation:
+      "CT brain without contrast is the investigation of choice for acute SAH — sensitivity ~98% within first 6 hours (hyperdense blood in subarachnoid space). After 6-12 hours, sensitivity drops; LP showing xanthochromia (12 hours–2 weeks) is then required. CT angiography identifies the aneurysm. Worst headache of life ('thunderclap') = SAH until proven otherwise.",
+  },
+  {
+    id: 512,
+    subject: "Radiology",
+    stem: "The 'snowstorm appearance' on ultrasound is seen in:",
+    options: ["Placenta praevia", "Hydatidiform mole (complete)", "Ectopic pregnancy", "Fetal hydrops"],
+    answer: 1,
+    explanation:
+      "Complete hydatidiform mole (CHM): ultrasound shows 'snowstorm appearance' — multiple small echogenic foci filling the uterus, no fetal parts. β-hCG markedly elevated. 15-20% risk of gestational trophoblastic neoplasia (GTN). Treatment: suction evacuation + weekly β-hCG monitoring. Contraception for ≥12 months. Partial mole: fetal parts present, triploid karyotype.",
+  },
+  {
+    id: 513,
+    subject: "Medicine",
+    stem: "The most common autoimmune cause of hyperthyroidism in young women is:",
+    options: ["Toxic multinodular goitre", "Toxic adenoma", "Graves' disease", "Hashimoto's thyroiditis"],
+    answer: 2,
+    explanation:
+      "Graves' disease (diffuse toxic goitre) = most common cause of hyperthyroidism (Hashimoto's = most common hypothyroidism). TSI (thyroid-stimulating immunoglobulin) against TSH receptor → autonomous thyroid stimulation. Unique features: ophthalmopathy (exophthalmos), pretibial myxoedema, thyroid acropachy. Treatment: antithyroid drugs (carbimazole/PTU), radioiodine, or surgery.",
+  },
+  {
+    id: 514,
+    subject: "Medicine",
+    stem: "The 'step-ladder' fever pattern with relative bradycardia (Faget sign) and rose spots is characteristic of:",
+    options: ["Malaria", "Typhoid fever", "Dengue fever", "Brucellosis"],
+    answer: 1,
+    explanation:
+      "Typhoid fever (Salmonella typhi): step-ladder fever (increases each day for 4 days, then plateau) + relative bradycardia (pulse-temperature dissociation) + rose spots (faint salmon-coloured macules, trunk) + abdominal pain + constipation initially then diarrhoea. Widal test (O+H agglutinins). Blood culture positive first week. Chloramphenicol was DOC; now ciprofloxacin or ceftriaxone.",
+  },
+  {
+    id: 515,
+    subject: "Medicine",
+    stem: "In a patient with ascites, a serum-ascites albumin gradient (SAAG) >1.1 g/dL indicates:",
+    options: ["Malignant ascites", "Tuberculous ascites", "Portal hypertension", "Nephrotic syndrome"],
+    answer: 2,
+    explanation:
+      "SAAG = serum albumin - ascites albumin. SAAG >1.1 g/dL = portal hypertension (high protein in serum due to congestion). Causes: cirrhosis, cardiac failure (Budd-Chiari), portal vein thrombosis. SAAG <1.1 g/dL = non-portal hypertension: malignancy, TB peritonitis, pancreatitis, nephrotic syndrome. SAAG has replaced exudate/transudate classification for ascites.",
+  },
+  {
+    id: 516,
+    subject: "Surgery",
+    stem: "The most reliable clinical test for diagnosing acute appendicitis is:",
+    options: ["Rovsing's sign", "McBurney's point tenderness", "Psoas sign", "Rebound tenderness at McBurney's point"],
+    answer: 1,
+    explanation:
+      "McBurney's point tenderness (2/3 of the way from umbilicus to right ASIS) is the most reliable clinical sign of acute appendicitis. Rovsing's sign: RIF pain on LIF palpation. Psoas sign: pain on right hip extension (retrocaecal appendix). Alvarado score ≥7 = high probability. Perforation risk increases with delay. Laparoscopic appendicectomy is now standard.",
+  },
+  {
+    id: 517,
+    subject: "Pharmacology",
+    stem: "Which beta-blocker is cardioselective (beta-1 selective) and therefore preferred in patients with asthma/COPD?",
+    options: ["Propranolol", "Carvedilol", "Metoprolol", "Sotalol"],
+    answer: 2,
+    explanation:
+      "Metoprolol and atenolol are cardioselective beta-1 blockers — they preferentially block cardiac beta-1 receptors with less effect on bronchial/vascular beta-2 receptors. Even so, cardioselectivity is relative and dose-dependent; use with caution in severe asthma/COPD. Propranolol = non-selective (blocks beta-1 + beta-2 → bronchospasm). Carvedilol = non-selective beta + alpha-1 blocker.",
+  },
+  {
+    id: 518,
+    subject: "Pharmacology",
+    stem: "The drug of choice for treatment of acute gout attack is:",
+    options: ["Allopurinol", "Colchicine or NSAIDs (e.g., indomethacin)", "Probenecid", "Febuxostat"],
+    answer: 1,
+    explanation:
+      "Acute gout: colchicine (within 12-36 hours of attack onset) or NSAIDs (indomethacin) are first-line. Oral prednisolone if NSAIDs/colchicine contraindicated. Do NOT start allopurinol during acute attack (may prolong/worsen). Allopurinol (xanthine oxidase inhibitor) = urate-lowering therapy for PREVENTION — started 2-4 weeks after acute attack subsides. Febuxostat = alternative to allopurinol.",
+  },
+  {
+    id: 519,
+    subject: "Pharmacology",
+    stem: "The mechanism by which aspirin produces its antiplatelet effect is:",
+    options: ["Reversible inhibition of COX-1", "Irreversible inhibition of COX-1 → reduced thromboxane A2", "Inhibition of ADP receptor (P2Y12)", "Phosphodiesterase inhibition"],
+    answer: 1,
+    explanation:
+      "Aspirin irreversibly acetylates COX-1 in platelets → blocks thromboxane A2 (TXA2) synthesis → impairs platelet aggregation for the lifetime of the platelet (7-10 days). Low-dose aspirin (75-150 mg) for antiplatelet effect. Clopidogrel/ticagrelor = P2Y12 (ADP receptor) antagonists. Dipyridamole = phosphodiesterase inhibitor. Aspirin also inhibits prostacyclin (PGI2) in endothelium but TXA2 suppression predominates at low doses.",
+  },
+  {
+    id: 520,
+    subject: "Pathology",
+    stem: "The tumour associated with a translocation t(8;14) and characteristic 'starry sky' pattern on histology is:",
+    options: ["Follicular lymphoma", "Hodgkin's lymphoma", "Burkitt's lymphoma", "Mantle cell lymphoma"],
+    answer: 2,
+    explanation:
+      "Burkitt's lymphoma: t(8;14) → MYC proto-oncogene juxtaposed to IgH enhancer → constitutive MYC expression → rapid proliferation (Ki-67 ~100%). 'Starry sky' = macrophages (stars) ingesting apoptotic tumour cells (sky). EBV-associated (especially endemic African form). Jaw mass in African children. Highly chemosensitive (CODOX-M/IVAC). Most rapidly dividing human tumour.",
+  },
+  {
+    id: 521,
+    subject: "Pathology",
+    stem: "Mallory-Denk bodies (Mallory's hyaline) in hepatocytes are characteristically seen in:",
+    options: ["Viral hepatitis A", "Primary biliary cholangitis", "Alcoholic liver disease / NASH", "Wilson's disease"],
+    answer: 2,
+    explanation:
+      "Mallory-Denk bodies = eosinophilic intracytoplasmic inclusions in hepatocytes (aggregated intermediate filaments, especially cytokeratins 8/18). Classic in alcoholic hepatitis and NASH (non-alcoholic steatohepatitis). Also seen (less characteristically) in PBC, Wilson's disease, PSC. Alcoholic hepatitis: Mallory bodies + ballooning degeneration + neutrophil infiltration + fat.",
+  },
+  {
+    id: 522,
+    subject: "OBG",
+    stem: "The most common site of ectopic pregnancy is:",
+    options: ["Ovary", "Cervix", "Fallopian tube (ampullary portion)", "Abdominal cavity"],
+    answer: 2,
+    explanation:
+      "95-97% of ectopic pregnancies occur in the fallopian tube; ampulla is the most common site (55-70%). Risk factors: PID, previous ectopic, tubal surgery, IVF, IUD (risk of ectopic if pregnancy occurs with IUD in situ). Classic presentation: amenorrhoea + lower abdominal pain + vaginal bleeding. Ruptured ectopic = haemoperitoneum + haemodynamic instability → emergency surgery.",
+  },
+  {
+    id: 523,
+    subject: "OBG",
+    stem: "The investigation of choice for assessing fetal well-being in a post-term pregnancy (>42 weeks) is:",
+    options: ["Doppler velocimetry of umbilical artery", "Non-stress test (NST) + amniotic fluid index (AFI)", "Serum HPL (human placental lactogen)", "Biophysical profile (BPP)"],
+    answer: 3,
+    explanation:
+      "Biophysical profile (BPP) = NST + 4 ultrasound parameters (fetal breathing movements, fetal movement, fetal tone, amniotic fluid volume). Score 8-10 = normal; ≤4 = deliver. Most comprehensive assessment. Modified BPP = NST + AFI (more practical). Post-term pregnancy: increased risk of meconium aspiration, oligohydramnios, placental insufficiency. Offer IOL at 41+0 weeks.",
+  },
+  {
+    id: 524,
+    subject: "Paediatrics",
+    stem: "The most common cause of pneumonia in neonates is:",
+    options: ["Streptococcus pneumoniae", "Group B Streptococcus (GBS)", "RSV (respiratory syncytial virus)", "Staphylococcus aureus"],
+    answer: 1,
+    explanation:
+      "Group B Streptococcus (Streptococcus agalactiae) is the most common cause of neonatal pneumonia (early-onset: <7 days, vertical transmission during delivery). Also causes meningitis and septicaemia. Late-onset (>7 days): E. coli, Listeria, S. aureus. RSV is the most common cause of bronchiolitis in infants >2 months. Congenital pneumonia: TORCH organisms.",
+  },
+  {
+    id: 525,
+    subject: "Paediatrics",
+    stem: "Physiological jaundice in neonates appears on day 2-3 of life and resolves by:",
+    options: ["Day 5 in term babies", "Day 7-10 in term; day 14 in preterm", "Day 3", "Day 21 in all neonates"],
+    answer: 1,
+    explanation:
+      "Physiological jaundice: appears day 2-3 (never day 1 — if day 1, always pathological), peaks day 3-5, resolves by day 7-10 in term neonates; may persist up to 14 days in preterm. Mechanism: high RBC breakdown, immature hepatic bilirubin conjugation, increased enterohepatic circulation. Serum bilirubin <12 mg/dL in term. Treatment: phototherapy if above threshold. Exchange transfusion if severe.",
+  },
+  {
+    id: 526,
+    subject: "PSM",
+    stem: "Attributable risk (AR) or risk difference is defined as:",
+    options: ["Risk in exposed / Risk in unexposed", "Risk in exposed − Risk in unexposed", "(Risk in exposed − Risk in unexposed) / Risk in unexposed × 100", "1 − (Risk in unexposed / Risk in exposed)"],
+    answer: 1,
+    explanation:
+      "Attributable risk = Risk (incidence) in exposed − Risk (incidence) in unexposed. It measures the excess risk attributable to the exposure. Relative risk (RR) = Risk in exposed / Risk in unexposed. Population attributable risk = AR × prevalence of exposure in population. Odds ratio (OR) ≈ RR when disease is rare.",
+  },
+  {
+    id: 527,
+    subject: "PSM",
+    stem: "The gold standard study design for evaluating efficacy of a new treatment is:",
+    options: ["Cohort study", "Case-control study", "Randomised controlled trial (RCT)", "Cross-sectional survey"],
+    answer: 2,
+    explanation:
+      "Randomised controlled trial (RCT) is the gold standard for evaluating therapeutic interventions. Random allocation minimises confounding, allowing causal inference. Systematic reviews + meta-analyses of RCTs provide highest level of evidence. Cohort studies best for incidence and aetiology. Case-control for rare diseases (retrospective). Cross-sectional for prevalence. Ecological studies: population-level data.",
+  },
+  {
+    id: 528,
+    subject: "Microbiology",
+    stem: "The test used to detect latent tuberculosis infection (LTBI) that is not affected by BCG vaccination is:",
+    options: ["Mantoux (tuberculin skin test)", "IGRA (interferon-gamma release assay)", "Sputum AFB smear", "Serum adenosine deaminase"],
+    answer: 1,
+    explanation:
+      "IGRAs (e.g., QuantiFERON-TB Gold, T-SPOT.TB) detect IFN-γ release from T-cells stimulated by M. tuberculosis-specific antigens (ESAT-6, CFP-10) — NOT present in BCG or most NTM → not affected by BCG vaccination. Mantoux test (TST): false positive with BCG and NTM. IGRA is preferred for BCG-vaccinated individuals or those with prior Mantoux. Blood test, single visit.",
+  },
+  {
+    id: 529,
+    subject: "Microbiology",
+    stem: "The causative organism of chancroid (soft sore/ulcus molle) is:",
+    options: ["Treponema pallidum", "Haemophilus ducreyi", "Klebsiella granulomatis", "Chlamydia trachomatis (L1-L3)"],
+    answer: 1,
+    explanation:
+      "Chancroid = Haemophilus ducreyi. Characteristics: painful, soft, ragged ulcer with undermined edges + painful inguinal lymphadenopathy (bubo). Gram stain: 'school of fish' pattern. Diagnosis: clinical; culture on special media. Treatment: azithromycin or ceftriaxone. Contrast with syphilis (Treponema pallidum — painless hard ulcer + painless lymphadenopathy). LGV = Chlamydia L1-L3.",
+  },
+  {
+    id: 530,
+    subject: "Anatomy",
+    stem: "The circle of Willis is an arterial anastomosis at the base of the brain. Its components include all of the following EXCEPT:",
+    options: ["Anterior communicating artery", "Posterior communicating artery", "Basilar artery", "Middle cerebral artery"],
+    answer: 3,
+    explanation:
+      "Circle of Willis components: anterior communicating artery + both ACAs + both ICAs + both PComs + both PCAs. The middle cerebral artery (MCA) is NOT part of the circle — it branches from the ICA but runs laterally into the Sylvian fissure. Basilar artery is the precursor (gives both PCAs) but is technically part of the posterior circulation feeding the circle, not within it.",
+  },
+  {
+    id: 531,
+    subject: "Anatomy",
+    stem: "The thoracic duct drains lymph from all of the following EXCEPT:",
+    options: ["Left side of the head and neck", "Both lower limbs", "Right lung", "Gut (intestinal lacteals)"],
+    answer: 2,
+    explanation:
+      "Thoracic duct drains: both lower limbs, abdomen, left thorax, left arm, left head/neck → into left subclavian/brachiocephalic vein. Right lymphatic duct drains: right head/neck, right arm, right thorax (including RIGHT LUNG) → right subclavian vein. So the right lung is NOT drained by the thoracic duct. Chyle in thoracic duct after meals due to intestinal lacteals.",
+  },
+  {
+    id: 532,
+    subject: "Physiology",
+    stem: "Aldosterone is secreted from the zona glomerulosa of the adrenal cortex in response to:",
+    options: ["High serum sodium", "Angiotensin II + hyperkalaemia + ACTH", "Low serum potassium", "ANP (atrial natriuretic peptide)"],
+    answer: 1,
+    explanation:
+      "Aldosterone secretion is primarily stimulated by: (1) Angiotensin II (via RAAS activation in low BP/volume), (2) Hyperkalaemia (direct effect on zona glomerulosa), (3) ACTH (minor role). ANP and high Na suppress aldosterone. Aldosterone → Na retention + K excretion at collecting duct. Mineralocorticoid receptor also binds cortisol (blocked by 11β-HSD2 in kidney).",
+  },
+  {
+    id: 533,
+    subject: "Physiology",
+    stem: "In the cardiac action potential of a ventricular myocyte, the plateau phase (phase 2) is maintained by:",
+    options: ["Rapid Na+ influx", "K+ efflux only", "Balanced Ca2+ influx (L-type) and K+ efflux", "Cl− influx"],
+    answer: 2,
+    explanation:
+      "Ventricular AP phases: Phase 0 = rapid Na+ influx (upstroke); Phase 1 = transient K+ efflux; Phase 2 = PLATEAU — slow Ca2+ influx (L-type channels, triggers excitation-contraction coupling) balanced by K+ efflux; Phase 3 = repolarisation (K+ efflux dominant); Phase 4 = resting potential (−90 mV, IK1 maintains). L-type Ca2+ channels blocked by verapamil/diltiazem.",
+  },
+  {
+    id: 534,
+    subject: "Medicine",
+    stem: "In an immunocompromised patient (HIV, CD4 <50), the most common cause of CNS space-occupying lesion (SOL) in India is:",
+    options: ["Primary CNS lymphoma", "Cryptococcal abscess", "Cerebral toxoplasmosis", "Progressive multifocal leucoencephalopathy (PML)"],
+    answer: 2,
+    explanation:
+      "Cerebral toxoplasmosis (Toxoplasma gondii reactivation) is the most common cause of CNS SOL in HIV patients globally. CT/MRI: multiple ring-enhancing lesions in basal ganglia. Treatment trial: pyrimethamine + sulfadiazine + folinic acid (if serology positive and clinical picture fits). Primary CNS lymphoma: usually single ring-enhancing lesion, EBV-associated.",
+  },
+  {
+    id: 535,
+    subject: "Medicine",
+    stem: "The most common cause of mitral stenosis in adults worldwide is:",
+    options: ["Congenital", "Rheumatic fever", "Degenerative calcification", "Infective endocarditis"],
+    answer: 1,
+    explanation:
+      "Rheumatic fever (Group A Streptococcal pharyngitis → cross-reactive antibodies) is the most common cause of mitral stenosis worldwide (and in India). Mitral valve is most commonly affected. Features: low-pitched mid-diastolic rumble at apex + opening snap (OS) + loud S1. Mitral valve area <1 cm² = severe. Treatment: balloon mitral valvotomy (BMV) for suitable morphology.",
+  },
+  {
+    id: 536,
+    subject: "Surgery",
+    stem: "The most important prognostic factor in carcinoma of the breast is:",
+    options: ["Tumour size", "Histological grade", "Axillary lymph node status", "Oestrogen receptor status"],
+    answer: 2,
+    explanation:
+      "Axillary lymph node status is the single most important prognostic factor in breast cancer — presence and number of involved nodes determines staging and treatment. Other important prognostic factors: tumour size (T stage), histological grade, lymphovascular invasion, HER2 status, hormone receptor status. Sentinel lymph node biopsy has replaced axillary clearance for clinically node-negative patients.",
+  },
+  {
+    id: 537,
+    subject: "Surgery",
+    stem: "The best investigation for staging carcinoma of the rectum is:",
+    options: ["CT thorax/abdomen/pelvis", "MRI pelvis", "Transrectal ultrasound (TRUS)", "PET scan"],
+    answer: 1,
+    explanation:
+      "MRI pelvis is the gold standard for local staging of rectal cancer (T and N staging) — it accurately defines the mesorectal fascia, relationship to CRM (circumferential resection margin), and sphincter involvement, guiding decision on neoadjuvant chemoradiotherapy. CT chest/abdomen/pelvis is used for distant metastasis staging. TRUS is useful for early rectal tumours (T1/T2).",
+  },
+  {
+    id: 538,
+    subject: "Pharmacology",
+    stem: "The reversal agent for dabigatran (direct thrombin inhibitor) is:",
+    options: ["Protamine sulphate", "Vitamin K", "Idarucizumab (Praxbind)", "Andexanet alfa"],
+    answer: 2,
+    explanation:
+      "Idarucizumab (Praxbind) is the specific reversal agent for dabigatran (direct thrombin inhibitor). Andexanet alfa reverses Factor Xa inhibitors (rivaroxaban, apixaban). Protamine sulphate reverses heparin (UFH; partial reversal of LMWH). Vitamin K reverses warfarin. Knowing reversal agents is high-yield for NEET PG.",
+  },
+  {
+    id: 539,
+    subject: "Pathology",
+    stem: "The hallmark of Type I hypersensitivity (anaphylaxis/atopy) is:",
+    options: ["IgM + complement activation", "IgG + complement + cytotoxicity", "IgE bound to mast cells + basophils → crosslinking by antigen → mediator release", "T-cell mediated (delayed hypersensitivity)"],
+    answer: 2,
+    explanation:
+      "Type I (immediate/anaphylactic): IgE bound to FcεRI on mast cells/basophils → antigen crosslinks IgE → degranulation → histamine, tryptase, leukotrienes, prostaglandins. Examples: anaphylaxis, urticaria, asthma, allergic rhinitis. Type II: IgG/IgM + complement (haemolytic anaemia, Goodpasture). Type III: immune complex (SLE, serum sickness). Type IV: T-cell (contact dermatitis, TB).",
+  },
+  {
+    id: 540,
+    subject: "OBG",
+    stem: "A 55-year-old postmenopausal woman presents with postmenopausal bleeding. The most important investigation to exclude endometrial carcinoma is:",
+    options: ["Pelvic ultrasound only", "Hysteroscopy + endometrial biopsy", "Cervical smear (Pap smear)", "Serum CA-125"],
+    answer: 1,
+    explanation:
+      "Hysteroscopy + endometrial biopsy (or D&C) is the definitive investigation for postmenopausal bleeding — allows direct visualisation of the endometrium and histological diagnosis. Transvaginal ultrasound (TVS) is the first-line investigation: endometrial thickness >4-5 mm in a postmenopausal woman requires histological assessment. Pap smear detects cervical (not endometrial) cancer. CA-125 is for ovarian cancer monitoring.",
+  },
+  {
+    id: 541,
+    subject: "Paediatrics",
+    stem: "The most common site of osteomyelitis in children is:",
+    options: ["Epiphysis", "Metaphysis", "Diaphysis", "Periosteum"],
+    answer: 1,
+    explanation:
+      "Metaphysis is the most common site of haematogenous osteomyelitis in children due to sluggish blood flow and lack of phagocytic cells in the venous sinusoids. Most common organism: Staphylococcus aureus (all ages). Neonates: GBS + S. aureus + Gram-negatives. Sickle cell disease: Salmonella spp. X-ray changes appear 10-14 days after onset; MRI is most sensitive early.",
+  },
+  {
+    id: 542,
+    subject: "PSM",
+    stem: "The infant mortality rate (IMR) in India as per SRS 2020 is approximately:",
+    options: ["15 per 1000 live births", "28 per 1000 live births", "42 per 1000 live births", "55 per 1000 live births"],
+    answer: 1,
+    explanation:
+      "India's IMR as per SRS 2020 = 28 per 1000 live births (urban 18, rural 31). Major causes: neonatal conditions (birth asphyxia, sepsis, prematurity) account for ~50% of under-5 deaths. SDG target: IMR <12 by 2030. States with lowest IMR: Kerala (~6), Goa (~9). States with highest IMR: UP (~38), MP (~41).",
+  },
+  {
+    id: 543,
+    subject: "Microbiology",
+    stem: "Which hepatitis virus is transmitted by the faeco-oral route and does NOT cause chronic infection?",
+    options: ["Hepatitis B", "Hepatitis C", "Hepatitis E", "Hepatitis D"],
+    answer: 2,
+    explanation:
+      "Hepatitis E: faeco-oral transmission (contaminated water), RNA virus (Hepevirus). Does NOT cause chronic infection (except in immunocompromised). However, causes high mortality (up to 25%) in pregnant women (especially 3rd trimester). No specific antiviral treatment. Hepatitis A also faeco-oral, no chronic infection. HBV, HCV, HDV = bloodborne, can cause chronic hepatitis.",
+  },
+  {
+    id: 544,
+    subject: "Anatomy",
+    stem: "The vertebral level of the aortic hiatus (where the descending aorta passes through the diaphragm) is:",
+    options: ["T8", "T10", "T12", "L1"],
+    answer: 2,
+    explanation:
+      "Diaphragmatic openings: T8 = IVC (and right phrenic nerve); T10 = oesophagus + left and right vagus nerves; T12 = aorta + thoracic duct + azygos vein. Mnemonic: 'I 8 (ate) 10 eggs at 12' = IVC at T8, oEsophagus at T10, Aorta at T12. The aortic hiatus is technically behind the median arcuate ligament, not through the diaphragm muscle itself.",
+  },
+  {
+    id: 545,
+    subject: "Physiology",
+    stem: "The normal anion gap (AG) in arterial blood gas analysis is:",
+    options: ["4-8 mEq/L", "8-12 mEq/L", "14-18 mEq/L", "20-24 mEq/L"],
+    answer: 1,
+    explanation:
+      "Anion gap = Na − (Cl + HCO3) = normally 8-12 mEq/L (unmeasured anions: albumin, phosphate, sulphate). Elevated AG metabolic acidosis (MUDPILES): Methanol, Uraemia, DKA, Propylene glycol, Isoniazid/Iron, Lactic acidosis, Ethylene glycol, Salicylates. Normal AG metabolic acidosis (HARDASS): Hyperalimentation, Addison's, RTA, Diarrhoea, Acetazolamide, Spironolactone, Saline infusion.",
+  },
+  {
+    id: 546,
+    subject: "Medicine",
+    stem: "A patient with AIDS presents with progressive outer retinal necrosis and painless vision loss. The most likely causative organism is:",
+    options: ["HSV-1", "Toxoplasma gondii", "Cytomegalovirus (CMV)", "Pneumocystis jirovecii"],
+    answer: 2,
+    explanation:
+      "CMV retinitis: most common ocular opportunistic infection in AIDS (CD4 <50 cells/μL). Painless, progressive vision loss + 'pizza pie' appearance (haemorrhages + exudates along vessels). Treatment: IV/oral ganciclovir or valganciclovir; intravitreal ganciclovir implant. Toxoplasma: CNS SOL. HSV/VZV: acute retinal necrosis (ARN — painful, peripheral necrosis, normal CD4 possible).",
+  },
+  {
+    id: 547,
+    subject: "Surgery",
+    stem: "The most common cause of lower GI bleeding (fresh blood per rectum) in adults in India is:",
+    options: ["Colorectal carcinoma", "Haemorrhoids", "Diverticular disease", "Angiodysplasia"],
+    answer: 1,
+    explanation:
+      "Haemorrhoids (piles) are the most common cause of fresh rectal bleeding in adults in India. Internal haemorrhoids (above dentate line): painless bright red bleeding (not mixed with stool — coats paper). External haemorrhoids (below dentate line): painful. In Western countries, diverticular disease is the most common cause of significant lower GI bleeding. Colorectal cancer: blood mixed with stool.",
+  },
+  {
+    id: 548,
+    subject: "Pharmacology",
+    stem: "The most common side effect of ACE inhibitors that often necessitates discontinuation is:",
+    options: ["Hyperkalaemia", "First-dose hypotension", "Dry persistent cough", "Angioedema"],
+    answer: 2,
+    explanation:
+      "Dry, persistent, non-productive cough occurs in ~10-20% of patients on ACE inhibitors (due to accumulation of bradykinin and substance P in the respiratory tract). It is the most common side effect causing discontinuation. Switch to an ARB (sartans — do not cause cough). Hyperkalaemia and first-dose hypotension also occur. Angioedema is rare but life-threatening (also bradykinin-mediated).",
+  },
+  {
+    id: 549,
+    subject: "Pathology",
+    stem: "The most common type of renal cell carcinoma (RCC) and its characteristic cytoplasm appearance is:",
+    options: ["Chromophobe RCC — pale cytoplasm", "Clear cell RCC — clear cytoplasm due to glycogen and lipid", "Papillary RCC — papillary architecture", "Collecting duct carcinoma — tubular pattern"],
+    answer: 1,
+    explanation:
+      "Clear cell RCC (ccRCC) = most common RCC (70-75%). Arises from proximal tubular cells. Clear cytoplasm due to abundant glycogen and lipid (dissolved in processing). VHL gene mutation (chromosome 3p). Classic triad (now rare at presentation): haematuria + flank pain + palpable mass. Paraneoplastic: polycythaemia (EPO), hypercalcaemia (PTHrP). Best prognosis: chromophobe. Worst: collecting duct.",
+  },
+  {
+    id: 550,
+    subject: "OBG",
+    stem: "The drug of choice for treatment of Trichomonas vaginalis infection is:",
+    options: ["Clindamycin", "Fluconazole", "Metronidazole", "Doxycycline"],
+    answer: 2,
+    explanation:
+      "Trichomonas vaginalis (protozoan STI): frothy, yellow-green, offensive discharge + vaginal pruritus + 'strawberry cervix' (punctate haemorrhages). pH >4.5. Wet mount: motile trichomonads with flagella. Treatment: metronidazole 2g stat (or 400 mg BD × 5-7 days) — MUST treat partner simultaneously. Fluconazole = candidiasis. Clindamycin = bacterial vaginosis (alternative). Doxycycline = chlamydia.",
+  },
+  {
+    id: 551,
+    subject: "ENT",
+    stem: "The most common benign tumour of the parotid gland is:",
+    options: ["Warthin's tumour (adenolymphoma)", "Mucoepidermoid carcinoma", "Pleomorphic adenoma (benign mixed tumour)", "Oncocytoma"],
+    answer: 2,
+    explanation:
+      "Pleomorphic adenoma = most common parotid tumour (70-80% of all salivary gland tumours). Benign, slow-growing, mobile. Risk of malignant transformation (carcinoma ex pleomorphic adenoma) if untreated long-term. Treatment: superficial parotidectomy (preserve facial nerve). Warthin's tumour: bilateral in 10%, smokers, middle-aged men. Mucoepidermoid carcinoma: most common malignant salivary gland tumour.",
+  },
+  {
+    id: 552,
+    subject: "Radiology",
+    stem: "Which radiological sign is seen in tension pneumothorax on chest X-ray?",
+    options: ["Opacification of hemithorax", "Tracheal deviation towards the affected side + mediastinal shift", "Tracheal deviation away from affected side + mediastinal shift + absent lung markings", "Pleural effusion shadow"],
+    answer: 2,
+    explanation:
+      "Tension pneumothorax: air enters pleural space but cannot escape (one-way valve) → progressive pressure build-up → trachea and mediastinum deviate AWAY from affected side + absent lung markings on that side + hypotension + distended neck veins. This is a clinical diagnosis — do NOT wait for X-ray if haemodynamically compromised. Immediate needle decompression (2nd ICS, MCL), then chest drain.",
+  },
 ];
 

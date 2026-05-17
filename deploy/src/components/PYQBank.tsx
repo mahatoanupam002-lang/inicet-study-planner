@@ -1,7 +1,7 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useMemo } from "react";
 import {
   BookOpen, CheckCircle, XCircle, Shuffle, ChevronLeft, ChevronRight,
-  RotateCcw, TrendingUp, Lightbulb, Brain, Zap, RefreshCw, Search,
+  RotateCcw, TrendingUp, Search,
 } from "lucide-react";
 import { QUESTIONS, QUESTION_SUBJECTS, Question } from "@/data/questions";
 import { safeLoad, safeSave } from "@/lib/storage";
@@ -9,39 +9,17 @@ import { safeLoad, safeSave } from "@/lib/storage";
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface AttemptRecord { selected: number; correct: boolean; }
-type FilterMode      = "all" | "unattempted" | "wrong";
+type FilterMode       = "all" | "unattempted" | "wrong";
 type DifficultyFilter = "all" | "easy" | "medium" | "hard";
-type SourceFilter    = "all" | "today" | "classic";
-
-interface AIQuestion {
-  id: string;
-  subject: string;
-  topic: string;
-  question: string;
-  options: string[];
-  correct_answer: number;
-  explanation: string;
-  mnemonic: string | null;
-  key_concept: string | null;
-  difficulty: "easy" | "medium" | "hard";
-  exam_hint: string | null;
-  batch_date: string;
-}
 
 interface UnifiedQuestion {
   uid: string;
   subject: string;
-  topic?: string;
   stem: string;
   options: [string, string, string, string];
   answer: 0 | 1 | 2 | 3;
   explanation: string;
-  mnemonic?: string | null;
-  key_concept?: string | null;
   difficulty: "easy" | "medium" | "hard";
-  exam_hint?: string | null;
-  isAI: boolean;
-  batch_date?: string;
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -55,25 +33,6 @@ function localToUnified(q: Question): UnifiedQuestion {
     answer: q.answer,
     explanation: q.explanation,
     difficulty: "medium",
-    isAI: false,
-  };
-}
-
-function aiToUnified(q: AIQuestion): UnifiedQuestion {
-  return {
-    uid: q.id,
-    subject: q.subject,
-    topic: q.topic,
-    stem: q.question,
-    options: q.options as [string, string, string, string],
-    answer: q.correct_answer as 0 | 1 | 2 | 3,
-    explanation: q.explanation,
-    mnemonic: q.mnemonic,
-    key_concept: q.key_concept,
-    difficulty: q.difficulty ?? "medium",
-    exam_hint: q.exam_hint,
-    isAI: true,
-    batch_date: q.batch_date,
   };
 }
 
@@ -83,8 +42,6 @@ function loadAttempts(): Record<string, AttemptRecord> {
 function saveAttempts(a: Record<string, AttemptRecord>) {
   safeSave("neetpg_pyq_attempts", a);
 }
-
-const TODAY = new Date().toISOString().slice(0, 10);
 
 const DIFF_COLORS: Record<string, string> = {
   easy:   "text-emerald-400 border-emerald-500/40 bg-emerald-500/10",
@@ -102,40 +59,16 @@ function DiffBadge({ level }: { level: string }) {
   );
 }
 
-function MnemonicBox({ text }: { text: string }) {
-  return (
-    <div className="mx-5 mb-3 flex items-start gap-2 bg-yellow-500/8 border border-yellow-500/25 rounded-xl px-4 py-3">
-      <Lightbulb className="w-4 h-4 text-yellow-400 mt-0.5 shrink-0" />
-      <div>
-        <p className="text-[10px] font-mono text-yellow-400 uppercase tracking-wider mb-1">Mnemonic</p>
-        <p className="text-sm font-mono text-yellow-200 font-semibold leading-relaxed">{text}</p>
-      </div>
-    </div>
-  );
-}
-
-function KeyConceptBox({ text }: { text: string }) {
-  return (
-    <div className="mx-5 mb-3 flex items-start gap-2 bg-primary/8 border border-primary/25 rounded-xl px-4 py-3">
-      <Brain className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-      <div>
-        <p className="text-[10px] font-mono text-primary uppercase tracking-wider mb-1">Key Concept</p>
-        <p className="text-sm font-mono text-foreground/90 leading-relaxed">{text}</p>
-      </div>
-    </div>
-  );
-}
 
 // ─── Stats View ───────────────────────────────────────────────────────────────
 
 function StatsView({
-  attempts, allQuestions, onBack, onReset, todayCount,
+  attempts, allQuestions, onBack, onReset,
 }: {
   attempts: Record<string, AttemptRecord>;
   allQuestions: UnifiedQuestion[];
   onBack: () => void;
   onReset: () => void;
-  todayCount: number;
 }) {
   const totalAttempted = Object.keys(attempts).length;
   const totalCorrect   = Object.values(attempts).filter(a => a.correct).length;
@@ -164,7 +97,7 @@ function StatsView({
           { label: "Overall Accuracy", value: overallPct !== null ? `${overallPct}%` : "—", color: "text-primary"     },
           { label: "Attempted",        value: totalAttempted,                                color: "text-foreground"  },
           { label: "Correct",          value: totalCorrect,                                  color: "text-emerald-400" },
-          { label: "Today's AI Qs",    value: todayCount,                                    color: "text-yellow-400"  },
+          { label: "Wrong",            value: totalAttempted - totalCorrect,                 color: "text-destructive" },
         ].map(({ label, value, color }) => (
           <div key={label} className="bg-card border border-border rounded-xl p-4 text-center">
             <p className={`text-2xl font-mono font-bold ${color}`}>{value}</p>
@@ -211,87 +144,25 @@ export function PYQBank({ onCorrect, onWrong }: PYQBankProps = {}) {
   const [subject,     setSubject]     = useState<string>("All");
   const [mode,        setMode]        = useState<FilterMode>("all");
   const [difficulty,  setDifficulty]  = useState<DifficultyFilter>("all");
-  const [source,      setSource]      = useState<SourceFilter>("all");
   const [qIndex,      setQIndex]      = useState<number>(0);
   const [selectedOpt, setSelectedOpt] = useState<number | null>(null);
   const [showStats,   setShowStats]   = useState<boolean>(false);
   const [search,      setSearch]      = useState<string>("");
 
-  const [aiQuestions, setAiQuestions] = useState<UnifiedQuestion[]>([]);
-  const [aiMeta,      setAiMeta]      = useState<{ lastUpdated: string; todayCount: number; totalDays: number } | null>(null);
-  const [loadingAI,   setLoadingAI]   = useState<boolean>(true);
-
-  const fetchAI = useCallback(async () => {
-    setLoadingAI(true);
-    try {
-      const today = new Date().toISOString().slice(0, 10);
-      const res   = await fetch(`/api/daily-questions?date=${today}`);
-      if (!res.ok) throw new Error("Not found");
-      const data  = await res.json();
-
-      // Map /api/daily-questions format → AIQuestion → UnifiedQuestion
-      type APIQ = { id: number; subject: string; topic: string; stem: string; options: string[]; answer: number; explanation: string; prediction: { confidence: string; rationale: string; topic_frequency: string } };
-      const confidenceToDifficulty = (c: string): "easy" | "medium" | "hard" =>
-        c === "high" ? "hard" : c === "medium" ? "medium" : "easy";
-
-      const qs: AIQuestion[] = ((data.questions ?? []) as APIQ[]).map(q => ({
-        id:             `ai_${today}_${q.id}`,
-        subject:        q.subject,
-        topic:          q.topic ?? "",
-        question:       q.stem,
-        options:        q.options,
-        correct_answer: q.answer,
-        explanation:    q.explanation,
-        mnemonic:       null,
-        key_concept:    q.prediction?.rationale ?? null,
-        difficulty:     confidenceToDifficulty(q.prediction?.confidence ?? "medium"),
-        exam_hint:      q.prediction?.topic_frequency ?? null,
-        batch_date:     today,
-      }));
-
-      setAiQuestions(qs.map(aiToUnified));
-      setAiMeta({ lastUpdated: today, todayCount: qs.length, totalDays: 1 });
-    } catch {
-      // API not configured yet — silent fallback
-    } finally {
-      setLoadingAI(false);
-    }
-  }, []);
-
-  useEffect(() => { fetchAI(); }, [fetchAI]);
-
-  const allQuestions = useMemo<UnifiedQuestion[]>(() => [
-    ...aiQuestions,
-    ...QUESTIONS.map(localToUnified),
-  ], [aiQuestions]);
-
-  const todayCount = useMemo(
-    () => aiQuestions.filter(q => q.batch_date === TODAY).length,
-    [aiQuestions]
-  );
+  const allQuestions = useMemo<UnifiedQuestion[]>(() => QUESTIONS.map(localToUnified), []);
 
   const pool = useMemo<UnifiedQuestion[]>(() => {
     let qs = allQuestions;
-
-    if (source === "today")   qs = qs.filter(q => q.isAI && q.batch_date === TODAY);
-    if (source === "classic") qs = qs.filter(q => !q.isAI);
-
     if (subject !== "All")    qs = qs.filter(q => q.subject === subject);
     if (difficulty !== "all") qs = qs.filter(q => q.difficulty === difficulty);
-
     if (mode === "unattempted") qs = qs.filter(q => !attempts[q.uid]);
     if (mode === "wrong")       qs = qs.filter(q => attempts[q.uid] && !attempts[q.uid].correct);
-
     if (search.trim()) {
       const s = search.toLowerCase();
-      qs = qs.filter(q =>
-        q.stem.toLowerCase().includes(s) ||
-        q.subject.toLowerCase().includes(s) ||
-        q.topic?.toLowerCase().includes(s)
-      );
+      qs = qs.filter(q => q.stem.toLowerCase().includes(s) || q.subject.toLowerCase().includes(s));
     }
     return qs;
-  }, [allQuestions, source, subject, difficulty, mode, search, attempts]);
+  }, [allQuestions, subject, difficulty, mode, search, attempts]);
 
   const current = pool[qIndex] ?? null;
   const attempt = current ? attempts[current.uid] : null;
@@ -340,7 +211,6 @@ export function PYQBank({ onCorrect, onWrong }: PYQBankProps = {}) {
         allQuestions={allQuestions}
         onBack={() => setShowStats(false)}
         onReset={() => { resetAll(); setShowStats(false); }}
-        todayCount={todayCount}
       />
     );
   }
@@ -357,18 +227,7 @@ export function PYQBank({ onCorrect, onWrong }: PYQBankProps = {}) {
           <div>
             <h2 className="font-mono font-bold text-foreground uppercase tracking-wider text-sm">PYQ Practice</h2>
             <p className="text-xs text-muted-foreground font-mono">
-              {allQuestions.length.toLocaleString()} questions
-              {aiMeta && aiMeta.totalDays > 0 && (
-                <span className="ml-2 text-primary/80">
-                  · Day {aiMeta.totalDays} · {(aiMeta.totalDays * 500).toLocaleString()} total
-                </span>
-              )}
-              {todayCount > 0 && (
-                <span className="ml-2 text-yellow-400">
-                  <Zap className="w-3 h-3 inline mr-0.5" />+{todayCount} today
-                </span>
-              )}
-              {loadingAI && <span className="ml-2 animate-pulse">· loading…</span>}
+              {allQuestions.length.toLocaleString()} questions · NEET PG focused
             </p>
           </div>
         </div>
@@ -379,13 +238,6 @@ export function PYQBank({ onCorrect, onWrong }: PYQBankProps = {}) {
               <span className="text-xs font-mono text-emerald-400">{overallPct}% accuracy</span>
             </div>
           )}
-          <button
-            onClick={fetchAI}
-            title="Refresh AI questions"
-            className="p-1.5 text-muted-foreground hover:text-foreground border border-border rounded transition-colors"
-          >
-            <RefreshCw className="w-3.5 h-3.5" />
-          </button>
           <button onClick={() => setShowStats(true)} className="px-3 py-1.5 text-xs font-mono text-muted-foreground hover:text-foreground border border-border rounded-md transition-colors">
             Stats
           </button>
@@ -405,21 +257,6 @@ export function PYQBank({ onCorrect, onWrong }: PYQBankProps = {}) {
 
       {/* Filters */}
       <div className="flex flex-col gap-2 shrink-0">
-        {/* Source */}
-        <div className="flex gap-1.5 flex-wrap">
-          {(["all", "today", "classic"] as SourceFilter[]).map(s => (
-            <button
-              key={s}
-              onClick={() => { setSource(s); setQIndex(0); setSelectedOpt(null); }}
-              className={`px-2.5 py-1 text-[11px] font-mono rounded-full border transition-colors ${
-                source === s ? "bg-primary text-primary-foreground border-primary" : "text-muted-foreground border-border hover:border-muted-foreground"
-              }`}
-            >
-              {s === "today" ? `Today's AI (${todayCount})` : s === "classic" ? "Classic PYQ" : "All"}
-            </button>
-          ))}
-        </div>
-
         {/* Subject */}
         <div className="flex flex-wrap gap-1.5">
           {["All", ...QUESTION_SUBJECTS].map(s => (
@@ -477,7 +314,7 @@ export function PYQBank({ onCorrect, onWrong }: PYQBankProps = {}) {
               {mode === "unattempted" ? "All questions attempted!" : "No wrong answers — great work!"}
             </p>
             <button
-              onClick={() => { setMode("all"); setDifficulty("all"); setSource("all"); setQIndex(0); }}
+              onClick={() => { setMode("all"); setDifficulty("all"); setQIndex(0); }}
               className="px-4 py-2 bg-primary text-primary-foreground text-xs font-mono rounded-md"
             >
               Show All
@@ -494,15 +331,7 @@ export function PYQBank({ onCorrect, onWrong }: PYQBankProps = {}) {
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-border text-muted-foreground">
                   {current.subject}
                 </span>
-                {current.topic && (
-                  <span className="text-[10px] font-mono text-muted-foreground/70">{current.topic}</span>
-                )}
                 <DiffBadge level={current.difficulty} />
-                {current.isAI && current.exam_hint && (
-                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border border-primary/30 text-primary/70 bg-primary/5">
-                    {current.exam_hint}
-                  </span>
-                )}
                 {attempt && (attempt.correct
                   ? <CheckCircle className="w-4 h-4 text-emerald-400" />
                   : <XCircle    className="w-4 h-4 text-destructive" />
@@ -533,16 +362,12 @@ export function PYQBank({ onCorrect, onWrong }: PYQBankProps = {}) {
               ))}
             </div>
 
-            {/* Rank-1 reveal: key concept → mnemonic → full explanation */}
+            {/* Explanation */}
             {revealed && (
-              <>
-                {current.key_concept && <KeyConceptBox text={current.key_concept} />}
-                {current.mnemonic    && <MnemonicBox   text={current.mnemonic}   />}
-                <div className="mx-5 mb-5 bg-emerald-500/5 border border-emerald-500/20 rounded-xl px-4 py-3">
-                  <p className="text-[11px] font-mono text-emerald-400 uppercase tracking-wider mb-1.5">Explanation</p>
-                  <p className="text-sm font-mono text-foreground/80 leading-relaxed">{current.explanation}</p>
-                </div>
-              </>
+              <div className="mx-5 mb-5 bg-emerald-500/5 border border-emerald-500/20 rounded-xl px-4 py-3">
+                <p className="text-[11px] font-mono text-emerald-400 uppercase tracking-wider mb-1.5">Explanation</p>
+                <p className="text-sm font-mono text-foreground/80 leading-relaxed">{current.explanation}</p>
+              </div>
             )}
           </div>
 
