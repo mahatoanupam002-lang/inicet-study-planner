@@ -173,8 +173,8 @@ export function AIPredictedQuiz() {
         <div>
           <p className="font-mono font-bold text-foreground mb-1">Could not load AI questions</p>
           <p className="text-xs font-mono text-muted-foreground max-w-sm mx-auto leading-relaxed mb-1">
-            {fetchError.includes("ANTHROPIC_API_KEY")
-              ? "The server ANTHROPIC_API_KEY is not set. Add it to Vercel → Project Settings → Environment Variables."
+            {fetchError.includes("No AI provider") || fetchError.includes("GEMINI")
+              ? "Add a free AI key to Vercel env vars: GEMINI_API_KEY (Google AI Studio — free) or GROQ_API_KEY (Groq — free)."
               : fetchError}
           </p>
           {fetchError.includes("daily_questions") && (
