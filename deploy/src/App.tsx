@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useRef, useCallback, lazy, Suspense } from "react";
+import { useStore } from "zustand";
 import type { User } from "@supabase/supabase-js";
 import {
   Target, Calendar, Clock, StickyNote, Flag, Flame, Download, Upload,
@@ -8,7 +9,7 @@ import {
   Pill, Calculator, BookMarked, XCircle, LayoutGrid, ScrollText, Stethoscope, Sliders, Eye, CalendarCheck,
 } from "lucide-react";
 import { StudyReminderBanner, StudyReminderBell } from "@/components/StudyReminder";
-import { EXAM_DATE, SCHEDULE } from "@/data/schedule";
+import { SCHEDULE } from "@/data/schedule";
 import { safeLoad, safeSave } from "@/lib/storage";
 import { SRCard } from "@/lib/sr";
 import { CountdownTimer } from "@/components/CountdownTimer";
@@ -16,7 +17,7 @@ import { DayGrid } from "@/components/DayGrid";
 import { DayDetail, DetailTab } from "@/components/DayDetail";
 import { DailyScheduleView } from "@/components/DailyScheduleView";
 import { NotesView } from "@/components/NotesView";
-import { RevisionList, FlaggedTopic } from "@/components/RevisionList";
+import { RevisionList } from "@/components/RevisionList";
 import { MockScoreTracker } from "@/components/MockScoreTracker";
 import { RankPredictor } from "@/components/RankPredictor";
 import { OnboardingModal } from "@/components/OnboardingModal";
@@ -65,6 +66,8 @@ const GuidelinesFeed    = mk(() => import("@/components/GuidelinesFeed"),    "Gu
 const GamificationPanel = mk(() => import("@/components/GamificationPanel"), "GamificationPanel");
 import { useAuth } from "@/lib/auth";
 import { useCloudSync } from "@/lib/cloud";
+import { getAppStore, sel } from "@/lib/store";
+import type { StreakData } from "@/lib/store";
 import { computeBaseXP, XP_VALUES, getRank } from "@/lib/xp";
 import { checkAchievements } from "@/lib/achievements";
 import { supabase } from "@/lib/supabase";
@@ -83,7 +86,6 @@ type MainTab =
 type NavGroup = 'home' | 'practice' | 'learn' | 'insights' | 'rewards';
 
 interface TimeLeft { days: number; hours: number; minutes: number; seconds: number; }
-interface StreakData { count: number; longest: number; lastDate: string; }
 
 // ─── Nav config ────────────────────────────────────────────────────────────────
 
@@ -210,39 +212,28 @@ interface StudyAppProps {
 
 function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
 
-  // ── Core study state ──────────────────────────────────────────
-  const [completedDays, setCompletedDays] = useState<number[]>(() =>
-    safeLoad<number[]>(`${prefix}completed_days`, [])
-  );
-  const [notes, setNotes] = useState<Record<number, string>>(() =>
-    safeLoad<Record<number, string>>(`${prefix}notes`, {})
-  );
-  const [mcqScores, setMcqScores] = useState<Record<number, { attempted: number; correct: number }>>(() =>
-    safeLoad(`${prefix}mcq_scores`, {})
-  );
-  const [flagged, setFlagged] = useState<FlaggedTopic[]>(() =>
-    safeLoad(`${prefix}flagged`, [])
-  );
-  const [srCards, setSrCards] = useState<Record<number, SRCard>>(() =>
-    safeLoad(`${prefix}sr_cards`, {})
-  );
-  const [streak, setStreak] = useState<StreakData>(() =>
-    safeLoad(`${prefix}streak`, { count: 0, longest: 0, lastDate: '' })
-  );
+  // ── Persistent store (Zustand, per auth-prefix) ───────────────
+  const appStore = getAppStore(prefix);
+  const completedDays  = useStore(appStore, sel.completedDays);
+  const notes          = useStore(appStore, sel.notes);
+  const mcqScores      = useStore(appStore, sel.mcqScores);
+  const flagged        = useStore(appStore, sel.flagged);
+  const srCards        = useStore(appStore, sel.srCards);
+  const streak         = useStore(appStore, sel.streak);
+  const examDateIso    = useStore(appStore, sel.examDateIso);
+  const bonusXP        = useStore(appStore, sel.bonusXP);
+  const unlockedIds    = useStore(appStore, sel.unlockedIds);
+  const drillsCompleted = useStore(appStore, sel.drillsCompleted);
+  const simCompleted   = useStore(appStore, sel.simCompleted);
+
+  // examDate is derived from the ISO string stored in the store
+  const examDate = useMemo(() => new Date(examDateIso), [examDateIso]);
+
+  // ── Session-only state ────────────────────────────────────────
   const [pyqAttempts, setPyqAttempts] = useState<Record<number, { selected: number; correct: boolean }>>(() =>
     safeLoad('neetpg_pyq_attempts', {})
   );
-  const [examDate, setExamDate] = useState<Date>(() => {
-    const saved = safeLoad<string>(`${prefix}exam_date`, '');
-    return saved ? new Date(saved) : EXAM_DATE;
-  });
-
-  // ── Gamification state ─────────────────────────────────────────
-  const [bonusXP,        setBonusXP]        = useState<number>(() => safeLoad('neetpg_bonus_xp', 0));
-  const [unlockedIds,    setUnlockedIds]    = useState<string[]>(() => safeLoad('neetpg_achievements', []));
-  const [drillsCompleted, setDrillsCompleted] = useState<number>(() => safeLoad('neetpg_drills_count', 0));
-  const [simCompleted,   setSimCompleted]   = useState<boolean>(() => safeLoad('neetpg_sim_done', false));
-  const [xpToasts,       setXpToasts]       = useState<XPToastItem[]>([]);
+  const [xpToasts, setXpToasts] = useState<XPToastItem[]>([]);
 
   // ── Nav state ──────────────────────────────────────────────────
   const [activeGroup,      setActiveGroup]      = useState<NavGroup>('home');
@@ -284,15 +275,13 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
     );
 
     if (newly.length > 0) {
-      const newIds = newly.map(a => a.id);
-      const bonusFromAchievements = newly.reduce((s, a) => s + a.xpReward, 0);
-      setUnlockedIds(prev => [...prev, ...newIds]);
-      setBonusXP(prev => prev + bonusFromAchievements);
-      // Each achievement also shows as a toast
+      const { unlockAchievement } = appStore.getState();
       newly.forEach(a => {
+        unlockAchievement(a.id, a.xpReward);
         setXpToasts(prev => [...prev, makeToastItem(a.xpReward, `${a.emoji} ${a.title}`)]);
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [completedDays, streak, mcqScores, pyqAttempts, notes, drillsCompleted, simCompleted, totalXP, unlockedIds]);
 
   // ── Leaderboard sync ──────────────────────────────────────────
@@ -320,26 +309,13 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
   useCloudSync('flagged',         flagged      as never, syncReady);
   useCloudSync('sr_cards',        srCards      as never, syncReady);
   useCloudSync('streak',          streak       as never, syncReady);
-  useCloudSync('exam_date',       examDate.toISOString() as never, syncReady);
+  useCloudSync('exam_date',       examDateIso as never, syncReady);
 
   // ── Theme ─────────────────────────────────────────────────────
   useEffect(() => {
     document.documentElement.classList.toggle('light', isLightMode);
     safeSave('neetpg_light_mode', isLightMode);
   }, [isLightMode]);
-
-  // ── localStorage persistence ──────────────────────────────────
-  useEffect(() => { safeSave(`${prefix}completed_days`, completedDays); }, [completedDays, prefix]);
-  useEffect(() => { safeSave(`${prefix}notes`,          notes);          }, [notes, prefix]);
-  useEffect(() => { safeSave(`${prefix}mcq_scores`,     mcqScores);      }, [mcqScores, prefix]);
-  useEffect(() => { safeSave(`${prefix}flagged`,        flagged);         }, [flagged, prefix]);
-  useEffect(() => { safeSave(`${prefix}sr_cards`,       srCards);         }, [srCards, prefix]);
-  useEffect(() => { safeSave(`${prefix}streak`,         streak);          }, [streak, prefix]);
-  useEffect(() => { safeSave(`${prefix}exam_date`,      examDate.toISOString()); }, [examDate, prefix]);
-  useEffect(() => { safeSave('neetpg_bonus_xp',         bonusXP);         }, [bonusXP]);
-  useEffect(() => { safeSave('neetpg_achievements',     unlockedIds);     }, [unlockedIds]);
-  useEffect(() => { safeSave('neetpg_drills_count',     drillsCompleted); }, [drillsCompleted]);
-  useEffect(() => { safeSave('neetpg_sim_done',         simCompleted);    }, [simCompleted]);
 
   // ── Timer ─────────────────────────────────────────────────────
   useEffect(() => {
@@ -355,53 +331,51 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
 
   // ── XP gain callback ──────────────────────────────────────────
   const gainXP = useCallback((amount: number, label: string) => {
-    setBonusXP(prev => prev + amount);
+    appStore.getState().addBonusXP(amount);
     setXpToasts(prev => [...prev, makeToastItem(amount, label)]);
-  }, []);
+  }, [appStore]);
 
   const dismissToast = useCallback((id: number) => {
     setXpToasts(prev => prev.filter(t => t.id !== id));
   }, []);
 
   // ── Study logic ───────────────────────────────────────────────
-  const toggleDayCompletion = (day: number) => {
-    const isCompleting = !completedDays.includes(day);
-    setCompletedDays(prev =>
-      prev.includes(day) ? prev.filter(d => d !== day) : [...prev, day]
-    );
+  const toggleDayCompletion = useCallback((day: number) => {
+    const { completedDays: days, toggleDayCompletion: toggle, setStreak } = appStore.getState();
+    const isCompleting = !days.includes(day);
+    toggle(day);
     if (isCompleting) {
       gainXP(XP_VALUES.day_complete, `Day ${day} complete`);
       const today = new Date().toISOString().slice(0, 10);
       setStreak(s => {
         if (s.lastDate === today) return s;
-        const prev = new Date(); prev.setDate(prev.getDate() - 1);
-        const newCount = s.lastDate === prev.toISOString().slice(0, 10) ? s.count + 1 : 1;
+        const prevDay = new Date(); prevDay.setDate(prevDay.getDate() - 1);
+        const newCount = s.lastDate === prevDay.toISOString().slice(0, 10) ? s.count + 1 : 1;
         return { count: newCount, longest: Math.max(s.longest, newCount), lastDate: today };
       });
     }
-  };
+  }, [appStore, gainXP]);
 
-  const updateNote = (day: number, text: string) =>
-    setNotes(prev => ({ ...prev, [day]: text }));
+  const updateNote = useCallback((day: number, text: string) => {
+    appStore.getState().updateNote(day, text);
+  }, [appStore]);
 
-  const saveMcqScore = (day: number, attempted: number, correct: number) => {
+  const saveMcqScore = useCallback((day: number, attempted: number, correct: number) => {
     const prev = mcqScores[day] ?? { attempted: 0, correct: 0 };
     const newCorrect = correct - (prev.correct ?? 0);
     const newWrong   = (attempted - correct) - (Math.max(0, (prev.attempted ?? 0) - (prev.correct ?? 0)));
-    setMcqScores(p => ({ ...p, [day]: { attempted, correct } }));
+    appStore.getState().saveMcqScore(day, attempted, correct);
     if (newCorrect > 0) gainXP(newCorrect * XP_VALUES.mcq_correct, 'MCQ correct');
     if (newWrong   > 0) gainXP(newWrong   * XP_VALUES.mcq_wrong,   'MCQ attempt');
-  };
+  }, [appStore, mcqScores, gainXP]);
 
-  const toggleFlag = (dayId: number, topicIdx: number) =>
-    setFlagged(prev =>
-      prev.some(f => f.dayId === dayId && f.topicIdx === topicIdx)
-        ? prev.filter(f => !(f.dayId === dayId && f.topicIdx === topicIdx))
-        : [...prev, { dayId, topicIdx }]
-    );
+  const toggleFlag = useCallback((dayId: number, topicIdx: number) => {
+    appStore.getState().toggleFlag(dayId, topicIdx);
+  }, [appStore]);
 
-  const updateSrCard = (dayId: number, card: SRCard) =>
-    setSrCards(prev => ({ ...prev, [dayId]: card }));
+  const updateSrCard = useCallback((dayId: number, card: SRCard) => {
+    appStore.getState().updateSrCard(dayId, card);
+  }, [appStore]);
 
   const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -429,19 +403,23 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
   };
 
   const handleDrillComplete = useCallback(() => {
-    setDrillsCompleted(prev => prev + 1);
+    appStore.getState().incrementDrills();
     gainXP(XP_VALUES.drill_complete, 'Drill complete');
-  }, [gainXP]);
+  }, [appStore, gainXP]);
 
   const handleRapidComplete = useCallback(() => {
-    setDrillsCompleted(prev => prev + 1);
+    appStore.getState().incrementDrills();
     gainXP(XP_VALUES.rapid_complete, 'Rapid revision');
-  }, [gainXP]);
+  }, [appStore, gainXP]);
 
   const handleSimComplete = useCallback(() => {
-    setSimCompleted(true);
+    appStore.getState().setSimCompleted(true);
     gainXP(XP_VALUES.simulation_complete, 'Exam simulation');
-  }, [gainXP]);
+  }, [appStore, gainXP]);
+
+  const handleExamDateSave = useCallback((date: Date) => {
+    appStore.getState().setExamDateIso(date.toISOString());
+  }, [appStore]);
 
   const handlePYQCorrect = useCallback(() => gainXP(XP_VALUES.pyq_correct, 'PYQ correct'), [gainXP]);
   const handlePYQWrong   = useCallback(() => gainXP(XP_VALUES.pyq_wrong,   'PYQ attempt'), [gainXP]);
@@ -718,7 +696,7 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
             />
             <ExamDateConfig
               currentExamDate={examDate}
-              onSave={setExamDate}
+              onSave={handleExamDateSave}
               isPostExam={isPostExam}
             />
           </div>
