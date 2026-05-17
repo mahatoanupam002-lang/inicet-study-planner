@@ -1,1 +1,3608 @@
-{"lastUpdated":"","totalCount":0,"todayCount":0,"totalDays":0,"oneliners":[]}
+{
+  "lastUpdated": "2026-05-17",
+  "totalCount": 400,
+  "todayCount": 40,
+  "totalDays": 10,
+  "oneliners": [
+    {
+      "id": "ol_001",
+      "subject": "Medicine",
+      "topic": "Cardiology",
+      "fact": "DOC for AF with rapid ventricular rate in WPW is procainamide (NOT digoxin/verapamil — they accelerate accessory pathway)",
+      "mnemonic": "Pro-WPW = Procainamide",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_002",
+      "subject": "Medicine",
+      "topic": "Cardiology",
+      "fact": "DOC for hypertensive emergency in aortic dissection is IV labetalol or esmolol (beta-blocker first, then vasodilator)",
+      "mnemonic": "LABEL aorta = Labetalol",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_003",
+      "subject": "Medicine",
+      "topic": "Cardiology",
+      "fact": "Prinzmetal angina: spasm of coronary artery; DOC is calcium channel blocker (verapamil/diltiazem); nitrates also used",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_004",
+      "subject": "Medicine",
+      "topic": "Cardiology",
+      "fact": "Vaughan Williams Class Ia antiarrhythmics: quinidine, procainamide, disopyramide — Na+ block + prolong refractory period",
+      "mnemonic": "Queen Pro Disco (QPD) = Class Ia",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_005",
+      "subject": "Medicine",
+      "topic": "Cardiology",
+      "fact": "Dressler syndrome (post-MI pericarditis) occurs 2-10 weeks after MI; treat with aspirin/NSAIDs; steroids if refractory",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_006",
+      "subject": "Medicine",
+      "topic": "Cardiology",
+      "fact": "S4 gallop indicates decreased LV compliance (hypertensive heart disease, hypertrophic CM); S3 indicates volume overload",
+      "mnemonic": "S4 = Stiff heart, S3 = Sloshing",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_007",
+      "subject": "Medicine",
+      "topic": "Cardiology",
+      "fact": "Normal QTc: <440 ms men, <460 ms women; prolonged QTc leads to risk of torsades de pointes",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_008",
+      "subject": "Medicine",
+      "topic": "Cardiology",
+      "fact": "Cardiac tamponade triad (Beck's): hypotension + raised JVP + muffled heart sounds",
+      "mnemonic": "Beck's 3 B's: BP down, Big JVP, Bad sounds",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_009",
+      "subject": "Medicine",
+      "topic": "Cardiology",
+      "fact": "Eisenmenger syndrome: L to R shunt reversed to R to L due to pulmonary HTN; cyanosis appears late; lung transplant only cure",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_010",
+      "subject": "Medicine",
+      "topic": "Cardiology",
+      "fact": "DOC for acute STEMI is primary PCI within 90 min (door-to-balloon); thrombolysis if PCI unavailable within 120 min",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_011",
+      "subject": "Medicine",
+      "topic": "Cardiology",
+      "fact": "Hypertrophic obstructive CM: systolic murmur increases with Valsalva and standing (decreased preload); decreases with squatting",
+      "mnemonic": "HOCM Hates Hypovolemia",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_012",
+      "subject": "Medicine",
+      "topic": "Cardiology",
+      "fact": "Atrial myxoma: commonest primary cardiac tumor; 75% in LA; causes ball-valve obstruction + tumor plop on auscultation",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_013",
+      "subject": "Medicine",
+      "topic": "Nephrology",
+      "fact": "DOC for minimal change disease in children is prednisolone; 80% respond within 8 weeks",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_014",
+      "subject": "Medicine",
+      "topic": "Nephrology",
+      "fact": "Fractional excretion of Na (FeNa) <1% indicates prerenal AKI; >2% indicates intrinsic renal AKI (ATN)",
+      "mnemonic": "FeNa <1 = Prerenal (fluid needed)",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_015",
+      "subject": "Medicine",
+      "topic": "Nephrology",
+      "fact": "Nephrotic range proteinuria: >3.5 g/day in adults, >40 mg/m2/hr in children",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_016",
+      "subject": "Medicine",
+      "topic": "Nephrology",
+      "fact": "Alport syndrome: X-linked mutation in type IV collagen (COL4A5); sensorineural deafness + hematuria + renal failure",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_017",
+      "subject": "Medicine",
+      "topic": "Nephrology",
+      "fact": "Renal tubular acidosis type 1 (distal): inability to acidify urine below pH 5.5; causes hypokalemia + nephrocalcinosis",
+      "mnemonic": "dRTA = distal, defective acidification",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_018",
+      "subject": "Medicine",
+      "topic": "Nephrology",
+      "fact": "ADPKD: mutation in PKD1 (chr 16) or PKD2 (chr 4); associated with berry aneurysms, liver cysts, mitral valve prolapse",
+      "mnemonic": "16 + 4 = PKD1 + PKD2",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_019",
+      "subject": "Medicine",
+      "topic": "Nephrology",
+      "fact": "Goodpasture syndrome: anti-GBM antibody against alpha-3 chain of type IV collagen; lung hemorrhage + rapidly progressive GN",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_020",
+      "subject": "Medicine",
+      "topic": "Nephrology",
+      "fact": "DOC for lupus nephritis class III/IV is mycophenolate mofetil (induction) + steroids; cyclophosphamide alternative",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_021",
+      "subject": "Medicine",
+      "topic": "Endocrine",
+      "fact": "DOC for thyroid storm is PTU (blocks synthesis + peripheral T4 to T3 conversion); propranolol controls symptoms",
+      "mnemonic": "PTU in storm: Peripheral conversion Too blocked",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_022",
+      "subject": "Medicine",
+      "topic": "Endocrine",
+      "fact": "MEN 1 (Wermer): Parathyroid + Pituitary + Pancreas (3 P's); gene MENIN on chromosome 11",
+      "mnemonic": "MEN 1 = 3Ps on 11",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_023",
+      "subject": "Medicine",
+      "topic": "Endocrine",
+      "fact": "MEN 2A (Sipple): Medullary thyroid Ca + Pheochromocytoma + Parathyroid; RET proto-oncogene mutation",
+      "mnemonic": "MEN 2A = MTP (Medullary, Twin pheo, Parathyroid)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_024",
+      "subject": "Medicine",
+      "topic": "Endocrine",
+      "fact": "Conn syndrome (primary hyperaldosteronism): hypertension + hypokalemia + metabolic alkalosis; low renin",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_025",
+      "subject": "Medicine",
+      "topic": "Endocrine",
+      "fact": "DOC for Graves' disease in pregnancy (1st trimester) is PTU; switch to carbimazole after 1st trimester",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_026",
+      "subject": "Medicine",
+      "topic": "Endocrine",
+      "fact": "Acromegaly: IGF-1 best screening test; GH suppression test with glucose is confirmatory; transphenoidal surgery is DOC",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_027",
+      "subject": "Medicine",
+      "topic": "Endocrine",
+      "fact": "Adrenal crisis: DOC is IV hydrocortisone 100 mg stat; then normal saline; fludrocortisone added when oral tolerated",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_028",
+      "subject": "Medicine",
+      "topic": "Endocrine",
+      "fact": "Central DI responds to desmopressin; nephrogenic DI does NOT respond; water deprivation test differentiates",
+      "mnemonic": "Central = responds to DDAVP",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_029",
+      "subject": "Medicine",
+      "topic": "Endocrine",
+      "fact": "Whipple triad for insulinoma: symptoms with fasting, blood glucose <45 mg/dL, relief with glucose administration",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_030",
+      "subject": "Medicine",
+      "topic": "Endocrine",
+      "fact": "Hypothyroidism commonest cause worldwide is iodine deficiency; in developed countries it is Hashimoto thyroiditis",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_031",
+      "subject": "Medicine",
+      "topic": "Neurology",
+      "fact": "DOC for status epilepticus is IV lorazepam (0.1 mg/kg); if unavailable give diazepam; then phenytoin/levetiracetam",
+      "mnemonic": "Lor first, then Phenytoin",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_032",
+      "subject": "Medicine",
+      "topic": "Neurology",
+      "fact": "Wilson disease: copper deposition; low ceruloplasmin; Kayser-Fleischer rings; DOC is D-penicillamine; zinc for maintenance",
+      "mnemonic": "KF rings = Kayser-Fleischer",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_033",
+      "subject": "Medicine",
+      "topic": "Neurology",
+      "fact": "Myasthenia gravis: anti-AChR antibody; tensilon (edrophonium) test positive; DOC pyridostigmine + immunosuppression",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_034",
+      "subject": "Medicine",
+      "topic": "Neurology",
+      "fact": "Guillain-Barre syndrome: ascending flaccid paralysis + areflexia after infection (Campylobacter); CSF shows albuminocytological dissociation",
+      "mnemonic": "GBS = ascending paralysis post-infection",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_035",
+      "subject": "Medicine",
+      "topic": "Neurology",
+      "fact": "Wernicke encephalopathy (thiamine def): confusion + ataxia + ophthalmoplegia triad; give thiamine BEFORE glucose",
+      "mnemonic": "CAO triad: Confusion, Ataxia, Ophthalmoplegia",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_036",
+      "subject": "Medicine",
+      "topic": "Neurology",
+      "fact": "Horner syndrome: ptosis + miosis + anhidrosis (sympathetic chain lesion); commonest cause is Pancoast tumor",
+      "mnemonic": "PMA = Ptosis, Miosis, Anhidrosis",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_037",
+      "subject": "Medicine",
+      "topic": "Neurology",
+      "fact": "DOC for trigeminal neuralgia is carbamazepine; if refractory, oxcarbazepine or surgical microvascular decompression",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_038",
+      "subject": "Medicine",
+      "topic": "Neurology",
+      "fact": "Normal pressure hydrocephalus: wet (incontinence) + wobbly (ataxia) + wacky (dementia) triad; responds to LP drainage",
+      "mnemonic": "3 W's of NPH: Wet, Wobbly, Wacky",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_039",
+      "subject": "Medicine",
+      "topic": "Rheumatology",
+      "fact": "DOC for acute gout attack is NSAIDs (indomethacin); colchicine if NSAIDs contraindicated; steroids if both CI",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_040",
+      "subject": "Medicine",
+      "topic": "Rheumatology",
+      "fact": "Allopurinol: xanthine oxidase inhibitor reduces uric acid synthesis; do NOT start during acute attack (may prolong it)",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_041",
+      "subject": "Medicine",
+      "topic": "Rheumatology",
+      "fact": "SLE: anti-dsDNA (most specific) + anti-Smith (most specific); ANA (most sensitive screening test)",
+      "mnemonic": "anti-Smith = Smoking gun for SLE",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_042",
+      "subject": "Medicine",
+      "topic": "Rheumatology",
+      "fact": "Rheumatoid arthritis: anti-CCP (most specific); RF positive in 70-80%; symmetric small joint arthritis + morning stiffness >1 hr",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_043",
+      "subject": "Medicine",
+      "topic": "Rheumatology",
+      "fact": "Ankylosing spondylitis: HLA-B27 associated; bamboo spine on X-ray; DOC NSAIDs; TNF-inhibitors if refractory",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_044",
+      "subject": "Medicine",
+      "topic": "Rheumatology",
+      "fact": "Felty syndrome: RA + splenomegaly + neutropenia (triad); increased risk of lymphoma",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_045",
+      "subject": "Medicine",
+      "topic": "GI",
+      "fact": "H. pylori eradication: triple therapy (PPI + clarithromycin + amoxicillin) for 14 days; test-and-treat strategy",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_046",
+      "subject": "Medicine",
+      "topic": "GI",
+      "fact": "Child-Pugh score parameters: Bilirubin, Albumin, PT, Ascites, Encephalopathy (BAPAE); grades A/B/C",
+      "mnemonic": "BAPAE = Child-Pugh parameters",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_047",
+      "subject": "Medicine",
+      "topic": "GI",
+      "fact": "Achalasia cardia: failure of LES relaxation due to loss of Auerbach plexus; barium shows rat-tail/bird-beak appearance",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_048",
+      "subject": "Medicine",
+      "topic": "GI",
+      "fact": "DOC for C. difficile colitis (mild-moderate) is oral vancomycin or fidaxomicin (NOT metronidazole per 2021 guidelines)",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_049",
+      "subject": "Medicine",
+      "topic": "GI",
+      "fact": "Primary biliary cholangitis: anti-mitochondrial antibody (AMA-M2); cholestatic picture; DOC ursodeoxycholic acid",
+      "mnemonic": "AMA = Always mainly PBC",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_050",
+      "subject": "Medicine",
+      "topic": "GI",
+      "fact": "Budd-Chiari syndrome: hepatic vein thrombosis; triad of abdominal pain + hepatomegaly + ascites; caudate lobe hypertrophies",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_051",
+      "subject": "Surgery",
+      "topic": "General",
+      "fact": "Courvoisier's law: palpable, non-tender gallbladder in jaundiced patient indicates malignant obstruction (NOT gallstones)",
+      "mnemonic": "Courvoisier = Cancer until proven otherwise",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_052",
+      "subject": "Surgery",
+      "topic": "General",
+      "fact": "DOC for appendicitis is appendicectomy (laparoscopic preferred); antibiotics alone acceptable in uncomplicated cases",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_053",
+      "subject": "Surgery",
+      "topic": "General",
+      "fact": "Ramstedt pyloromyotomy is DOC for hypertrophic pyloric stenosis; correct hypochloremic hypokalemic metabolic alkalosis first",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_054",
+      "subject": "Surgery",
+      "topic": "General",
+      "fact": "Ranson's criteria: 3 or more at admission (or 48 hr) indicates severe pancreatitis; APACHE II >=8 also indicates severe",
+      "mnemonic": "3+ Ranson = Severe pancreatitis",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_055",
+      "subject": "Surgery",
+      "topic": "General",
+      "fact": "Most common site of GI bleeding in adults: duodenal ulcer (anterior wall perforates, posterior wall bleeds)",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_056",
+      "subject": "Surgery",
+      "topic": "General",
+      "fact": "Richter's hernia: only part of bowel wall (antimesenteric border) in hernia sac; may strangulate without obstruction",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_057",
+      "subject": "Surgery",
+      "topic": "General",
+      "fact": "Spigelian hernia: through linea semilunaris lateral to rectus; interparietal (between muscle layers); difficult to diagnose",
+      "mnemonic": "Spigel = Sneaky interparietal location",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_058",
+      "subject": "Surgery",
+      "topic": "General",
+      "fact": "Mirizzi syndrome: external compression of CBD by stone in Hartmann's pouch of GB; causes obstructive jaundice",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_059",
+      "subject": "Surgery",
+      "topic": "General",
+      "fact": "DOC for esophageal varices: acute bleed = terlipressin + endoscopic band ligation; prophylaxis = propranolol",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_060",
+      "subject": "Surgery",
+      "topic": "General",
+      "fact": "Pseudomyxoma peritonei: mucinous ascites from appendiceal mucocele; jelly belly; treated by peritonectomy + HIPEC",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_061",
+      "subject": "Surgery",
+      "topic": "Orthopaedics",
+      "fact": "Compartment syndrome: 6 P's = Pain, Pressure, Paralysis, Paresthesia, Pallor, Pulselessness; DOC is fasciotomy",
+      "mnemonic": "6 P's of compartment syndrome",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_062",
+      "subject": "Surgery",
+      "topic": "Orthopaedics",
+      "fact": "Colles fracture: distal radius fracture with dorsal angulation (dinner fork deformity); FOOSH injury mechanism",
+      "mnemonic": "Colles = dinner fork deformity",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_063",
+      "subject": "Surgery",
+      "topic": "Orthopaedics",
+      "fact": "Avascular necrosis of femoral head: commonest cause is trauma (femoral neck fracture); also steroids, sickle cell, alcohol",
+      "mnemonic": "TRASH: Trauma, RA, Alcohol, Steroids, Hemoglobinopathy",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_064",
+      "subject": "Surgery",
+      "topic": "Orthopaedics",
+      "fact": "Scaphoid fracture: FOOSH injury; tenderness in anatomical snuffbox; X-ray may be normal initially; MRI is most sensitive",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_065",
+      "subject": "Surgery",
+      "topic": "Orthopaedics",
+      "fact": "DOC for septic arthritis is IV cloxacillin (Staph aureus most common); joint washout + drainage",
+      "mnemonic": "Septic joint = Staph = Cloxacillin",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_066",
+      "subject": "Surgery",
+      "topic": "Orthopaedics",
+      "fact": "Osgood-Schlatter disease: apophysitis of tibial tubercle in adolescents; traction injury; self-limiting",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_067",
+      "subject": "Surgery",
+      "topic": "Orthopaedics",
+      "fact": "Erb's palsy (C5-C6): waiter's tip position; loss of abduction, lateral rotation, supination; affects deltoid, supraspinatus",
+      "mnemonic": "Waiter's tip = Upper trunk C5-C6 injury",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_068",
+      "subject": "Surgery",
+      "topic": "Orthopaedics",
+      "fact": "Volkmann's ischemic contracture: compartment syndrome of forearm leading to fibrosis; flexion deformity of wrist and fingers",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_069",
+      "subject": "Surgery",
+      "topic": "Urology",
+      "fact": "Commonest malignancy of kidney in adults: clear cell RCC (from PCT cells); associated with VHL gene mutation on chr 3p",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_070",
+      "subject": "Surgery",
+      "topic": "Urology",
+      "fact": "Wilms tumor (nephroblastoma): commonest renal tumor in children; WT1 gene; triad = mass + hematuria + hypertension",
+      "mnemonic": "WT1 gene = Wilms' tumor",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_071",
+      "subject": "Surgery",
+      "topic": "Urology",
+      "fact": "DOC for uncomplicated UTI in non-pregnant females is oral nitrofurantoin or trimethoprim-sulfamethoxazole for 3-5 days",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_072",
+      "subject": "Surgery",
+      "topic": "Urology",
+      "fact": "BPH: commonest site is transitional zone; PSA elevated but not specific; DOC alpha-blocker (tamsulosin) +/- 5-ARI",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_073",
+      "subject": "Surgery",
+      "topic": "Urology",
+      "fact": "Cryptorchidism: undescended testis; increases risk of malignancy even after orchiopexy; germ cell tumors commonest",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_074",
+      "subject": "Surgery",
+      "topic": "Urology",
+      "fact": "Fournier's gangrene: necrotizing fasciitis of perineum/scrotum; polymicrobial; DOC = emergency debridement + broad-spectrum ABx",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_075",
+      "subject": "Surgery",
+      "topic": "Vascular",
+      "fact": "Aortic aneurysm >5.5 cm in men (>5 cm women) warrants elective repair; ruptured AAA is surgical emergency",
+      "mnemonic": "5.5 cm = Surgery time for AAA",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_076",
+      "subject": "Surgery",
+      "topic": "Vascular",
+      "fact": "Leriche syndrome: aortoiliac occlusion triad = bilateral claudication + impotence + absent femoral pulses",
+      "mnemonic": "Leriche = Leg + Love problems (bilateral)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_077",
+      "subject": "Surgery",
+      "topic": "Vascular",
+      "fact": "DOC for DVT is LMWH initially then warfarin (INR 2-3) for 3-6 months; DOACs (rivaroxaban) now preferred",
+      "mnemonic": "LMWH bridges to warfarin",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_078",
+      "subject": "Surgery",
+      "topic": "Vascular",
+      "fact": "Varicose veins: incompetence of sapheno-femoral junction (SFJ) commonest; Trendelenburg test used for assessment",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_079",
+      "subject": "Surgery",
+      "topic": "Vascular",
+      "fact": "Carotid artery stenosis >70% with symptoms warrants carotid endarterectomy; asymptomatic >60% is controversial",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_080",
+      "subject": "Surgery",
+      "topic": "Vascular",
+      "fact": "Buerger's disease (thromboangiitis obliterans): young male smoker + rest pain + Raynaud's; DOC = smoking cessation",
+      "mnemonic": "Buerger = Burning cigarette = Stop smoking",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_081",
+      "subject": "Pathology",
+      "topic": "Haematology",
+      "fact": "Iron deficiency anemia: microcytic hypochromic; serum ferritin LOW (best indicator of iron stores); TIBC HIGH",
+      "mnemonic": "Ferritin = iron store mirror",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_082",
+      "subject": "Pathology",
+      "topic": "Haematology",
+      "fact": "Sickle cell anemia: HbS (beta6 Glu to Val mutation); sickle in hypoxia; DOC for crisis = IV fluids + analgesia + O2",
+      "mnemonic": "Glu to Val = SiCkle cell switch",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_083",
+      "subject": "Pathology",
+      "topic": "Haematology",
+      "fact": "G6PD deficiency: X-linked; Heinz bodies + bite cells on smear; hemolysis triggered by oxidative stress (primaquine, dapsone)",
+      "mnemonic": "G6PD = Greeks/Africans at risk",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_084",
+      "subject": "Pathology",
+      "topic": "Haematology",
+      "fact": "Beta-thalassemia major: HbF predominant; Erlenmeyer flask deformity; crew-cut skull X-ray; needs regular transfusion",
+      "mnemonic": "Hair-on-end skull = Thalassemia major",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_085",
+      "subject": "Pathology",
+      "topic": "Haematology",
+      "fact": "Paroxysmal nocturnal hemoglobinuria (PNH): GPI anchor deficiency (PIGA mutation); complement-mediated hemolysis; DOC eculizumab",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_086",
+      "subject": "Pathology",
+      "topic": "Haematology",
+      "fact": "Philadelphia chromosome: t(9;22) BCR-ABL; seen in CML (100%) + ALL (25%); treated with imatinib (TKI)",
+      "mnemonic": "Ph chromosome = Philadelphia cream cheese t(9;22)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_087",
+      "subject": "Pathology",
+      "topic": "Haematology",
+      "fact": "Reed-Sternberg cells (owl-eye nucleoli): pathognomonic of Hodgkin lymphoma; CD15+, CD30+",
+      "mnemonic": "RS cells = Two owl eyes watching",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_088",
+      "subject": "Pathology",
+      "topic": "Haematology",
+      "fact": "Hemophilia A: factor VIII deficiency; X-linked recessive; PTT prolonged, PT normal; DOC recombinant FVIII",
+      "mnemonic": "A = 8 (rotate A looks like 8)",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_089",
+      "subject": "Pathology",
+      "topic": "Haematology",
+      "fact": "DIC: consumptive coagulopathy; low fibrinogen + elevated D-dimer + low platelets + prolonged PT/PTT; treat underlying cause",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_090",
+      "subject": "Pathology",
+      "topic": "Haematology",
+      "fact": "Polycythemia vera: JAK2 V617F mutation (95%); low EPO; treated with phlebotomy +/- hydroxyurea; risk of Budd-Chiari",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_091",
+      "subject": "Pathology",
+      "topic": "Haematology",
+      "fact": "Aplastic anemia: pancytopenia with hypocellular marrow; commonest cause = idiopathic (autoimmune); DOC allogeneic HSCT",
+      "mnemonic": "Empty marrow = Aplastic anemia",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_092",
+      "subject": "Pathology",
+      "topic": "Haematology",
+      "fact": "Von Willebrand disease: commonest inherited bleeding disorder; Type 1 (partial VWF deficiency); DOC desmopressin (DDAVP) for Type 1",
+      "mnemonic": "VWD = Very Widespread Disease (commonest hereditary bleeding)",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_093",
+      "subject": "Pathology",
+      "topic": "Oncology",
+      "fact": "Commonest cancer worldwide in males: lung cancer (incidence); prostate cancer (USA); oral cancer (India)",
+      "mnemonic": "India = Oral, World = Lung cancer dominates",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_094",
+      "subject": "Pathology",
+      "topic": "Oncology",
+      "fact": "Tumor lysis syndrome: hyperkalemia + hyperphosphatemia + hypocalcemia + hyperuricemia after chemotherapy; DOC rasburicase",
+      "mnemonic": "KPCU: K up, P up, Ca down, Uric acid up",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_095",
+      "subject": "Pathology",
+      "topic": "Oncology",
+      "fact": "p53 tumor suppressor (chr 17p): guardian of genome; mutated in 50%+ of all cancers; Li-Fraumeni syndrome",
+      "mnemonic": "p53 = Police of the genome",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_096",
+      "subject": "Pathology",
+      "topic": "Oncology",
+      "fact": "Paraneoplastic syndromes: SIADH (small cell lung Ca), PTHrP hypercalcemia (squamous cell Ca), Eaton-Lambert (small cell Ca)",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_097",
+      "subject": "Pathology",
+      "topic": "Oncology",
+      "fact": "Krukenberg tumor: gastric Ca metastasis to bilateral ovaries via transcoelomic spread; signet ring cells",
+      "mnemonic": "Krukenberg = Stomach to Ovary kruising",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_098",
+      "subject": "Pathology",
+      "topic": "Oncology",
+      "fact": "Multiple myeloma: M-spike on SPEP; Bence-Jones proteins in urine; lytic bone lesions (punched out); CRAB criteria",
+      "mnemonic": "CRAB: Calcium up, Renal failure, Anemia, Bone lesions",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_099",
+      "subject": "Pathology",
+      "topic": "Oncology",
+      "fact": "Burkitt lymphoma: t(8;14) MYC-IgH translocation; starry sky pattern; EBV associated; fastest growing human tumor",
+      "mnemonic": "8:14 = Burkitt's translocation bingo",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_100",
+      "subject": "Pathology",
+      "topic": "Oncology",
+      "fact": "PSA >10 ng/mL highly suggestive of prostate cancer; Gleason score grades aggressiveness; DOC localized = radical prostatectomy",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_101",
+      "subject": "Pathology",
+      "topic": "Oncology",
+      "fact": "CA-125 elevated in ovarian cancer; NOT specific (also elevated in endometriosis, PID); used for monitoring, not diagnosis",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_102",
+      "subject": "Pathology",
+      "topic": "Oncology",
+      "fact": "Mesothelioma: associated with asbestos exposure; calretinin positive; poor prognosis; commonest in pleura",
+      "mnemonic": "Asbestos causes Mesothelioma (50 year latency)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_103",
+      "subject": "Pathology",
+      "topic": "Renal Pathology",
+      "fact": "IgA nephropathy (Berger's disease): commonest GN worldwide; hematuria 1-3 days after URTI (synpharyngitic)",
+      "mnemonic": "IgA = After URTI (synpharyngitic hematuria)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_104",
+      "subject": "Pathology",
+      "topic": "Renal Pathology",
+      "fact": "Focal segmental glomerulosclerosis (FSGS): commonest cause of nephrotic syndrome in adults (esp. Black patients); poor prognosis",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_105",
+      "subject": "Pathology",
+      "topic": "Renal Pathology",
+      "fact": "Membranous nephropathy: commonest cause of nephrotic syndrome in white adults; anti-PLA2R antibody; spike and dome pattern",
+      "mnemonic": "Spike and dome = Membranous nephropathy EM",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_106",
+      "subject": "Pathology",
+      "topic": "Renal Pathology",
+      "fact": "Diabetic nephropathy: Kimmelstiel-Wilson lesion (nodular glomerulosclerosis); GBM thickening; microalbuminuria is earliest feature",
+      "mnemonic": "KW lesion = diabetic kidney fingerprint",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_107",
+      "subject": "Pathology",
+      "topic": "Renal Pathology",
+      "fact": "RPGN (rapidly progressive GN): crescent formation on biopsy; type II = immune complex; type I = anti-GBM; type III = pauci-immune",
+      "mnemonic": "3 types of crescentic GN",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_108",
+      "subject": "Pathology",
+      "topic": "Renal Pathology",
+      "fact": "Amyloidosis kidney: Congo red stain shows apple-green birefringence; AA amyloid in chronic inflammation; AL in myeloma",
+      "mnemonic": "Congo red = Apple green birefringence",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_109",
+      "subject": "Pathology",
+      "topic": "Renal Pathology",
+      "fact": "Renal cell carcinoma: clear cell type commonest; 3p deletion (VHL); triad = hematuria + loin pain + mass (present in only 10%)",
+      "mnemonic": "RCC classic triad is rare to see all 3 together",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_110",
+      "subject": "Pathology",
+      "topic": "Renal Pathology",
+      "fact": "Minimal change disease: electron microscopy shows podocyte foot process effacement; NO immune deposits on IF; responds to steroids",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_111",
+      "subject": "Pathology",
+      "topic": "General Pathology",
+      "fact": "Caseating granuloma: TB (commonest); sarcoidosis has NON-caseating granulomas; distinction is key exam point",
+      "mnemonic": "TB = Caseating; Sarcoid = non-Caseating",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_112",
+      "subject": "Pathology",
+      "topic": "General Pathology",
+      "fact": "Psammoma bodies: papillary thyroid Ca, serous cystadenocarcinoma ovary, meningioma, mesothelioma (PSaMMoMa)",
+      "mnemonic": "PSaMMoMa: Papillary, Serous, Meningioma, Mesothelioma",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_113",
+      "subject": "Pathology",
+      "topic": "General Pathology",
+      "fact": "Councilman bodies (acidophilic apoptotic hepatocytes): seen in yellow fever and viral hepatitis",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_114",
+      "subject": "Pathology",
+      "topic": "General Pathology",
+      "fact": "Mallory-Denk bodies (cytokeratin aggregates in hepatocytes): seen in alcoholic hepatitis, NASH, Wilson disease",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_115",
+      "subject": "Pathology",
+      "topic": "General Pathology",
+      "fact": "Aschoff nodules: pathognomonic of rheumatic fever; perivascular granuloma with Anitschkow cells (caterpillar cells)",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_116",
+      "subject": "Pharmacology",
+      "topic": "ANS",
+      "fact": "Atropine mechanism: competitive muscarinic antagonist; increases HR (blocks vagal tone); causes mydriasis + cycloplegia",
+      "mnemonic": "ATROPINE = Anti-muscarinic agent",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_117",
+      "subject": "Pharmacology",
+      "topic": "ANS",
+      "fact": "Prazosin: selective alpha-1 blocker; used in BPH + hypertension; first-dose hypotension is major side effect",
+      "mnemonic": null,
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_118",
+      "subject": "Pharmacology",
+      "topic": "ANS",
+      "fact": "Propranolol: non-selective beta-blocker; contraindicated in asthma, Prinzmetal angina, COPD; used in thyroid storm",
+      "mnemonic": "Propranolol = Pan-beta-blocker (beta 1 and 2)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_119",
+      "subject": "Pharmacology",
+      "topic": "ANS",
+      "fact": "Neostigmine: reversible AChE inhibitor; does NOT cross BBB (charged); used to reverse NMJ blockade; antidote = atropine",
+      "mnemonic": "NEOstigmine = No entry to brain (charged)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_120",
+      "subject": "Pharmacology",
+      "topic": "ANS",
+      "fact": "Organophosphate poisoning: excess ACh; SLUDGE (Salivation, Lacrimation, Urination, Defecation, GI cramps, Emesis); DOC atropine + pralidoxime",
+      "mnemonic": "SLUDGE = OPC poisoning mnemonic",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_121",
+      "subject": "Pharmacology",
+      "topic": "ANS",
+      "fact": "Physostigmine: reversible AChE inhibitor; CROSSES BBB (uncharged); antidote for anticholinergic toxidrome",
+      "mnemonic": "Physo crosses BBB = enters Physiology of brain",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_122",
+      "subject": "Pharmacology",
+      "topic": "ANS",
+      "fact": "Clonidine: central alpha-2 agonist; reduces sympathetic outflow; used in HTN + opioid withdrawal + ADHD; rebound HTN on sudden withdrawal",
+      "mnemonic": null,
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_123",
+      "subject": "Pharmacology",
+      "topic": "ANS",
+      "fact": "Botulinum toxin: blocks ACh release at NMJ by cleaving SNARE proteins; used in dystonia, spasticity, cosmetic use",
+      "mnemonic": "BoTox blocks ACh release (SNARE cleavage)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_124",
+      "subject": "Pharmacology",
+      "topic": "ANS",
+      "fact": "Metoprolol: cardioselective beta-1 blocker (at low dose); safe in mild asthma; used in post-MI, heart failure, hypertension",
+      "mnemonic": "Metro beta-1 = Metro only for heart (selective)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_125",
+      "subject": "Pharmacology",
+      "topic": "ANS",
+      "fact": "Pilocarpine: direct muscarinic agonist; used in glaucoma (reduces IOP by increasing aqueous outflow via trabecular meshwork)",
+      "mnemonic": "Pilocarpine = Pupil constricts (miosis)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_126",
+      "subject": "Pharmacology",
+      "topic": "CVS",
+      "fact": "Digoxin toxicity: visual disturbances (yellow-green halos), nausea, arrhythmias; hypokalemia potentiates toxicity",
+      "mnemonic": "Yellow vision + Digoxin = Toxicity warning",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_127",
+      "subject": "Pharmacology",
+      "topic": "CVS",
+      "fact": "Hydralazine: direct arteriolar vasodilator; causes reflex tachycardia; DOC for HTN in pregnancy (with methyldopa, labetalol)",
+      "mnemonic": "Hydralazine in pregnancy = Hyper-safe choice",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_128",
+      "subject": "Pharmacology",
+      "topic": "CVS",
+      "fact": "Nitrates mechanism: donate NO, activate guanylyl cyclase, increase cGMP, smooth muscle relaxation, venodilation (preload decreases)",
+      "mnemonic": "NO = Nice Oxide reduces preload",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_129",
+      "subject": "Pharmacology",
+      "topic": "CVS",
+      "fact": "Amiodarone: class III antiarrhythmic; side effects: pulmonary fibrosis, thyroid dysfunction, corneal deposits, photosensitivity",
+      "mnemonic": "Amio = All organs hit by side effects",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_130",
+      "subject": "Pharmacology",
+      "topic": "CVS",
+      "fact": "Statins: HMG-CoA reductase inhibitors; side effect = myopathy (monitor CK); rhabdomyolysis rare but serious",
+      "mnemonic": "Statins Stab muscles (myopathy risk)",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_131",
+      "subject": "Pharmacology",
+      "topic": "CVS",
+      "fact": "ACE inhibitors: contraindicated in bilateral renal artery stenosis + pregnancy (teratogenic); cause dry cough (bradykinin accumulation)",
+      "mnemonic": "ACE = Avoid Cough (bradykinin), avoid in bilateral RAS",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_132",
+      "subject": "Pharmacology",
+      "topic": "CVS",
+      "fact": "Sacubitril-valsartan (ARNi): neprilysin inhibitor + ARB; used in HFrEF; do NOT combine with ACE inhibitor (angioedema risk)",
+      "mnemonic": "ARNi = nepRilysiN inhibitor + ARB combo",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_133",
+      "subject": "Pharmacology",
+      "topic": "CVS",
+      "fact": "Furosemide: loop diuretic; inhibits Na-K-2Cl cotransporter in thick ascending limb; causes hypokalemia + ototoxicity",
+      "mnemonic": "FURO = Flush out K and hearing (ototoxicity)",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_134",
+      "subject": "Pharmacology",
+      "topic": "Antimicrobials",
+      "fact": "Penicillin mechanism: inhibits transpeptidase (PBP) preventing peptidoglycan cross-linking, leading to cell wall lysis",
+      "mnemonic": "Penicillin Prevents Peptidoglycan cross-linking",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_135",
+      "subject": "Pharmacology",
+      "topic": "Antimicrobials",
+      "fact": "Chloramphenicol side effects: grey baby syndrome (neonates), aplastic anemia (idiosyncratic), reversible bone marrow suppression",
+      "mnemonic": "Grey baby = Chloramphenicol in neonates",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_136",
+      "subject": "Pharmacology",
+      "topic": "Antimicrobials",
+      "fact": "Aminoglycosides: concentration-dependent killing; nephrotoxicity + ototoxicity (vestibular + cochlear); synergistic with beta-lactams",
+      "mnemonic": "AMINO = Auditory + Nephro toxic duo",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_137",
+      "subject": "Pharmacology",
+      "topic": "Antimicrobials",
+      "fact": "Fluoroquinolones: inhibit DNA gyrase (topoisomerase II in bacteria); tendinopathy + QT prolongation; avoid in children",
+      "mnemonic": "Fluoro = Fights DNA gyrase",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_138",
+      "subject": "Pharmacology",
+      "topic": "Antimicrobials",
+      "fact": "Tetracycline: chelates with divalent cations (Ca, Mg, Fe); take on empty stomach; teeth discoloration in children",
+      "mnemonic": "Tetra Tricks: avoid dairy, not for kids",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_139",
+      "subject": "Pharmacology",
+      "topic": "Antimicrobials",
+      "fact": "Metronidazole: DOC for anaerobes, Giardia, Trichomonas, amoeba; disulfiram-like reaction with alcohol",
+      "mnemonic": "Metro = Microaerobes + alcohol reaction",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_140",
+      "subject": "Pharmacology",
+      "topic": "Antimicrobials",
+      "fact": "DOC for MRSA is vancomycin (IV); for skin/soft tissue MRSA = linezolid or daptomycin; teicoplanin is alternative",
+      "mnemonic": "Van saves MRSA victims",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_141",
+      "subject": "Pharmacology",
+      "topic": "Antimicrobials",
+      "fact": "Rifampicin: hepatic enzyme inducer (CYP450); turns body fluids orange-red; used in TB + leprosy + meningococcal prophylaxis",
+      "mnemonic": "Rifampicin = Red/Orange all body fluids",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_142",
+      "subject": "Pharmacology",
+      "topic": "Antimicrobials",
+      "fact": "Azithromycin: azalide (macrolide derivative); long half-life (68 hrs); single-dose for chlamydia; inhibits 50S ribosomal subunit",
+      "mnemonic": "Azithro = 5 days course but works 10 days",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_143",
+      "subject": "Pharmacology",
+      "topic": "Antimicrobials",
+      "fact": "DOC for Pneumocystis jirovecii pneumonia (PCP) is TMP-SMX (co-trimoxazole); prophylaxis when CD4 <200 in HIV",
+      "mnemonic": "TMP-SMX = The Main Protection for PCP",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_144",
+      "subject": "Pharmacology",
+      "topic": "Antimicrobials",
+      "fact": "Linezolid: oxazolidinone; inhibits 70S initiation complex; causes thrombocytopenia + serotonin syndrome with SSRIs",
+      "mnemonic": "Linezolid inhibits ribosome initiation complex",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_145",
+      "subject": "Pharmacology",
+      "topic": "Antimicrobials",
+      "fact": "Cephalosporins 3rd generation (ceftriaxone): best CSF penetration; DOC for bacterial meningitis in adults + empirical sepsis",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_146",
+      "subject": "Pharmacology",
+      "topic": "CNS",
+      "fact": "Phenytoin: Na+ channel blocker; zero-order kinetics (saturable); side effects = gingival hyperplasia, hirsutism, megaloblastic anemia",
+      "mnemonic": "Phenytoin = gums grow, hair grows, blood fails",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_147",
+      "subject": "Pharmacology",
+      "topic": "CNS",
+      "fact": "Valproate: broad-spectrum AED; Na+ channel block + GABA enhancement; teratogenic (neural tube defects); give folic acid",
+      "mnemonic": "Val + Folic acid mandatory in women of childbearing age",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_148",
+      "subject": "Pharmacology",
+      "topic": "CNS",
+      "fact": "Clozapine: atypical antipsychotic; most effective for treatment-resistant schizophrenia; causes agranulocytosis (monitor CBC weekly)",
+      "mnemonic": "Clozapine Clears schizophrenia but Clogs WBCs",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_149",
+      "subject": "Pharmacology",
+      "topic": "CNS",
+      "fact": "Lithium toxicity: tremor, polyuria, confusion, seizures; narrow therapeutic index (0.6-1.2 mEq/L); nephrotoxic long-term",
+      "mnemonic": "Lithium = Little therapeutic window",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_150",
+      "subject": "Pharmacology",
+      "topic": "CNS",
+      "fact": "SSRIs: DOC for depression + OCD + panic disorder; serotonin syndrome risk with MAOIs; sexual dysfunction common side effect",
+      "mnemonic": "SSRI = Sexy side effect Suppressed (anorgasmia)",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_151",
+      "subject": "Pharmacology",
+      "topic": "CNS",
+      "fact": "Haloperidol: typical antipsychotic (D2 blocker); causes EPS (akathisia, dystonia, parkinsonism, tardive dyskinesia)",
+      "mnemonic": "Haldo = High EPS risk (D2 blocker)",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_152",
+      "subject": "Pharmacology",
+      "topic": "CNS",
+      "fact": "Benzodiazepines: positive allosteric modulator of GABA-A; increase frequency of Cl- channel opening; antidote = flumazenil",
+      "mnemonic": "BZD = Boosts GABA-A Frequency (not duration)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_153",
+      "subject": "Pharmacology",
+      "topic": "CNS",
+      "fact": "Levodopa + carbidopa: dopamine precursor for Parkinson's; carbidopa prevents peripheral conversion so more L-dopa enters brain",
+      "mnemonic": "Carbidopa = Chaperone escorting L-dopa to brain",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_154",
+      "subject": "Pharmacology",
+      "topic": "Others",
+      "fact": "Methotrexate: DHFR inhibitor reducing THF, decreasing purines + DNA synthesis; used in RA, psoriasis, ectopic; antidote = leucovorin",
+      "mnemonic": "MTX = Must Take eXtra folinic acid (leucovorin)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_155",
+      "subject": "Pharmacology",
+      "topic": "Others",
+      "fact": "Warfarin: inhibits vitamin K epoxide reductase (VKORC1); affects factors II, VII, IX, X, Protein C, S; antidote = vitamin K + FFP",
+      "mnemonic": "Warfarin Wrecks Vit K factors (1972 = affected)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_156",
+      "subject": "Pharmacology",
+      "topic": "Others",
+      "fact": "Heparin: activates antithrombin III to inactivate thrombin (IIa) and Xa; antidote = protamine sulfate; HIT = type II (IgG)",
+      "mnemonic": "Heparin Hires antithrombin (amplifies it 1000x)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_157",
+      "subject": "Pharmacology",
+      "topic": "Others",
+      "fact": "NSAIDs mechanism: inhibit COX-1 + COX-2 reducing prostaglandin synthesis; aspirin irreversibly inhibits (acetylates) COX",
+      "mnemonic": "Aspirin = Acetylates COX permanently",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_158",
+      "subject": "Pharmacology",
+      "topic": "Others",
+      "fact": "Cisplatin side effects: nephrotoxicity + ototoxicity + peripheral neuropathy; dose-limiting = nephrotoxicity; prehydration essential",
+      "mnemonic": "Cisplatin = Cis-Platinum hurts kidneys and ears",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_159",
+      "subject": "Pharmacology",
+      "topic": "Others",
+      "fact": "Tamoxifen: selective estrogen receptor modulator (SERM); used in ER+ breast cancer; risk of endometrial carcinoma + DVT",
+      "mnemonic": "Tamoxifen = Treats breast but Torments uterus (endometrial Ca)",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_160",
+      "subject": "Pharmacology",
+      "topic": "Others",
+      "fact": "DOC for malaria (chloroquine-resistant P. falciparum) is artemisinin-based combination therapy (ACT); artemether-lumefantrine preferred",
+      "mnemonic": "ACT fast against resistant falciparum malaria",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_161",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "DOC for preeclampsia (antihypertensive) is labetalol IV or hydralazine IV; oral nifedipine also used; NOT ACE inhibitors in pregnancy",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_162",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "Magnesium sulfate: DOC for eclampsia seizure prophylaxis and treatment; antidote = calcium gluconate",
+      "mnemonic": "Mag sulfate = Mighty anticonvulsant in eclampsia",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_163",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "Placenta previa: painless bright red vaginal bleeding in 3rd trimester; NO vaginal examination; diagnosis by USG",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_164",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "Abruptio placentae: painful dark red bleeding; concealed/revealed; associated with hypertension + trauma; DIC risk",
+      "mnemonic": "Abruption = Abrupt Agonizing pain",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_165",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "Bishop score >=6 indicates favorable cervix for induction; >=8 means induction as likely to succeed as spontaneous labor",
+      "mnemonic": "Bishop 8 = Baby coming easily; 6 = induction ok",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_166",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "Gestational diabetes: screened at 24-28 weeks with 50g GCT; diagnosed with 75g OGTT; DOC metformin or insulin",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_167",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "Rh incompatibility: Rh-negative mother with Rh-positive fetus; anti-D given at 28 weeks + within 72 hrs of delivery",
+      "mnemonic": "Anti-D within 72 hours = golden window",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_168",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "Oxytocin: released from posterior pituitary (made in hypothalamus); stimulates uterine contractions; used for induction of labor",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_169",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "Postpartum hemorrhage (PPH): blood loss >500 mL vaginal, >1000 mL CS; commonest cause = uterine atony (4 T's)",
+      "mnemonic": "4T's: Tone, Tissue, Trauma, Thrombin",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_170",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "DOC for PPH due to atony: oxytocin IV first; then ergometrine; then carboprost (PGF2-alpha); then B-Lynch suture/hysterectomy",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_171",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "Ectopic pregnancy: commonest site = ampulla of fallopian tube (70%); risk factors = PID, previous ectopic, IUD",
+      "mnemonic": "Ampulla = Ectopic's Favorite Spot (70%)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_172",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "HELLP syndrome: Hemolysis + Elevated Liver enzymes + Low Platelets; variant of severe preeclampsia; DOC delivery",
+      "mnemonic": "HELLP = Help! Emergency delivery",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_173",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "Hydatidiform mole: complete mole (46XX, all paternal) leads to snowstorm USG, no fetal parts; risk of choriocarcinoma 2-3%",
+      "mnemonic": "Complete mole = all Dad's genes (androgenesis)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_174",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "DOC for hyperemesis gravidarum: IV fluids + thiamine (prevent Wernicke) + ondansetron/metoclopramide antiemetics",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_175",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "Preterm labor (<37 weeks): DOC tocolysis = nifedipine (or terbutaline); betamethasone for fetal lung maturity at 24-34 weeks",
+      "mnemonic": "Nifedipine = Natural tocolytic choice in preterm",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_176",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "PROM (prelabor rupture of membranes): >37 weeks = induce labor; <37 weeks = conservative management with antibiotics",
+      "mnemonic": "PPROM + erythromycin = 7-day course standard",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_177",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "Cord prolapse: emergency C-section; meanwhile knee-chest position + manually elevate presenting part off cord",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_178",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "GDM offspring risks: macrosomia, hypoglycemia, polycythemia, respiratory distress, hyperbilirubinemia",
+      "mnemonic": "MACRO baby = GDM complication spectrum",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_179",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "Amniocentesis: performed at 15-18 weeks; karyotyping, fetal lung maturity (L:S ratio >2 = mature), AFP for NTD detection",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_180",
+      "subject": "OBG",
+      "topic": "Obstetrics",
+      "fact": "Fetal distress: late decelerations most ominous (uteroplacental insufficiency); variable = cord compression; early = head compression",
+      "mnemonic": "VEAL CHOP: Variable=Cord, Early=Head, Accel=ok, Late=Placenta",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_181",
+      "subject": "OBG",
+      "topic": "Gynaecology",
+      "fact": "Polycystic ovary syndrome (PCOS): LH:FSH ratio >2:1; hyperandrogenism + oligomenorrhea + polycystic ovaries (Rotterdam criteria)",
+      "mnemonic": "Rotterdam 2/3 criteria = PCOS diagnosis",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_182",
+      "subject": "OBG",
+      "topic": "Gynaecology",
+      "fact": "DOC for PCOS (ovulation induction) is clomiphene citrate; metformin for insulin resistance; OCP for menstrual regulation",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_183",
+      "subject": "OBG",
+      "topic": "Gynaecology",
+      "fact": "Endometriosis: ectopic endometrium; chocolate cysts (endometrioma); CA-125 elevated; DOC GnRH agonists or surgery",
+      "mnemonic": "Chocolate cyst = Endometriosis ovarian hallmark",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_184",
+      "subject": "OBG",
+      "topic": "Gynaecology",
+      "fact": "Cervical cancer: HPV 16 (squamous, most common) and HPV 18 (adenocarcinoma); PAP smear screening; DOC chemoradiation",
+      "mnemonic": "HPV 16/18 = High-risk for cervical Ca",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_185",
+      "subject": "OBG",
+      "topic": "Gynaecology",
+      "fact": "Endometrial cancer: commonest gynecological cancer; postmenopausal bleeding = endometrial cancer until proven otherwise",
+      "mnemonic": "PostMeno bleeding = Endometrial Ca alarm",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_186",
+      "subject": "OBG",
+      "topic": "Gynaecology",
+      "fact": "Ovarian cancer: commonest = serous cystadenocarcinoma; presents late (Stage III/IV); CA-125 marker; BRCA1/2 mutations",
+      "mnemonic": "Silent killer of the pelvis",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_187",
+      "subject": "OBG",
+      "topic": "Gynaecology",
+      "fact": "Fibroid uterus: commonest benign gynecological tumor; intramural commonest type; heavy menstrual bleeding; DOC GnRH agonists or myomectomy",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_188",
+      "subject": "OBG",
+      "topic": "Gynaecology",
+      "fact": "Emergency contraception: levonorgestrel (within 72 hrs); ulipristal acetate (within 120 hrs); copper IUD (within 5 days, most effective)",
+      "mnemonic": "Cu IUD = most effective emergency contraception",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_189",
+      "subject": "OBG",
+      "topic": "Gynaecology",
+      "fact": "Asherman syndrome: intrauterine adhesions post D&C; secondary amenorrhea + infertility; hysteroscopic adhesiolysis DOC",
+      "mnemonic": "Asherman = Adhesions after curettage",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_190",
+      "subject": "OBG",
+      "topic": "Gynaecology",
+      "fact": "Turner syndrome (45,XO): streak ovaries + primary amenorrhea + short stature + webbed neck + coarctation of aorta",
+      "mnemonic": "Turner = Too few (45), Too short, Too webby neck",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_191",
+      "subject": "OBG",
+      "topic": "Gynaecology",
+      "fact": "Bartholin gland: located at 5 and 7 o'clock positions in vestibule; bartholinitis/abscess DOC = incision and marsupialization",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_192",
+      "subject": "OBG",
+      "topic": "Gynaecology",
+      "fact": "Stress urinary incontinence: commonest in multiparous women; DOC pelvic floor exercises (Kegel); surgical = mid-urethral sling",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_193",
+      "subject": "OBG",
+      "topic": "Gynaecology",
+      "fact": "Meigs syndrome: ovarian fibroma + ascites + right pleural effusion (triad); CA-125 may be elevated but benign",
+      "mnemonic": "Meigs = Mystery benign fibroma with effusion",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_194",
+      "subject": "OBG",
+      "topic": "Gynaecology",
+      "fact": "Vesicovaginal fistula: commonest cause in developing world = obstructed labor; in developed world = gynecological surgery",
+      "mnemonic": "VVF in India = Obstructed labor complication",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_195",
+      "subject": "OBG",
+      "topic": "Gynaecology",
+      "fact": "Oral contraceptive pill: estrogen + progestin; contraindicated in smokers >35 years + migraine with aura + DVT history",
+      "mnemonic": "OCP = Avoid if old smoker (>35) or aura migraine",
+      "category": "side-effect",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_196",
+      "subject": "Paediatrics",
+      "topic": "Nutrition",
+      "fact": "Kwashiorkor: protein deficiency with adequate calories; edema + skin changes (flaky paint) + fatty liver; serum albumin <2.8 g/dL",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_197",
+      "subject": "Paediatrics",
+      "topic": "Nutrition",
+      "fact": "Marasmus: severe protein-calorie malnutrition; baggy pants appearance; no edema; skin and bones; ribs prominent",
+      "mnemonic": "Marasmus = Matched stick arms and legs",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_198",
+      "subject": "Paediatrics",
+      "topic": "Nutrition",
+      "fact": "Vitamin D deficiency (rickets): craniotabes (earliest sign), rachitic rosary, Harrison's sulcus; DOC vitamin D + calcium",
+      "mnemonic": "Rachitic rosary = Rickets beads on ribs",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_199",
+      "subject": "Paediatrics",
+      "topic": "Nutrition",
+      "fact": "Vitamin A deficiency: Bitot's spots (earliest reversible sign) + night blindness; xerophthalmia; DOC high-dose vitamin A",
+      "mnemonic": "Bitot = Bright spots of Vit A deficiency",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_200",
+      "subject": "Paediatrics",
+      "topic": "Nutrition",
+      "fact": "Vitamin K deficiency: hemorrhagic disease of newborn; prophylactic vitamin K 1 mg IM at birth prevents bleeding",
+      "mnemonic": "VitK at birth = Vital for neonatal clotting",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_201",
+      "subject": "Paediatrics",
+      "topic": "Nutrition",
+      "fact": "Breast milk is best for infants; WHO recommends exclusive breastfeeding for 6 months; contraindicated in HIV+ mothers (in India)",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_202",
+      "subject": "Paediatrics",
+      "topic": "Nutrition",
+      "fact": "Zinc deficiency: acrodermatitis enteropathica (perioral + perianal rash) + alopecia + diarrhea; DOC oral zinc supplementation",
+      "mnemonic": "Zinc deficiency = Zonal skin rash + alopecia",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_203",
+      "subject": "Paediatrics",
+      "topic": "Nutrition",
+      "fact": "Iron deficiency in children: most common nutritional deficiency worldwide; peaks at 6 months-3 years; DOC = oral ferrous sulfate",
+      "mnemonic": "Fe deficiency = No. 1 nutritional problem globally",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_204",
+      "subject": "Paediatrics",
+      "topic": "Infections",
+      "fact": "Kawasaki disease: fever >5 days + 4/5 features (rash, conjunctivitis, lymph node, oral changes, extremity changes); DOC IVIG + aspirin",
+      "mnemonic": "CRASH + fever = Kawasaki disease",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_205",
+      "subject": "Paediatrics",
+      "topic": "Infections",
+      "fact": "Measles (rubeola): prodrome CCCK (cough, coryza, conjunctivitis, Koplik spots); maculopapular rash cephalocaudal spread",
+      "mnemonic": "Koplik spots = Pathognomonic of measles (before rash)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_206",
+      "subject": "Paediatrics",
+      "topic": "Infections",
+      "fact": "Mumps: parotitis + orchitis (post-pubertal males); pancreatitis; encephalitis; elevated serum amylase; prevented by MMR vaccine",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_207",
+      "subject": "Paediatrics",
+      "topic": "Infections",
+      "fact": "Whooping cough (Bordetella pertussis): inspiratory whoop + post-tussive vomiting; lymphocytosis; DOC azithromycin",
+      "mnemonic": "Whoop = B. pertussis calling card",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_208",
+      "subject": "Paediatrics",
+      "topic": "Infections",
+      "fact": "Epiglottitis: H. influenzae type b; tripod position + drooling + muffled voice; cherry-red epiglottis; DOC airway + IV cefotaxime",
+      "mnemonic": "Tripod + Drool = Epiglottitis emergency",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_209",
+      "subject": "Paediatrics",
+      "topic": "Infections",
+      "fact": "Croup (laryngotracheobronchitis): parainfluenza virus; steeple sign on X-ray; barking cough; DOC nebulized epinephrine + steroids",
+      "mnemonic": "Steeple sign = Croup radiological hallmark",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_210",
+      "subject": "Paediatrics",
+      "topic": "Infections",
+      "fact": "Dengue hemorrhagic fever: thrombocytopenia + leukopenia + rising hematocrit (plasma leak); NS1 antigen earliest marker; DOC supportive",
+      "mnemonic": "NS1 = earliest dengue antigen (day 1-5)",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_211",
+      "subject": "Paediatrics",
+      "topic": "Infections",
+      "fact": "Typhoid fever: rose spots + relative bradycardia + splenomegaly; Widal test (unreliable); DOC ceftriaxone or azithromycin",
+      "mnemonic": "Rose spots + slow pulse = Typhoid clue",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_212",
+      "subject": "Paediatrics",
+      "topic": "Infections",
+      "fact": "Meningococcal meningitis: petechial/purpuric rash + meningism; Waterhouse-Friderichsen syndrome (bilateral adrenal hemorrhage); DOC IV benzylpenicillin",
+      "mnemonic": "Waterhouse-Friderichsen = Worried about adrenal crisis",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_213",
+      "subject": "Paediatrics",
+      "topic": "Infections",
+      "fact": "Neonatal sepsis: GBS + E. coli commonest in early onset (<72 hrs); DOC ampicillin + gentamicin; late onset = Staph epidermidis",
+      "mnemonic": "EOS <72hr = GBS + E.coli duo",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_214",
+      "subject": "Paediatrics",
+      "topic": "Neonatal",
+      "fact": "APGAR score: Appearance, Pulse, Grimace, Activity, Respiration; scored at 1 and 5 minutes; 7 or above = normal",
+      "mnemonic": "APGAR = A Pretty Good Assessment Really",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_215",
+      "subject": "Paediatrics",
+      "topic": "Neonatal",
+      "fact": "Transient tachypnea of newborn (TTN): wet lung; residual fetal lung fluid; CS babies at risk; resolves in 24-48 hrs; O2 support",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_216",
+      "subject": "Paediatrics",
+      "topic": "Neonatal",
+      "fact": "RDS (hyaline membrane disease): surfactant deficiency; premature infants; ground glass + air bronchogram on CXR; DOC surfactant therapy",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_217",
+      "subject": "Paediatrics",
+      "topic": "Neonatal",
+      "fact": "Physiological jaundice: appears day 2-3, peaks day 4-5, resolves by day 7-10; pathological if appears within 24 hrs",
+      "mnemonic": "Day 1 jaundice = Pathological (always)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_218",
+      "subject": "Paediatrics",
+      "topic": "Neonatal",
+      "fact": "Kernicterus (bilirubin encephalopathy): bilirubin deposits in basal ganglia; DOC phototherapy; exchange transfusion if severe",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_219",
+      "subject": "Paediatrics",
+      "topic": "Neonatal",
+      "fact": "Neonatal hypoglycemia: blood glucose <45 mg/dL in term neonate; commonest cause = IDM (infant of diabetic mother); DOC IV dextrose",
+      "mnemonic": "IDM baby = hypoglycemia risk at birth",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_220",
+      "subject": "Paediatrics",
+      "topic": "Neonatal",
+      "fact": "Patent ductus arteriosus: prostaglandin maintains patency; DOC for closure = indomethacin or ibuprofen (premature); surgical ligation if failed",
+      "mnemonic": "PDA loves PGs; Indomethacin (anti-PG) closes it",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_221",
+      "subject": "Paediatrics",
+      "topic": "Neonatal",
+      "fact": "Tracheoesophageal fistula: commonest type = EA with distal TEF (85%); polyhydramnios + inability to pass NG tube to stomach",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_222",
+      "subject": "Paediatrics",
+      "topic": "Other",
+      "fact": "Down syndrome (trisomy 21): Brushfield spots, simian crease, sandal gap toe; associated with ALL, Hirschsprung, Duodenal atresia",
+      "mnemonic": "Trisomy 21 = trio of gastrointestinal associations",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_223",
+      "subject": "Paediatrics",
+      "topic": "Other",
+      "fact": "Febrile seizures: age 6 months-5 years; simple (<15 min, generalized, once in 24 hr); DOC diazepam PR for prolonged seizure",
+      "mnemonic": "Simple febrile = good prognosis, no AED needed",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_224",
+      "subject": "Paediatrics",
+      "topic": "Other",
+      "fact": "Reye syndrome: aspirin in viral illness leads to hepatic encephalopathy + microvesicular steatosis; AVOID aspirin in children <12",
+      "mnemonic": "Aspirin + Virus = Reye's risk in children",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_225",
+      "subject": "Paediatrics",
+      "topic": "Other",
+      "fact": "Intussusception: 3 months-2 years; currant jelly stools + intermittent colicky pain; DOC pneumatic/hydrostatic reduction",
+      "mnemonic": "Currant jelly stool = Intussusception alarm",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_226",
+      "subject": "PSM",
+      "topic": "Epidemiology",
+      "fact": "Sensitivity = TP/(TP+FN); ability to detect true positives; high sensitivity = good screening test (rules OUT disease if negative)",
+      "mnemonic": "SnNOut: Sensitive test Negative = rule Out",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_227",
+      "subject": "PSM",
+      "topic": "Epidemiology",
+      "fact": "Specificity = TN/(TN+FP); ability to correctly identify negatives; high specificity = good confirmatory test (rules IN if positive)",
+      "mnemonic": "SpPIn: Specific test Positive = rule In",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_228",
+      "subject": "PSM",
+      "topic": "Epidemiology",
+      "fact": "Positive predictive value (PPV) depends on prevalence; increases as prevalence increases; NOT a fixed characteristic of the test",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_229",
+      "subject": "PSM",
+      "topic": "Epidemiology",
+      "fact": "Relative Risk (RR): ratio of incidence in exposed vs unexposed; used in cohort studies; RR=1 means no association",
+      "mnemonic": "RR in Cohort (prospective) studies",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_230",
+      "subject": "PSM",
+      "topic": "Epidemiology",
+      "fact": "Odds Ratio (OR): used in case-control studies; approximates RR when disease is rare (prevalence <10%)",
+      "mnemonic": "OR in cAse-cOntrol = backwards study design",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_231",
+      "subject": "PSM",
+      "topic": "Epidemiology",
+      "fact": "Herd immunity threshold = 1 - (1/R0); for measles R0=12-18, threshold ~92-95%; for polio ~83%",
+      "mnemonic": "Herd immunity = 1-1/R0 formula",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_232",
+      "subject": "PSM",
+      "topic": "Epidemiology",
+      "fact": "Case fatality rate (CFR) = deaths from disease / total cases x 100; NOT same as mortality rate (which uses population denominator)",
+      "mnemonic": "CFR = cases who died / total cases (not population)",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_233",
+      "subject": "PSM",
+      "topic": "Epidemiology",
+      "fact": "Epidemic curve: common source = sharp peak; propagated = multiple peaks with serial interval; point source = bell-shaped",
+      "mnemonic": "Sharp peak = Point source epidemic curve shape",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_234",
+      "subject": "PSM",
+      "topic": "Biostatistics",
+      "fact": "Type I error (alpha): rejecting true null hypothesis (false positive); p-value is probability of type I error; conventional alpha = 0.05",
+      "mnemonic": "alpha = wrongly ACCEPT alternative hypothesis",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_235",
+      "subject": "PSM",
+      "topic": "Biostatistics",
+      "fact": "Type II error (beta): accepting false null hypothesis (false negative); power = 1-beta; increasing sample size reduces beta",
+      "mnemonic": "beta = wrongly REJECT alternative (miss true disease)",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_236",
+      "subject": "PSM",
+      "topic": "Biostatistics",
+      "fact": "Normal distribution: mean = median = mode; 68-95-99.7 rule (1SD-2SD-3SD); basis for parametric statistical tests",
+      "mnemonic": "Bell curve: 68-95-99.7 rule",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_237",
+      "subject": "PSM",
+      "topic": "Biostatistics",
+      "fact": "Chi-square test: used for categorical data comparison; requires expected frequency >5 in each cell; Fisher's exact if not met",
+      "mnemonic": "Chi-square = Categorical data test",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_238",
+      "subject": "PSM",
+      "topic": "Biostatistics",
+      "fact": "Number needed to treat (NNT) = 1/ARR (absolute risk reduction); lower NNT = more effective treatment",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_239",
+      "subject": "PSM",
+      "topic": "National Programs",
+      "fact": "National Tuberculosis Elimination Programme (NTEP): target TB elimination by 2025 (25 years ahead of global SDG); uses DOTS strategy",
+      "mnemonic": "NTEP 2025 = India's ambitious TB elimination target",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_240",
+      "subject": "PSM",
+      "topic": "National Programs",
+      "fact": "Universal Immunization Programme (UIP): BCG at birth; Hep B at 0-6-10-14 weeks; IPV + fOPV; MR vaccine at 9 months + 16-24 months",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_241",
+      "subject": "PSM",
+      "topic": "National Programs",
+      "fact": "Pulse polio immunization: OPV given on national immunization days; India declared polio-free in 2014",
+      "mnemonic": "India polio-free since 2014 (WHO certified)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_242",
+      "subject": "PSM",
+      "topic": "National Programs",
+      "fact": "NTEP DOTS regimen: 2-month intensive phase (HRZE) + 4-month continuation phase (HR); treatment under DOTS supervisor",
+      "mnemonic": "2+4 months = NTEP DOTS total duration",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_243",
+      "subject": "PSM",
+      "topic": "National Programs",
+      "fact": "NHM (National Health Mission): includes NRHM (rural) + NUHM (urban); ASHA workers = 1 per 1000 population in rural areas",
+      "mnemonic": "ASHA = Community health link worker at village level",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_244",
+      "subject": "PSM",
+      "topic": "National Programs",
+      "fact": "Janani Suraksha Yojana (JSY): cash incentive for institutional delivery; targets BPL + SC/ST mothers; 600 Rs urban, 1400 Rs rural",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_245",
+      "subject": "PSM",
+      "topic": "National Programs",
+      "fact": "ICDS (Integrated Child Development Services): nutrition + health + education for children <6 years + pregnant/lactating women via Anganwadi",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_246",
+      "subject": "PSM",
+      "topic": "Nutrition",
+      "fact": "Wellcome classification of PEM: <60% expected weight = marasmus; 60-80% with edema = kwashiorkor; 60-80% no edema = undernutrition",
+      "mnemonic": "Wellcome = Weight + edema classification system",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_247",
+      "subject": "PSM",
+      "topic": "Nutrition",
+      "fact": "RDA of iron: adult male = 17 mg/day; adult female = 21 mg/day; pregnancy = 35 mg/day (Indian ICMR recommendations)",
+      "mnemonic": "Pregnant women need 35 mg Fe/day (India)",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_248",
+      "subject": "PSM",
+      "topic": "Nutrition",
+      "fact": "Iodine deficiency disorders (IDD): goiter, cretinism, myxedema; commonest nutritional deficiency in Himalayan belt",
+      "mnemonic": "Iodine = Himalayan deficiency problem (endemic belt)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_249",
+      "subject": "PSM",
+      "topic": "Nutrition",
+      "fact": "Mid-upper arm circumference (MUAC): <11.5 cm = severe acute malnutrition; 11.5-12.5 cm = moderate SAM in children <5",
+      "mnemonic": "MUAC <11.5 cm = SAM in under-5",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_250",
+      "subject": "PSM",
+      "topic": "Nutrition",
+      "fact": "Protein requirement: 0.8 g/kg/day for adults; 1.0-1.5 g/kg/day during pregnancy; 2-3 g/kg/day for premature neonates",
+      "mnemonic": "Pregnancy protein = 1.5 g/kg/day (ICMR)",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_251",
+      "subject": "Microbiology",
+      "topic": "Bacteriology",
+      "fact": "Staphylococcus aureus: MRSA treated with vancomycin; coagulase positive (distinguishes from CoNS); toxic shock syndrome via TSST-1",
+      "mnemonic": "Aureus = coAgulase positive (capital A)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_252",
+      "subject": "Microbiology",
+      "topic": "Bacteriology",
+      "fact": "Streptococcus pyogenes (Group A Strep): M protein = major virulence factor; causes strep throat leading to rheumatic fever; DOC penicillin",
+      "mnemonic": "M protein = Major Strep virulence factor",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_253",
+      "subject": "Microbiology",
+      "topic": "Bacteriology",
+      "fact": "Clostridium tetani: tetanospasmin toxin blocks inhibitory interneurons (glycine, GABA) leading to spastic paralysis; trismus + risus sardonicus",
+      "mnemonic": "Tetanus = Tonic spasm (inhibition is blocked)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_254",
+      "subject": "Microbiology",
+      "topic": "Bacteriology",
+      "fact": "Clostridium botulinum: flaccid paralysis; blocks ACh release at NMJ; descending paralysis; food-borne/wound/infant types",
+      "mnemonic": "Botulinum = Blocks neuromuscular transmission (flaccid)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_255",
+      "subject": "Microbiology",
+      "topic": "Bacteriology",
+      "fact": "Mycobacterium tuberculosis: acid-fast bacillus (Ziehl-Neelsen stain); Lowenstein-Jensen medium; cord factor (trehalose dimycolate)",
+      "mnemonic": "ZN stain = TB detective tool",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_256",
+      "subject": "Microbiology",
+      "topic": "Bacteriology",
+      "fact": "Neisseria meningitidis: gram-negative diplococcus; capsule = main virulence; serogroup B = most common; vaccine for A,C,Y,W135",
+      "mnemonic": "Meningococcus serogroup B = vaccine challenge",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_257",
+      "subject": "Microbiology",
+      "topic": "Bacteriology",
+      "fact": "Salmonella typhi: intracellular pathogen; Widal (O and H antibodies); DOC ceftriaxone; carrier state in gallbladder",
+      "mnemonic": "Typhoid hides in Gallbladder (chronic carrier)",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_258",
+      "subject": "Microbiology",
+      "topic": "Bacteriology",
+      "fact": "Vibrio cholerae: rice-water stools; El Tor biotype currently predominant; DOC ORS; antibiotics (doxycycline) reduce duration",
+      "mnemonic": "Rice water stool = Vibrio cholerae calling card",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_259",
+      "subject": "Microbiology",
+      "topic": "Bacteriology",
+      "fact": "H. pylori: gram-negative curved rod; CLO test (urease positive); colonizes antrum; risk factor for gastric Ca and MALT lymphoma",
+      "mnemonic": "CLO = Campylobacter-Like Organism urease test",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_260",
+      "subject": "Microbiology",
+      "topic": "Bacteriology",
+      "fact": "Klebsiella pneumoniae: causes lobar pneumonia in alcoholics + diabetics; mucoid colonies; currant jelly sputum; DOC carbapenem",
+      "mnemonic": "Currant jelly sputum = Klebsiella pneumonia",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_261",
+      "subject": "Microbiology",
+      "topic": "Bacteriology",
+      "fact": "Pseudomonas aeruginosa: grape/corn-like sweet smell; produces pyocyanin (blue-green pigment); DOC = anti-pseudomonal beta-lactam + aminoglycoside",
+      "mnemonic": "Pseudo grape = Pyocyanin blue-green pigment",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_262",
+      "subject": "Microbiology",
+      "topic": "Bacteriology",
+      "fact": "Treponema pallidum: syphilis agent; dark-field microscopy for diagnosis; FTA-ABS most specific serology; DOC = benzathine penicillin",
+      "mnemonic": "FTA-ABS = most specific syphilis serological test",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_263",
+      "subject": "Microbiology",
+      "topic": "Virology",
+      "fact": "HIV: CCR5 co-receptor used by M-tropic strains; CXCR4 by T-tropic; CD4 >500 asymptomatic; <200 = AIDS; DOC HAART",
+      "mnemonic": "CCR5 = Macrophage tropism; CXCR4 = T-cell tropism",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_264",
+      "subject": "Microbiology",
+      "topic": "Virology",
+      "fact": "Hepatitis B: HBsAg = surface antigen (first to appear); HBeAg = active replication + infectivity; Anti-HBs = immunity",
+      "mnemonic": "HBsAg first to appear; Anti-HBs = immunity (vaccine)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_265",
+      "subject": "Microbiology",
+      "topic": "Virology",
+      "fact": "Hepatitis C: RNA virus; no vaccine available; DOC = direct-acting antivirals (sofosbuvir + velpatasvir) = 95%+ cure rate",
+      "mnemonic": "HCV = Curable now with direct-acting antivirals",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_266",
+      "subject": "Microbiology",
+      "topic": "Virology",
+      "fact": "Rabies: Negri bodies (pathognomonic) in hippocampal neurons; Purkinje cells; 100% fatal once symptomatic; DOC = post-exposure prophylaxis",
+      "mnemonic": "Negri bodies = Neuron inclusions of Rabies",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_267",
+      "subject": "Microbiology",
+      "topic": "Virology",
+      "fact": "Herpes simplex: HSV-1 = oral (cold sores); HSV-2 = genital; latency in sensory ganglia; DOC = acyclovir (viral thymidine kinase activates it)",
+      "mnemonic": "Acyclovir needs viral thymidine kinase to activate",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_268",
+      "subject": "Microbiology",
+      "topic": "Virology",
+      "fact": "Influenza: segmented RNA virus; antigenic drift (minor mutations) = epidemic; antigenic shift (major reassortment) = pandemic",
+      "mnemonic": "Shift = pandemic; Drift = epidemic (minor)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_269",
+      "subject": "Microbiology",
+      "topic": "Virology",
+      "fact": "CMV: commonest intrauterine infection (TORCH); periventricular calcifications; owl-eye intranuclear inclusions; DOC ganciclovir",
+      "mnemonic": "Owl eye inclusions = CMV pathognomonic finding",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_270",
+      "subject": "Microbiology",
+      "topic": "Virology",
+      "fact": "EBV (Epstein-Barr): infectious mononucleosis; heterophile antibodies (Paul-Bunnell test); causes Burkitt lymphoma + nasopharyngeal Ca",
+      "mnemonic": "Paul-Bunnell = EBV mono heterophile antibody test",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_271",
+      "subject": "Microbiology",
+      "topic": "Virology",
+      "fact": "Dengue: 4 serotypes; Aedes aegypti vector; NS1 antigen earliest marker; IgM after 5 days; secondary infection leads to DHF risk",
+      "mnemonic": "NS1 = earliest; IgM appears at day 5",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_272",
+      "subject": "Microbiology",
+      "topic": "Virology",
+      "fact": "Parvovirus B19: erythema infectiosum (fifth disease); slapped cheek appearance; aplastic crisis in sickle cell patients",
+      "mnemonic": "Slapped cheek rash = Parvo B19 fifth disease",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_273",
+      "subject": "Microbiology",
+      "topic": "Parasitology",
+      "fact": "Plasmodium falciparum: malignant tertian malaria; ring forms + banana-shaped gametocytes; cerebral malaria + blackwater fever",
+      "mnemonic": "Banana gametocytes = P. falciparum signature finding",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_274",
+      "subject": "Microbiology",
+      "topic": "Parasitology",
+      "fact": "Leishmania donovani: kala-azar; transmitted by Phlebotomus sandfly; Aldehyde (formal-gel/Napier's) test; DOC miltefosine (India)",
+      "mnemonic": "Kala-azar DOC = Miltefosine in India",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_275",
+      "subject": "Microbiology",
+      "topic": "Parasitology",
+      "fact": "Entamoeba histolytica: flask-shaped ulcers in colon; amoebic liver abscess (chocolate/anchovy sauce pus); DOC metronidazole",
+      "mnemonic": "Anchovy sauce = Amoebic liver abscess pus",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_276",
+      "subject": "Microbiology",
+      "topic": "Parasitology",
+      "fact": "Wuchereria bancrofti: lymphatic filariasis; Culex mosquito; nocturnal periodicity of microfilariae; DOC diethylcarbamazine (DEC)",
+      "mnemonic": "DEC for filariasis = Diethylcarbamazine",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_277",
+      "subject": "Microbiology",
+      "topic": "Parasitology",
+      "fact": "Toxoplasma gondii: cats = definitive host; congenital toxoplasmosis = hydrocephalus + chorioretinitis + intracranial calcifications",
+      "mnemonic": "TORCH T = Toxoplasma via cats",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_278",
+      "subject": "Microbiology",
+      "topic": "Mycology",
+      "fact": "Candida albicans: pseudohyphae + blastoconidia; germ tube positive at 37 degrees (distinguishes from other Candida); DOC fluconazole",
+      "mnemonic": "Germ tube = C. albicans fingerprint test",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_279",
+      "subject": "Microbiology",
+      "topic": "Mycology",
+      "fact": "Cryptococcus neoformans: encapsulated yeast; India ink stain shows capsule halo; meningitis in HIV (CD4<100); DOC amphotericin B + flucytosine",
+      "mnemonic": "India ink = Cryptococcal capsule visualization",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_280",
+      "subject": "Microbiology",
+      "topic": "Mycology",
+      "fact": "Aspergillus fumigatus: septate hyphae at 45-degree angle; angio-invasive; DOC = voriconazole for invasive aspergillosis; galactomannan test used",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_281",
+      "subject": "Biochemistry",
+      "topic": "Enzymes",
+      "fact": "Km: substrate concentration at which reaction is half-maximal velocity; lower Km = higher affinity; NOT changed by competitive inhibitor",
+      "mnemonic": "Km = Kinetic affinity measure (love for substrate)",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_282",
+      "subject": "Biochemistry",
+      "topic": "Enzymes",
+      "fact": "Competitive inhibition: Km increases, Vmax unchanged; overcome by increasing substrate concentration",
+      "mnemonic": "Compete = Can overcome with more substrate (Vmax ok)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_283",
+      "subject": "Biochemistry",
+      "topic": "Enzymes",
+      "fact": "Non-competitive inhibition: Km unchanged, Vmax decreases; cannot overcome by increasing substrate; binds allosteric site",
+      "mnemonic": "Non-compete = Nixed Vmax (cannot be reversed)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_284",
+      "subject": "Biochemistry",
+      "topic": "Enzymes",
+      "fact": "Hexokinase vs Glucokinase: hexokinase = low Km (high affinity); glucokinase = high Km + sigmoidal kinetics (liver/beta-cells)",
+      "mnemonic": "Gluco = high Km, induced by insulin, in liver",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_285",
+      "subject": "Biochemistry",
+      "topic": "Enzymes",
+      "fact": "LDH isoenzymes: LDH-1 (heart, RBCs) = flipped ratio LDH1>LDH2 in MI; LDH-5 (liver, skeletal muscle) elevated in hepatitis",
+      "mnemonic": "LDH1 flip ratio = heart attack indicator",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_286",
+      "subject": "Biochemistry",
+      "topic": "Enzymes",
+      "fact": "AST:ALT ratio >2:1 in alcoholic liver disease; ALT more liver-specific; isolated ALT rise suggests viral hepatitis",
+      "mnemonic": "AST:ALT >2 = Alcoholic liver disease (de Ritis ratio)",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_287",
+      "subject": "Biochemistry",
+      "topic": "Enzymes",
+      "fact": "G6PD enzyme: pentose phosphate pathway; produces NADPH (maintains reduced glutathione); deficiency leads to oxidative hemolysis",
+      "mnemonic": "G6PD = Guardian via NADPH production",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_288",
+      "subject": "Biochemistry",
+      "topic": "Enzymes",
+      "fact": "Creatine kinase (CK-MB): peaks 18-24 hrs in MI; returns to normal by 48-72 hrs; troponin peaks later but stays elevated longer",
+      "mnemonic": "CK-MB = 24hr peak, Troponin stays days longer",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_289",
+      "subject": "Biochemistry",
+      "topic": "Metabolism",
+      "fact": "Glycolysis key enzymes: hexokinase (step 1), PFK-1 (rate-limiting, step 3), pyruvate kinase (step 10); regulated by F-2,6-BP",
+      "mnemonic": "PFK-1 = Pace-setter of glycolysis (rate-limiting)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_290",
+      "subject": "Biochemistry",
+      "topic": "Metabolism",
+      "fact": "Cori cycle: lactate from muscle transported to liver for gluconeogenesis; lactate dehydrogenase converts; costs 6 ATP net",
+      "mnemonic": "Cori = liver recycles muscle lactate into glucose",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_291",
+      "subject": "Biochemistry",
+      "topic": "Metabolism",
+      "fact": "Ketone body synthesis in liver: acetyl-CoA to acetoacetate to beta-hydroxybutyrate; used by brain in prolonged fasting/DKA",
+      "mnemonic": "Liver makes ketones; brain uses them in starvation",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_292",
+      "subject": "Biochemistry",
+      "topic": "Metabolism",
+      "fact": "HMP shunt (PPP): produces NADPH + ribose-5-phosphate; occurs in cytoplasm; important in RBCs, adrenal cortex, mammary gland",
+      "mnemonic": "HMP = NADPH + Ribose factory",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_293",
+      "subject": "Biochemistry",
+      "topic": "Metabolism",
+      "fact": "Urea cycle: occurs in liver (partly mitochondria, partly cytoplasm); key enzyme CPS-I (mitochondria) commits NH3 to cycle",
+      "mnemonic": "CPS-1 = Commits NH3 to urea cycle (first step)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_294",
+      "subject": "Biochemistry",
+      "topic": "Metabolism",
+      "fact": "Phenylketonuria (PKU): phenylalanine hydroxylase deficiency; elevated phenylalanine causes musty/mousy odor; DOC Phe-restricted diet + sapropterin",
+      "mnemonic": "PKU = Musty smelling urine metabolic error",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_295",
+      "subject": "Biochemistry",
+      "topic": "Metabolism",
+      "fact": "Galactosemia: galactose-1-phosphate uridyltransferase deficiency; cataracts + liver disease + intellectual disability; DOC galactose-free diet",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_296",
+      "subject": "Biochemistry",
+      "topic": "Metabolism",
+      "fact": "Glycogen storage disease type I (von Gierke): glucose-6-phosphatase deficiency; severe hypoglycemia + hepatomegaly + doll face",
+      "mnemonic": "Von Gierke = no G6Pase = glucose trapped in liver",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_297",
+      "subject": "Biochemistry",
+      "topic": "Metabolism",
+      "fact": "Maple syrup urine disease: branched-chain keto acid dehydrogenase deficiency (leucine, isoleucine, valine); sweet urine odor; neurological damage",
+      "mnemonic": "MSUD = Maple Sugar-smelling urine disease",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_298",
+      "subject": "Biochemistry",
+      "topic": "Metabolism",
+      "fact": "Homocystinuria: cystathionine beta-synthase deficiency; downward lens dislocation + Marfanoid habitus + thrombosis; DOC pyridoxine (B6)",
+      "mnemonic": "Homocystinuria = downward lens (vs Marfan = upward)",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_299",
+      "subject": "Biochemistry",
+      "topic": "Vitamins",
+      "fact": "Vitamin B1 (thiamine): required for pyruvate dehydrogenase, alpha-KG dehydrogenase, transketolase; deficiency = Wernicke + Beri-beri",
+      "mnemonic": "Thiamine = Three-enzyme cofactor (PDH, aKGDH, TK)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_300",
+      "subject": "Biochemistry",
+      "topic": "Vitamins",
+      "fact": "Vitamin B12 deficiency: subacute combined degeneration of spinal cord (posterior + lateral columns); megaloblastic anemia; glossitis",
+      "mnemonic": "B12 = Backbone of spinal cord vitamin",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_301",
+      "subject": "Biochemistry",
+      "topic": "Vitamins",
+      "fact": "Niacin (Vit B3) deficiency: pellagra = 3 D's (Dermatitis + Diarrhea + Dementia); 4th D = Death; Casal necklace rash on neck",
+      "mnemonic": "3D's of pellagra: Dermatitis, Diarrhea, Dementia",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_302",
+      "subject": "Biochemistry",
+      "topic": "Vitamins",
+      "fact": "Biotin deficiency: raw egg white consumption (avidin binds biotin); dermatitis + alopecia + neurological symptoms",
+      "mnemonic": "Avidin in raw egg whites = biotin thief",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_303",
+      "subject": "Biochemistry",
+      "topic": "Vitamins",
+      "fact": "Vitamin C (ascorbic acid): required for hydroxylation of proline/lysine in collagen synthesis; deficiency = scurvy (perifollicular hemorrhage)",
+      "mnemonic": "Scurvy = Collagen can't cross-link without Vit C",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_304",
+      "subject": "Biochemistry",
+      "topic": "Vitamins",
+      "fact": "Folic acid: required for purine and dTMP synthesis; deficiency leads to megaloblastic anemia; neural tube defects if deficient periconceptionally",
+      "mnemonic": "Folate = Fetal neural tube protector (take before conception)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_305",
+      "subject": "Biochemistry",
+      "topic": "Vitamins",
+      "fact": "Fat-soluble vitamins: A, D, E, K (ADEK); stored in liver; toxicity possible with excess; deficiency in fat malabsorption",
+      "mnemonic": "ADEK = All Dissolved in fat/oil (fat-soluble)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_306",
+      "subject": "Forensic",
+      "topic": "Forensic Medicine",
+      "fact": "Rigor mortis: starts 2-6 hrs after death; complete at 6-12 hrs; disappears in 36-48 hrs; begins in jaw and neck (descends)",
+      "mnemonic": "Rigor goes top to bottom (jaw first)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_307",
+      "subject": "Forensic",
+      "topic": "Forensic Medicine",
+      "fact": "Hypostasis (livor mortis): gravitational pooling of blood; appears 2-4 hrs; fixed by 8-12 hrs (cannot be shifted after fixation)",
+      "mnemonic": "Livor = Livid gravity-driven discoloration",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_308",
+      "subject": "Forensic",
+      "topic": "Forensic Medicine",
+      "fact": "Time of death estimation: corneal clouding in 2-3 hrs; vitreous K+ used for forensic estimation; tache noire in dry conditions",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_309",
+      "subject": "Forensic",
+      "topic": "Forensic Medicine",
+      "fact": "Drowning: diatom test (Incinerator test) is gold standard for confirming antemortem drowning; fine froth at mouth/nose",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_310",
+      "subject": "Forensic",
+      "topic": "Forensic Medicine",
+      "fact": "Carbon monoxide poisoning: carboxyhemoglobin causes cherry red color; CO has 250x affinity for Hb vs O2; DOC 100% O2/hyperbaric O2",
+      "mnemonic": "Cherry red = CO poisoning (carboxyhemoglobin)",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_311",
+      "subject": "Forensic",
+      "topic": "Forensic Medicine",
+      "fact": "Hanging vs strangulation: in hanging, ligature mark is inverted V above thyroid cartilage; in strangulation, it is horizontal",
+      "mnemonic": "Hanging = oblique/upward mark; Strangulation = horizontal",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_312",
+      "subject": "Forensic",
+      "topic": "Forensic Medicine",
+      "fact": "Hymen is NOT reliable indicator of virginity; medico-legally, intact hymen does NOT confirm virginity",
+      "mnemonic": "Hymen = NOT proof of virginity (legal fact)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_313",
+      "subject": "Forensic",
+      "topic": "Forensic Medicine",
+      "fact": "Semen identification: acid phosphatase test for seminal stain; Florence test (choline + iodine = brown rhomboid crystals); DNA typing is best",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_314",
+      "subject": "Forensic",
+      "topic": "Forensic Medicine",
+      "fact": "Exhumation: disinterment of buried body; requires order from magistrate; decomposition depends on soil, temperature, moisture",
+      "mnemonic": "Exhumation = legal digging up of buried body",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_315",
+      "subject": "Forensic",
+      "topic": "Forensic Medicine",
+      "fact": "Indian Evidence Act Sec 112: legitimacy of child born during valid marriage presumed; irrebuttable presumption of paternity",
+      "mnemonic": "Sec 112 IEA = Legitimate child presumption in marriage",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_316",
+      "subject": "Forensic",
+      "topic": "Forensic Medicine",
+      "fact": "Grievous hurt (IPC Sec 320): 8 types including emasculation, permanent loss of sight/hearing, fracture, dislocation",
+      "mnemonic": "Grievous 8 types defined under IPC 320",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_317",
+      "subject": "Forensic",
+      "topic": "Forensic Medicine",
+      "fact": "Arsenic poisoning: garlic odor + Mees lines on nails + rain drop pigmentation on skin; Marsh test for detection",
+      "mnemonic": "Arsenic = garlic odor + rain drops on skin",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_318",
+      "subject": "Forensic",
+      "topic": "Forensic Medicine",
+      "fact": "Organophosphate poisoning: miosis + bradycardia + excessive secretions; SLUDGE symptoms; DOC atropine + pralidoxime (2-PAM)",
+      "mnemonic": "2-PAM reactivates AChE if given within 24-48 hours",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_319",
+      "subject": "Forensic",
+      "topic": "Forensic Medicine",
+      "fact": "Drowning types: dry drowning (laryngospasm, lungs dry) vs wet drowning (lungs waterlogged); secondary drowning = delayed pulmonary edema",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_320",
+      "subject": "Forensic",
+      "topic": "Forensic Medicine",
+      "fact": "Pugilistic (boxer) posture seen in burn victims: heat causes muscle contraction; NOT a sign of ante-mortem injury",
+      "mnemonic": "Pugilistic = Heat artifact, not evidence of fight",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_321",
+      "subject": "Anatomy",
+      "topic": "Neuroanatomy",
+      "fact": "Circle of Willis: ICA supplies anterior and middle cerebral arteries; basilar artery supplies posterior cerebral; communicating arteries connect them",
+      "mnemonic": "ACA + MCA from ICA; PCA from basilar artery",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_322",
+      "subject": "Anatomy",
+      "topic": "Neuroanatomy",
+      "fact": "Internal capsule: posterior limb carries corticospinal + sensory fibers; anterior limb = frontopontine; genu = corticobulbar fibers",
+      "mnemonic": "Posterior limb = motor and sensory highway",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_323",
+      "subject": "Anatomy",
+      "topic": "Neuroanatomy",
+      "fact": "Facial nerve (CN VII): upper face has bilateral cortical representation so upper face is spared in UMN (central) lesion; LMN = all face involved",
+      "mnemonic": "Upper face = bilateral = spared in stroke (UMN)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_324",
+      "subject": "Anatomy",
+      "topic": "Neuroanatomy",
+      "fact": "Vagus nerve (CN X): dorsal motor nucleus = parasympathetic to thoracoabdominal viscera; nucleus ambiguus = motor (larynx/pharynx)",
+      "mnemonic": "Vagus = Vast range of visceral effects",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_325",
+      "subject": "Anatomy",
+      "topic": "Neuroanatomy",
+      "fact": "Trigeminal nerve (CN V): V1 = ophthalmic (corneal reflex afferent); V2 = maxillary; V3 = mandibular (motor to masseter)",
+      "mnemonic": "V1V2V3 = Eye-Nose-Jaw territory",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_326",
+      "subject": "Anatomy",
+      "topic": "Neuroanatomy",
+      "fact": "Hippocampus: part of limbic system; crucial for memory formation; damaged in Alzheimer disease (neurofibrillary tangles + Abeta plaques)",
+      "mnemonic": "Hippo = memory horse of the brain",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_327",
+      "subject": "Anatomy",
+      "topic": "Thorax",
+      "fact": "Right recurrent laryngeal nerve loops under subclavian artery; LEFT RLN loops under arch of aorta (longer = more vulnerable to Pancoast tumor)",
+      "mnemonic": "Left RLN = longer, more vulnerable to mediastinal disease",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_328",
+      "subject": "Anatomy",
+      "topic": "Thorax",
+      "fact": "Phrenic nerve (C3,4,5): motor to diaphragm; sensory to central diaphragm, pericardium; runs anterior to lung hilum",
+      "mnemonic": "C3,4,5 keeps the diaphragm alive (mnemonic)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_329",
+      "subject": "Anatomy",
+      "topic": "Thorax",
+      "fact": "Thoracic duct: drains all lymph except right head/neck/arm/right thorax; begins at cisterna chyli (L1-2); opens into left subclavian-jugular junction",
+      "mnemonic": "Thoracic duct = most of body's lymph drainage",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_330",
+      "subject": "Anatomy",
+      "topic": "Thorax",
+      "fact": "Coronary arteries: RCA = right atrium, RV, SA node (60%), AV node (80%); LAD = anterior LV, anterior 2/3 IVS, apex",
+      "mnemonic": "LAD = widowmaker artery (anterior MI)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_331",
+      "subject": "Anatomy",
+      "topic": "Thorax",
+      "fact": "Horner syndrome: lesion of sympathetic chain (T1 root to superior cervical ganglion to head); ptosis + miosis + anhidrosis",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_332",
+      "subject": "Anatomy",
+      "topic": "Thorax",
+      "fact": "Erb's point: medial border of SCM where C5+C6 join to form upper trunk of brachial plexus; commonest birth injury site",
+      "mnemonic": "Erb's point = Birth injury target (C5-C6 junction)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_333",
+      "subject": "Anatomy",
+      "topic": "Abdomen",
+      "fact": "Portal vein: formed by SMV + splenic vein; portal hypertension leads to portosystemic anastomoses (varices, hemorrhoids, caput medusae)",
+      "mnemonic": "Portal = Pinched = portosystemic collateral varices",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_334",
+      "subject": "Anatomy",
+      "topic": "Abdomen",
+      "fact": "McBurney's point: junction of lateral 1/3 and medial 2/3 of line from ASIS to umbilicus; point of maximal tenderness in appendicitis",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_335",
+      "subject": "Anatomy",
+      "topic": "Abdomen",
+      "fact": "Femoral canal boundaries: medial = lacunar ligament; lateral = femoral vein; anterior = inguinal ligament; posterior = pectineal ligament",
+      "mnemonic": "NAVEL: Nerve Artery Vein Empty canal Lymphatics",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_336",
+      "subject": "Anatomy",
+      "topic": "Abdomen",
+      "fact": "Hesselbach's triangle: boundaries = inguinal ligament (inferior), inferior epigastric vessels (lateral), rectus abdominis (medial); site of direct hernia",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_337",
+      "subject": "Anatomy",
+      "topic": "Abdomen",
+      "fact": "Adrenal glands: right is triangular; left is crescent-shaped; right drains directly into IVC; left drains into left renal vein",
+      "mnemonic": "Right adrenal vein goes to IVC; Left goes to renal vein",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_338",
+      "subject": "Anatomy",
+      "topic": "Other",
+      "fact": "Anatomical snuffbox boundaries: laterally = APL + EPB; medially = EPL; floor = scaphoid + radial artery; tenderness = scaphoid fracture",
+      "mnemonic": "Snuffbox floor = Scaphoid (+ radial artery)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_339",
+      "subject": "Anatomy",
+      "topic": "Other",
+      "fact": "Carpal tunnel: contents = FDS, FDP, FPL (9 tendons) + median nerve; NOT ulnar nerve; compression causes thenar wasting (CTS)",
+      "mnemonic": "CTS = median nerve in trouble (9 tendons + 1 nerve)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_340",
+      "subject": "Anatomy",
+      "topic": "Other",
+      "fact": "Sciatic nerve (L4-S3): divides in popliteal fossa into tibial + common peroneal; prone to injury at piriformis (deep gluteal syndrome)",
+      "mnemonic": "Sciatic = biggest nerve, piriformis neighbor",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_341",
+      "subject": "Physiology",
+      "topic": "Renal Physiology",
+      "fact": "GFR approximately 120 mL/min in adults; measured by inulin clearance (gold standard); estimated by creatinine clearance (Cockcroft-Gault)",
+      "mnemonic": "GFR = 120 mL/min = kidney's filtration power",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_342",
+      "subject": "Physiology",
+      "topic": "Renal Physiology",
+      "fact": "Starling forces in glomerulus: favoring filtration = capillary hydrostatic pressure (55 mmHg); opposing = oncotic pressure (30) + Bowman's pressure (15)",
+      "mnemonic": "Net filtration = 55-(30+15) = 10 mmHg",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_343",
+      "subject": "Physiology",
+      "topic": "Renal Physiology",
+      "fact": "ADH (vasopressin): released from posterior pituitary in response to increased osmolality or decreased volume; acts on V2 receptors in CD to insert aquaporin-2",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_344",
+      "subject": "Physiology",
+      "topic": "Renal Physiology",
+      "fact": "Aldosterone: acts on principal cells of CD; promotes Na+ reabsorption + K+ secretion + H+ secretion; stimulated by angiotensin II + hyperkalemia",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_345",
+      "subject": "Physiology",
+      "topic": "Renal Physiology",
+      "fact": "Renal autoregulation: maintains GFR constant despite BP 80-180 mmHg; myogenic reflex + tubuloglomerular feedback (macula densa)",
+      "mnemonic": "Kidney self-regulates its own filtration rate",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_346",
+      "subject": "Physiology",
+      "topic": "CVS Physiology",
+      "fact": "Cardiac output = HR x stroke volume; normal = 5 L/min; cardiac index = CO/BSA (normal 2.5-3.5 L/min/m2)",
+      "mnemonic": "CO = HR x SV; normal CO = 5 L/min",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_347",
+      "subject": "Physiology",
+      "topic": "CVS Physiology",
+      "fact": "Starling's law of the heart: increased preload (EDV) leads to increased stroke volume (up to a point); failing heart has flattened Starling curve",
+      "mnemonic": "Starling = stretch to contract harder",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_348",
+      "subject": "Physiology",
+      "topic": "CVS Physiology",
+      "fact": "JVP waveforms: a wave = atrial contraction; c wave = tricuspid closure; x descent = atrial relaxation; v wave = venous filling; y descent = tricuspid opening",
+      "mnemonic": "a-c-x-v-y sequence of JVP waveforms",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_349",
+      "subject": "Physiology",
+      "topic": "CVS Physiology",
+      "fact": "Ventricular action potential phases: 0 = rapid depolarization (Na+); 1 = early repol; 2 = plateau (Ca2+); 3 = rapid repol (K+); 4 = resting",
+      "mnemonic": "01234 phases of ventricular action potential",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_350",
+      "subject": "Physiology",
+      "topic": "CVS Physiology",
+      "fact": "Pulse pressure = systolic - diastolic; normal approximately 40 mmHg; widened in aortic regurgitation + thyrotoxicosis; narrow in cardiac tamponade",
+      "mnemonic": "Wide PP = AR or thyroid; Narrow = tamponade",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_351",
+      "subject": "Physiology",
+      "topic": "Respiratory Physiology",
+      "fact": "FEV1/FVC: normal >70-80%; obstructive pattern = FEV1/FVC <70% with low FEV1; restrictive = normal ratio with low FVC",
+      "mnemonic": "FEV1/FVC <70 = Obstructive lung disease",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_352",
+      "subject": "Physiology",
+      "topic": "Respiratory Physiology",
+      "fact": "Oxygen-Hb dissociation curve: right shift by increased CO2, temp, 2,3-DPG, H+ (acidosis) leads to increased O2 release to tissues",
+      "mnemonic": "CADET: CO2, Altitude-2,3DPG, Exercise/Temp, right-shift",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_353",
+      "subject": "Physiology",
+      "topic": "Respiratory Physiology",
+      "fact": "Dead space: anatomical approximately 150 mL; physiological = anatomical + alveolar; Bohr equation measures physiological dead space",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_354",
+      "subject": "Physiology",
+      "topic": "Respiratory Physiology",
+      "fact": "Surfactant: produced by type II pneumocytes; decreases surface tension; prevents alveolar collapse; reduces pressure in small alveoli",
+      "mnemonic": "Type II pneumocytes = Surfactant secretors",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_355",
+      "subject": "Physiology",
+      "topic": "Respiratory Physiology",
+      "fact": "Hypoxic pulmonary vasoconstriction (HPV): hypoxia causes pulmonary vasoconstriction (opposite to systemic response); redirects blood from poorly ventilated areas",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_356",
+      "subject": "Physiology",
+      "topic": "Neurophysiology",
+      "fact": "Resting membrane potential: -70 mV in neurons; maintained by Na-K ATPase (3Na out, 2K in) + K+ leak channels",
+      "mnemonic": "Na-K pump = the -70mV guardian (3Na out, 2K in)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_357",
+      "subject": "Physiology",
+      "topic": "Neurophysiology",
+      "fact": "Action potential: all-or-nothing principle; threshold approximately -55 mV; absolute refractory period (inactivated Na channels) prevents summation",
+      "mnemonic": "All-or-nothing threshold at -55 mV",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_358",
+      "subject": "Physiology",
+      "topic": "Neurophysiology",
+      "fact": "CSF: produced by choroid plexus (~500 mL/day); absorbed by arachnoid granulations; normal pressure 70-180 mm H2O; protein 15-45 mg/dL",
+      "mnemonic": "CSF = 500 mL/day produced, slowly drained",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_359",
+      "subject": "Physiology",
+      "topic": "Neurophysiology",
+      "fact": "Gate control theory of pain: large A-beta fibers close gate; small C-fibers open gate; explains TENS mechanism of pain relief",
+      "mnemonic": "Large fibers = Close pain gate (TENS works this way)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_360",
+      "subject": "Physiology",
+      "topic": "Neurophysiology",
+      "fact": "REM sleep: associated with dreaming; loss of muscle tone (pontine atonia); essential for memory consolidation; EEG shows low-amplitude high-frequency waves",
+      "mnemonic": "REM = Remember = memory consolidation during sleep",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_361",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "ENT",
+      "fact": "Cholesteatoma: keratinizing squamous epithelium in middle ear; erodes bone (ossicles, tegmen, facial canal); dangerous CSOM type",
+      "mnemonic": "Cholesteatoma = Destructive white pearly tumor in ear",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_362",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "ENT",
+      "fact": "Meniere's disease: endolymphatic hydrops; triad = episodic vertigo + sensorineural HL + tinnitus; DOC low-salt diet + betahistine",
+      "mnemonic": "Meniere = Medley of ear symptoms (triad)",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_363",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "ENT",
+      "fact": "BPPV: commonest cause of vertigo; posterior semicircular canal (90%); displaced otoconia; Dix-Hallpike test; DOC Epley maneuver",
+      "mnemonic": "Epley = Ear crystal repositioning maneuver",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_364",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "ENT",
+      "fact": "Acoustic neuroma (vestibular schwannoma): CN VIII tumor; unilateral SNHL + tinnitus; bilateral in NF-2; MRI with contrast for diagnosis",
+      "mnemonic": "CN VIII = Acoustic schwannoma site",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_365",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "ENT",
+      "fact": "Rinne's test: AC > BC = positive (normal); BC > AC = negative Rinne = conductive HL; False negative Rinne in dead ear (better ear hears by BC)",
+      "mnemonic": "Rinne negative = Conductive hearing loss",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_366",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "ENT",
+      "fact": "Weber test: lateralizes to affected ear in conductive HL; lateralizes to better (unaffected) ear in sensorineural HL",
+      "mnemonic": "Weber lateralizes to GOOD ear in SNHL",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_367",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "ENT",
+      "fact": "Otosclerosis: fixation of stapes footplate; conductive HL; Schwartze sign (flamingo pink blush); DOC stapedectomy",
+      "mnemonic": "Stapedectomy = Otosclerosis surgical cure",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_368",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "ENT",
+      "fact": "Ludwig's angina: bilateral submandibular + sublingual + submental space infection; airway emergency; DOC airway management + IV penicillin",
+      "mnemonic": "Ludwig = Life-threatening floor of mouth infection",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_369",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "ENT",
+      "fact": "Quinsy (peritonsillar abscess): DOC incision + drainage + IV antibiotics; interval tonsillectomy after 6 weeks",
+      "mnemonic": "Quinsy = Drained first, tonsils out 6 weeks later",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_370",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "ENT",
+      "fact": "CSF rhinorrhea: Beta-2 transferrin is specific marker; halo sign on filter paper; CT cisternography for localization",
+      "mnemonic": "Beta-2 transferrin = CSF in nose diagnostic proof",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_371",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "ENT",
+      "fact": "Carcinoma nasopharynx: EBV associated; commonest in southern China; arises from fossa of Rosenmuller; DOC chemoradiation",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_372",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "ENT",
+      "fact": "Laryngomalacia: commonest cause of stridor in neonates; inspiratory stridor; omega-shaped epiglottis; resolves by 18-24 months",
+      "mnemonic": "Laryngomalacia = Limp larynx in neonates (benign)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_373",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "ENT",
+      "fact": "Epistaxis: commonest site = Kiesselbach's plexus (Little's area) on anteroinferior nasal septum; DOC anterior pack or silver nitrate cautery",
+      "mnemonic": "Little's area = Little nosebleed site (Kiesselbach)",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_374",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "ENT",
+      "fact": "Presbycusis: age-related SNHL; high-frequency first affected; 4 kHz notch on audiogram (noise-induced also); gradually progressive",
+      "mnemonic": "4 kHz notch = Noise or aging-related hearing loss",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_375",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Ophthalmology",
+      "fact": "Normal IOP: 10-21 mmHg; measured by Goldmann applanation tonometry (gold standard); elevated IOP seen in glaucoma",
+      "mnemonic": "Normal IOP = 10-21 mmHg (Goldmann gold standard)",
+      "category": "value",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_376",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Ophthalmology",
+      "fact": "Primary open-angle glaucoma (POAG): commonest glaucoma; painless; optic disc cupping (C/D ratio >0.6); DOC prostaglandin analogues (latanoprost)",
+      "mnemonic": "POAG = Painless progressive optic disc cupping",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_377",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Ophthalmology",
+      "fact": "Acute angle-closure glaucoma: sudden IOP rise; pain + halos + nausea + fixed mid-dilated pupil; DOC IV acetazolamide + pilocarpine",
+      "mnemonic": "Mid-dilated fixed pupil = ACG emergency sign",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_378",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Ophthalmology",
+      "fact": "Diabetic retinopathy: commonest cause of blindness 20-65 years (developed world); laser photocoagulation for PDR; anti-VEGF for DME",
+      "mnemonic": "Diabetes = Leading cause of working-age blindness",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_379",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Ophthalmology",
+      "fact": "Trachoma: Chlamydia trachomatis (serovars A-C); commonest infectious cause of blindness worldwide; DOC azithromycin 1g single dose",
+      "mnemonic": "Trachoma = Trichiasis leading to blindness (WHO priority)",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_380",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Ophthalmology",
+      "fact": "Cataract: commonest cause of blindness worldwide (and India); DOC phacoemulsification + IOL; congenital cataract = rubella (TORCH)",
+      "mnemonic": "Cataract = Number 1 cause of blindness globally",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_381",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Ophthalmology",
+      "fact": "Retinal detachment: posterior vitreous detachment leads to tear then fluid under retina; risk factors = myopia, trauma; DOC cryopexy/scleral buckle",
+      "mnemonic": "Curtain coming down = retinal detachment symptom",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_382",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Ophthalmology",
+      "fact": "Marcus Gunn pupil (RAPD): afferent pupillary defect; swinging flashlight test shows affected eye paradoxically dilates; indicates optic nerve lesion",
+      "mnemonic": "RAPD = Relative Afferent Pupillary Defect (optic nerve)",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_383",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Ophthalmology",
+      "fact": "Argyll Robertson pupil: accommodates but does NOT react to light (prostitute's pupil); caused by neurosyphilis; midbrain lesion",
+      "mnemonic": "AR pupil = Accommodates but doesn't React to light",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_384",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Ophthalmology",
+      "fact": "Papilledema: bilateral optic disc swelling from raised ICP; no visual acuity loss early; CP angle tumor, pseudotumor cerebri",
+      "mnemonic": "Papilledema = Pressure pushing optic disc forward",
+      "category": "mechanism",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_385",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Ophthalmology",
+      "fact": "Age-related macular degeneration (AMD): dry (drusen) vs wet (neovascularization); wet AMD DOC = anti-VEGF (ranibizumab/bevacizumab)",
+      "mnemonic": "Anti-VEGF = Wet AMD treatment of choice",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_386",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Ophthalmology",
+      "fact": "Retinoblastoma: commonest intraocular tumor in children; leukocoria (white pupillary reflex); RB1 gene (chr 13q14); DOC enucleation",
+      "mnemonic": "Leukocoria + child = Retinoblastoma until proven otherwise",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_387",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Ophthalmology",
+      "fact": "Hordeolum (stye): infection of Zeis/Moll gland (external) or Meibomian gland (internal = chalazion if chronic); DOC warm compresses",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_388",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Ophthalmology",
+      "fact": "Bitot's spots: conjunctival xerosis with foamy deposits; indicates vitamin A deficiency; DOC high-dose vitamin A supplementation",
+      "mnemonic": "Bitot = Beware of xerophthalmia worsening",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_389",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Dermatology",
+      "fact": "Pemphigus vulgaris: acantholysis (intraepidermal split); IgG against desmoglein 1+3; Nikolsky sign positive; DOC steroids + azathioprine",
+      "mnemonic": "PV = Positive Nikolsky, desmoglein IgG target",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_390",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Dermatology",
+      "fact": "Bullous pemphigoid: subepidermal blister (basement membrane zone); IgG against BP180+BP230; Nikolsky sign negative; older age group",
+      "mnemonic": "BP = Below epidermis; Nikolsky Negative (unlike PV)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_391",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Dermatology",
+      "fact": "Psoriasis: Munro's microabscesses + Auspitz sign (pinpoint bleeding on scale removal) + Koebner phenomenon; DOC mild = topical steroids",
+      "mnemonic": "Auspitz + Koebner = Psoriasis signs",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_392",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Dermatology",
+      "fact": "Tinea capitis: Microsporum (Wood's lamp fluoresces green) vs Trichophyton (no fluorescence); DOC griseofulvin or terbinafine (oral)",
+      "mnemonic": "Wood's lamp green = Microsporum tinea",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_393",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Dermatology",
+      "fact": "Scabies: Sarcoptes scabiei; burrows in interdigital spaces; intense nocturnal itching; DOC permethrin 5% cream (treat all family members)",
+      "mnemonic": "Scabies = Sarcoptes + nocturnal itch + burrows",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_394",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Dermatology",
+      "fact": "Leprosy: Mycobacterium leprae; Fite-Faraco stain; TT = paucibacillary (negative skin smear); LL = multibacillary (anergic)",
+      "mnemonic": "TT = Tuberculoid (immune); LL = Lepromatous (anergic)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_395",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Dermatology",
+      "fact": "DOC for multibacillary leprosy (MB): rifampicin + clofazimine + dapsone for 12 months (WHO MDT); paucibacillary = 6 months",
+      "mnemonic": "MB leprosy = 12 months MDT (WHO regimen)",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_396",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Dermatology",
+      "fact": "Erythema multiforme: target (iris) lesions; triggered by HSV, Mycoplasma; mild form vs Stevens-Johnson syndrome spectrum",
+      "mnemonic": "Target lesions = Erythema multiforme hallmark",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_397",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Dermatology",
+      "fact": "Stevens-Johnson syndrome/TEN: severe mucocutaneous reaction; >30% BSA = TEN; drugs (sulfonamides, carbamazepine, allopurinol) trigger",
+      "mnemonic": "SJS + BSA >30% = TEN (life-threatening)",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_398",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Dermatology",
+      "fact": "Vitiligo: autoimmune destruction of melanocytes; associated with thyroid disease, DM, Addison's; DOC narrow-band UVB phototherapy",
+      "mnemonic": "Vitiligo = melanocytes vanished (autoimmune)",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_399",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Dermatology",
+      "fact": "Acne vulgaris: Cutibacterium acnes; DOC mild-moderate = topical retinoids + benzoyl peroxide; severe cystic = oral isotretinoin",
+      "mnemonic": "Isotretinoin = Severe acne solution (teratogenic!)",
+      "category": "DOC",
+      "batch_date": "2026-05-17"
+    },
+    {
+      "id": "ol_400",
+      "subject": "ENT/Ophth/Derm",
+      "topic": "Dermatology",
+      "fact": "Melanoma: ABCDE rule (Asymmetry, Border, Color, Diameter >6mm, Evolution); Breslow thickness = most important prognostic factor",
+      "mnemonic": "Breslow thickness = prognosis king for melanoma",
+      "category": "classification",
+      "batch_date": "2026-05-17"
+    }
+  ]
+}
