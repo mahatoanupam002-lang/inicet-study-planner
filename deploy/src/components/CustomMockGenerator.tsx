@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { safeLoad, safeSave } from "@/lib/storage";
-import { QUESTIONS, QUESTION_SUBJECTS } from "@/data/questions";
+import { QUESTIONS_BY_SUBJECT, QUESTION_SUBJECTS } from "@/data/questions";
 import { Sliders, Clock, Flag, CheckCircle, XCircle, Download, RotateCcw } from "lucide-react";
 
 interface MockResult {
@@ -61,7 +61,7 @@ export function CustomMockGenerator() {
   }, []);
 
   const availableCount = useMemo(() => {
-    return QUESTIONS.filter(q => selectedSubjects.includes(q.subject)).length;
+    return selectedSubjects.reduce((n, s) => n + (QUESTIONS_BY_SUBJECT.get(s)?.length ?? 0), 0);
   }, [selectedSubjects]);
 
   const actualQCount = Math.min(qCount, availableCount);
@@ -73,7 +73,7 @@ export function CustomMockGenerator() {
   };
 
   const startExam = () => {
-    const pool = QUESTIONS.filter(q => selectedSubjects.includes(q.subject));
+    const pool = selectedSubjects.flatMap(s => QUESTIONS_BY_SUBJECT.get(s) ?? []);
     const shuffled = seededShuffle(pool, Date.now().toString()).slice(0, actualQCount);
     setQuestions(shuffled);
     setAnswers(Array(shuffled.length).fill(null));

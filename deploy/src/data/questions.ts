@@ -1,13 +1,6 @@
-export interface Question {
-  id: number;
-  subject: string;
-  stem: string;
-  options: [string, string, string, string];
-  answer: 0 | 1 | 2 | 3;
-  explanation: string;
-}
+import { z } from "zod";
 
-export const QUESTION_SUBJECTS: string[] = [
+export const QUESTION_SUBJECTS = [
   "Pharmacology",
   "Physiology",
   "Biochemistry",
@@ -21,9 +14,22 @@ export const QUESTION_SUBJECTS: string[] = [
   "ENT/Ophthalmology",
   "PSM/Community Medicine",
   "Forensic Medicine",
-];
+] as const;
 
-export const QUESTIONS: Question[] = [
+export type QuestionSubject = (typeof QUESTION_SUBJECTS)[number];
+
+const QuestionSchema = z.object({
+  id:          z.number().int().positive(),
+  subject:     z.enum(QUESTION_SUBJECTS),
+  stem:        z.string().min(5),
+  options:     z.tuple([z.string(), z.string(), z.string(), z.string()]),
+  answer:      z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]),
+  explanation: z.string().min(5),
+});
+
+export type Question = z.infer<typeof QuestionSchema>;
+
+const RAW_QUESTIONS = [
   // ─── PHARMACOLOGY (18) ───────────────────────────────────────────────────
   {
     id: 1,
@@ -5656,4 +5662,28 @@ export const QUESTIONS: Question[] = [
       "Tension pneumothorax: air enters pleural space but cannot escape (one-way valve) → progressive pressure build-up → trachea and mediastinum deviate AWAY from affected side + absent lung markings on that side + hypotension + distended neck veins. This is a clinical diagnosis — do NOT wait for X-ray if haemodynamically compromised. Immediate needle decompression (2nd ICS, MCL), then chest drain.",
   },
 ];
+
+// Validate every question at module load. In development a Zod error pinpoints
+// the exact question that has a bad field; in production the parse is a no-op
+// on valid data (every field already matches the schema).
+const parsed = z.array(QuestionSchema).safeParse(RAW_QUESTIONS);
+if (!parsed.success) {
+  // Log a human-readable summary rather than crashing the app
+  console.error(
+    "[questions] Data validation failed. Fix the following before shipping:\n" +
+    parsed.error.issues
+      .map(i => `  Q#${RAW_QUESTIONS[i.path[0] as number]?.id ?? "?"} [${i.path.join(".")}]: ${i.message}`)
+      .join("\n")
+  );
+}
+
+export const QUESTIONS: Question[] = parsed.success ? parsed.data : (RAW_QUESTIONS as Question[]);
+
+// Pre-built subject index for O(1) lookups — use this instead of QUESTIONS.filter()
+export const QUESTIONS_BY_SUBJECT: ReadonlyMap<QuestionSubject, Question[]> = new Map(
+  QUESTION_SUBJECTS.map(subj => [
+    subj,
+    QUESTIONS.filter(q => q.subject === subj),
+  ])
+);
 

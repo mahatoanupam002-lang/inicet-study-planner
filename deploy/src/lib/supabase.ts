@@ -1,5 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
 
+// These values are safe to include in client-side code.
+// The anon/publishable key is intentionally public — Supabase security is enforced
+// via Row Level Security (RLS) policies, not by hiding the anon key.
+// Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env to override.
 const SUPABASE_URL =
   (import.meta.env.VITE_SUPABASE_URL as string | undefined) ??
   "https://fkqazoltrxmwlareblpi.supabase.co";

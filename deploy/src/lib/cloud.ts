@@ -5,19 +5,81 @@ import { safeSave, safeLoad } from "@/lib/storage";
 
 type JsonValue = string | number | boolean | null | JsonValue[] | { [k: string]: JsonValue };
 
-/**
- * Debounce helper — waits `ms` milliseconds after the last call before invoking fn.
- */
-function useDebounce<T extends (...args: Parameters<T>) => void>(fn: T, ms: number): T {
+// ── Offline mutation queue ────────────────────────────────────────────────────
+// Writes that fail while offline are stored here and re-attempted on reconnect.
+
+const QUEUE_KEY = "neetpg_pending_sync";
+
+interface PendingWrite {
+  userId: string;
+  key: string;
+  value: JsonValue;
+  ts: number;
+}
+
+function loadQueue(): PendingWrite[] {
+  return safeLoad<PendingWrite[]>(QUEUE_KEY, []);
+}
+
+function saveQueue(q: PendingWrite[]): void {
+  safeSave(QUEUE_KEY, q);
+}
+
+function enqueue(userId: string, key: string, value: JsonValue): void {
+  const q = loadQueue().filter(p => !(p.userId === userId && p.key === key));
+  // Keep only the latest write per (userId, key) — older ones are superseded
+  q.push({ userId, key, value, ts: Date.now() });
+  saveQueue(q);
+}
+
+function dequeue(userId: string, key: string): void {
+  saveQueue(loadQueue().filter(p => !(p.userId === userId && p.key === key)));
+}
+
+// ── Flush pending writes on reconnect ────────────────────────────────────────
+
+let flushInProgress = false;
+
+async function flushQueue(): Promise<void> {
+  if (flushInProgress) return;
+  flushInProgress = true;
+  try {
+    const pending = loadQueue();
+    if (pending.length === 0) return;
+    for (const write of pending) {
+      const ok = await upsertCloudData(write.userId, { [write.key]: write.value } as Partial<UserData>);
+      if (ok) dequeue(write.userId, write.key);
+    }
+  } finally {
+    flushInProgress = false;
+  }
+}
+
+// Register a one-time online listener that flushes pending writes when the
+// browser reconnects. Safe to call multiple times — listener is idempotent.
+let onlineListenerAttached = false;
+function ensureOnlineListener(): void {
+  if (onlineListenerAttached) return;
+  onlineListenerAttached = true;
+  window.addEventListener("online", () => {
+    void flushQueue();
+  });
+}
+
+// ── Debounce helper ───────────────────────────────────────────────────────────
+
+function useDebounce<A extends unknown[]>(fn: (...args: A) => void, ms: number): (...args: A) => void {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   return useCallback(
-    (...args: Parameters<T>) => {
+    (...args: A) => {
       if (timer.current) clearTimeout(timer.current);
       timer.current = setTimeout(() => fn(...args), ms);
     },
     [fn, ms]
-  ) as T;
+  );
 }
+
+// ── UserData shape (mirrors Supabase user_data columns) ───────────────────────
 
 interface UserData {
   completed_days: number[];
@@ -28,6 +90,8 @@ interface UserData {
   streak: { count: number; longest: number; lastDate: string };
   exam_date: string | null;
 }
+
+// ── Cloud read/write ──────────────────────────────────────────────────────────
 
 /**
  * Fetch the user's data row from Supabase.
@@ -51,15 +115,18 @@ export async function fetchCloudData(userId: string): Promise<UserData | null> {
 /**
  * Upsert (insert or update) the user's data row in Supabase.
  * localStorage is always written first so the UI never waits for the network.
+ * Returns true on success. On failure, the write is queued for retry on reconnect.
  */
-export async function upsertCloudData(userId: string, patch: Partial<UserData>): Promise<void> {
+export async function upsertCloudData(userId: string, patch: Partial<UserData>): Promise<boolean> {
   const { error } = await supabase
     .from("user_data")
     .upsert({ user_id: userId, ...patch, updated_at: new Date().toISOString() }, { onConflict: "user_id" });
 
   if (error) {
     console.warn("[cloud] upsertCloudData error:", error.message);
+    return false;
   }
+  return true;
 }
 
 /**
@@ -91,7 +158,7 @@ export function mergeCloudIntoLocal(cloud: UserData): void {
 
 /**
  * Hook that syncs a single state slice to Supabase with a debounced write.
- * Call this once per state slice in App.tsx.
+ * Failed writes are queued in localStorage and retried on next online event.
  */
 export function useCloudSync<T extends JsonValue>(
   key: keyof UserData,
@@ -100,10 +167,20 @@ export function useCloudSync<T extends JsonValue>(
 ): void {
   const { user } = useAuth();
 
+  // Attach the online-reconnect flush listener once per app session
+  useEffect(() => { ensureOnlineListener(); }, []);
+
   const syncToCloud = useCallback(
     async (v: T) => {
       if (!user) return;
-      await upsertCloudData(user.id, { [key]: v } as Partial<UserData>);
+      const ok = await upsertCloudData(user.id, { [key]: v } as Partial<UserData>);
+      if (!ok) {
+        // Queue for retry when connectivity is restored
+        enqueue(user.id, key, v as JsonValue);
+      } else {
+        // Successful write — clear any stale queued entry for this key
+        dequeue(user.id, key);
+      }
     },
     [user, key]
   );

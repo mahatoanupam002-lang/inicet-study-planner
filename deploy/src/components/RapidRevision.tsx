@@ -8,7 +8,7 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
-import { QUESTIONS, QUESTION_SUBJECTS, Question } from "@/data/questions";
+import { QUESTIONS_BY_SUBJECT, QUESTION_SUBJECTS, Question } from "@/data/questions";
 import { safeLoad } from "@/lib/storage";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -99,10 +99,10 @@ function getWeakSubjects(
     subjStats[subj] = { correct: 0, total: 0 };
   }
 
-  // Map local question UIDs to subjects
+  // Map local question UIDs to subjects using the pre-built index
   const localSubjMap: Record<string, string> = {};
-  for (const q of QUESTIONS) {
-    localSubjMap[`local-${q.id}`] = q.subject;
+  for (const [subj, qs] of QUESTIONS_BY_SUBJECT) {
+    for (const q of qs) localSubjMap[`local-${q.id}`] = subj;
   }
 
   for (const [uid, record] of Object.entries(attempts)) {
@@ -193,18 +193,26 @@ export function RapidRevision({ onComplete }: { onComplete?: () => void } = {}) 
   // AI questions from /daily-questions.json
   const [aiQuestions, setAiQuestions] = useState<UnifiedQuestion[]>([]);
 
-  // Fetch AI questions on mount
+  // Fetch AI questions on mount — failures are non-fatal; local questions are used as fallback
   useEffect(() => {
     fetch(`/daily-questions.json?v=${Date.now()}`)
-      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json() as Promise<{ questions?: AIQuestion[] }>;
+      })
       .then((data) => {
-        const qs = (data.questions ?? []) as AIQuestion[];
+        const qs = data.questions ?? [];
         setAiQuestions(qs.map(aiToUnified));
       })
-      .catch(() => {});
+      .catch((err: unknown) => {
+        console.warn('[RapidRevision] AI questions unavailable:', err instanceof Error ? err.message : err);
+      });
   }, []);
 
-  const allLocal = useMemo(() => QUESTIONS.map(localToUnified), []);
+  const allLocal = useMemo(
+    () => Array.from(QUESTIONS_BY_SUBJECT.values()).flat().map(localToUnified),
+    []
+  );
 
   // Timer ref pattern to avoid stale closures
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);

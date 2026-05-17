@@ -1,23 +1,58 @@
 // Root-level Vercel serverless function — zero npm deps, pure fetch
+
+// SUPABASE_URL is safe to hardcode (public project URL).
+// SUPABASE_KEY should be set in Vercel environment variables.
+// The anon/publishable key is intentionally public (Supabase security comes from RLS).
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://fkqazoltrxmwlareblpi.supabase.co";
-const SUPABASE_KEY =
-  process.env.SUPABASE_SERVICE_ROLE_KEY ||
-  process.env.SUPABASE_ANON_KEY ||
-  "sb_publishable_r_YTJolEVNR9vQR7oTVENA_7ZADmY3o";
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
+
+// ── Typed interfaces for API responses ──────────────────────────────────────
+
+interface DailyQuestion {
+  id: number;
+  subject: string;
+  topic: string;
+  stem: string;
+  options: [string, string, string, string];
+  answer: 0 | 1 | 2 | 3;
+  explanation: string;
+  prediction?: { confidence: string; rationale: string; topic_frequency: string };
+}
+
+interface DailyQuestionsPayload {
+  date: string;
+  theme: string;
+  questions: DailyQuestion[];
+}
+
+interface GeminiResponse {
+  candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
+}
+
+interface GroqResponse {
+  choices?: Array<{ message?: { content?: string } }>;
+}
+
+interface AnthropicResponse {
+  content?: Array<{ text?: string }>;
+}
 
 // ── Supabase REST helpers ────────────────────────────────────────────────────
 
-async function sbRead(date: string): Promise<object | null> {
+async function sbRead(date: string): Promise<DailyQuestionsPayload | null> {
+  if (!SUPABASE_KEY) return null;
   const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/daily_questions?date=eq.${date}&select=*&limit=1`,
+    // encodeURIComponent prevents any query-param injection via the date value
+    `${SUPABASE_URL}/rest/v1/daily_questions?date=eq.${encodeURIComponent(date)}&select=*&limit=1`,
     { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } }
   );
   if (!res.ok) return null;
-  const rows = (await res.json()) as object[];
+  const rows = (await res.json()) as DailyQuestionsPayload[];
   return rows.length > 0 ? rows[0] : null;
 }
 
-async function sbWrite(date: string, data: object): Promise<void> {
+async function sbWrite(date: string, data: DailyQuestionsPayload): Promise<void> {
+  if (!SUPABASE_KEY) return;
   await fetch(`${SUPABASE_URL}/rest/v1/daily_questions`, {
     method: "POST",
     headers: {
@@ -26,7 +61,7 @@ async function sbWrite(date: string, data: object): Promise<void> {
       "Content-Type": "application/json",
       Prefer: "resolution=ignore-duplicates,return=minimal",
     },
-    body: JSON.stringify({ date, ...(data as Record<string, unknown>) }),
+    body: JSON.stringify({ date, ...data }),
   });
 }
 
@@ -100,7 +135,7 @@ function parseJSON(text: string): object {
 
 // ── AI providers ─────────────────────────────────────────────────────────────
 
-async function withGemini(date: string, apiKey: string): Promise<object> {
+async function withGemini(date: string, apiKey: string): Promise<DailyQuestionsPayload> {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
   const res = await fetch(url, {
     method: "POST",
@@ -112,11 +147,11 @@ async function withGemini(date: string, apiKey: string): Promise<object> {
     }),
   });
   if (!res.ok) throw new Error(`Gemini ${res.status}: ${(await res.text()).slice(0, 200)}`);
-  const data = await res.json() as any;
-  return parseJSON(data.candidates?.[0]?.content?.parts?.[0]?.text ?? "");
+  const data = await res.json() as GeminiResponse;
+  return parseJSON(data.candidates?.[0]?.content?.parts?.[0]?.text ?? "") as DailyQuestionsPayload;
 }
 
-async function withGroq(date: string, apiKey: string): Promise<object> {
+async function withGroq(date: string, apiKey: string): Promise<DailyQuestionsPayload> {
   const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
@@ -129,11 +164,11 @@ async function withGroq(date: string, apiKey: string): Promise<object> {
     }),
   });
   if (!res.ok) throw new Error(`Groq ${res.status}: ${(await res.text()).slice(0, 200)}`);
-  const data = await res.json() as any;
-  return parseJSON(data.choices?.[0]?.message?.content ?? "");
+  const data = await res.json() as GroqResponse;
+  return parseJSON(data.choices?.[0]?.message?.content ?? "") as DailyQuestionsPayload;
 }
 
-async function withAnthropic(date: string, apiKey: string): Promise<object> {
+async function withAnthropic(date: string, apiKey: string): Promise<DailyQuestionsPayload> {
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
@@ -149,13 +184,13 @@ async function withAnthropic(date: string, apiKey: string): Promise<object> {
     }),
   });
   if (!res.ok) throw new Error(`Anthropic ${res.status}: ${(await res.text()).slice(0, 200)}`);
-  const data = await res.json() as any;
-  return parseJSON(data.content?.[0]?.text ?? "");
+  const data = await res.json() as AnthropicResponse;
+  return parseJSON(data.content?.[0]?.text ?? "") as DailyQuestionsPayload;
 }
 
 // ── Generate + store ─────────────────────────────────────────────────────────
 
-async function generateAndStore(date: string): Promise<object> {
+async function generateAndStore(date: string): Promise<DailyQuestionsPayload> {
   const geminiKey    = process.env.GEMINI_API_KEY;
   const groqKey      = process.env.GROQ_API_KEY;
   const anthropicKey = process.env.ANTHROPIC_API_KEY;
@@ -166,7 +201,7 @@ async function generateAndStore(date: string): Promise<object> {
     );
   }
 
-  let parsed: object | undefined;
+  let parsed: DailyQuestionsPayload | undefined;
   const errors: string[] = [];
 
   if (geminiKey)    { try { parsed = await withGemini(date, geminiKey); }    catch (e) { errors.push(`Gemini: ${e}`); } }
@@ -179,15 +214,37 @@ async function generateAndStore(date: string): Promise<object> {
   return parsed;
 }
 
+// ── Minimal request/response types (avoids importing @vercel/node at root level) ──
+
+interface Req {
+  method?: string;
+  query?: Record<string, string | string[] | undefined>;
+}
+interface Res {
+  status(code: number): Res;
+  json(body: unknown): void;
+  setHeader(name: string, value: string): void;
+  end(): void;
+}
+
 // ── Handler ──────────────────────────────────────────────────────────────────
 
-export default async function handler(req: any, res: any) {
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+export default async function handler(req: Req, res: Res) {
   if (req.method !== "GET") { res.status(405).end(); return; }
 
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate=3600");
 
-  const date = (req.query?.date as string | undefined) || new Date().toISOString().slice(0, 10);
+  const rawDate = (req.query?.date as string | undefined) || new Date().toISOString().slice(0, 10);
+
+  // Reject dates that don't match YYYY-MM-DD to prevent injection via URL params
+  if (!DATE_RE.test(rawDate)) {
+    res.status(400).json({ error: "Invalid date format. Expected YYYY-MM-DD." });
+    return;
+  }
+  const date = rawDate;
 
   const cached = await sbRead(date);
   if (cached) { res.json(cached); return; }

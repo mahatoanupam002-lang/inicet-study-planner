@@ -551,17 +551,33 @@ export function MnemonicsBank() {
 
               {/* Expansion */}
               <div className="px-4 py-3 space-y-1 flex-1">
-                {m.expansion.map((item, i) => (
-                  <div key={i} className="flex items-start gap-2 text-xs font-mono">
-                    <span className="text-primary font-bold shrink-0 w-4">
-                      {item.includes(" — ") || item.includes(": ") ? item.split(/[ —:]/)[0] : String.fromCharCode(65 + i)}
-                    </span>
-                    <span className="text-foreground/80 leading-relaxed">
-                      {item.includes(" — ") ? item.split(" — ").slice(1).join(" — ") :
-                       item.includes(": ") ? item.split(": ").slice(1).join(": ") : item}
-                    </span>
-                  </div>
-                ))}
+                {m.expansion.map((item, i) => {
+                  const dashIdx   = item.indexOf(" — "); // em dash " — "
+                  const hyphenIdx = item.indexOf(" - ");
+                  const colonIdx  = item.indexOf(": ");
+                  const inf = Infinity;
+                  // Pick the separator that appears earliest in the string
+                  const earliest = Math.min(
+                    dashIdx   < 0 ? inf : dashIdx,
+                    hyphenIdx < 0 ? inf : hyphenIdx,
+                    colonIdx  < 0 ? inf : colonIdx,
+                  );
+                  // Key: first token before the earliest separator; fallback = first letter of item
+                  const key = earliest < inf
+                    ? item.split(/[ —\-:]/)[0]
+                    : (item.trimStart()[0]?.toUpperCase() ?? String.fromCharCode(65 + i));
+                  // Body: text after the earliest separator (strip the separator itself)
+                  const body = earliest === inf       ? item
+                    : earliest === hyphenIdx          ? item.slice(hyphenIdx + 3)
+                    : earliest === dashIdx            ? item.slice(dashIdx   + 3)
+                    :                                   item.slice(colonIdx  + 2);
+                  return (
+                    <div key={i} className="flex items-start gap-2 text-xs font-mono">
+                      <span className="text-primary font-bold shrink-0 w-4">{key}</span>
+                      <span className="text-foreground/80 leading-relaxed">{body}</span>
+                    </div>
+                  );
+                })}
               </div>
 
               {/* Clinical note */}

@@ -1,4 +1,40 @@
 // Root-level Vercel serverless function — zero npm deps, pure fetch
+
+// ── Minimal request/response types ───────────────────────────────────────────
+
+interface Req {
+  method?: string;
+  headers: Record<string, string | string[] | undefined>;
+  body: unknown;
+}
+interface ResStream {
+  status(code: number): ResStream;
+  json(body: unknown): void;
+  setHeader(name: string, value: string): void;
+  write(chunk: string): boolean;
+  end(): void;
+  headersSent: boolean;
+}
+
+// ── Typed API response shapes ─────────────────────────────────────────────────
+
+interface GeminiStreamEvent {
+  candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
+}
+interface GroqStreamEvent {
+  choices?: Array<{ delta?: { content?: string } }>;
+}
+interface AnthropicStreamEvent {
+  type?: string;
+  delta?: { type?: string; text?: string };
+  error?: { message?: string };
+}
+interface AnthropicErrorResponse {
+  error?: { message?: string };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 const SYSTEM_PROMPT = `You are an expert NEET PG medical exam tutor helping an Indian postgraduate medical aspirant preparing for NEET PG (National Board of Examinations, Nov 2026).
 
 Your role:
@@ -21,7 +57,7 @@ async function streamGemini(
   apiKey: string,
   messages: Msg[],
   system: string,
-  res: any
+  res: ResStream
 ): Promise<void> {
   const contents = messages.map(m => ({
     role: m.role === "assistant" ? "model" : "user",
@@ -40,11 +76,11 @@ async function streamGemini(
   });
 
   if (!geminiRes.ok) {
-    const err = await geminiRes.json() as any;
+    const err = await geminiRes.json() as { error?: { message?: string } };
     throw new Error(err?.error?.message || `Gemini ${geminiRes.status}`);
   }
 
-  const reader = (geminiRes.body as any).getReader();
+  const reader = (geminiRes.body as ReadableStream<Uint8Array>).getReader();
   const decoder = new TextDecoder();
   let buffer = "";
 
@@ -59,8 +95,8 @@ async function streamGemini(
       const data = line.slice(6).trim();
       if (!data || data === "[DONE]") continue;
       try {
-        const evt = JSON.parse(data);
-        const text: string = evt.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
+        const evt = JSON.parse(data) as GeminiStreamEvent;
+        const text = evt.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
         if (text) res.write(`data: ${JSON.stringify({ text })}\n\n`);
       } catch {}
     }
@@ -73,7 +109,7 @@ async function streamGroq(
   apiKey: string,
   messages: Msg[],
   system: string,
-  res: any
+  res: ResStream
 ): Promise<void> {
   const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
@@ -92,7 +128,7 @@ async function streamGroq(
 
   if (!groqRes.ok) throw new Error(`Groq ${groqRes.status}`);
 
-  const reader = (groqRes.body as any).getReader();
+  const reader = (groqRes.body as ReadableStream<Uint8Array>).getReader();
   const decoder = new TextDecoder();
   let buffer = "";
 
@@ -107,8 +143,8 @@ async function streamGroq(
       const data = line.slice(6).trim();
       if (!data || data === "[DONE]") continue;
       try {
-        const evt = JSON.parse(data);
-        const text: string = evt.choices?.[0]?.delta?.content ?? "";
+        const evt = JSON.parse(data) as GroqStreamEvent;
+        const text = evt.choices?.[0]?.delta?.content ?? "";
         if (text) res.write(`data: ${JSON.stringify({ text })}\n\n`);
       } catch {}
     }
@@ -121,7 +157,7 @@ async function streamAnthropic(
   apiKey: string,
   messages: Msg[],
   system: string,
-  res: any
+  res: ResStream
 ): Promise<void> {
   const anthropicRes = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
@@ -140,11 +176,11 @@ async function streamAnthropic(
   });
 
   if (!anthropicRes.ok) {
-    const err = await anthropicRes.json() as any;
+    const err = await anthropicRes.json() as AnthropicErrorResponse;
     throw new Error(err?.error?.message || `Anthropic API error ${anthropicRes.status}`);
   }
 
-  const reader = (anthropicRes.body as any).getReader();
+  const reader = (anthropicRes.body as ReadableStream<Uint8Array>).getReader();
   const decoder = new TextDecoder();
   let buffer = "";
 
@@ -159,7 +195,7 @@ async function streamAnthropic(
       const data = line.slice(6).trim();
       if (data === "[DONE]") continue;
       try {
-        const evt = JSON.parse(data);
+        const evt = JSON.parse(data) as AnthropicStreamEvent;
         if (evt.type === "content_block_delta" && evt.delta?.type === "text_delta") {
           res.write(`data: ${JSON.stringify({ text: evt.delta.text })}\n\n`);
         }
@@ -170,20 +206,33 @@ async function streamAnthropic(
 
 // ── Handler ───────────────────────────────────────────────────────────────────
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req: Req, res: ResStream) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
-  const { messages, context } = req.body as { messages: Msg[]; context?: string };
+  const body = req.body as { messages?: unknown; context?: unknown };
+  const messages = body?.messages;
+  const context = typeof body?.context === "string" ? body.context : undefined;
+
   if (!Array.isArray(messages) || messages.length === 0) {
     return res.status(400).json({ error: "messages array is required" });
   }
+
+  // Validate and normalise each message
+  const typedMessages: Msg[] = messages.map((m: unknown) => {
+    const msg = m as Record<string, unknown>;
+    return {
+      role: msg.role === "assistant" ? "assistant" : "user",
+      content: typeof msg.content === "string" ? msg.content : "",
+    };
+  });
 
   const system = context
     ? `${SYSTEM_PROMPT}\n\nThe user is currently studying: ${context}. Prioritise this topic in your responses when relevant.`
     : SYSTEM_PROMPT;
 
-  const trimmed = messages.slice(-20);
-  const userKey = req.headers["x-api-key"] as string | undefined;
+  const trimmed = typedMessages.slice(-20);
+  const rawUserKey = req.headers["x-api-key"];
+  const userKey = Array.isArray(rawUserKey) ? rawUserKey[0] : rawUserKey;
 
   // Detect user-provided key type by prefix
   const userIsGemini    = userKey?.startsWith("AI") || userKey?.startsWith("ai");

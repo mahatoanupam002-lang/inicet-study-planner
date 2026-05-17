@@ -1,4 +1,5 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import { Search, Download } from "lucide-react";
 
 interface DOCEntry {
@@ -164,6 +165,17 @@ export function DOCTable() {
     return data;
   }, [search, subjectFilter, sortCol, sortAsc]);
 
+  const parentRef = useRef<HTMLDivElement>(null);
+  const rowVirtualizer = useVirtualizer({
+    count: filtered.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 48,
+    overscan: 10,
+  });
+  const virtualItems  = rowVirtualizer.getVirtualItems();
+  const topPadding    = virtualItems[0]?.start ?? 0;
+  const bottomPadding = rowVirtualizer.getTotalSize() - (virtualItems[virtualItems.length - 1]?.end ?? 0);
+
   const handleSort = (col: "condition" | "doc" | "subject") => {
     if (sortCol === col) setSortAsc(a => !a);
     else { setSortCol(col); setSortAsc(true); }
@@ -218,9 +230,9 @@ export function DOCTable() {
         ))}
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-border">
+      <div ref={parentRef} className="overflow-auto rounded-xl border border-border" style={{ maxHeight: 480 }}>
         <table className="w-full text-sm">
-          <thead>
+          <thead className="sticky top-0 z-10">
             <tr className="bg-card border-b border-border">
               {[
                 { key: "condition" as const, label: "Condition" },
@@ -245,19 +257,28 @@ export function DOCTable() {
             </tr>
           </thead>
           <tbody>
-            {filtered.map((entry, i) => (
-              <tr key={i} className="border-b border-border/50 hover:bg-card/50 transition-colors">
-                <td className="px-4 py-3 font-medium text-foreground">{entry.condition}</td>
-                <td className="px-4 py-3 text-primary font-mono text-xs">{entry.doc}</td>
-                <td className="px-4 py-3 text-muted-foreground text-xs">{entry.alternative ?? "—"}</td>
-                <td className="px-4 py-3 text-muted-foreground text-xs italic">{entry.notes ?? "—"}</td>
-                <td className="px-4 py-3">
-                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-medium border ${SUBJECT_COLORS[entry.subject] ?? "bg-card border-border text-muted-foreground"}`}>
-                    {entry.subject}
-                  </span>
-                </td>
-              </tr>
-            ))}
+            {topPadding > 0 && (
+              <tr><td colSpan={5} style={{ height: topPadding, padding: 0, border: 0 }} /></tr>
+            )}
+            {virtualItems.map(virtualRow => {
+              const entry = filtered[virtualRow.index]!;
+              return (
+                <tr key={virtualRow.index} className="border-b border-border/50 hover:bg-card/50 transition-colors">
+                  <td className="px-4 py-3 font-medium text-foreground">{entry.condition}</td>
+                  <td className="px-4 py-3 text-primary font-mono text-xs">{entry.doc}</td>
+                  <td className="px-4 py-3 text-muted-foreground text-xs">{entry.alternative ?? "—"}</td>
+                  <td className="px-4 py-3 text-muted-foreground text-xs italic">{entry.notes ?? "—"}</td>
+                  <td className="px-4 py-3">
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-medium border ${SUBJECT_COLORS[entry.subject] ?? "bg-card border-border text-muted-foreground"}`}>
+                      {entry.subject}
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
+            {bottomPadding > 0 && (
+              <tr><td colSpan={5} style={{ height: bottomPadding, padding: 0, border: 0 }} /></tr>
+            )}
             {filtered.length === 0 && (
               <tr>
                 <td colSpan={5} className="px-4 py-8 text-center text-muted-foreground text-sm">No entries match your search.</td>

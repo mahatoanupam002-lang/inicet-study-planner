@@ -11,7 +11,7 @@ import {
   BookOpen,
   Zap,
 } from "lucide-react";
-import { QUESTIONS, QUESTION_SUBJECTS, Question } from "@/data/questions";
+import { QUESTIONS_BY_SUBJECT, QUESTION_SUBJECTS, Question } from "@/data/questions";
 import { safeLoad, safeSave } from "@/lib/storage";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -165,6 +165,7 @@ export function SubjectDrill({ onComplete }: { onComplete?: () => void } = {}) {
   // AI questions
   const [aiQuestions, setAiQuestions] = useState<UnifiedQuestion[]>([]);
   const [loadingAI, setLoadingAI] = useState(false);
+  const [aiError, setAiError] = useState(false);
 
   // Timer
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -173,21 +174,23 @@ export function SubjectDrill({ onComplete }: { onComplete?: () => void } = {}) {
   // Fetch AI questions on mount
   useEffect(() => {
     setLoadingAI(true);
+    setAiError(false);
     fetch(`/daily-questions.json?v=${Date.now()}`)
-      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json() as Promise<{ questions?: AIQuestion[] }>;
+      })
       .then((data) => {
-        const qs = (data.questions ?? []) as AIQuestion[];
+        const qs = data.questions ?? [];
         setAiQuestions(qs.map(aiToUnified));
       })
-      .catch(() => {})
+      .catch(() => { setAiError(true); })
       .finally(() => setLoadingAI(false));
   }, []);
 
   // Combined pool for subject
   const subjectPool = useMemo<UnifiedQuestion[]>(() => {
-    const local = QUESTIONS.filter((q) => q.subject === subject).map(
-      localToUnified
-    );
+    const local = (QUESTIONS_BY_SUBJECT.get(subject) ?? []).map(localToUnified);
     const ai = aiQuestions.filter((q) => q.subject === subject);
     return [...local, ...ai];
   }, [subject, aiQuestions]);
@@ -422,6 +425,11 @@ export function SubjectDrill({ onComplete }: { onComplete?: () => void } = {}) {
               {loadingAI && (
                 <span className="ml-auto text-muted-foreground animate-pulse">
                   loading AI…
+                </span>
+              )}
+              {aiError && (
+                <span className="ml-auto text-amber-400">
+                  AI questions unavailable
                 </span>
               )}
             </div>

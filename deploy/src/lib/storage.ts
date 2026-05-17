@@ -26,12 +26,13 @@ export function safeLoad<T>(key: string, fallback: T): T {
   }
 }
 
-export function safeSave(key: string, value: unknown): void {
+export function safeSave(key: string, value: unknown): boolean {
   try {
     localStorage.setItem(key, JSON.stringify(value));
+    return true;
   } catch {
-    // Quota exceeded or storage blocked — notify if possible
     console.warn(`[storage] Failed to save "${key}" — storage may be full or blocked.`);
+    return false;
   }
 }
 

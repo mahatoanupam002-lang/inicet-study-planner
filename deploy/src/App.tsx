@@ -1,4 +1,5 @@
-import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback, lazy, Suspense } from "react";
+import { useStore } from "zustand";
 import type { User } from "@supabase/supabase-js";
 import {
   Target, Calendar, Clock, StickyNote, Flag, Flame, Download, Upload,
@@ -8,7 +9,7 @@ import {
   Pill, Calculator, BookMarked, XCircle, LayoutGrid, ScrollText, Stethoscope, Sliders, Eye, CalendarCheck,
 } from "lucide-react";
 import { StudyReminderBanner, StudyReminderBell } from "@/components/StudyReminder";
-import { EXAM_DATE, SCHEDULE } from "@/data/schedule";
+import { SCHEDULE } from "@/data/schedule";
 import { safeLoad, safeSave } from "@/lib/storage";
 import { SRCard } from "@/lib/sr";
 import { CountdownTimer } from "@/components/CountdownTimer";
@@ -16,46 +17,57 @@ import { DayGrid } from "@/components/DayGrid";
 import { DayDetail, DetailTab } from "@/components/DayDetail";
 import { DailyScheduleView } from "@/components/DailyScheduleView";
 import { NotesView } from "@/components/NotesView";
-import { RevisionList, FlaggedTopic } from "@/components/RevisionList";
+import { RevisionList } from "@/components/RevisionList";
 import { MockScoreTracker } from "@/components/MockScoreTracker";
-import { PYQBank } from "@/components/PYQBank";
-import { TopperInsights } from "@/components/TopperInsights";
 import { RankPredictor } from "@/components/RankPredictor";
 import { OnboardingModal } from "@/components/OnboardingModal";
-import { ResourceHub } from "@/components/ResourceHub";
-import { CommunityQA } from "@/components/CommunityQA";
 import { AdaptiveSuggestions } from "@/components/AdaptiveSuggestions";
 import { AdaptivePlanPanel } from "@/components/AdaptivePlanPanel";
-import { AnalyticsPanel } from "@/components/AnalyticsPanel";
-import { ExamSimulation } from "@/components/ExamSimulation";
 import { ExamDateConfig } from "@/components/ExamDateConfig";
-import { PDFLearningExtractor } from "@/components/PDFLearningExtractor";
-import { SubjectDrill } from "@/components/SubjectDrill";
-import { RapidRevision } from "@/components/RapidRevision";
-import { OneLinerBank } from "@/components/OneLinerBank";
 import { DailyBriefing } from "@/components/DailyBriefing";
-import { ErrorAnalysis } from "@/components/ErrorAnalysis";
-import { GamificationPanel } from "@/components/GamificationPanel";
-import { MnemonicsBank } from "@/components/MnemonicsBank";
-import { NEETPGPaperAnalysis } from "@/components/NEETPGPaperAnalysis";
 import { XPToastLayer, makeToastItem, type XPToastItem } from "@/components/XPToast";
 import { computeAdaptivePlan } from "@/lib/adaptive";
 import { LoginScreen } from "@/components/LoginScreen";
-import { DOCTable } from "@/components/DOCTable";
-import { PSMCalculator } from "@/components/PSMCalculator";
-import { MistakeLogbook } from "@/components/MistakeLogbook";
-import { FlashcardDeck } from "@/components/FlashcardDeck";
-import { ImageBank } from "@/components/ImageBank";
-import { DailyQuiz } from "@/components/DailyQuiz";
-import { HighYieldReference } from "@/components/HighYieldReference";
-import { WeakTopicHeatmap } from "@/components/WeakTopicHeatmap";
-import { SpecialtySeatTracker } from "@/components/SpecialtySeatTracker";
-import { CutoffHistory } from "@/components/CutoffHistory";
-import { GuidelinesFeed } from "@/components/GuidelinesFeed";
-import { CustomMockGenerator } from "@/components/CustomMockGenerator";
-import { RevisionScheduler } from "@/components/RevisionScheduler";
+
+// ── Lazy-loaded tab components (split into separate JS chunks) ────────────────
+// Each component is fetched from the network only on the first visit to its tab.
+// After that it stays mounted (behind `hidden`) so in-session state is preserved.
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const mk = <T extends Record<string, unknown>>(fn: () => Promise<T>, name: keyof T) =>
+  lazy(() => fn().then(m => ({ default: m[name] as any })));
+
+const PYQBank           = mk(() => import("@/components/PYQBank"),           "PYQBank");
+const SubjectDrill      = mk(() => import("@/components/SubjectDrill"),      "SubjectDrill");
+const RapidRevision     = mk(() => import("@/components/RapidRevision"),     "RapidRevision");
+const OneLinerBank      = mk(() => import("@/components/OneLinerBank"),      "OneLinerBank");
+const ExamSimulation    = mk(() => import("@/components/ExamSimulation"),    "ExamSimulation");
+const DailyQuiz         = mk(() => import("@/components/DailyQuiz"),         "DailyQuiz");
+const CustomMockGenerator = mk(() => import("@/components/CustomMockGenerator"), "CustomMockGenerator");
+const PSMCalculator     = mk(() => import("@/components/PSMCalculator"),     "PSMCalculator");
+const ImageBank         = mk(() => import("@/components/ImageBank"),         "ImageBank");
+const PDFLearningExtractor = mk(() => import("@/components/PDFLearningExtractor"), "PDFLearningExtractor");
+const HighYieldReference = mk(() => import("@/components/HighYieldReference"), "HighYieldReference");
+const MnemonicsBank     = mk(() => import("@/components/MnemonicsBank"),     "MnemonicsBank");
+const NEETPGPaperAnalysis = mk(() => import("@/components/NEETPGPaperAnalysis"), "NEETPGPaperAnalysis");
+const FlashcardDeck     = mk(() => import("@/components/FlashcardDeck"),     "FlashcardDeck");
+const DOCTable          = mk(() => import("@/components/DOCTable"),          "DOCTable");
+const RevisionScheduler = mk(() => import("@/components/RevisionScheduler"), "RevisionScheduler");
+const MistakeLogbook    = mk(() => import("@/components/MistakeLogbook"),    "MistakeLogbook");
+const AnalyticsPanel    = mk(() => import("@/components/AnalyticsPanel"),    "AnalyticsPanel");
+const ErrorAnalysis     = mk(() => import("@/components/ErrorAnalysis"),     "ErrorAnalysis");
+const TopperInsights    = mk(() => import("@/components/TopperInsights"),    "TopperInsights");
+const ResourceHub       = mk(() => import("@/components/ResourceHub"),       "ResourceHub");
+const CommunityQA       = mk(() => import("@/components/CommunityQA"),       "CommunityQA");
+const WeakTopicHeatmap  = mk(() => import("@/components/WeakTopicHeatmap"),  "WeakTopicHeatmap");
+const CutoffHistory     = mk(() => import("@/components/CutoffHistory"),     "CutoffHistory");
+const SpecialtySeatTracker = mk(() => import("@/components/SpecialtySeatTracker"), "SpecialtySeatTracker");
+const GuidelinesFeed    = mk(() => import("@/components/GuidelinesFeed"),    "GuidelinesFeed");
+const GamificationPanel = mk(() => import("@/components/GamificationPanel"), "GamificationPanel");
 import { useAuth } from "@/lib/auth";
 import { useCloudSync } from "@/lib/cloud";
+import { getAppStore, sel } from "@/lib/store";
+import type { StreakData } from "@/lib/store";
 import { computeBaseXP, XP_VALUES, getRank } from "@/lib/xp";
 import { checkAchievements } from "@/lib/achievements";
 import { supabase } from "@/lib/supabase";
@@ -74,7 +86,6 @@ type MainTab =
 type NavGroup = 'home' | 'practice' | 'learn' | 'insights' | 'rewards';
 
 interface TimeLeft { days: number; hours: number; minutes: number; seconds: number; }
-interface StreakData { count: number; longest: number; lastDate: string; }
 
 // ─── Nav config ────────────────────────────────────────────────────────────────
 
@@ -182,6 +193,17 @@ function exportAllData(prefix: string) {
 
 // ─── StudyApp ──────────────────────────────────────────────────────────────────
 
+function TabFallback() {
+  return (
+    <div className="flex items-center justify-center py-16">
+      <div className="flex flex-col items-center gap-3">
+        <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+        <span className="text-xs font-mono text-muted-foreground">Loading…</span>
+      </div>
+    </div>
+  );
+}
+
 interface StudyAppProps {
   prefix: string;
   user: User | null;
@@ -190,39 +212,28 @@ interface StudyAppProps {
 
 function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
 
-  // ── Core study state ──────────────────────────────────────────
-  const [completedDays, setCompletedDays] = useState<number[]>(() =>
-    safeLoad<number[]>(`${prefix}completed_days`, [])
-  );
-  const [notes, setNotes] = useState<Record<number, string>>(() =>
-    safeLoad<Record<number, string>>(`${prefix}notes`, {})
-  );
-  const [mcqScores, setMcqScores] = useState<Record<number, { attempted: number; correct: number }>>(() =>
-    safeLoad(`${prefix}mcq_scores`, {})
-  );
-  const [flagged, setFlagged] = useState<FlaggedTopic[]>(() =>
-    safeLoad(`${prefix}flagged`, [])
-  );
-  const [srCards, setSrCards] = useState<Record<number, SRCard>>(() =>
-    safeLoad(`${prefix}sr_cards`, {})
-  );
-  const [streak, setStreak] = useState<StreakData>(() =>
-    safeLoad(`${prefix}streak`, { count: 0, longest: 0, lastDate: '' })
-  );
+  // ── Persistent store (Zustand, per auth-prefix) ───────────────
+  const appStore = getAppStore(prefix);
+  const completedDays  = useStore(appStore, sel.completedDays);
+  const notes          = useStore(appStore, sel.notes);
+  const mcqScores      = useStore(appStore, sel.mcqScores);
+  const flagged        = useStore(appStore, sel.flagged);
+  const srCards        = useStore(appStore, sel.srCards);
+  const streak         = useStore(appStore, sel.streak);
+  const examDateIso    = useStore(appStore, sel.examDateIso);
+  const bonusXP        = useStore(appStore, sel.bonusXP);
+  const unlockedIds    = useStore(appStore, sel.unlockedIds);
+  const drillsCompleted = useStore(appStore, sel.drillsCompleted);
+  const simCompleted   = useStore(appStore, sel.simCompleted);
+
+  // examDate is derived from the ISO string stored in the store
+  const examDate = useMemo(() => new Date(examDateIso), [examDateIso]);
+
+  // ── Session-only state ────────────────────────────────────────
   const [pyqAttempts, setPyqAttempts] = useState<Record<number, { selected: number; correct: boolean }>>(() =>
     safeLoad('neetpg_pyq_attempts', {})
   );
-  const [examDate, setExamDate] = useState<Date>(() => {
-    const saved = safeLoad<string>(`${prefix}exam_date`, '');
-    return saved ? new Date(saved) : EXAM_DATE;
-  });
-
-  // ── Gamification state ─────────────────────────────────────────
-  const [bonusXP,        setBonusXP]        = useState<number>(() => safeLoad('neetpg_bonus_xp', 0));
-  const [unlockedIds,    setUnlockedIds]    = useState<string[]>(() => safeLoad('neetpg_achievements', []));
-  const [drillsCompleted, setDrillsCompleted] = useState<number>(() => safeLoad('neetpg_drills_count', 0));
-  const [simCompleted,   setSimCompleted]   = useState<boolean>(() => safeLoad('neetpg_sim_done', false));
-  const [xpToasts,       setXpToasts]       = useState<XPToastItem[]>([]);
+  const [xpToasts, setXpToasts] = useState<XPToastItem[]>([]);
 
   // ── Nav state ──────────────────────────────────────────────────
   const [activeGroup,      setActiveGroup]      = useState<NavGroup>('home');
@@ -233,6 +244,13 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
   const [timeLeft,         setTimeLeft]         = useState<TimeLeft>(() => calcTimeLeft(examDate));
   const [showOnboarding,   setShowOnboarding]   = useState<boolean>(() => !localStorage.getItem(`${prefix}onboarded`));
   const [isLightMode,      setIsLightMode]      = useState<boolean>(() => safeLoad('neetpg_light_mode', false));
+
+  // Tracks which tabs have ever been visited this session so lazy components
+  // mount on first visit and stay mounted (state-preserving) on subsequent ones.
+  const [visitedTabs, setVisitedTabs] = useState<Set<MainTab>>(() => new Set<MainTab>(['planner', 'schedule']));
+  useEffect(() => {
+    setVisitedTabs(prev => prev.has(activeTab) ? prev : new Set([...prev, activeTab]));
+  }, [activeTab]);
 
   const importRef = useRef<HTMLInputElement>(null);
 
@@ -257,15 +275,13 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
     );
 
     if (newly.length > 0) {
-      const newIds = newly.map(a => a.id);
-      const bonusFromAchievements = newly.reduce((s, a) => s + a.xpReward, 0);
-      setUnlockedIds(prev => [...prev, ...newIds]);
-      setBonusXP(prev => prev + bonusFromAchievements);
-      // Each achievement also shows as a toast
+      const { unlockAchievement } = appStore.getState();
       newly.forEach(a => {
+        unlockAchievement(a.id, a.xpReward);
         setXpToasts(prev => [...prev, makeToastItem(a.xpReward, `${a.emoji} ${a.title}`)]);
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [completedDays, streak, mcqScores, pyqAttempts, notes, drillsCompleted, simCompleted, totalXP, unlockedIds]);
 
   // ── Leaderboard sync ──────────────────────────────────────────
@@ -279,7 +295,9 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
       streak:       streak.count,
       completed:    completedDays.length,
       updated_at:   new Date().toISOString(),
-    }, { onConflict: 'user_id' }).then(() => {});
+    }, { onConflict: 'user_id' }).then(({ error }) => {
+      if (error) console.warn('[leaderboard] sync failed:', error.message);
+    });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalXP]);
 
@@ -291,26 +309,13 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
   useCloudSync('flagged',         flagged      as never, syncReady);
   useCloudSync('sr_cards',        srCards      as never, syncReady);
   useCloudSync('streak',          streak       as never, syncReady);
-  useCloudSync('exam_date',       examDate.toISOString() as never, syncReady);
+  useCloudSync('exam_date',       examDateIso as never, syncReady);
 
   // ── Theme ─────────────────────────────────────────────────────
   useEffect(() => {
     document.documentElement.classList.toggle('light', isLightMode);
     safeSave('neetpg_light_mode', isLightMode);
   }, [isLightMode]);
-
-  // ── localStorage persistence ──────────────────────────────────
-  useEffect(() => { safeSave(`${prefix}completed_days`, completedDays); }, [completedDays, prefix]);
-  useEffect(() => { safeSave(`${prefix}notes`,          notes);          }, [notes, prefix]);
-  useEffect(() => { safeSave(`${prefix}mcq_scores`,     mcqScores);      }, [mcqScores, prefix]);
-  useEffect(() => { safeSave(`${prefix}flagged`,        flagged);         }, [flagged, prefix]);
-  useEffect(() => { safeSave(`${prefix}sr_cards`,       srCards);         }, [srCards, prefix]);
-  useEffect(() => { safeSave(`${prefix}streak`,         streak);          }, [streak, prefix]);
-  useEffect(() => { safeSave(`${prefix}exam_date`,      examDate.toISOString()); }, [examDate, prefix]);
-  useEffect(() => { safeSave('neetpg_bonus_xp',         bonusXP);         }, [bonusXP]);
-  useEffect(() => { safeSave('neetpg_achievements',     unlockedIds);     }, [unlockedIds]);
-  useEffect(() => { safeSave('neetpg_drills_count',     drillsCompleted); }, [drillsCompleted]);
-  useEffect(() => { safeSave('neetpg_sim_done',         simCompleted);    }, [simCompleted]);
 
   // ── Timer ─────────────────────────────────────────────────────
   useEffect(() => {
@@ -326,53 +331,51 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
 
   // ── XP gain callback ──────────────────────────────────────────
   const gainXP = useCallback((amount: number, label: string) => {
-    setBonusXP(prev => prev + amount);
+    appStore.getState().addBonusXP(amount);
     setXpToasts(prev => [...prev, makeToastItem(amount, label)]);
-  }, []);
+  }, [appStore]);
 
   const dismissToast = useCallback((id: number) => {
     setXpToasts(prev => prev.filter(t => t.id !== id));
   }, []);
 
   // ── Study logic ───────────────────────────────────────────────
-  const toggleDayCompletion = (day: number) => {
-    const isCompleting = !completedDays.includes(day);
-    setCompletedDays(prev =>
-      prev.includes(day) ? prev.filter(d => d !== day) : [...prev, day]
-    );
+  const toggleDayCompletion = useCallback((day: number) => {
+    const { completedDays: days, toggleDayCompletion: toggle, setStreak } = appStore.getState();
+    const isCompleting = !days.includes(day);
+    toggle(day);
     if (isCompleting) {
       gainXP(XP_VALUES.day_complete, `Day ${day} complete`);
       const today = new Date().toISOString().slice(0, 10);
       setStreak(s => {
         if (s.lastDate === today) return s;
-        const prev = new Date(); prev.setDate(prev.getDate() - 1);
-        const newCount = s.lastDate === prev.toISOString().slice(0, 10) ? s.count + 1 : 1;
+        const prevDay = new Date(); prevDay.setDate(prevDay.getDate() - 1);
+        const newCount = s.lastDate === prevDay.toISOString().slice(0, 10) ? s.count + 1 : 1;
         return { count: newCount, longest: Math.max(s.longest, newCount), lastDate: today };
       });
     }
-  };
+  }, [appStore, gainXP]);
 
-  const updateNote = (day: number, text: string) =>
-    setNotes(prev => ({ ...prev, [day]: text }));
+  const updateNote = useCallback((day: number, text: string) => {
+    appStore.getState().updateNote(day, text);
+  }, [appStore]);
 
-  const saveMcqScore = (day: number, attempted: number, correct: number) => {
+  const saveMcqScore = useCallback((day: number, attempted: number, correct: number) => {
     const prev = mcqScores[day] ?? { attempted: 0, correct: 0 };
     const newCorrect = correct - (prev.correct ?? 0);
     const newWrong   = (attempted - correct) - (Math.max(0, (prev.attempted ?? 0) - (prev.correct ?? 0)));
-    setMcqScores(p => ({ ...p, [day]: { attempted, correct } }));
+    appStore.getState().saveMcqScore(day, attempted, correct);
     if (newCorrect > 0) gainXP(newCorrect * XP_VALUES.mcq_correct, 'MCQ correct');
     if (newWrong   > 0) gainXP(newWrong   * XP_VALUES.mcq_wrong,   'MCQ attempt');
-  };
+  }, [appStore, mcqScores, gainXP]);
 
-  const toggleFlag = (dayId: number, topicIdx: number) =>
-    setFlagged(prev =>
-      prev.some(f => f.dayId === dayId && f.topicIdx === topicIdx)
-        ? prev.filter(f => !(f.dayId === dayId && f.topicIdx === topicIdx))
-        : [...prev, { dayId, topicIdx }]
-    );
+  const toggleFlag = useCallback((dayId: number, topicIdx: number) => {
+    appStore.getState().toggleFlag(dayId, topicIdx);
+  }, [appStore]);
 
-  const updateSrCard = (dayId: number, card: SRCard) =>
-    setSrCards(prev => ({ ...prev, [dayId]: card }));
+  const updateSrCard = useCallback((dayId: number, card: SRCard) => {
+    appStore.getState().updateSrCard(dayId, card);
+  }, [appStore]);
 
   const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -380,8 +383,18 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
     const reader = new FileReader();
     reader.onload = ev => {
       try {
-        const data = JSON.parse(ev.target!.result as string) as Record<string, unknown>;
-        Object.entries(data).forEach(([k, v]) => localStorage.setItem(k, JSON.stringify(v)));
+        const raw = JSON.parse(ev.target!.result as string);
+        if (typeof raw !== 'object' || raw === null || Array.isArray(raw)) {
+          alert('Invalid backup file: expected a JSON object.');
+          return;
+        }
+        const data = raw as Record<string, unknown>;
+        const keys = Object.keys(data);
+        if (!keys.some(k => k.startsWith('neetpg_'))) {
+          alert('Invalid backup file: no NEET PG study data found.');
+          return;
+        }
+        keys.forEach(k => localStorage.setItem(k, JSON.stringify(data[k])));
         window.location.reload();
       } catch { alert('Invalid backup file.'); }
     };
@@ -390,19 +403,23 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
   };
 
   const handleDrillComplete = useCallback(() => {
-    setDrillsCompleted(prev => prev + 1);
+    appStore.getState().incrementDrills();
     gainXP(XP_VALUES.drill_complete, 'Drill complete');
-  }, [gainXP]);
+  }, [appStore, gainXP]);
 
   const handleRapidComplete = useCallback(() => {
-    setDrillsCompleted(prev => prev + 1);
+    appStore.getState().incrementDrills();
     gainXP(XP_VALUES.rapid_complete, 'Rapid revision');
-  }, [gainXP]);
+  }, [appStore, gainXP]);
 
   const handleSimComplete = useCallback(() => {
-    setSimCompleted(true);
+    appStore.getState().setSimCompleted(true);
     gainXP(XP_VALUES.simulation_complete, 'Exam simulation');
-  }, [gainXP]);
+  }, [appStore, gainXP]);
+
+  const handleExamDateSave = useCallback((date: Date) => {
+    appStore.getState().setExamDateIso(date.toISOString());
+  }, [appStore]);
 
   const handlePYQCorrect = useCallback(() => gainXP(XP_VALUES.pyq_correct, 'PYQ correct'), [gainXP]);
   const handlePYQWrong   = useCallback(() => gainXP(XP_VALUES.pyq_wrong,   'PYQ attempt'), [gainXP]);
@@ -679,27 +696,37 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
             />
             <ExamDateConfig
               currentExamDate={examDate}
-              onSave={setExamDate}
+              onSave={handleExamDateSave}
               isPostExam={isPostExam}
             />
           </div>
         </div>
 
-        {/* PRACTICE group */}
+        {/* PRACTICE group — lazy: JS chunk loads on first tab visit, stays mounted after */}
         <div hidden={activeGroup !== 'practice' || activeTab !== 'pyq'}>
-          <PYQBank onCorrect={handlePYQCorrect} onWrong={handlePYQWrong} />
+          {visitedTabs.has('pyq') && <Suspense fallback={<TabFallback />}>
+            <PYQBank onCorrect={handlePYQCorrect} onWrong={handlePYQWrong} />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'practice' || activeTab !== 'drills'}>
-          <SubjectDrill onComplete={handleDrillComplete} />
+          {visitedTabs.has('drills') && <Suspense fallback={<TabFallback />}>
+            <SubjectDrill onComplete={handleDrillComplete} />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'practice' || activeTab !== 'rapid'}>
-          <RapidRevision onComplete={handleRapidComplete} />
+          {visitedTabs.has('rapid') && <Suspense fallback={<TabFallback />}>
+            <RapidRevision onComplete={handleRapidComplete} />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'practice' || activeTab !== 'oneliners'}>
-          <OneLinerBank />
+          {visitedTabs.has('oneliners') && <Suspense fallback={<TabFallback />}>
+            <OneLinerBank />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'practice' || activeTab !== 'simulation'}>
-          <ExamSimulation onComplete={handleSimComplete} />
+          {visitedTabs.has('simulation') && <Suspense fallback={<TabFallback />}>
+            <ExamSimulation onComplete={handleSimComplete} />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'practice' || activeTab !== 'revision'}>
           <RevisionList
@@ -709,16 +736,24 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
           />
         </div>
         <div hidden={activeGroup !== 'practice' || activeTab !== 'dailyquiz'}>
-          <DailyQuiz />
+          {visitedTabs.has('dailyquiz') && <Suspense fallback={<TabFallback />}>
+            <DailyQuiz />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'practice' || activeTab !== 'custommock'}>
-          <CustomMockGenerator />
+          {visitedTabs.has('custommock') && <Suspense fallback={<TabFallback />}>
+            <CustomMockGenerator />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'practice' || activeTab !== 'psmcalc'}>
-          <PSMCalculator />
+          {visitedTabs.has('psmcalc') && <Suspense fallback={<TabFallback />}>
+            <PSMCalculator />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'practice' || activeTab !== 'imagequiz'}>
-          <ImageBank />
+          {visitedTabs.has('imagequiz') && <Suspense fallback={<TabFallback />}>
+            <ImageBank />
+          </Suspense>}
         </div>
 
         {/* LEARN group */}
@@ -734,68 +769,102 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
           />
         </div>
         <div hidden={activeGroup !== 'learn' || activeTab !== 'pdf'}>
-          <PDFLearningExtractor />
+          {visitedTabs.has('pdf') && <Suspense fallback={<TabFallback />}>
+            <PDFLearningExtractor />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'learn' || activeTab !== 'ai'}>
-          <HighYieldReference />
+          {visitedTabs.has('ai') && <Suspense fallback={<TabFallback />}>
+            <HighYieldReference />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'learn' || activeTab !== 'mnemonics'}>
-          <MnemonicsBank />
+          {visitedTabs.has('mnemonics') && <Suspense fallback={<TabFallback />}>
+            <MnemonicsBank />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'learn' || activeTab !== 'analysis'}>
-          <NEETPGPaperAnalysis />
+          {visitedTabs.has('analysis') && <Suspense fallback={<TabFallback />}>
+            <NEETPGPaperAnalysis />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'learn' || activeTab !== 'flashcards'}>
-          <FlashcardDeck />
+          {visitedTabs.has('flashcards') && <Suspense fallback={<TabFallback />}>
+            <FlashcardDeck />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'learn' || activeTab !== 'doctable'}>
-          <DOCTable />
+          {visitedTabs.has('doctable') && <Suspense fallback={<TabFallback />}>
+            <DOCTable />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'learn' || activeTab !== 'revschedule'}>
-          <RevisionScheduler />
+          {visitedTabs.has('revschedule') && <Suspense fallback={<TabFallback />}>
+            <RevisionScheduler />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'learn' || activeTab !== 'mistakelogbook'}>
-          <MistakeLogbook />
+          {visitedTabs.has('mistakelogbook') && <Suspense fallback={<TabFallback />}>
+            <MistakeLogbook />
+          </Suspense>}
         </div>
 
         {/* INSIGHTS group */}
         <div hidden={activeGroup !== 'insights' || activeTab !== 'analytics'}>
-          <div className="flex flex-col gap-6">
-            <AnalyticsPanel mcqScores={mcqScores} completedDays={completedDays} streak={streak} examDate={examDate} />
-            <ErrorAnalysis mcqScores={mcqScores} />
-          </div>
+          {visitedTabs.has('analytics') && <Suspense fallback={<TabFallback />}>
+            <div className="flex flex-col gap-6">
+              <AnalyticsPanel mcqScores={mcqScores} completedDays={completedDays} streak={streak} examDate={examDate} />
+              <ErrorAnalysis mcqScores={mcqScores} />
+            </div>
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'insights' || activeTab !== 'toppers'}>
-          <TopperInsights />
+          {visitedTabs.has('toppers') && <Suspense fallback={<TabFallback />}>
+            <TopperInsights />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'insights' || activeTab !== 'resources'}>
-          <ResourceHub />
+          {visitedTabs.has('resources') && <Suspense fallback={<TabFallback />}>
+            <ResourceHub />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'insights' || activeTab !== 'community'}>
-          <CommunityQA />
+          {visitedTabs.has('community') && <Suspense fallback={<TabFallback />}>
+            <CommunityQA />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'insights' || activeTab !== 'weakheatmap'}>
-          <WeakTopicHeatmap onGoToSubject={(subject) => { setActiveGroup('practice'); setActiveTab('pyq'); }} />
+          {visitedTabs.has('weakheatmap') && <Suspense fallback={<TabFallback />}>
+            <WeakTopicHeatmap onGoToSubject={() => { setActiveGroup('practice'); setActiveTab('pyq'); }} />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'insights' || activeTab !== 'cutoffhistory'}>
-          <CutoffHistory />
+          {visitedTabs.has('cutoffhistory') && <Suspense fallback={<TabFallback />}>
+            <CutoffHistory />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'insights' || activeTab !== 'specialtyseats'}>
-          <SpecialtySeatTracker />
+          {visitedTabs.has('specialtyseats') && <Suspense fallback={<TabFallback />}>
+            <SpecialtySeatTracker />
+          </Suspense>}
         </div>
         <div hidden={activeGroup !== 'insights' || activeTab !== 'guidelines'}>
-          <GuidelinesFeed />
+          {visitedTabs.has('guidelines') && <Suspense fallback={<TabFallback />}>
+            <GuidelinesFeed />
+          </Suspense>}
         </div>
 
         {/* REWARDS group */}
         <div hidden={activeGroup !== 'rewards'}>
-          <GamificationPanel
-            xp={totalXP}
-            unlockedIds={unlockedIds}
-            completedDays={completedDays.length}
-            streak={streak.longest}
-            displayName={user?.email ?? 'Aspirant'}
-          />
+          {visitedTabs.has('rewards') && <Suspense fallback={<TabFallback />}>
+            <GamificationPanel
+              xp={totalXP}
+              unlockedIds={unlockedIds}
+              completedDays={completedDays.length}
+              streak={streak.longest}
+              displayName={user?.email ?? 'Aspirant'}
+            />
+          </Suspense>}
         </div>
 
       </main>
