@@ -2,6 +2,7 @@ import { useEffect, useCallback, useRef } from "react";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/lib/auth";
 import { safeSave, safeLoad } from "@/lib/storage";
+import { executeWithRetry, type SyncError } from "@/lib/sync";
 
 type JsonValue = string | number | boolean | null | JsonValue[] | { [k: string]: JsonValue };
 
@@ -94,39 +95,63 @@ interface UserData {
 // ── Cloud read/write ──────────────────────────────────────────────────────────
 
 /**
- * Fetch the user's data row from Supabase.
+ * Fetch the user's data row from Supabase with automatic retry.
  * Returns null if the row doesn't exist yet.
  */
 export async function fetchCloudData(userId: string): Promise<UserData | null> {
-  const { data, error } = await supabase
-    .from("user_data")
-    .select("*")
-    .eq("user_id", userId)
-    .single();
+  return executeWithRetry(
+    async () => {
+      const { data, error } = await supabase
+        .from("user_data")
+        .select("*")
+        .eq("user_id", userId)
+        .single();
 
-  if (error && error.code !== "PGRST116") {
-    // PGRST116 = row not found — that's fine on first login
-    console.error("[cloud] fetchCloudData error:", error.message);
-    return null;
-  }
-  return data ?? null;
+      if (error && error.code !== "PGRST116") {
+        // PGRST116 = row not found — that's fine on first login
+        const syncError = new Error(error.message) as SyncError;
+        syncError.code = error.code;
+        syncError.isNetworkError = true;
+        throw syncError;
+      }
+      return data ?? null;
+    },
+    {
+      maxRetries: 3,
+      onError: (error) => {
+        console.error("[cloud] fetchCloudData error:", error.message);
+      },
+    }
+  );
 }
 
 /**
- * Upsert (insert or update) the user's data row in Supabase.
+ * Upsert (insert or update) the user's data row in Supabase with automatic retry.
  * localStorage is always written first so the UI never waits for the network.
  * Returns true on success. On failure, the write is queued for retry on reconnect.
  */
 export async function upsertCloudData(userId: string, patch: Partial<UserData>): Promise<boolean> {
-  const { error } = await supabase
-    .from("user_data")
-    .upsert({ user_id: userId, ...patch, updated_at: new Date().toISOString() }, { onConflict: "user_id" });
+  try {
+    await executeWithRetry(
+      async () => {
+        const { error } = await supabase
+          .from("user_data")
+          .upsert({ user_id: userId, ...patch, updated_at: new Date().toISOString() }, { onConflict: "user_id" });
 
-  if (error) {
-    console.warn("[cloud] upsertCloudData error:", error.message);
+        if (error) {
+          const syncError = new Error(error.message) as SyncError;
+          syncError.code = error.code;
+          syncError.isNetworkError = true;
+          throw syncError;
+        }
+      },
+      { maxRetries: 3 }
+    );
+    return true;
+  } catch (error) {
+    console.warn("[cloud] upsertCloudData error:", error instanceof Error ? error.message : String(error));
     return false;
   }
-  return true;
 }
 
 /**
