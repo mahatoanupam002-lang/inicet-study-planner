@@ -34,6 +34,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
+      if (!data.session) {
+        // No active session: auto-enable guest access so app is usable without login
+        setIsGuest(true);
+      }
       setLoading(false);
     });
 
@@ -42,6 +46,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (newSession) {
         setIsGuest(false);
         localStorage.removeItem("neetpg_guest_mode");
+      } else {
+        setIsGuest(true);
       }
     });
 
@@ -78,7 +84,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signOut = async () => {
     await supabase.auth.signOut();
-    setIsGuest(false);
+    setIsGuest(true);
     localStorage.removeItem("neetpg_guest_mode");
   };
 

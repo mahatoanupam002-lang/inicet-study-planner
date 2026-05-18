@@ -29,7 +29,7 @@ import { DailyBriefing } from "@/components/DailyBriefing";
 import { PomodoroTimer } from "@/components/PomodoroTimer";
 import { XPToastLayer, makeToastItem, type XPToastItem } from "@/components/XPToast";
 import { computeAdaptivePlan } from "@/lib/adaptive";
-import { LoginScreen } from "@/components/LoginScreen";
+import { LoginPanel } from "@/components/LoginPanel";
 import { useAuth } from "@/lib/auth";
 import { useCloudSync } from "@/lib/cloud";
 import { getAppStore, sel } from "@/lib/store";
@@ -368,7 +368,7 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
   });
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans">
+    <div className="h-screen bg-background text-foreground flex flex-col font-sans overflow-hidden">
       <Toaster position="bottom-right" richColors />
       {showOnboarding && <OnboardingModal onDone={handleOnboardingDone} />}
       <XPToastLayer items={xpToasts} onDismiss={dismissToast} />
@@ -399,20 +399,24 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
         isPostExam={isPostExam}
       />
 
-      <AppNav
-        activeGroup={activeGroup}
-        activeTab={activeTab}
-        flagBadge={flagBadge}
-        completedCount={completedDays.length}
-        totalDays={28}
-        onGroupClick={handleGroupClick}
-        onTabClick={setActiveTab}
-        onExport={() => exportAllData(prefix)}
-        onImport={handleImport}
-        onSearchOpen={() => setCommandOpen(true)}
-      />
+      <div className="flex flex-1 overflow-hidden">
+        <LoginPanel />
 
-      <main id="main-content" className="flex-1 p-4 md:p-6 overflow-y-auto max-w-7xl mx-auto w-full">
+        <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+          <AppNav
+            activeGroup={activeGroup}
+            activeTab={activeTab}
+            flagBadge={flagBadge}
+            completedCount={completedDays.length}
+            totalDays={28}
+            onGroupClick={handleGroupClick}
+            onTabClick={setActiveTab}
+            onExport={() => exportAllData(prefix)}
+            onImport={handleImport}
+            onSearchOpen={() => setCommandOpen(true)}
+          />
+
+          <main id="main-content" className="flex-1 p-4 md:p-6 overflow-y-auto max-w-7xl mx-auto w-full">
 
         {/* HOME — Planner */}
         <div hidden={activeGroup !== 'home' || activeTab !== 'planner'}>
@@ -698,15 +702,17 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
           </Suspense>}
         </div>
 
-      </main>
+          </main>
+        </div>
+      </div>
     </div>
   );
 }
 
-// ── App (Auth Gate) ──────────────────────────────────────────────────────────
+// ── App ───────────────────────────────────────────────────────────────────────
 
 export default function App() {
-  const { user, loading, isGuest, storagePrefix, signOut } = useAuth();
+  const { user, loading, storagePrefix, signOut } = useAuth();
 
   if (loading) {
     return (
@@ -720,8 +726,6 @@ export default function App() {
       </div>
     );
   }
-
-  if (!user && !isGuest) return <LoginScreen />;
 
   return (
     <StudyApp
