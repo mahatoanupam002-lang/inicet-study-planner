@@ -59,10 +59,13 @@ export function LoginScreen() {
 
   const handleOAuth = async (provider: "google" | "github") => {
     setLoadingProvider(provider);
+    setError(null);
     try {
-      if (provider === "google") await signInWithGoogle();
-      else await signInWithGitHub();
-    } catch {
+      const err = provider === "google" ? await signInWithGoogle() : await signInWithGitHub();
+      if (err) setError(err);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "OAuth sign-in failed");
+    } finally {
       setLoadingProvider(null);
     }
   };

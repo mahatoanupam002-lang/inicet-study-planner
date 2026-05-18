@@ -62,10 +62,14 @@ export function LoginPanel() {
 
   const handleOAuth = async (provider: "google" | "github") => {
     setLoadingProvider(provider);
+    setError(null);
     try {
-      if (provider === "google") await signInWithGoogle();
-      else await signInWithGitHub();
-    } catch {
+      const err = provider === "google" ? await signInWithGoogle() : await signInWithGitHub();
+      if (err) setError(err);
+      // On success the browser navigates away to the OAuth provider — no cleanup needed
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "OAuth sign-in failed");
+    } finally {
       setLoadingProvider(null);
     }
   };

@@ -16,8 +16,8 @@ interface AuthContextValue {
   storagePrefix: string;
   signInWithEmail: (email: string, password: string) => Promise<string | null>;
   signUpWithEmail: (email: string, password: string) => Promise<string | null>;
-  signInWithGoogle: () => Promise<void>;
-  signInWithGitHub: () => Promise<void>;
+  signInWithGoogle: () => Promise<string | null>;
+  signInWithGitHub: () => Promise<string | null>;
   signOut: () => Promise<void>;
   continueAsGuest: () => void;
 }
@@ -68,18 +68,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return error?.message ?? null;
   };
 
-  const signInWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({
+  const signInWithGoogle = async (): Promise<string | null> => {
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: { redirectTo: window.location.origin },
     });
+    return error?.message ?? null;
   };
 
-  const signInWithGitHub = async () => {
-    await supabase.auth.signInWithOAuth({
+  const signInWithGitHub = async (): Promise<string | null> => {
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: "github",
       options: { redirectTo: window.location.origin },
     });
+    return error?.message ?? null;
   };
 
   const signOut = async () => {
