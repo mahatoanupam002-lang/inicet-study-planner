@@ -399,10 +399,10 @@ function StudyApp({ prefix, user, onSignOut }: StudyAppProps) {
         isPostExam={isPostExam}
       />
 
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden relative">
         <LoginPanel />
 
-        <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+        <div className="pl-12 md:pl-0 flex flex-col flex-1 min-w-0 overflow-hidden">
           <AppNav
             activeGroup={activeGroup}
             activeTab={activeTab}

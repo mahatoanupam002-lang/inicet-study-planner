@@ -73,13 +73,25 @@ export function LoginPanel() {
   const userInitial = user?.email?.[0]?.toUpperCase() ?? "U";
 
   return (
-    <aside
-      className={`
-        hidden md:flex flex-col flex-shrink-0 border-r border-border bg-card/30
-        transition-all duration-300 overflow-hidden
-        ${open ? "w-64" : "w-12"}
-      `}
-    >
+    <>
+      {/* Backdrop — mobile only, closes drawer when tapping outside */}
+      {open && (
+        <div
+          className="md:hidden absolute inset-0 z-40 bg-black/50"
+          onClick={() => setOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      <aside
+        className={`
+          flex flex-col flex-shrink-0 border-r border-border bg-card/30
+          transition-all duration-300
+          absolute md:relative top-0 left-0 bottom-0 md:bottom-auto
+          z-50 md:z-auto
+          ${open ? "w-64 overflow-y-auto shadow-2xl md:shadow-none" : "w-12 overflow-hidden"}
+        `}
+      >
       {/* Toggle / icon button */}
       <button
         onClick={() => setOpen(o => !o)}
@@ -250,6 +262,7 @@ export function LoginPanel() {
           )}
         </div>
       )}
-    </aside>
+      </aside>
+    </>
   );
 }
