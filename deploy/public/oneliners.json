@@ -1,9 +1,945 @@
 {
-  "lastUpdated": "2026-05-17",
-  "totalCount": 400,
-  "todayCount": 40,
-  "totalDays": 10,
+  "lastUpdated": "2026-05-18",
+  "totalCount": 504,
+  "todayCount": 104,
+  "totalDays": 2,
   "oneliners": [
+    {
+      "id": "c4690bea-ceab-4c62-83ab-da1215af2e06",
+      "subject": "Medicine",
+      "topic": "Immunology",
+      "fact": "CD4+ cells are helper T-cells",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "96029b2c-556c-420b-90d2-42c8ac488434",
+      "subject": "Medicine",
+      "topic": "Immunology",
+      "fact": "CD8+ cells are cytotoxic T-cells",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "899a8762-afa0-40c6-8b1f-ce0665e1752e",
+      "subject": "Medicine",
+      "topic": "Cardiology",
+      "fact": "DOC for acute myocardial infarction is aspirin",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "bf150dc0-9be3-4e9b-9c01-256e2f56065f",
+      "subject": "Medicine",
+      "topic": "Nephrology",
+      "fact": "Mechanism of action of ACE inhibitors is by blocking conversion of angiotensin I to angiotensin II",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "a71d2270-23ac-49b6-9f38-be51510947b9",
+      "subject": "Medicine",
+      "topic": "Neurology",
+      "fact": "Side effect of phenytoin is gingival hyperplasia",
+      "mnemonic": null,
+      "category": "side-effect",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "7cd1cbab-6e98-435d-8ea8-d87389e54339",
+      "subject": "Medicine",
+      "topic": "Endocrinology",
+      "fact": "Value of HbA1c for diagnosing diabetes is 6.5%",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "4a402b78-c895-4293-ba1a-58d2d0d17760",
+      "subject": "Medicine",
+      "topic": "Gastroenterology",
+      "fact": "Classification of liver disease is based on Child-Pugh score",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "83692141-429d-46cc-987f-86148a4c05f0",
+      "subject": "Medicine",
+      "topic": "Pulmonology",
+      "fact": "DOC for asthma is inhaled corticosteroids",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "6ecbcb3e-ca4e-452c-8b79-048cb6a0a819",
+      "subject": "Medicine",
+      "topic": "Rheumatology",
+      "fact": "Mechanism of action of methotrexate is by inhibiting dihydrofolate reductase",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "cfb42bc5-e32f-4ea6-af0d-fae623a38710",
+      "subject": "Medicine",
+      "topic": "Immunology",
+      "fact": "IL-4 induces IgE class switching",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "c2877511-31bb-4ea1-b9e2-f166a7ea3052",
+      "subject": "Medicine",
+      "topic": "Cardiology",
+      "fact": "Side effect of beta blockers is bronchospasm",
+      "mnemonic": null,
+      "category": "side-effect",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "3c3232b4-08b5-49fd-a30d-8b24fc95944d",
+      "subject": "Medicine",
+      "topic": "Nephrology",
+      "fact": "Value of serum creatinine for diagnosing acute kidney injury is 0.3 mg/dL increase",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "189cd4fb-8777-457f-9d31-10ee1e075a4e",
+      "subject": "Medicine",
+      "topic": "Neurology",
+      "fact": "Classification of seizures is based on ILAE classification",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "94823330-d5e7-4a37-8fc4-81904345c34a",
+      "subject": "Medicine",
+      "topic": "Endocrinology",
+      "fact": "DOC for type 1 diabetes is insulin",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "9ef03d13-921e-4e98-83b8-896ab16c5189",
+      "subject": "Medicine",
+      "topic": "Gastroenterology",
+      "fact": "Mechanism of action of proton pump inhibitors is by inhibiting H+/K+ ATPase",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "db61f971-a3b4-43d8-a4a4-e2eff67df8de",
+      "subject": "Medicine",
+      "topic": "Pulmonology",
+      "fact": "Side effect of amiodarone is pulmonary fibrosis",
+      "mnemonic": null,
+      "category": "side-effect",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "8a460c60-4cc3-4f0c-a415-4bec21219709",
+      "subject": "Medicine",
+      "topic": "Rheumatology",
+      "fact": "Value of ESR for diagnosing giant cell arteritis is 50 mm/hr",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "1798abbf-38a9-49b6-a840-771ba70c8cd8",
+      "subject": "Medicine",
+      "topic": "Immunology",
+      "fact": "CD55 and CD59 are deficient in paroxysmal nocturnal hemoglobinuria",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "7f59be3a-df8d-4eae-b1a1-0f5d81061284",
+      "subject": "Medicine",
+      "topic": "Cardiology",
+      "fact": "Classification of heart failure is based on NYHA classification",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "197b5b82-f4f8-4544-93ff-fb6095835117",
+      "subject": "Medicine",
+      "topic": "Nephrology",
+      "fact": "DOC for nephrotic syndrome is corticosteroids",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "60fca5ff-6fa7-4830-84dd-87e2840115d9",
+      "subject": "Medicine",
+      "topic": "Neurology",
+      "fact": "Mechanism of action of levodopa is by increasing dopamine levels",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "bf822b7c-5a45-4c66-987d-e235cddf49ce",
+      "subject": "Surgery",
+      "topic": "Hernias",
+      "fact": "Inguinal hernias are more common in men due to the presence of a patent processus vaginalis",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "08525343-a3be-40f2-9484-72306112a03f",
+      "subject": "Surgery",
+      "topic": "Appendicitis",
+      "fact": "The diagnosis of appendicitis is primarily clinical, with the Alvarado score being a useful adjunct",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "c4cfe642-8e1d-4d3f-91b9-bd4ae69ce0ff",
+      "subject": "Surgery",
+      "topic": "Bowel obstruction",
+      "fact": "The DOC for bowel obstruction is fluid resuscitation and nasogastric decompression",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "34951b93-b51a-45aa-a5a1-94547a68b1da",
+      "subject": "Surgery",
+      "topic": "Hepatobiliary",
+      "fact": "The Courvoisier's law states that a palpable gallbladder is more likely to be associated with a malignant obstruction",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "a34d8958-da34-4d96-9216-9cf94dde1819",
+      "subject": "Surgery",
+      "topic": "Breast & Thyroid",
+      "fact": "The DOC for papillary thyroid carcinoma is total thyroidectomy",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "8c395faf-977b-44e0-81b5-3b62d2834339",
+      "subject": "Surgery",
+      "topic": "Orthopedics",
+      "fact": "The Garden classification is used to classify femoral neck fractures",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "491d0aca-d8ee-433f-be07-e0ea0ebf2ee2",
+      "subject": "Surgery",
+      "topic": "Urology",
+      "fact": "The DOC for renal colic is NSAIDs and hydration",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "bcaab05b-40e9-4bcb-8029-b3590dff0ac2",
+      "subject": "Surgery",
+      "topic": "Vascular",
+      "fact": "The ABCD score is used to classify acute limb ischemia",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "64607ca1-a9fb-4915-b6cd-2de88c98c350",
+      "subject": "Surgery",
+      "topic": "Hernias",
+      "fact": "The Lichtenstein repair is a type of mesh repair for inguinal hernias",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "99229f48-72e9-4658-86fb-e8d0c2ff6b0e",
+      "subject": "Surgery",
+      "topic": "Appendicitis",
+      "fact": "The McBurney's point is the most tender point in appendicitis, located 1.5 cm from the anterior superior iliac spine on a line between the iliac spine and the umbilicus",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "5c9afae5-d335-4310-91e3-7a97f8b23438",
+      "subject": "Surgery",
+      "topic": "Bowel obstruction",
+      "fact": "The closed-loop obstruction is a type of bowel obstruction where a segment of bowel is obstructed at two points",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "a42a5f0c-ec33-4727-ad73-36785089e1a8",
+      "subject": "Surgery",
+      "topic": "Hepatobiliary",
+      "fact": "The Child-Pugh score is used to classify liver dysfunction in cirrhosis",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "c72cb549-2742-42d3-95d8-143b1b2d1c2d",
+      "subject": "Surgery",
+      "topic": "Breast & Thyroid",
+      "fact": "The TNM staging system is used to classify breast cancer",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "4dad7b03-0e10-4382-905a-090a81d22263",
+      "subject": "Surgery",
+      "topic": "Orthopedics",
+      "fact": "The Neer classification is used to classify proximal humeral fractures",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "10a0e7a3-4bb7-442e-a40c-b7a017c841e3",
+      "subject": "Surgery",
+      "topic": "Urology",
+      "fact": "The RIFLE criteria are used to classify acute kidney injury",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "d8558193-b798-4579-a36a-5375c7e74451",
+      "subject": "Surgery",
+      "topic": "Vascular",
+      "fact": "The Fontaine classification is used to classify peripheral arterial disease",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "39bfd957-564e-4853-9481-7a7eee10e7f2",
+      "subject": "Surgery",
+      "topic": "Hernias",
+      "fact": "The hernia sac is composed of peritoneum and lies within the hernial orifice",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "cdd55d1a-9b65-45fc-8630-a004ace55017",
+      "subject": "Surgery",
+      "topic": "Appendicitis",
+      "fact": "The appendiceal artery is a branch of the ileocolic artery",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "87629c53-34ca-4fb6-b267-d9e41cc270ba",
+      "subject": "Surgery",
+      "topic": "Bowel obstruction",
+      "fact": "The small bowel mesentery is the most common site of internal hernias",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "1ef21352-93b4-4824-958d-deb852f9b0fc",
+      "subject": "Surgery",
+      "topic": "Hepatobiliary",
+      "fact": "The bile duct is divided into the right and left hepatic ducts at the liver hilum",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "05c6808c-4631-4881-8d61-a46aff3e4ab5",
+      "subject": "Surgery",
+      "topic": "Breast & Thyroid",
+      "fact": "The thyroid gland is located in the pretracheal space",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "113be2ff-f281-46e5-884f-06b2c9d7d919",
+      "subject": "Pathology",
+      "topic": "Immunopathology",
+      "fact": "CD4+ cells are helper T-cells",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "fd2457e7-e96a-4bee-9f0b-3ea8c0591e27",
+      "subject": "Pathology",
+      "topic": "Immunopathology",
+      "fact": "CD8+ cells are cytotoxic T-cells",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "7376ac19-927b-4ca1-9998-7d4de4e1ed80",
+      "subject": "Pathology",
+      "topic": "Hematology",
+      "fact": "CD34+ is a marker for hematopoietic stem cells",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "a96e5cf8-c910-4562-a988-f5dad35df474",
+      "subject": "Pathology",
+      "topic": "Immunopathology",
+      "fact": "IL-4 induces IgE class switching",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "188d8b67-d8de-4649-b75e-fdb98932d629",
+      "subject": "Pathology",
+      "topic": "Immunopathology",
+      "fact": "IL-10 is an anti-inflammatory cytokine",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "335ab8fa-bff4-4617-b4b1-db5a37df55e7",
+      "subject": "Pathology",
+      "topic": "Molecular Biology",
+      "fact": "Southern blot detects DNA",
+      "mnemonic": "SNOW DROP",
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "2b0cb22f-9b3e-468b-9f5a-4faed7d76791",
+      "subject": "Pathology",
+      "topic": "Molecular Biology",
+      "fact": "Northern blot detects RNA",
+      "mnemonic": "SNOW DROP",
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "685d5825-7f17-4a2a-aa27-ca503f5dd845",
+      "subject": "Pathology",
+      "topic": "Molecular Biology",
+      "fact": "Western blot detects protein",
+      "mnemonic": "SNOW DROP",
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "68fe3686-1e2b-4803-9c8d-88b2b06192e8",
+      "subject": "Pathology",
+      "topic": "Molecular Biology",
+      "fact": "RT-PCR detects RNA by converting it to cDNA first",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "493cd3e2-d600-4604-82c9-51fc49fdc563",
+      "subject": "Pathology",
+      "topic": "Molecular Biology",
+      "fact": "Sanger sequencing uses dideoxynucleotides",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "31b63a03-b693-45ec-ad65-b23e89798ec1",
+      "subject": "Pathology",
+      "topic": "Neoplasia",
+      "fact": "p53 is the most common mutation in human cancers",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "2abb5082-a79c-4e0d-86bd-104d0a91e042",
+      "subject": "Pathology",
+      "topic": "Neoplasia",
+      "fact": "BRCA 1/2 are involved in DNA repair by homologous recombination",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "0e5dbf32-5313-407f-8a40-eca437f5858c",
+      "subject": "Pathology",
+      "topic": "Hypersensitivity Reactions",
+      "fact": "Type I hypersensitivity is immediate and IgE mediated",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "b0012009-5166-4fea-b2ad-9a551eef6101",
+      "subject": "Pathology",
+      "topic": "Hypersensitivity Reactions",
+      "fact": "Type II hypersensitivity is cytotoxic and mediated by IgG/IgM",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "6f3ccff6-74d8-4bb0-910d-effcbba7aa91",
+      "subject": "Pathology",
+      "topic": "Hypersensitivity Reactions",
+      "fact": "Type III hypersensitivity involves immune complex deposition",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "6278d369-9561-4cc0-90ec-7ea1c618a269",
+      "subject": "Pathology",
+      "topic": "Hypersensitivity Reactions",
+      "fact": "Type IV hypersensitivity is delayed-type and T-cell mediated",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "f0baaab2-c19d-483d-9292-7401f4ee581a",
+      "subject": "Pathology",
+      "topic": "Cell Injury",
+      "fact": "IL-1 is an endogenous pyrogen that induces fever",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "bd777050-973f-41bf-b698-cbe44d9a1c3c",
+      "subject": "Pathology",
+      "topic": "Inflammation",
+      "fact": "IL-8 is a major chemotactic factor for neutrophils",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "cbd81102-4709-43be-9f8f-5ee26d30c1bf",
+      "subject": "Pathology",
+      "topic": "Immunopathology",
+      "fact": "CD15 and CD30 are markers for Reed-Sternberg cells in Hodgkin lymphoma",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "6ac6ea77-23f1-4e5c-9569-4c04e2fd3973",
+      "subject": "Pathology",
+      "topic": "Hematology",
+      "fact": "CD11c, CD25, and CD103 are markers for hairy cell leukemia",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "001dce23-6d91-477c-8904-67ab6dfff863",
+      "subject": "Pathology",
+      "topic": "Hematology",
+      "fact": "Deficiency of CD55 and CD59 is characteristic of paroxysmal nocturnal hemoglobinuria",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "182ca03d-0115-42a4-a606-53efb614444c",
+      "subject": "Pharmacology",
+      "topic": "ANS",
+      "fact": "Prazosin is the DOC for hypertension in pheochromocytoma",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "a0224b01-19fa-4ce0-b0e8-1bf338231d84",
+      "subject": "Pharmacology",
+      "topic": "CNS drugs",
+      "fact": "Flumazenil is a benzodiazepine antagonist that works by competitive inhibition at the GABA_A receptor",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "5c33dd65-141a-4c1f-a49c-65f42440e3c0",
+      "subject": "Pharmacology",
+      "topic": "Cardiovascular drugs",
+      "fact": "Aspirin causes gastritis as a side-effect due to inhibition of COX-1",
+      "mnemonic": null,
+      "category": "side-effect",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "c58cb969-e022-4178-9ba9-9284d33765b4",
+      "subject": "Pharmacology",
+      "topic": "Antibiotics",
+      "fact": "The value of the minimum inhibitory concentration (MIC) is used to determine antibiotic susceptibility",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "9c75e3f7-1a9d-498e-9e3a-7476ce2f8b72",
+      "subject": "Pharmacology",
+      "topic": "Endocrine pharmacology",
+      "fact": "Metformin is the DOC for type 2 diabetes mellitus",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "233ecfac-ab52-4d54-8106-97ac1a6910d9",
+      "subject": "Pharmacology",
+      "topic": "Chemotherapy",
+      "fact": "Rituximab is a monoclonal antibody that targets CD20 on B-cells",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "9ed3dbe3-0490-4f4f-b2b9-cc04278ab8f5",
+      "subject": "Pharmacology",
+      "topic": "Pharmacokinetics",
+      "fact": "The bioavailability of a drug is calculated as the ratio of area under the curve (AUC) of the drug after oral administration to AUC after intravenous administration",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "58e99943-14b7-4050-97d9-ec9726748e72",
+      "subject": "Pharmacology",
+      "topic": "ANS",
+      "fact": "Propranolol is a non-selective beta-blocker that can cause bronchospasm as a side-effect",
+      "mnemonic": null,
+      "category": "side-effect",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "21e56493-fc7f-4cd4-9bf5-f12e54c10daa",
+      "subject": "Pharmacology",
+      "topic": "CNS drugs",
+      "fact": "Lorazepam has a high affinity for the GABA_A receptor and is used for status epilepticus",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "0dc6708a-d82c-4fc9-8444-9830f2f1585c",
+      "subject": "Pharmacology",
+      "topic": "Cardiovascular drugs",
+      "fact": "The classification of heart failure is based on the New York Heart Association (NYHA) functional classification system",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "fecc7100-a6f3-4433-b371-540d17d1e4ae",
+      "subject": "Pharmacology",
+      "topic": "Antibiotics",
+      "fact": "Ceftriaxone is a third-generation cephalosporin with broad-spectrum activity against Gram-negative bacteria",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "c811b62d-f129-403c-921d-3d3f020fe92b",
+      "subject": "Pharmacology",
+      "topic": "Endocrine pharmacology",
+      "fact": "Levothyroxine is the DOC for hypothyroidism",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "835256b7-34db-4fba-ba3a-42840cb51268",
+      "subject": "Pharmacology",
+      "topic": "Chemotherapy",
+      "fact": "The mechanism of action of paclitaxel is by inhibiting microtubule depolymerization",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "7053ae05-7144-4ded-9078-2b49540daa99",
+      "subject": "Pharmacology",
+      "topic": "Pharmacokinetics",
+      "fact": "The value of the therapeutic index (TI) is calculated as the ratio of the toxic dose to the therapeutic dose",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "c9ab5715-4b8e-46c0-9636-1acba1e5840e",
+      "subject": "Pharmacology",
+      "topic": "ANS",
+      "fact": "Clonidine is an alpha-2 adrenergic agonist that can cause dry mouth as a side-effect",
+      "mnemonic": null,
+      "category": "side-effect",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "543c5520-7bde-4aa5-aa77-bda936f316e9",
+      "subject": "Pharmacology",
+      "topic": "CNS drugs",
+      "fact": "The classification of seizures is based on the International League Against Epilepsy (ILAE) classification system",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "f07f090c-d0a2-46da-b8d7-fce71721c8bd",
+      "subject": "Pharmacology",
+      "topic": "Cardiovascular drugs",
+      "fact": "Atorvastatin is a statin that works by inhibiting HMG-CoA reductase",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "e94db0ec-fe33-4dd4-a560-1297ac323c68",
+      "subject": "Pharmacology",
+      "topic": "Antibiotics",
+      "fact": "Vancomycin is a glycopeptide antibiotic that is effective against methicillin-resistant Staphylococcus aureus (MRSA)",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "a26667ff-b303-4851-afc8-53afeecaf574",
+      "subject": "Pharmacology",
+      "topic": "Endocrine pharmacology",
+      "fact": "The mechanism of action of metformin is by decreasing hepatic glucose production and increasing insulin sensitivity",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "93507ba4-f4de-433b-bf32-0494a0e20525",
+      "subject": "Pharmacology",
+      "topic": "Chemotherapy",
+      "fact": "The side-effect of doxorubicin is cardiotoxicity due to the formation of free radicals",
+      "mnemonic": null,
+      "category": "side-effect",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "2fc8c91c-b09b-4629-9b08-ff679b2405aa",
+      "subject": "Paediatrics",
+      "topic": "Neonatology",
+      "fact": "Birth asphyxia is defined as a 5-minute Apgar score of 7 or less",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "a6afe678-9d2f-457a-8946-97d207aec07a",
+      "subject": "Paediatrics",
+      "topic": "Growth & development milestones",
+      "fact": "Infants typically double their birth weight by 6 months of age",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "f5d0f12e-117a-4471-9e3f-4f454851bd58",
+      "subject": "Paediatrics",
+      "topic": "Nutrition",
+      "fact": "Breastfeeding is recommended exclusively for the first 6 months of life",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "f94a8d3c-a3a4-4431-b3ab-aac14a5bb434",
+      "subject": "Paediatrics",
+      "topic": "Pediatric infections",
+      "fact": "DOC for streptococcal pharyngitis is penicillin",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "da87b1ef-5149-4fa6-bb43-21a9f6862bba",
+      "subject": "Paediatrics",
+      "topic": "Vaccines",
+      "fact": "The first dose of measles vaccine is given at 9 months of age",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "bb840722-a33c-449c-83f4-45036a548ded",
+      "subject": "Paediatrics",
+      "topic": "Congenital heart diseases",
+      "fact": "Tetralogy of Fallot is characterized by 4 components: VSD, pulmonary stenosis, right ventricular hypertrophy, and overriding aorta",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "ae97cc13-3c64-4818-86b7-1280fe93e962",
+      "subject": "Paediatrics",
+      "topic": "Neonatology",
+      "fact": "Respiratory distress syndrome in preterm infants is due to surfactant deficiency",
+      "mnemonic": null,
+      "category": "mechanism",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "5dea6248-dc36-4835-8084-7498b338424e",
+      "subject": "Paediatrics",
+      "topic": "Growth & development milestones",
+      "fact": "Gross motor skills include sitting, standing, and walking, typically achieved by 12 months of age",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "bbd9fe3f-2255-4159-b1cd-6f85f2966325",
+      "subject": "Paediatrics",
+      "topic": "Nutrition",
+      "fact": "Vitamin K is given to newborns to prevent hemorrhagic disease of the newborn",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "01b7e8e4-a21c-41b1-b36a-fbc721208bf8",
+      "subject": "Paediatrics",
+      "topic": "Pediatric infections",
+      "fact": "Haemophilus influenzae type b vaccine is given at 2, 4, and 6 months of age",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "c324b609-1398-4f9d-a646-02489b45d965",
+      "subject": "Paediatrics",
+      "topic": "Vaccines",
+      "fact": "OPV is contraindicated in immunocompromised individuals",
+      "mnemonic": null,
+      "category": "side-effect",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "536685a7-0a4c-4455-a6b1-f97d6c6cbb01",
+      "subject": "Paediatrics",
+      "topic": "Congenital heart diseases",
+      "fact": "Coarctation of the aorta is characterized by narrowing of the aortic isthmus",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "b23fda59-60d1-45bf-9cec-936e1df93e17",
+      "subject": "Paediatrics",
+      "topic": "Neonatology",
+      "fact": "Jaundice in newborns is defined as a bilirubin level above 15 mg/dL",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "c3624233-bff2-42de-a628-84f15585cff2",
+      "subject": "Paediatrics",
+      "topic": "Growth & development milestones",
+      "fact": "Fine motor skills include grasping and releasing objects, typically achieved by 12 months of age",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "0cd9a002-f419-4912-a5da-0bfd9ed9333c",
+      "subject": "Paediatrics",
+      "topic": "Nutrition",
+      "fact": "Iron supplementation is recommended for infants from 6 months of age",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "44b681d5-20cd-4ee8-aae9-4d36175126db",
+      "subject": "Paediatrics",
+      "topic": "Pediatric infections",
+      "fact": "DOC for urinary tract infections in children is trimethoprim-sulfamethoxazole",
+      "mnemonic": null,
+      "category": "DOC",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "240bcebb-566d-4d9b-b74c-8cd665978b65",
+      "subject": "Paediatrics",
+      "topic": "Vaccines",
+      "fact": "DTaP vaccine is given at 2, 4, 6, and 15-18 months of age",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "fa443d8f-9e25-4bec-81d5-039ec3027273",
+      "subject": "Paediatrics",
+      "topic": "Congenital heart diseases",
+      "fact": "Transposition of the great arteries is characterized by aorta arising from the right ventricle and pulmonary artery from the left ventricle",
+      "mnemonic": null,
+      "category": "classification",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "5bb3fe3c-14f0-48b2-8a29-207a1a8d9d32",
+      "subject": "Paediatrics",
+      "topic": "Neonatology",
+      "fact": "Hypoglycemia in newborns is defined as a blood glucose level below 40 mg/dL",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "56271ac2-263a-4083-9617-f4413607b4dd",
+      "subject": "Paediatrics",
+      "topic": "Growth & development milestones",
+      "fact": "Language development includes babbling, gesturing, and saying first words, typically achieved by 12 months of age",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
+    {
+      "id": "564f66fe-a91a-4de6-9a6d-221ad7cbcca2",
+      "subject": "Paediatrics",
+      "topic": "Nutrition",
+      "fact": "Vitamin D supplementation is recommended for breastfed infants from 2 months of age",
+      "mnemonic": null,
+      "category": "value",
+      "batch_date": "2026-05-18"
+    },
     {
       "id": "ol_001",
       "subject": "Medicine",
