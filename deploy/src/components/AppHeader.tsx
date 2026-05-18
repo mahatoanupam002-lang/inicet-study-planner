@@ -2,6 +2,7 @@ import { Trophy, Flame, Sun, Moon, Target } from "lucide-react";
 import { StudyReminderBanner, StudyReminderBell } from "@/components/StudyReminder";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { HeaderAuth } from "@/components/HeaderAuth";
+import { SyncStatus } from "@/components/SyncStatus";
 
 export interface TimeLeft {
   days: number;
@@ -68,7 +69,10 @@ export function AppHeader({
 
       {/* ── Row 2: Countdown + XP + Streak ─────────────────────────── */}
       <div className="px-3 sm:px-6 pb-2.5 flex items-center justify-between gap-2">
-        <CountdownTimer timeLeft={timeLeft} compact />
+        <div className="flex items-center gap-3 min-w-0">
+          <CountdownTimer timeLeft={timeLeft} compact />
+          <SyncStatus />
+        </div>
 
         <div className="flex items-center gap-1.5 shrink-0">
           <button
