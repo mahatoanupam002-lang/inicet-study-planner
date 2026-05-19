@@ -174,6 +174,12 @@ export function DailyBriefing({
   const urgencyColor = getUrgencyColor(daysLeft);
   const urgencyBg    = getUrgencyBg(daysLeft);
 
+  const moodLabel = todayMood === null ? null
+    : todayMood <= 2 ? "😴 Low energy — light plan active"
+    : todayMood === 3 ? "😐 Normal mode"
+    : todayMood === 4 ? "🙂 Focused mode"
+    : "🚀 Peak mode — push hard today";
+
   const greeting = isBehind
     ? `You're behind — catch up today!`
     : `Good morning! Day ${planDay} of your 28-day plan`;
@@ -213,6 +219,13 @@ export function DailyBriefing({
             {daysLeft}d left
           </div>
 
+          {/* Mood pill (when low) */}
+          {todayMood !== null && todayMood <= 2 && (
+            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full border bg-amber-500/15 border-amber-500/30 text-amber-400 text-[11px] font-mono">
+              😴 Light
+            </div>
+          )}
+
           {expanded ? (
             <ChevronUp className="w-4 h-4 text-muted-foreground" />
           ) : (
@@ -224,6 +237,24 @@ export function DailyBriefing({
       {/* Expanded body */}
       {expanded && (
         <div className="border-t border-border/50 px-5 py-4 flex flex-col gap-4">
+
+          {/* 0 — Mood banner */}
+          {moodLabel && (
+            <div className={`flex items-center gap-2 px-3 py-2 rounded-xl border text-[11px] font-mono ${
+              todayMood! <= 2
+                ? "bg-amber-500/8 border-amber-500/25 text-amber-400"
+                : todayMood === 3
+                ? "bg-muted/20 border-border text-muted-foreground"
+                : todayMood === 4
+                ? "bg-blue-500/8 border-blue-500/25 text-blue-400"
+                : "bg-emerald-500/8 border-emerald-500/25 text-emerald-400"
+            }`}>
+              {moodLabel}
+              {todayMood! <= 2 && (
+                <span className="ml-auto text-[10px] opacity-70">targets reduced — prioritise rest</span>
+              )}
+            </div>
+          )}
 
           {/* 1 — Today's priority */}
           {top2Weak.length > 0 ? (
