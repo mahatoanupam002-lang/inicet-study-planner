@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { Clock, ChevronLeft, ChevronRight, CheckCircle, Circle, Flag, BarChart3 } from "lucide-react";
 import { ALL_NEET_PG_2026_QUESTIONS, NEET_PG_2026_META, NeetPGQuestion } from "@/data/neetPG2026Questions";
 import { TestAnalyticsDashboard } from "./TestAnalyticsDashboard";
-import { MockTest, TestResponse } from "@/lib/mockAnalytics";
+import { MockTest } from "@/lib/mockAnalytics";
 
 type Phase = "config" | "test" | "results";
 
@@ -13,29 +13,38 @@ interface Config {
 }
 
 function buildMockTest(questions: NeetPGQuestion[], responses: Map<string, string>, elapsedMs: number): MockTest {
-  const totalTime = elapsedMs / 1000;
-  const perQ = totalTime / Math.max(1, questions.length);
+  const perQMs = elapsedMs / Math.max(1, questions.length);
 
-  const testResponses: TestResponse[] = questions.map((q, idx) => {
-    const selected = responses.get(q.id);
-    return {
-      questionId: q.id,
-      selectedOption: selected || "",
-      correctOption: q.answer,
-      isCorrect: selected === q.answer,
-      timeSpentSeconds: perQ + (idx % 5 === 0 ? 15 : 0),
-      concept: q.subject,
-      questionType: "single-answer" as const,
-      difficulty: q.difficulty,
-    };
-  });
+  const correct = questions.filter(q => responses.get(q.id) === q.answer).length;
+  const attempted = [...responses.values()].filter(v => v).length;
+  const wrong = attempted - correct;
 
   return {
     id: `mock-${Date.now()}`,
-    date: new Date().toISOString(),
+    date: Date.now(),
     totalQuestions: questions.length,
-    responses: testResponses,
-    totalTimeSeconds: totalTime,
+    questionsAttempted: attempted,
+    correctAnswers: correct,
+    score: correct * 4 - wrong,
+    duration: elapsedMs,
+    questions: questions.map(q => ({
+      id: q.id,
+      concept: q.subject,
+      topic: q.subject,
+      difficulty: q.difficulty,
+      type: "single-answer" as const,
+      correctAnswer: q.answer,
+    })),
+    responses: questions.map((q, idx) => {
+      const selected = responses.get(q.id);
+      return {
+        questionId: q.id,
+        answered: !!selected,
+        correct: selected === q.answer,
+        timeSpent: perQMs + (idx % 5 === 0 ? 15000 : 0),
+        confidence: 3,
+      };
+    }),
   };
 }
 
