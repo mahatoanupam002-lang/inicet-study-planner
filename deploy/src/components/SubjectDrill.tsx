@@ -62,6 +62,34 @@ type CountOption = 25 | 50 | 100;
 const DRILL_SCORES_KEY = "neetpg_drill_scores";
 const OPTION_LABELS = ["A", "B", "C", "D"] as const;
 
+// INI-CET high-yield keyword → extra copies (weight - 1) added to pool
+// These keywords appear commonly in AIIMS/INI-CET PYQs
+const INICET_KEYWORDS: Record<string, number> = {
+  "drug of choice": 2, "doc ": 2, "first line": 2, "gold standard": 2,
+  "most common": 2, "mc cause": 2, "most common cause": 2, "commonest": 2,
+  "mechanism of action": 1, "side effect": 1, "contraindicated": 1,
+  "investigation of choice": 2, "ioc": 1, "test of choice": 1,
+  "classic triad": 1, "pathognomonic": 1, "diagnostic": 1,
+};
+
+function weightQuestion(q: UnifiedQuestion): number {
+  const stem = q.stem.toLowerCase();
+  let weight = 1;
+  for (const [kw, w] of Object.entries(INICET_KEYWORDS)) {
+    if (stem.includes(kw)) weight += w;
+  }
+  return Math.min(weight, 4); // cap at 4x
+}
+
+function weightedPool(pool: UnifiedQuestion[]): UnifiedQuestion[] {
+  const expanded: UnifiedQuestion[] = [];
+  for (const q of pool) {
+    const w = weightQuestion(q);
+    for (let i = 0; i < w; i++) expanded.push(q);
+  }
+  return expanded;
+}
+
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function shuffle<T>(arr: T[]): T[] {
@@ -309,9 +337,17 @@ export function SubjectDrill({ onComplete }: { onComplete?: () => void } = {}) {
     return stopTimer;
   }, [phase, stopTimer]);
 
-  // Start drill
+  // Start drill — bias toward INI-CET high-yield questions
   const startDrill = () => {
-    const pool = shuffle(subjectPool).slice(0, count);
+    const expanded = weightedPool(subjectPool);
+    const shuffled = shuffle(expanded);
+    // Deduplicate by uid while preserving weighted order
+    const seen = new Set<string>();
+    const deduped: UnifiedQuestion[] = [];
+    for (const q of shuffled) {
+      if (!seen.has(q.uid)) { seen.add(q.uid); deduped.push(q); }
+    }
+    const pool = deduped.slice(0, count);
     setQuestions(pool);
     setCurrentIdx(0);
     setAnswers({});
@@ -549,10 +585,16 @@ export function SubjectDrill({ onComplete }: { onComplete?: () => void } = {}) {
             </span>
           </div>
 
-          {/* Timer info */}
-          <div className="bg-muted/20 border border-border rounded-lg px-4 py-3 text-[11px] font-mono text-foreground/60">
-            <Timer className="w-3.5 h-3.5 inline mr-1.5 mb-0.5 text-muted-foreground" />
-            30-minute countdown · instant feedback after each answer · auto-advance in 2 seconds
+          {/* Timer info + INI-CET weighting note */}
+          <div className="bg-muted/20 border border-border rounded-lg px-4 py-3 text-[11px] font-mono text-foreground/60 space-y-1">
+            <div>
+              <Timer className="w-3.5 h-3.5 inline mr-1.5 mb-0.5 text-muted-foreground" />
+              30-minute countdown · instant feedback after each answer · auto-advance in 2 seconds
+            </div>
+            <div className="text-violet-400/80">
+              <Brain className="w-3.5 h-3.5 inline mr-1.5 mb-0.5" />
+              INI-CET weighted: DOC, gold standard, and most-common questions appear 2–4× more often
+            </div>
           </div>
 
           <button
