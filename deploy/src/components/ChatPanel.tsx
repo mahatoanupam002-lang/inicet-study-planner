@@ -28,12 +28,23 @@ const SUBJECT_DAYS: Record<string, number[]> = {
   PSM: [14,15], Microbiology: [16,17], Forensic: [18],
 };
 
+interface StoredMistake { subject: string; question: string; correctAnswer: string; myAnswer: string; whyWrong: string; }
+
+function getRecentMistakes(n = 5): StoredMistake[] {
+  try {
+    const raw = localStorage.getItem("neetpg_mistake_logbook");
+    if (!raw) return [];
+    const entries = JSON.parse(raw) as StoredMistake[];
+    return Array.isArray(entries) ? entries.slice(0, n) : [];
+  } catch { return []; }
+}
+
 function buildContext(ctx: StudyContext | undefined): string | undefined {
   if (!ctx) return undefined;
   const daysToExam = Math.max(0, Math.ceil(
     (ctx.examDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)
   ));
-  const lines = Object.entries(SUBJECT_DAYS).flatMap(([subj, days]) => {
+  const subjectLines = Object.entries(SUBJECT_DAYS).flatMap(([subj, days]) => {
     let attempted = 0, correct = 0;
     days.filter(d => ctx.completedDays.includes(d)).forEach(d => {
       const s = ctx.mcqScores[d];
@@ -44,12 +55,17 @@ function buildContext(ctx: StudyContext | undefined): string | undefined {
     const tag = acc < 60 ? "WEAK" : acc < 75 ? "borderline" : "strong";
     return [`${subj}: ${acc}% (${tag})`];
   });
+  const recentMistakes = getRecentMistakes(5);
+  const mistakeLines = recentMistakes.map(
+    (m, i) => `[${i+1}] ${m.subject}: Q="${m.question.slice(0,80)}…" correct="${m.correctAnswer}" chose="${m.myAnswer}"`
+  );
   return [
     `Progress: ${ctx.completedDays.length}/28 days`,
     `Currently: ${ctx.currentDayFocus}`,
     `Days to exam: ${daysToExam}`,
     `Flagged: ${ctx.flaggedCount} topics`,
-    ...(lines.length ? [`MCQ accuracy: ${lines.join(', ')}`] : []),
+    ...(subjectLines.length ? [`Subject accuracy: ${subjectLines.join(', ')}`] : []),
+    ...(mistakeLines.length ? [`Recent wrong answers:\n${mistakeLines.join('\n')}`] : []),
   ].join(' | ');
 }
 
@@ -76,10 +92,11 @@ export function ChatPanel({ studyContext, onFirstMessage }: Props) {
 
   const quickPrompts = studyContext
     ? [
+        "Explain the correct answers for my recent wrong questions",
         "Based on my weak subjects, what should I focus on today?",
         "Give me the top 5 high-yield mnemonics for my weakest subject",
         "What are the most common MCQ traps for my current topic?",
-        ...DEFAULT_PROMPTS.slice(0, 3),
+        ...DEFAULT_PROMPTS.slice(0, 2),
       ]
     : DEFAULT_PROMPTS;
 
