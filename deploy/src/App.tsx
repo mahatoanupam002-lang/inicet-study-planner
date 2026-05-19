@@ -78,6 +78,7 @@ const TopicPredictor      = mk(() => import("@/components/TopicPredictor"),     
 const StudyRooms          = mk(() => import("@/components/StudyRooms"),          "StudyRooms");
 const BuddyMatch          = mk(() => import("@/components/BuddyMatch"),          "BuddyMatch");
 const StressAdaptive      = mk(() => import("@/components/StressAdaptive"),      "StressAdaptive");
+const NeetPGMockTest      = mk(() => import("@/components/NeetPGMockTest"),      "NeetPGMockTest");
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -559,6 +560,11 @@ function StudyApp({ prefix, user }: StudyAppProps) {
         <div hidden={activeGroup !== 'practice' || activeTab !== 'microburst'}>
           {visitedTabs.has('microburst') && <Suspense fallback={<TabFallback />}>
             <MicroBurst />
+          </Suspense>}
+        </div>
+        <div hidden={activeGroup !== 'practice' || activeTab !== 'neetpg2026'}>
+          {visitedTabs.has('neetpg2026') && <Suspense fallback={<TabFallback />}>
+            <NeetPGMockTest />
           </Suspense>}
         </div>
 

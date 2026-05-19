@@ -5,13 +5,13 @@ import {
   CalendarCheck, Sliders, Calculator, Eye, StickyNote, FileText, Brain,
   BarChart2, BookMarked, Pill, XCircle, Award, ExternalLink, MessageSquare,
   LayoutGrid, TrendingUp, Stethoscope, ScrollText, Trophy, Home, GraduationCap,
-  Sparkles, Bot, Timer, Sun, Users, UserCheck, Heart, Radio,
+  Sparkles, Bot, Timer, Sun, Users, UserCheck, Heart, Radio, ClipboardList,
 } from "lucide-react";
 
 export type MainTab =
   | 'planner' | 'schedule' | 'circadian' | 'stress'
   | 'pyq' | 'drills' | 'rapid' | 'oneliners' | 'simulation' | 'revision'
-  | 'dailyquiz' | 'aiquiz' | 'custommock' | 'psmcalc' | 'imagequiz' | 'microburst'
+  | 'dailyquiz' | 'aiquiz' | 'custommock' | 'psmcalc' | 'imagequiz' | 'microburst' | 'neetpg2026'
   | 'notes' | 'pdf' | 'ai' | 'mnemonics' | 'analysis' | 'flashcards'
   | 'doctable' | 'revschedule' | 'mistakelogbook' | 'aichat'
   | 'analytics' | 'toppers' | 'resources' | 'community' | 'weakheatmap'
@@ -62,7 +62,8 @@ export const NAV_GROUPS: NavGroupConfig[] = [
       { id: 'custommock', label: 'Custom Mock',Icon: Sliders      },
       { id: 'psmcalc',    label: 'PSM Calc',   Icon: Calculator   },
       { id: 'imagequiz',  label: 'Image Bank', Icon: Eye          },
-      { id: 'microburst', label: 'Micro Burst',Icon: Radio        },
+      { id: 'microburst',  label: 'Micro Burst', Icon: Radio          },
+      { id: 'neetpg2026', label: 'NEET PG 2026', Icon: ClipboardList  },
     ],
   },
   {
