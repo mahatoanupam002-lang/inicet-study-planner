@@ -80,6 +80,7 @@ const BuddyMatch          = mk(() => import("@/components/BuddyMatch"),         
 const StressAdaptive      = mk(() => import("@/components/StressAdaptive"),      "StressAdaptive");
 const NeetPGMockTest      = mk(() => import("@/components/NeetPGMockTest"),      "NeetPGMockTest");
 const WellnessTracker     = mk(() => import("@/components/WellnessTracker"),     "WellnessTracker");
+const ExamEveLockdown     = mk(() => import("@/components/ExamEveLockdown"),     "ExamEveLockdown");
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -436,6 +437,9 @@ function StudyApp({ prefix, user }: StudyAppProps) {
         {/* HOME — Planner */}
         <div hidden={activeGroup !== 'home' || activeTab !== 'planner'}>
           <div className="flex flex-col gap-6">
+            <Suspense fallback={null}>
+              <ExamEveLockdown examDate={examDate} />
+            </Suspense>
             <DailyBriefing
               completedDays={completedDays}
               mcqScores={mcqScores}
