@@ -4,6 +4,7 @@ import {
   RotateCcw, TrendingUp, Search,
 } from "lucide-react";
 import { QUESTIONS, QUESTION_SUBJECTS, Question } from "@/data/questions";
+import { SPECIFIC_PYQS, type ExamSource } from "@/data/pyqSpecific";
 import { safeLoad, safeSave } from "@/lib/storage";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -11,6 +12,7 @@ import { safeLoad, safeSave } from "@/lib/storage";
 interface AttemptRecord { selected: number; correct: boolean; }
 type FilterMode       = "all" | "unattempted" | "wrong";
 type DifficultyFilter = "all" | "easy" | "medium" | "hard";
+type SourceFilter     = "all" | ExamSource;
 
 interface UnifiedQuestion {
   uid: string;
@@ -20,6 +22,8 @@ interface UnifiedQuestion {
   answer: 0 | 1 | 2 | 3;
   explanation: string;
   difficulty: "easy" | "medium" | "hard";
+  source?: ExamSource;
+  year?: number;
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -139,22 +143,34 @@ interface PYQBankProps {
   onWrong?: () => void;
 }
 
+const EXAM_SOURCES: ExamSource[] = ["AIIMS", "PGIMER", "JIPMER", "INI-CET"];
+
 export function PYQBank({ onCorrect, onWrong }: PYQBankProps = {}) {
   const [attempts,    setAttempts]    = useState<Record<string, AttemptRecord>>(loadAttempts);
   const [subject,     setSubject]     = useState<string>("All");
   const [mode,        setMode]        = useState<FilterMode>("all");
   const [difficulty,  setDifficulty]  = useState<DifficultyFilter>("all");
+  const [sourceFilter, setSourceFilter] = useState<SourceFilter>("all");
   const [qIndex,      setQIndex]      = useState<number>(0);
   const [selectedOpt, setSelectedOpt] = useState<number | null>(null);
   const [showStats,   setShowStats]   = useState<boolean>(false);
   const [search,      setSearch]      = useState<string>("");
 
-  const allQuestions = useMemo<UnifiedQuestion[]>(() => QUESTIONS.map(localToUnified), []);
+  const allQuestions = useMemo<UnifiedQuestion[]>(() => {
+    const base = QUESTIONS.map(localToUnified);
+    const specific: UnifiedQuestion[] = SPECIFIC_PYQS.map(q => ({
+      uid: q.id, subject: q.subject, stem: q.stem, options: q.options,
+      answer: q.answer, explanation: q.explanation, difficulty: q.difficulty,
+      source: q.source, year: q.year,
+    }));
+    return [...base, ...specific];
+  }, []);
 
   const pool = useMemo<UnifiedQuestion[]>(() => {
     let qs = allQuestions;
-    if (subject !== "All")    qs = qs.filter(q => q.subject === subject);
-    if (difficulty !== "all") qs = qs.filter(q => q.difficulty === difficulty);
+    if (subject !== "All")      qs = qs.filter(q => q.subject === subject);
+    if (difficulty !== "all")   qs = qs.filter(q => q.difficulty === difficulty);
+    if (sourceFilter !== "all") qs = qs.filter(q => q.source === sourceFilter);
     if (mode === "unattempted") qs = qs.filter(q => !attempts[q.uid]);
     if (mode === "wrong")       qs = qs.filter(q => attempts[q.uid] && !attempts[q.uid].correct);
     if (search.trim()) {
@@ -162,7 +178,7 @@ export function PYQBank({ onCorrect, onWrong }: PYQBankProps = {}) {
       qs = qs.filter(q => q.stem.toLowerCase().includes(s) || q.subject.toLowerCase().includes(s));
     }
     return qs;
-  }, [allQuestions, subject, difficulty, mode, search, attempts]);
+  }, [allQuestions, subject, difficulty, sourceFilter, mode, search, attempts]);
 
   const current = pool[qIndex] ?? null;
   const attempt = current ? attempts[current.uid] : null;
@@ -227,7 +243,7 @@ export function PYQBank({ onCorrect, onWrong }: PYQBankProps = {}) {
           <div>
             <h2 className="font-mono font-bold text-foreground uppercase tracking-wider text-sm">PYQ Practice</h2>
             <p className="text-xs text-muted-foreground font-mono">
-              {allQuestions.length.toLocaleString()} questions · NEET PG focused
+              {allQuestions.length.toLocaleString()} questions · AIIMS · PGIMER · JIPMER · INI-CET
             </p>
           </div>
         </div>
@@ -268,6 +284,27 @@ export function PYQBank({ onCorrect, onWrong }: PYQBankProps = {}) {
               }`}
             >
               {s}
+            </button>
+          ))}
+        </div>
+
+        {/* Exam source filter */}
+        <div className="flex flex-wrap gap-1.5">
+          {(["all", ...EXAM_SOURCES] as SourceFilter[]).map(s => (
+            <button
+              key={s}
+              onClick={() => { setSourceFilter(s); setQIndex(0); setSelectedOpt(null); }}
+              className={`px-2.5 py-1 text-[11px] font-mono rounded-full border transition-colors ${
+                sourceFilter === s
+                  ? s === "AIIMS" ? "bg-blue-500/20 text-blue-400 border-blue-500/40"
+                    : s === "PGIMER" ? "bg-violet-500/20 text-violet-400 border-violet-500/40"
+                    : s === "JIPMER" ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/40"
+                    : s === "INI-CET" ? "bg-amber-500/20 text-amber-400 border-amber-500/40"
+                    : "bg-secondary text-secondary-foreground border-secondary"
+                  : "text-muted-foreground border-border hover:border-muted-foreground"
+              }`}
+            >
+              {s === "all" ? "All Sources" : s}
             </button>
           ))}
         </div>
@@ -332,6 +369,16 @@ export function PYQBank({ onCorrect, onWrong }: PYQBankProps = {}) {
                   {current.subject}
                 </span>
                 <DiffBadge level={current.difficulty} />
+                {current.source && (
+                  <span className={`text-[9px] font-mono px-1.5 py-0.5 rounded border ${
+                    current.source === "AIIMS" ? "bg-blue-500/10 border-blue-500/30 text-blue-400" :
+                    current.source === "PGIMER" ? "bg-violet-500/10 border-violet-500/30 text-violet-400" :
+                    current.source === "JIPMER" ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400" :
+                    "bg-amber-500/10 border-amber-500/30 text-amber-400"
+                  }`}>
+                    {current.source} {current.year}
+                  </span>
+                )}
                 {attempt && (attempt.correct
                   ? <CheckCircle className="w-4 h-4 text-emerald-400" />
                   : <XCircle    className="w-4 h-4 text-destructive" />
