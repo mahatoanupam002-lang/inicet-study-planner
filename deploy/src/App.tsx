@@ -79,6 +79,7 @@ const StudyRooms          = mk(() => import("@/components/StudyRooms"),         
 const BuddyMatch          = mk(() => import("@/components/BuddyMatch"),          "BuddyMatch");
 const StressAdaptive      = mk(() => import("@/components/StressAdaptive"),      "StressAdaptive");
 const NeetPGMockTest      = mk(() => import("@/components/NeetPGMockTest"),      "NeetPGMockTest");
+const WellnessTracker     = mk(() => import("@/components/WellnessTracker"),     "WellnessTracker");
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -469,9 +470,16 @@ function StudyApp({ prefix, user }: StudyAppProps) {
 
         {/* HOME — Stress / Wellbeing */}
         <div hidden={activeGroup !== 'home' || activeTab !== 'stress'}>
-          {visitedTabs.has('stress') && <Suspense fallback={<TabFallback />}>
-            <StressAdaptive />
-          </Suspense>}
+          {visitedTabs.has('stress') && (
+            <div className="space-y-4">
+              <Suspense fallback={<TabFallback />}>
+                <WellnessTracker onGainXP={gainXP} />
+              </Suspense>
+              <Suspense fallback={<TabFallback />}>
+                <StressAdaptive />
+              </Suspense>
+            </div>
+          )}
         </div>
 
         {/* HOME — Schedule */}
